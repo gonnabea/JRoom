@@ -1,10 +1,9 @@
-import VideoBackground from "./Components/VideoBackground";
-
+import Home from "./Home";
 
 function App() {
   return (
     <div className="App">
-      <VideoBackground videoSrc="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></VideoBackground>
+      <Home/>
     </div>
   );
 }

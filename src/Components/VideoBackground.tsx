@@ -4,6 +4,7 @@ import styled from "styled-components"
 const Container = styled.section`
   width: 100vw;
   height: 100vh;
+  z-index: -1;
 `
 
 const Video = styled.video`
@@ -17,7 +18,7 @@ interface IProps {
 
 const VideoBackground:React.FC<IProps> = ({ videoSrc }) => (
   <Container>
-      <Video src={videoSrc} autoPlay></Video>
+      <Video src={videoSrc} onContextMenu={(e) => e.preventDefault()} autoPlay muted loop></Video>
     </Container>
 );
 
