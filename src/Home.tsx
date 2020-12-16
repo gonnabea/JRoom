@@ -19,7 +19,7 @@ const Home:React.FC = () => {
 
 return <Container>
        <VideoBackground videoList={["http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"]} selectIndex={selectedVid}></VideoBackground>
-      <SkeletonScrollMenu texts={["xxx","About Me", "Projects", "Documents", "Goals", "Companies", "Contact","xxx"]}></SkeletonScrollMenu>
+      <SkeletonScrollMenu texts={["xxx","About Me", "Side-Projects ✨", "Documents", "Goals", "Companies", "Contact Me...","xxx"]}></SkeletonScrollMenu>
 </Container>}
 
 export default Home
