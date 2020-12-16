@@ -93,19 +93,20 @@ const handleTexts:Function = (texts:Array<string>) => { // props 전달 안되�
 // 스크롤 시 글자 기울이는 애니메이션 구현
 const inclinetexts = () => {
     const textContainer = document.getElementById("textContainer")
-    if(textContainer){
-        textContainer?.addEventListener("wheel", () => {
+    textContainer?.addEventListener("wheel", () => {
+            if(textContainer.scrollTop > 0){
             textContainer.style.animation = ""
-            const originPosition = textContainer.scrollTop
+            const originPosition = textContainer.scrollTop + textContainer.scrollHeight
             let currentPosition
 
             setTimeout(() => {
-                currentPosition = textContainer.scrollTop;
+                currentPosition = textContainer.scrollTop + textContainer.scrollHeight;
                 
                 console.log(originPosition)
                 console.log(currentPosition)
+                console.dir(textContainer)
                 // 스크롤을 내릴 때
-                if(originPosition < currentPosition){
+                if(originPosition <= currentPosition){
                     textContainer.style.animation = `inclineTexts 1s forwards`
                      setTimeout(() => {
                          textContainer.style.animation = `revertIncline 3s forwards`
@@ -118,9 +119,11 @@ const inclinetexts = () => {
                          textContainer.style.animation = `revertInclineLeft 3s forwards`
                      }, 0)
                 }
+              
             }, 50);
+        }
         }) 
-    }
+    
 }
 
 const SkeletonScrollMenu:React.FC<IProps> = ({texts, colors}) => {
