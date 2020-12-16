@@ -2,23 +2,25 @@ import React from "react"
 import styled from "styled-components"
 
 const Container = styled.section`
-  width: 100vw;
-  height: 100vh;
+  width: 70vw;
+  height: 70vh;
   z-index: -1;
 `
 
 const Video = styled.video`
   width: 100%;
   height: 100%;
+  object-fit: fill;
 `
 
 interface IProps {
-  videoSrc: string
+  videoList: Array<string>,
+  selectIndex: number
 } 
 
-const VideoBackground:React.FC<IProps> = ({ videoSrc }) => (
+const VideoBackground:React.FC<IProps> = ({ videoList, selectIndex = 0 }) => (
   <Container>
-      <Video src={videoSrc} onContextMenu={(e) => e.preventDefault()} autoPlay muted loop></Video>
+      <Video src={videoList[selectIndex]} onContextMenu={(e) => e.preventDefault()} autoPlay muted loop></Video>
     </Container>
 );
 
