@@ -1,8 +1,6 @@
 import React, { useEffect } from "react"
 import styled, { keyframes } from "styled-components"
 
-//스크롤 시 작동하는 글자 기울기 애니메이션
-
 
 const Container = styled.div`
     width: 80vw;
@@ -43,57 +41,61 @@ const TextArea = styled.div`
     }
     @keyframes inclineTexts {
     0%{
-        transform: rotateZ(0deg);
+        transform: skew(0deg);
     }
     100%{
-        transform: rotateZ(2deg);
+        transform: skew(-10deg);
     }
     }
 
     @keyframes revertIncline {
         0%{
-            transform: rotateZ(2deg);
+            transform: skew(-10deg);
         }
         100%{
-            transform: rotateZ(0deg)
+            transform: skew(0deg)
         }
     }
 
     @keyframes InclineTextsLeft {
     0%{
-        transform: rotateZ(0deg);
+        transform: skew(0deg);
     }
     100%{
-        transform: rotateZ(-2deg);
+        transform: skew(10deg);
     }
     }
 
     @keyframes revertInclineLeft {
         0%{
-            transform: rotateZ(-2deg);
+            transform: skew(10deg);
         }
         100%{
-            transform: rotateZ(0deg)
+            transform: skew(0deg)
         }
     }
 
 `
 
 interface IProps {
-    texts:Array<string>
+    texts:Array<string>,
+    colors:Array<string>
 }
 
-const handleTexts:Function = (texts:Array<string>) => {
-    return texts.map( (text:string, index) => <TextArea className="textAreas">
+const handleTexts:Function = (texts:Array<string>) => { // props 전달 안되는 문제 고쳐야함
+    
+    return texts.map( (text) => <TextArea className="textAreas"> 
         {text}
         </TextArea>
         )
 }
 
+// 스크롤 시 글자 기울이는 애니메이션 구현
 const inclinetexts = () => {
     const textContainer = document.getElementById("textContainer")
     if(textContainer){
         textContainer?.addEventListener("wheel", () => {
+            textContainer.style.animation = ""
             const originPosition = textContainer.scrollTop
             let currentPosition
 
@@ -104,16 +106,16 @@ const inclinetexts = () => {
                 console.log(currentPosition)
                 // 스크롤을 내릴 때
                 if(originPosition < currentPosition){
-                    textContainer.style.animation = `inclineTexts 0s forwards`
+                    textContainer.style.animation = `inclineTexts 1s forwards`
                      setTimeout(() => {
-                         textContainer.style.animation = `revertIncline 2s forwards`
+                         textContainer.style.animation = `revertIncline 3s forwards`
                      }, 0)
                 }
                 // 스크롤을 올릴 때
                 else if(originPosition > currentPosition){
-                    textContainer.style.animation = `InclineTextsLeft 0s forwards`
+                    textContainer.style.animation = `InclineTextsLeft 1s forwards`
                      setTimeout(() => {
-                         textContainer.style.animation = `revertInclineLeft 2s forwards`
+                         textContainer.style.animation = `revertInclineLeft 3s forwards`
                      }, 0)
                 }
             }, 50);
@@ -121,7 +123,7 @@ const inclinetexts = () => {
     }
 }
 
-const SkeletonScrollMenu:React.FC<IProps> = ({texts}) => {
+const SkeletonScrollMenu:React.FC<IProps> = ({texts, colors}) => {
     
     
     useEffect(() => {
@@ -129,7 +131,7 @@ const SkeletonScrollMenu:React.FC<IProps> = ({texts}) => {
     }, [])
 
 return <Container id="textContainer">
-        {handleTexts(texts)}
+        {handleTexts(texts, colors)}
     </Container>
 }
 

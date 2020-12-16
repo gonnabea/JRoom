@@ -5,14 +5,14 @@ const Container = styled.section`
   width: 70vw;
   height: 70vh;
   z-index: -1;
-  box-shadow: 0 0 100px green;
+  box-shadow: 0 0 200px green;
 `
 
 const Video = styled.video`
   width: 100%;
   height: 100%;
   object-fit: fill;
-  opacity: 0.4;
+  opacity: 0.6;
 `
 
 interface IProps {

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import VideoBackground from "./Components/VideoBackground"
-import SkeletonScrollMenu from "./Components/SkeletonScrollMenu";
+import SkewScrollMenu from "./Components/SkewScrollMenu";
 import { useState } from "react";
 
 const Container = styled.section`
@@ -19,7 +19,7 @@ const Home:React.FC = () => {
 
 return <Container>
        <VideoBackground videoList={["http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"]} selectIndex={selectedVid}></VideoBackground>
-      <SkeletonScrollMenu texts={["xxx","About Me", "Side-Projects ✨", "Documents", "Goals", "Companies", "Contact Me...","xxx"]}></SkeletonScrollMenu>
+      <SkewScrollMenu texts={["xxx","About Me", "Side-Projects ✨", "Documents", "Goals", "Companies", "Contact Me...","xxx"]} colors={["blue","green", "yellow", "white", "", "", "",""]}></SkewScrollMenu>
 </Container>}
 
 export default Home
