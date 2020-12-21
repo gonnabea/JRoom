@@ -1,8 +1,17 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import styled, { keyframes } from "styled-components"
 
 
 const Container = styled.div`
+width: 100vw;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+`
+
+const TextContainer = styled.div`
     width: 80vw;
     height: 90vh; 
     position: absolute;
@@ -23,7 +32,7 @@ const Container = styled.div`
 const TextArea = styled.div`
     color: black;
     width: 100%;
-    font-size: 150px;
+    font-size: 10.5vw;
     height: 20%;
     display: flex;
     justify-content: center;
@@ -77,20 +86,22 @@ const TextArea = styled.div`
 
 `
 
+const Video = styled.video`
+  width: 70%;
+  height: 70%;
+  object-fit: fill;
+  opacity: 0.6;
+`
+
 interface IProps {
     texts:Array<string>,
-    colors:Array<string>
+    colors:Array<string>,
+    videoList: Array<string>,
 }
 
-const handleTexts:Function = (texts:Array<string>) => { // props 전달 안되는 문제 고쳐야함
-    
-    return texts.map( (text) => <TextArea className="textAreas"> 
-        {text}
-        </TextArea>
-        )
-}
 
-// 스크롤 시 글자 기울이는 애니메이션 구현
+
+// 스크롤 시 글자 기울이는 애니메이션
 const inclinetexts = () => {
     const textContainer = document.getElementById("textContainer")
     textContainer?.addEventListener("wheel", () => {
@@ -126,16 +137,35 @@ const inclinetexts = () => {
     
 }
 
-const SkeletonScrollMenu:React.FC<IProps> = ({texts, colors}) => {
+
+const SkeletonScrollMenu:React.FC<IProps> = ({texts, colors, videoList}) => {
+    const [videoIndex, setvideoIndex] = useState(0) // 화면에 나오는 비디오를 선택하기 위한 index 값
+
+    const handleTexts:Function = (texts: Array<string>, colors: Array<string>) => { // props 전달 안되는 문제 고쳐야함
+        console.log(texts)
+        console.log(colors)
+        return texts.map( (text, index) => <TextArea onMouseOver = {() => selectVideo(index)} className="textAreas"> 
+            {text}
+            </TextArea>
+            )
+    }
     
+    const selectVideo = (index:number) => {
+        console.log(index)
+        setvideoIndex(index)
+    }
     
     useEffect(() => {
         inclinetexts()
     }, [])
 
-return <Container id="textContainer">
+return <Container>
+<TextContainer id="textContainer">
         {handleTexts(texts, colors)}
-    </Container>
+        
+    </TextContainer>
+        <Video src={videoList[videoIndex]} onContextMenu={(e) => e.preventDefault()} autoPlay muted loop></Video>
+</Container>
 }
 
         
