@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import styled, { keyframes } from "styled-components"
 
 
@@ -15,6 +15,7 @@ const TextContainer = styled.div`
     width: 80vw;
     height: 90vh; 
     position: absolute;
+    opacity: 0.7;
     z-index: 1;
     top: 10%;
     right: 0%;
@@ -90,7 +91,8 @@ const Video = styled.video`
   width: 70%;
   height: 70%;
   object-fit: fill;
-  opacity: 0.6;
+ 
+  box-shadow: 0px 0px 200px #68B793;
 `
 
 interface IProps {
@@ -140,19 +142,27 @@ const inclinetexts = () => {
 
 const SkeletonScrollMenu:React.FC<IProps> = ({texts, colors, videoList}) => {
     const [videoIndex, setvideoIndex] = useState(0) // 화면에 나오는 비디오를 선택하기 위한 index 값
+    const video = useRef<HTMLVideoElement>(null)
 
     const handleTexts:Function = (texts: Array<string>, colors: Array<string>) => { // props 전달 안되는 문제 고쳐야함
         console.log(texts)
         console.log(colors)
-        return texts.map( (text, index) => <TextArea onMouseOver = {() => selectVideo(index)} className="textAreas"> 
+        return texts.map( (text, index) => <TextArea onMouseOver = {() => selectVideo(index, colors)} className="textAreas"> 
             {text}
             </TextArea>
             )
     }
     
-    const selectVideo = (index:number) => {
+    const selectVideo = (index:number, colors:string[]) => {
         console.log(index)
         setvideoIndex(index)
+        console.log(video)
+        if(video.current !== null) {
+            video.current.style.boxShadow = `0px 0px 200px ${colors[index]}`
+        }
+        
+   
+        
     }
     
     useEffect(() => {
@@ -162,9 +172,8 @@ const SkeletonScrollMenu:React.FC<IProps> = ({texts, colors, videoList}) => {
 return <Container>
 <TextContainer id="textContainer">
         {handleTexts(texts, colors)}
-        
     </TextContainer>
-        <Video src={videoList[videoIndex]} onContextMenu={(e) => e.preventDefault()} autoPlay muted loop></Video>
+        <Video src={videoList[videoIndex]} ref={video} onContextMenu={(e) => e.preventDefault()} autoPlay muted loop></Video>
 </Container>
 }
 

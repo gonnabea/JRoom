@@ -11,14 +11,14 @@ display: flex;
 justify-content: center;
 align-items: center;
 background-color: black;
-opacity: 0.9;
+opacity: 1;
 `
 
 const Home:React.FC = () => {
 
 return <Container>
        
-      <SkewScrollMenu texts={["xxx","About Me", "Exhibition ✨", "Documents", "Goals", "Companies", "Contact Me...","xxx"]} 
+      <SkewScrollMenu texts={["xxx","About Me", "Exhibition ✨", "Documents", "Books", "Companies", "Contact Me...","Github"]} 
       colors={["blue","green", "yellow", "white", "", "", "",""]}
       videoList={["http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"]} 
       ></SkewScrollMenu>
