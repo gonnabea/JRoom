@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 import styled, { keyframes } from "styled-components"
 
 
@@ -30,13 +31,14 @@ const TextContainer = styled.div`
 }
 `
 
-const TextArea = styled.div`
+const TextArea = styled(Link)`
     color: black;
     width: 100%;
     font-size: 10.5vw;
     height: 20%;
     display: flex;
     justify-content: center;
+    text-decoration: none;
       /* Prefix required. Even Firefox only supports the -webkit- prefix */
     font-family: fantasy;
     margin-bottom: 80px;
@@ -99,6 +101,8 @@ interface IProps {
     texts:Array<string>,
     colors:Array<string>,
     videoList: Array<string>,
+    links: Array<string>,
+
 }
 
 
@@ -140,14 +144,14 @@ const inclinetexts = () => {
 }
 
 
-const SkeletonScrollMenu:React.FC<IProps> = ({texts, colors, videoList}) => {
+const SkeletonScrollMenu:React.FC<IProps> = ({texts, colors, videoList, links}) => {
     const [videoIndex, setvideoIndex] = useState(0) // 화면에 나오는 비디오를 선택하기 위한 index 값
     const video = useRef<HTMLVideoElement>(null)
 
-    const handleTexts:Function = (texts: Array<string>, colors: Array<string>) => { // props 전달 안되는 문제 고쳐야함
+    const handleTexts:Function = (texts: Array<string>, colors: Array<string>, links:Array<string>) => { // props 전달 안되는 문제 고쳐야함
         console.log(texts)
         console.log(colors)
-        return texts.map( (text, index) => <TextArea onMouseOver = {() => selectVideo(index, colors)} className="textAreas"> 
+        return texts.map( (text, index) => <TextArea to={links[index]} onMouseOver = {() => selectVideo(index, colors)} className="textAreas"> 
             {text}
             </TextArea>
             )
@@ -171,7 +175,7 @@ const SkeletonScrollMenu:React.FC<IProps> = ({texts, colors, videoList}) => {
 
 return <Container>
 <TextContainer id="textContainer">
-        {handleTexts(texts, colors)}
+        {handleTexts(texts, colors, links)}
     </TextContainer>
         <Video src={videoList[videoIndex]} ref={video} onContextMenu={(e) => e.preventDefault()} autoPlay muted loop></Video>
 </Container>

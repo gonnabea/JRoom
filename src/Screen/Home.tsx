@@ -21,6 +21,7 @@ return <Container>
       <SkewScrollMenu texts={["About Me", "Exhibition ✨", "Documents", "Books", "Interested", "Contact Me...","Github"]} 
       colors={["#79D0FF","green", "white", "#C56AC8", "#FBD591", "skyblue", "purple", "gray"]}
       videoList={["http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"]} 
+      links={["/about-me","/exhibition"]}
       ></SkewScrollMenu>
 </Container>}
 
