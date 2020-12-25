@@ -13,8 +13,8 @@
 
 - [x] 메인화면 스켈레톤 컴포넌트 만들기
 - [x] 스크롤에 따른 비디오 변환
-- [ ] 화면 색 필터만들기
-
+- [x] 화면 색 필터만들기
+- [ ] 마우스에 따라 스크린 무빙
 - [ ] Three.js 이펙트
 
 ### Projects-Exhibition
@@ -30,3 +30,5 @@
 #### References
 
 - https://activetheory.net/work
+
+- https://sketchfab.com/3d-models/richards-art-gallery-audio-tour-0e3e19faa6474fd5974e6a7ed1b221d8
