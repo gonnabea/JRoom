@@ -5,7 +5,7 @@
 
 - [x] TypeScript
 - [x] React
-- [ ] Three.js 💎
+- [x] Three.js 💎
 
 ## TodoList
 
@@ -19,7 +19,7 @@
 
 ### Projects-Exhibition
 
-- [ ] Three.js Exhibition
+- [ ] Three.js Exhibition 📌 (진행중)
 
 ### Documents
 
