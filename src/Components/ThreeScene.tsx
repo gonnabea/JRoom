@@ -43,9 +43,9 @@ const ThreeScene = () => {
         ExhibitionRoom.material.side = THREE.BackSide
         scene.add( ExhibitionRoom );
 
-        // const light = new THREE.AmbientLight( 0xffffff, 10000 ); // soft white light
-        // light.position.set(0,5000,0)
-        // scene.add(light)
+        const light = new THREE.AmbientLight( 0xEFD740, 1 ); // soft white light
+        light.position.set(0,5000,0)
+        scene.add(light)
 
         // const hemiLight = new THREE.HemisphereLight(0xFFFFFF, 0x1F1E1F)
         // hemiLight.position.set(0,0,0 )
@@ -54,7 +54,7 @@ const ThreeScene = () => {
         // const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
         // scene.add( light );
 
-        const dirLight = new THREE.DirectionalLight( 0xEFD740, 1 );
+        const dirLight = new THREE.DirectionalLight( 0xffffff, 0.3 );
         dirLight.position.set(2000,2000,0 );
         dirLight.castShadow = true
         
@@ -64,7 +64,7 @@ const ThreeScene = () => {
         dirLight.target.position.set(-400,-500,1000)
         dirLight.target.updateMatrixWorld();
 
-        const dirLightHelper = new THREE.DirectionalLightHelper( dirLight, 300 );
+        const dirLightHelper = new THREE.DirectionalLightHelper( dirLight, 300, 0xA0C2F9 );
         dirLightHelper.update()
 
         scene.add( dirLight, dirLight.target );
@@ -72,17 +72,20 @@ const ThreeScene = () => {
        
                 
         
-        // const spotLight_distance = 0; // 빛의 최대범위
-        // const spotLight_angle = Math.PI / 20;
-        // const spotLight_penumbra = 0.5;
-        // const spotLight_decay = 1.0
-        // const spotLight = new THREE.SpotLight(0x1DA8F5, 1, spotLight_distance, spotLight_angle)
-        // spotLight.position.set(-400,3000,0)
-        
+        const spotLight_distance = 0; // 빛의 최대범위
+        const spotLight_angle = Math.PI / 40;
+        const spotLight_penumbra = 0.5;
+        const spotLight_decay = 1.0
+        const spotLight = new THREE.SpotLight(0x1DA8F5, 0.5, spotLight_distance, spotLight_angle)
+        spotLight.position.set(2000,2000,0 )
+        spotLight.target = targetObject;
+        dirLight.target.position.set(-400,-500,1000)
+        dirLight.target.updateMatrixWorld();
 
+        const spotLightHelper = new THREE.SpotLightHelper(spotLight)
+        scene.add(spotLightHelper)
         
-
-        // scene.add( spotLight );
+        scene.add( spotLight );
     
         renderer = new THREE.WebGLRenderer({antialias: true})
         renderer.shadowMap.enabled = true
