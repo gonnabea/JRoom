@@ -43,7 +43,7 @@ const ThreeScene = () => {
         ExhibitionRoom.material.side = THREE.BackSide
         scene.add( ExhibitionRoom );
 
-        const light = new THREE.AmbientLight( 0xEFD740, 1 ); // soft white light
+        const light = new THREE.AmbientLight( 0xEFD740, 0.5 ); // soft white light
         light.position.set(0,5000,0)
         scene.add(light)
 
@@ -61,7 +61,7 @@ const ThreeScene = () => {
         const targetObject = new THREE.Object3D();
         scene.add(targetObject);
         dirLight.target = targetObject
-        dirLight.target.position.set(-400,-500,1000)
+        dirLight.target.position.set(-400,500,1000)
         dirLight.target.updateMatrixWorld();
 
         const dirLightHelper = new THREE.DirectionalLightHelper( dirLight, 300, 0xA0C2F9 );
@@ -76,16 +76,27 @@ const ThreeScene = () => {
         const spotLight_angle = Math.PI / 40;
         const spotLight_penumbra = 0.5;
         const spotLight_decay = 1.0
-        const spotLight = new THREE.SpotLight(0x1DA8F5, 0.5, spotLight_distance, spotLight_angle)
+        const spotLight = new THREE.SpotLight(0xffffff, 0.7, spotLight_distance, spotLight_angle)
+        spotLight.penumbra = 1;
+        spotLight.decay = 0.5;
         spotLight.position.set(2000,2000,0 )
         spotLight.target = targetObject;
-        dirLight.target.position.set(-400,-500,1000)
-        dirLight.target.updateMatrixWorld();
+        spotLight.target.position.set(-400,-500,1000)
+        spotLight.target.updateMatrixWorld();
 
         const spotLightHelper = new THREE.SpotLightHelper(spotLight)
         scene.add(spotLightHelper)
         
         scene.add( spotLight );
+
+        const CylinderGeometry = new THREE.CylinderGeometry( 5, 5, 20, 32 );
+        const CylinderMaterial = new THREE.MeshBasicMaterial()
+        const CylinderMesh = new THREE.Mesh(CylinderGeometry,CylinderMaterial)
+        CylinderMesh.scale.set(60,20,30)
+        CylinderMesh.position.set(300,100,1000)
+        CylinderGeometry.rotateZ(-10)
+        scene.add(CylinderMesh)
+        
     
         renderer = new THREE.WebGLRenderer({antialias: true})
         renderer.shadowMap.enabled = true
