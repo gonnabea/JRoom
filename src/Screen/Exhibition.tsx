@@ -10,6 +10,9 @@ justify-content: center;
 align-items: center;
 background-color: white;
 opacity: 1;
+cursor: grab;
+cursor: -moz-grab;
+cursor: -webkit-grab;
 `
 
 

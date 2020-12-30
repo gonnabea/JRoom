@@ -1,6 +1,5 @@
 import GlobalStyles from "./Components/GlobalStyles";
 import { GlobalRouter } from "./routes";
-import Home from "./Screen/Home";
 
 function App() {
   return (

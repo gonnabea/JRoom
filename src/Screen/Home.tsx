@@ -1,7 +1,6 @@
 import styled from "styled-components"
-import VideoBackground from "../Components/VideoBackground"
 import SkewScrollMenu from "../Components/SkewScrollMenu";
-import { useState } from "react";
+
 
 const Container = styled.section`
 width: 100vw;
