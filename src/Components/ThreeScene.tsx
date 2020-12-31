@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react"
 import * as THREE from "three"
 import styled from "styled-components"
 import { OrbitControls } from 'three-orbitcontrols-ts';
-import { Light } from "three";
+import {GodRaysEffect, RenderPass, EffectPass, EffectComposer} from "postprocessing"
 const Container = styled.div`
     
 `
@@ -10,6 +10,7 @@ const Container = styled.div`
 let camera: THREE.PerspectiveCamera, scene: THREE.Object3D, renderer: THREE.WebGLRenderer;
 let geometry, material, mesh;
 let controls: OrbitControls;
+let composer: { addPass: (arg0: any) => void; render: (arg0: number) => void; }
 
 const ThreeScene = () => {
     const ThreeContainer = useRef<HTMLDivElement>(null)
@@ -20,6 +21,8 @@ const ThreeScene = () => {
         camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 5000)
         camera.position.set(400, 0, 2000)
         scene = new THREE.Scene()
+
+        
 
         // 배경 박스
         geometry = new THREE.BoxGeometry(10000,10000,10000)
@@ -90,19 +93,43 @@ const ThreeScene = () => {
         scene.add( spotLight );
 
         const CylinderGeometry = new THREE.CylinderGeometry( 5, 5, 20, 32 );
-        const CylinderMaterial = new THREE.MeshBasicMaterial()
+        const CylinderMaterial = new THREE.MeshBasicMaterial({
+            color: 0xEBBD48
+        })
+        CylinderMaterial.transparent = true
+        CylinderMaterial.opacity = 0.3;
         const CylinderMesh = new THREE.Mesh(CylinderGeometry,CylinderMaterial)
         CylinderMesh.scale.set(60,20,30)
         CylinderMesh.position.set(300,100,1000)
         CylinderGeometry.rotateZ(-10)
         scene.add(CylinderMesh)
+
+        const godraysEffect = new GodRaysEffect(camera, CylinderMesh, {
+            resolutionScale: 1,
+            density: 0.9,
+            decay: 0.9,
+            weight: 0.5,
+            samples: 100,
+            blurriness: 5,
+            opacity: 0.5
+        })
         
-    
+        console.log(godraysEffect)
+
+        const renderPass = new RenderPass(scene, camera)
+        const effectPass = new EffectPass(camera,godraysEffect)
+        effectPass.renderToScreen = true
+
+        
+        
         renderer = new THREE.WebGLRenderer({antialias: true})
         renderer.shadowMap.enabled = true
         renderer.setSize(window.innerWidth, window.innerHeight)
         renderer.setClearColor('#000000')
-
+        
+        composer = new EffectComposer(renderer)
+        composer.addPass(renderPass)
+        composer.addPass(effectPass)
 
 
         
@@ -142,6 +169,7 @@ const ThreeScene = () => {
 function animate() {
     requestAnimationFrame( animate )
     renderer.render(scene, camera)
+    composer.render(0.1)
     
 }
 

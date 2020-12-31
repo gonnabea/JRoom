@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babylonjs/loaders": "^4.2.0",
+    "@babylonjs/viewer": "^4.2.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -13,6 +15,8 @@
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.5",
     "@types/threex.domevents": "git+https://github.com/ahilbig/types-threex.domevents.git",
+    "babylonjs-godrays": "^1.0.13",
+    "postprocessing": "^6.18.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
