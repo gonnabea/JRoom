@@ -8,10 +8,10 @@ const Container = styled.div`
 `
 
 let camera: THREE.PerspectiveCamera, scene: THREE.Object3D, renderer: THREE.WebGLRenderer;
-let geometry, material, mesh;
+let geometry: THREE.BoxGeometry, material, mesh;
 let controls: OrbitControls;
 let composer: { addPass: (arg0: any) => void; render: (arg0: number) => void; }
-
+const meshList: THREE.Object3D[] = []
 const ThreeScene = () => {
     const ThreeContainer = useRef<HTMLDivElement>(null)
     
@@ -45,11 +45,11 @@ const ThreeScene = () => {
         // mesh 내부에서도 면이 보이게 만들어 줌.
         ExhibitionRoom.material.side = THREE.BackSide
         scene.add( ExhibitionRoom );
-
+        meshList.push(ExhibitionRoom)
         const light = new THREE.AmbientLight( 0xEFD740, 0.5 ); // soft white light
         light.position.set(0,5000,0)
         scene.add(light)
-
+        meshList.push(light)
         // const hemiLight = new THREE.HemisphereLight(0xFFFFFF, 0x1F1E1F)
         // hemiLight.position.set(0,0,0 )
         // scene.add(hemiLight)
@@ -63,6 +63,7 @@ const ThreeScene = () => {
         
         const targetObject = new THREE.Object3D();
         scene.add(targetObject);
+        meshList.push(targetObject)
         dirLight.target = targetObject
         dirLight.target.position.set(-400,500,1000)
         dirLight.target.updateMatrixWorld();
@@ -72,7 +73,7 @@ const ThreeScene = () => {
 
         scene.add( dirLight, dirLight.target );
         scene.add( dirLightHelper );
-       
+        meshList.push(dirLight, dirLight.target, dirLightHelper)
                 
         
         const spotLight_distance = 0; // 빛의 최대범위
@@ -91,7 +92,7 @@ const ThreeScene = () => {
         scene.add(spotLightHelper)
         
         scene.add( spotLight );
-
+        meshList.push(spotLightHelper, spotLight)
         const CylinderGeometry = new THREE.CylinderGeometry( 5, 5, 20, 32 );
         const CylinderMaterial = new THREE.MeshBasicMaterial({
             color: 0xEBBD48
@@ -103,7 +104,7 @@ const ThreeScene = () => {
         CylinderMesh.position.set(300,100,1000)
         CylinderGeometry.rotateZ(-10)
         scene.add(CylinderMesh)
-
+        meshList.push(CylinderMesh)
         const godraysEffect = new GodRaysEffect(camera, CylinderMesh, {
             resolutionScale: 1,
             density: 0.9,
@@ -114,7 +115,7 @@ const ThreeScene = () => {
             opacity: 0.5
         })
         
-        console.log(godraysEffect)
+      
 
         const renderPass = new RenderPass(scene, camera)
         const effectPass = new EffectPass(camera,godraysEffect)
@@ -159,16 +160,17 @@ const ThreeScene = () => {
        
         if(ThreeContainer.current !== null ){
             ThreeContainer.current.appendChild(renderer.domElement)
-            
+            console.log(ThreeContainer.current)
+            // renderer.setAnimationLoop( animate ); <- GPU 메모리 100% 버그 유발
+            animate()
         }
-        animate()
         
-        renderer.setAnimationLoop( animate );
-}
+        
+    }
 
 function animate() {
     requestAnimationFrame( animate )
-    renderer.render(scene, camera)
+    // renderer.render(scene, camera)
     composer.render(0.1)
     
 }
@@ -176,8 +178,12 @@ function animate() {
 
     useEffect(() => {
         ThreeSceneInit()
-       
-    },[])
+        return () => {
+            
+            scene.remove.apply(scene, scene.children);
+            ThreeSceneInit()
+        }
+    })
     return <Container ref={ThreeContainer}>
         
     </Container>

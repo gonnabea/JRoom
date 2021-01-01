@@ -18,9 +18,7 @@ cursor: -webkit-grab;
 
 const Exhibition:React.FC = () => {
 
-return <Container>
-       
-      <ThreeScene/>
-</Container>}
+return <ThreeScene/>
+}
 
 export default Exhibition
