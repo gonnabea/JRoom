@@ -25,7 +25,7 @@ const ThreeScene = () => {
     
         
         camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 5000)
-        camera.position.set(0, 0, 2000)
+        camera.position.set(0, 0, 3000)
         scene = new THREE.Scene()
 
         
@@ -41,12 +41,12 @@ const ThreeScene = () => {
         // scene.add(mesh)
 
         // 건물 박스
-        const buildingGeometry = new THREE.BoxGeometry(2000,1000,3000)
+        const buildingGeometry = new THREE.BoxGeometry(2000,1000,4000)
         const buildingTexture = new THREE.TextureLoader()
         const buildingMaterial = new THREE.MeshPhongMaterial()
 
         const ExhibitionRoom = new THREE.Mesh(buildingGeometry, buildingMaterial)
-        ExhibitionRoom.position.set(0,0,0)
+        ExhibitionRoom.position.set(0,0,-3000)
         
         // mesh 내부에서도 면이 보이게 만들어 줌.
         ExhibitionRoom.material.side = THREE.BackSide
@@ -100,30 +100,18 @@ const ThreeScene = () => {
         scene.add( spotLight );
 
         // 프로젝트 방 (Just-Read-It)
-        const length = 12
-        const width = 8
 
-        const shape = new THREE.Shape()
-        shape.moveTo( 0, 0 )
-        shape.lineTo(width, length)
-        shape.moveTo(width,length)
-
-        const extrudeSettings = {
-            steps: 2,
-            depth: 16,
-            bevelEnabled: true,
-            bevelThickness: 1,
-            bevelSize: 1,
-            bevelOffset: 0,
-            bevelSegments: 1
-        };
-
-        const project1Geo = new THREE.ExtrudeGeometry( shape, extrudeSettings );
-        const project1Mat = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        const project1Mesh = new THREE.Mesh( project1Geo, project1Mat ) ;
-        project1Mesh.scale.set(100,100,100)
+        const project1Geo = new THREE.BoxGeometry(3000,1000,2000)
+        const project1Mat = new THREE.MeshPhongMaterial()
+        const project1Mesh = new THREE.Mesh(project1Geo, project1Mat)
         
-        scene.add( project1Mesh );
+        ExhibitionRoom.updateMatrix()
+        project1Geo.merge(buildingGeometry,ExhibitionRoom.matrix)
+
+        const newMesh = new THREE.Mesh(project1Geo, project1Mat)
+        newMesh.material.side = THREE.BackSide
+        scene.add(newMesh)
+        
         
         // 렌더러
         renderer = new THREE.WebGLRenderer({antialias: true})
