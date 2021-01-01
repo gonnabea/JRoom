@@ -20,7 +20,13 @@
 
 ### Projects-Exhibition
 
-- [ ] Three.js Exhibition 📌 (진행중)
+- [ ] 건물 구조 잡기 📌 (진행중)
+- [ ] 내부 인테리어 (GLTF 로드)
+- [ ] 창문 GodRaysEffect
+- [ ] Iframe in Scene
+- [ ] 그림자 효과
+- [ ] 광원 효과
+- [ ] 선택버튼 만들기 (DOM 요소로 부드러운 카메라 이동)
 
 ### Documents
 
@@ -33,3 +39,9 @@
 - https://activetheory.net/work
 
 - https://sketchfab.com/3d-models/richards-art-gallery-audio-tour-0e3e19faa6474fd5974e6a7ed1b221d8
+
+### Concepts
+
+거실(로비)이 하나 있고, 프로젝트마다 하나의 방을 가집니다.
+
+각각의 방은 프로젝트의 컨셉에 맞춰 디자인을 적용합니다.

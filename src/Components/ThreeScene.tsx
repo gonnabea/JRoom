@@ -3,23 +3,29 @@ import * as THREE from "three"
 import styled from "styled-components"
 import { OrbitControls } from 'three-orbitcontrols-ts';
 import {GodRaysEffect, RenderPass, EffectPass, EffectComposer} from "postprocessing"
+import { Shape, ShapePath } from "three";
 const Container = styled.div`
-    
+cursor: grab;
+cursor: -moz-grab;
+cursor: -webkit-grab;
+:active{
+cursor: grabbing;
+}
 `
 
 let camera: THREE.PerspectiveCamera, scene: THREE.Object3D, renderer: THREE.WebGLRenderer;
 let geometry: THREE.BoxGeometry, material, mesh;
 let controls: OrbitControls;
 let composer: { addPass: (arg0: any) => void; render: (arg0: number) => void; }
-const meshList: THREE.Object3D[] = []
+
 const ThreeScene = () => {
     const ThreeContainer = useRef<HTMLDivElement>(null)
     
     function ThreeSceneInit() {
     
         
-        camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 5000)
-        camera.position.set(400, 0, 2000)
+        camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 5000)
+        camera.position.set(0, 0, 2000)
         scene = new THREE.Scene()
 
         
@@ -35,7 +41,7 @@ const ThreeScene = () => {
         // scene.add(mesh)
 
         // 건물 박스
-        const buildingGeometry = new THREE.BoxGeometry(800,1000,3000)
+        const buildingGeometry = new THREE.BoxGeometry(2000,1000,3000)
         const buildingTexture = new THREE.TextureLoader()
         const buildingMaterial = new THREE.MeshPhongMaterial()
 
@@ -45,11 +51,10 @@ const ThreeScene = () => {
         // mesh 내부에서도 면이 보이게 만들어 줌.
         ExhibitionRoom.material.side = THREE.BackSide
         scene.add( ExhibitionRoom );
-        meshList.push(ExhibitionRoom)
         const light = new THREE.AmbientLight( 0xEFD740, 0.5 ); // soft white light
         light.position.set(0,5000,0)
         scene.add(light)
-        meshList.push(light)
+
         // const hemiLight = new THREE.HemisphereLight(0xFFFFFF, 0x1F1E1F)
         // hemiLight.position.set(0,0,0 )
         // scene.add(hemiLight)
@@ -57,13 +62,14 @@ const ThreeScene = () => {
         // const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
         // scene.add( light );
 
+
+        // 디렉셔널 라이트 (햇빛)
         const dirLight = new THREE.DirectionalLight( 0xffffff, 0.3 );
         dirLight.position.set(2000,2000,0 );
         dirLight.castShadow = true
         
         const targetObject = new THREE.Object3D();
         scene.add(targetObject);
-        meshList.push(targetObject)
         dirLight.target = targetObject
         dirLight.target.position.set(-400,500,1000)
         dirLight.target.updateMatrixWorld();
@@ -73,9 +79,9 @@ const ThreeScene = () => {
 
         scene.add( dirLight, dirLight.target );
         scene.add( dirLightHelper );
-        meshList.push(dirLight, dirLight.target, dirLightHelper)
+       
                 
-        
+        // 스포트라이트
         const spotLight_distance = 0; // 빛의 최대범위
         const spotLight_angle = Math.PI / 40;
         const spotLight_penumbra = 0.5;
@@ -92,19 +98,51 @@ const ThreeScene = () => {
         scene.add(spotLightHelper)
         
         scene.add( spotLight );
-        meshList.push(spotLightHelper, spotLight)
+
+        // 프로젝트 방 (Just-Read-It)
+        const length = 12
+        const width = 8
+
+        const shape = new THREE.Shape()
+        shape.moveTo( 0, 0 )
+        shape.lineTo(width, length)
+        shape.moveTo(width,length)
+
+        const extrudeSettings = {
+            steps: 2,
+            depth: 16,
+            bevelEnabled: true,
+            bevelThickness: 1,
+            bevelSize: 1,
+            bevelOffset: 0,
+            bevelSegments: 1
+        };
+
+        const project1Geo = new THREE.ExtrudeGeometry( shape, extrudeSettings );
+        const project1Mat = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        const project1Mesh = new THREE.Mesh( project1Geo, project1Mat ) ;
+        project1Mesh.scale.set(100,100,100)
+        
+        scene.add( project1Mesh );
+        
+        // 렌더러
+        renderer = new THREE.WebGLRenderer({antialias: true})
+        renderer.shadowMap.enabled = true
+        renderer.setSize(window.innerWidth, window.innerHeight)
+        renderer.setClearColor('#ffffff')
+
+        // 갓레이이펙트
         const CylinderGeometry = new THREE.CylinderGeometry( 5, 5, 20, 32 );
         const CylinderMaterial = new THREE.MeshBasicMaterial({
             color: 0xEBBD48
         })
         CylinderMaterial.transparent = true
         CylinderMaterial.opacity = 0.3;
-        const CylinderMesh = new THREE.Mesh(CylinderGeometry,CylinderMaterial)
-        CylinderMesh.scale.set(60,20,30)
+        const CylinderMesh = new THREE.Mesh(CylinderGeometry, CylinderMaterial)
+        CylinderMesh.scale.set(60,60,30)
         CylinderMesh.position.set(300,100,1000)
         CylinderGeometry.rotateZ(-10)
         scene.add(CylinderMesh)
-        meshList.push(CylinderMesh)
         const godraysEffect = new GodRaysEffect(camera, CylinderMesh, {
             resolutionScale: 1,
             density: 0.9,
@@ -115,18 +153,9 @@ const ThreeScene = () => {
             opacity: 0.5
         })
         
-      
-
         const renderPass = new RenderPass(scene, camera)
         const effectPass = new EffectPass(camera,godraysEffect)
         effectPass.renderToScreen = true
-
-        
-        
-        renderer = new THREE.WebGLRenderer({antialias: true})
-        renderer.shadowMap.enabled = true
-        renderer.setSize(window.innerWidth, window.innerHeight)
-        renderer.setClearColor('#000000')
         
         composer = new EffectComposer(renderer)
         composer.addPass(renderPass)
@@ -137,7 +166,6 @@ const ThreeScene = () => {
         controls = new OrbitControls(camera, renderer.domElement)
         
         // 마우스 휠로 줌 조절
-        
             controls.dollyOut = function(){
                 if(camera.zoom < 5 ){
                 camera.zoom = camera.zoom + 0.1
