@@ -44,13 +44,12 @@ const ThreeScene = () => {
         const buildingGeometry = new THREE.BoxGeometry(2000,1000,4000)
         const buildingTexture = new THREE.TextureLoader()
         const buildingMaterial = new THREE.MeshPhongMaterial()
-
         const ExhibitionRoom = new THREE.Mesh(buildingGeometry, buildingMaterial)
         ExhibitionRoom.position.set(0,0,-3000)
         
         // mesh 내부에서도 면이 보이게 만들어 줌.
         ExhibitionRoom.material.side = THREE.BackSide
-        scene.add( ExhibitionRoom );
+        // scene.add( ExhibitionRoom );
         const light = new THREE.AmbientLight( 0xEFD740, 0.5 ); // soft white light
         light.position.set(0,5000,0)
         scene.add(light)
@@ -111,7 +110,19 @@ const ThreeScene = () => {
         const newMesh = new THREE.Mesh(project1Geo, project1Mat)
         newMesh.material.side = THREE.BackSide
         scene.add(newMesh)
+
+        // 바닥
+    
+        const floorGeo = new THREE.PlaneGeometry(2000,2000,200, 200) // width, height
+        const floorTexture = new THREE.TextureLoader().load("https://aws1.discourse-cdn.com/standard17/uploads/threejs/original/2X/d/d35b3bcc0f4e167983fbe085e8dc0c6c51df006e.jpeg")
         
+
+        floorTexture.encoding = THREE.sRGBEncoding;
+        const floorMat = new THREE.MeshStandardMaterial({map:floorTexture})
+        const floorMesh = new THREE.Mesh(floorGeo, floorMat)
+        floorMesh.receiveShadow = true;
+        floorMesh.rotateX(-33.3)
+        scene.add(floorMesh)
         
         // 렌더러
         renderer = new THREE.WebGLRenderer({antialias: true})
