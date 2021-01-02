@@ -36,6 +36,8 @@ const ThreeScene = () => {
         const buildingMaterial = new THREE.MeshPhongMaterial()
         const ExhibitionRoom = new THREE.Mesh(buildingGeometry, buildingMaterial)
         ExhibitionRoom.position.set(0,0,-3000)
+
+        
         
         // mesh 내부에서도 면이 보이게 만들어 줌.
         ExhibitionRoom.material.side = THREE.BackSide
@@ -102,7 +104,6 @@ const ThreeScene = () => {
         scene.add(newMesh)
 
         // 바닥
-    
         const floorGeo = new THREE.PlaneGeometry(3000,2000) // width, height
         const floorTexture = new THREE.TextureLoader().load(floorImage)
         floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
@@ -114,6 +115,14 @@ const ThreeScene = () => {
         floorMesh.rotateX(-Math.PI / 2) // -90도 로테이션
         floorMesh.position.set(0,-490,0) // 위치 조정
         scene.add(floorMesh)
+
+
+        // 메인룸 바닥
+        const mainFloor = floorMesh.clone()
+        mainFloor.scale.set( 4/3, 1, 1 )
+        mainFloor.position.set(0,-490,-3000)
+        mainFloor.rotateZ(Math.PI /2)
+        scene.add(mainFloor)
 
         ////
         
