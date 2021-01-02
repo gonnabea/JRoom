@@ -5,6 +5,8 @@ import { OrbitControls } from 'three-orbitcontrols-ts';
 import {GodRaysEffect, RenderPass, EffectPass, EffectComposer} from "postprocessing"
 import { Shape, ShapePath } from "three";
 import floorImage from "../resources/images/floor1.jpg"
+import floorImage2 from "../resources/images/floor2.jpg"
+
 const Container = styled.div`
 cursor: grab;
 cursor: -moz-grab;
@@ -26,14 +28,14 @@ const ThreeScene = () => {
     
         
         camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 8000)
-        camera.position.set(0, 0, 3000)
+        camera.position.set(0, 0, 5000)
         scene = new THREE.Scene()
 
 
         // 건물 박스
         const buildingGeometry = new THREE.BoxGeometry(2000,1000,4000)
         const buildingTexture = new THREE.TextureLoader()
-        const buildingMaterial = new THREE.MeshPhongMaterial()
+        const buildingMaterial = new THREE.MeshPhongMaterial({color:0xC2CEE9})
         const ExhibitionRoom = new THREE.Mesh(buildingGeometry, buildingMaterial)
         ExhibitionRoom.position.set(0,0,-3000)
 
@@ -42,16 +44,9 @@ const ThreeScene = () => {
         // mesh 내부에서도 면이 보이게 만들어 줌.
         ExhibitionRoom.material.side = THREE.BackSide
         // scene.add( ExhibitionRoom );
-        const light = new THREE.AmbientLight( 0xEFD740, 0.5 ); // soft white light
-        light.position.set(0,5000,0)
-        scene.add(light)
-
-        // const hemiLight = new THREE.HemisphereLight(0xFFFFFF, 0x1F1E1F)
-        // hemiLight.position.set(0,0,0 )
-        // scene.add(hemiLight)
-
-        // const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
-        // scene.add( light );
+        const ambientLight = new THREE.AmbientLight( 0xC2CEE9, 0.7 ); // soft white light
+        ambientLight.position.set(0,6000,0)
+        scene.add(ambientLight)
 
 
         // 디렉셔널 라이트 (햇빛)
@@ -105,9 +100,9 @@ const ThreeScene = () => {
 
         // 바닥
         const floorGeo = new THREE.PlaneGeometry(3000,2000) // width, height
-        const floorTexture = new THREE.TextureLoader().load(floorImage)
+        const floorTexture = new THREE.TextureLoader().load(floorImage2)
         floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-        floorTexture.repeat.set( 10, 10 );
+        floorTexture.repeat.set( 5, 5 );
         floorTexture.encoding = THREE.sRGBEncoding;
         const floorMat = new THREE.MeshStandardMaterial({map:floorTexture})
         const floorMesh = new THREE.Mesh(floorGeo, floorMat)
@@ -125,6 +120,33 @@ const ThreeScene = () => {
         scene.add(mainFloor)
 
         ////
+
+        // 지붕
+        const roofShape = new THREE.Shape()
+        roofShape.moveTo(0,0)
+        roofShape.lineTo(1000,500) // rotate로 인해 x는 높이, y는 깊이
+        roofShape.lineTo(0,1000) 
+        roofShape.lineTo(1000,1500)
+        roofShape.lineTo(0,2000)
+
+        const extrudeSettings = {
+            steps: 2,
+            depth: 3000, // Z축 깊이 (rotate로 인해 너비가 됨)
+            bevelEnabled: true,
+            bevelThickness: 1,
+            bevelSize: 1,
+            bevelOffset: 0,
+            bevelSegments: 1
+        };
+
+        const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
+        const roofMaterial = new THREE.MeshBasicMaterial({color:0x00ff00})
+        const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
+
+        roofMesh.rotateZ(Math.PI / 2)
+        roofMesh.rotateX(Math.PI / 2)
+        roofMesh.position.set(-1500, 500, -1000)
+        scene.add(roofMesh)
         
         // 렌더러
         renderer = new THREE.WebGLRenderer({antialias: true})
