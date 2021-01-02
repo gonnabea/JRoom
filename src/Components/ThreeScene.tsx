@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { OrbitControls } from 'three-orbitcontrols-ts';
 import {GodRaysEffect, RenderPass, EffectPass, EffectComposer} from "postprocessing"
 import { Shape, ShapePath } from "three";
+import floorImage from "../resources/images/floor1.jpg"
 const Container = styled.div`
 cursor: grab;
 cursor: -moz-grab;
@@ -28,17 +29,6 @@ const ThreeScene = () => {
         camera.position.set(0, 0, 3000)
         scene = new THREE.Scene()
 
-        
-
-        // 배경 박스
-        geometry = new THREE.BoxGeometry(10000,10000,10000)
-
-        const bgTexture = new THREE.TextureLoader().load("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAACsCAMAAADhRvHiAAAAQlBMVEX////8/Pz4+Pj09PTx8fH29vb///3p6en///v49/r98rz9/Prq5uHz8OyxsbHt7PDi5uv37vL1+vz9/+zV1Nf7+OH4MhMRAAAC20lEQVR4nO3d3VrbMAyAYZyWjg4YDOj93+pONiDLn53Ilix97wEP0KepLNtymibp3V1gP9cfTm2iMOlb2y96UYRG3jNcHh8XHjE+e4cfQhvKa+fTs9DLNTb80o6gD8ZHOwz3kN3IvrxoB7BFPol7tngVjwJwo4dKV8RdgwAUMVoDjoZltFlmkB8A8EqowveyUPQSp5hwDd5nI01kUdq9g5QmPj3NMbwWPsHB0Gjh1Pj1dLuFQVGAZAHKmITFfmsHgF6ozq4qLz7U2Kg/Jbk/BazBtZscMKWtpPvdT30TDKOBpDSK3qaHbGZyHn6IzxzYKs5J68MTJmRnKYVe7bMbr1UnsGHaL417qteBkSa/wCu6GDJYB7EpLfyONUwtTDAmEEjAgxEPD9oRAEAA7E5pqJP1RG/GZbXrrcYFiEpn7QjqYRIjJkZ+RSQ3BKl7nX5Jnz8gy8aNDPU3nbn9KhHEPgNxovOPgeWrHzBif4IUR1j2BPsJsMDzEYqaZpfjykNOpKuYFsB/huxZEbpcnk1eJRa6S3BM7sTn7TcWWD0WsRaWyZDtBcWs74K9gSPEbcNWRGxzhwRL479NWV1Ij5hrksNmKuk0k+xWZOq0f0sEaOIq5kIZ8gWgGIXDmOgrP7CAqYEC/u4unmP/7YedEMm8/1Ij2cKBvcgcG6ek2D5jZW28ND0BqOVY818GRJAmABZZq03W4lFnKCGGQgEArLrw9d053rUDqEfqonm+CD7LtdY+UuFpnuyq5SFPWQTTRMabWCzX0fM/bv+zUhTfGLg8eGZMjP+1ufjnXwt+xO7vOpaJrnArap/67XlhvbIQrSA5vGDHYZME8Kn/LpejN8zQXlDbTAYO7WyiKu3TSd5YdbIUZslrUk22K63+ib/GeeGuvhhh2igi+eFca7318LVH9+GjNbebdgS2LPRqxSz1OI4WpvJC5RBvYY8pA5DrpH2YV0DdKlXhbTJlVdAfcqQC5niL5u4AAAAASUVORK5CYII=")
-
-        // material = new THREE.MeshStandardMaterial()
-        // mesh = new THREE.Mesh(geometry,material) 
-        // mesh.material.side = THREE.DoubleSide
-        // scene.add(mesh)
 
         // 건물 박스
         const buildingGeometry = new THREE.BoxGeometry(2000,1000,4000)
@@ -98,7 +88,7 @@ const ThreeScene = () => {
         
         scene.add( spotLight );
 
-        // 프로젝트 방 (Just-Read-It)
+        //// 프로젝트 방 (Just-Read-It) ////
 
         const project1Geo = new THREE.BoxGeometry(3000,1000,2000)
         const project1Mat = new THREE.MeshPhongMaterial()
@@ -113,16 +103,19 @@ const ThreeScene = () => {
 
         // 바닥
     
-        const floorGeo = new THREE.PlaneGeometry(2000,2000,200, 200) // width, height
-        const floorTexture = new THREE.TextureLoader().load("https://aws1.discourse-cdn.com/standard17/uploads/threejs/original/2X/d/d35b3bcc0f4e167983fbe085e8dc0c6c51df006e.jpeg")
-        
-
+        const floorGeo = new THREE.PlaneGeometry(3000,2000) // width, height
+        const floorTexture = new THREE.TextureLoader().load(floorImage)
+        floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
+        floorTexture.repeat.set( 10, 10 );
         floorTexture.encoding = THREE.sRGBEncoding;
         const floorMat = new THREE.MeshStandardMaterial({map:floorTexture})
         const floorMesh = new THREE.Mesh(floorGeo, floorMat)
         floorMesh.receiveShadow = true;
-        floorMesh.rotateX(-33.3)
+        floorMesh.rotateX(-Math.PI / 2) // -90도 로테이션
+        floorMesh.position.set(0,-490,0) // 위치 조정
         scene.add(floorMesh)
+
+        ////
         
         // 렌더러
         renderer = new THREE.WebGLRenderer({antialias: true})
