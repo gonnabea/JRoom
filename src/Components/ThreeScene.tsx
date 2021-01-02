@@ -25,7 +25,7 @@ const ThreeScene = () => {
     function ThreeSceneInit() {
     
         
-        camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 5000)
+        camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 8000)
         camera.position.set(0, 0, 3000)
         scene = new THREE.Scene()
 
@@ -120,7 +120,7 @@ const ThreeScene = () => {
         // 메인룸 바닥
         const mainFloor = floorMesh.clone()
         mainFloor.scale.set( 4/3, 1, 1 )
-        mainFloor.position.set(0,-490,-3000)
+        mainFloor.position.set(0,-490,-3500)
         mainFloor.rotateZ(Math.PI /2)
         scene.add(mainFloor)
 
@@ -176,7 +176,7 @@ const ThreeScene = () => {
                 }
             }
             controls.dollyIn = function(){
-                if(camera.zoom > 0.3){
+                if(camera.zoom > 0.2){
                 camera.zoom = camera.zoom - 0.1
                 camera.updateProjectionMatrix();
                 console.log(camera.zoom)
@@ -204,8 +204,17 @@ function animate() {
     
 }
 
+function resize() {
+    if(ThreeContainer.current){
+        renderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
+        camera.aspect = ThreeContainer.current?.clientWidth / ThreeContainer.current?.clientHeight
+        camera.updateProjectionMatrix()
+    }
+}
+
 
     useEffect(() => {
+        window.addEventListener("resize", resize)
         ThreeSceneInit()
         return () => {
             
