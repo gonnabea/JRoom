@@ -24,6 +24,8 @@
     "styled-components": "^5.2.1",
     "styled-normalize": "^8.0.7",
     "three": "^0.123.0",
+    "three-csg-ts": "^2.0.0",
+    "three-js-csg-es6": "^73.0.0",
     "three-orbitcontrols-ts": "^0.1.2",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4"

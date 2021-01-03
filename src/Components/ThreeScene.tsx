@@ -69,17 +69,18 @@ const ThreeScene = () => {
         scene.add( dirLightHelper );
        
                 
-        // 스포트라이트
+        // 스포트라이트 (창문 통과하는 햇빛)
         const spotLight_distance = 0; // 빛의 최대범위
-        const spotLight_angle = Math.PI / 40;
+        const spotLight_angle = Math.PI / 10;
         const spotLight_penumbra = 0.5;
         const spotLight_decay = 1.0
-        const spotLight = new THREE.SpotLight(0xffffff, 0.7, spotLight_distance, spotLight_angle)
+        const spotLight = new THREE.SpotLight(0xffffff, 0.9, spotLight_distance, spotLight_angle)
         spotLight.penumbra = 1;
         spotLight.decay = 0.5;
-        spotLight.position.set(2000,2000,0 )
+        // 창문 위치
+        spotLight.position.set(-900,750,800)
         spotLight.target = targetObject;
-        spotLight.target.position.set(-400,-500,1000)
+        spotLight.target.position.set(-400,-500,-500)
         spotLight.target.updateMatrixWorld();
 
         const spotLightHelper = new THREE.SpotLightHelper(spotLight)
@@ -160,12 +161,14 @@ const ThreeScene = () => {
         // 지붕에 달린 창문
         const loader = new GLTFLoader()
 
-        loader.load("/models/saloon_window/scene.gltf", (gltf) => {
-            gltf.scene.position.set(-900,750,800)
+        loader.load("/models/window_landscape/scene.gltf", (gltf) => {
+            gltf.scene.position.set(-700,400,1100)
             gltf.scene.rotateX(-Math.PI/4)
-            gltf.scene.scale.set(2,2,2)
+            gltf.scene.rotateY(-Math.PI)
+            gltf.scene.scale.set(7,7,7)
             scene.add(gltf.scene)
         })
+        
         
         // 렌더러
         renderer = new THREE.WebGLRenderer({antialias: true})
@@ -182,8 +185,9 @@ const ThreeScene = () => {
         CylinderMaterial.opacity = 0.3;
         const CylinderMesh = new THREE.Mesh(CylinderGeometry, CylinderMaterial)
         CylinderMesh.scale.set(60,60,30)
-        CylinderMesh.position.set(300,100,1000)
-        CylinderGeometry.rotateZ(-10)
+        CylinderMesh.position.set(-900,300,500)
+        CylinderGeometry.rotateZ(0)
+        CylinderGeometry.rotateX(Math.PI/3)
         scene.add(CylinderMesh)
         const godraysEffect = new GodRaysEffect(camera, CylinderMesh, {
             resolutionScale: 1,
