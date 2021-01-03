@@ -6,6 +6,8 @@ import {GodRaysEffect, RenderPass, EffectPass, EffectComposer} from "postprocess
 import { Shape, ShapePath } from "three";
 import floorImage from "../resources/images/floor1.jpg"
 import floorImage2 from "../resources/images/floor2.jpg"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+
 
 const Container = styled.div`
 cursor: grab;
@@ -124,9 +126,9 @@ const ThreeScene = () => {
         // 지붕
         const roofShape = new THREE.Shape()
         roofShape.moveTo(0,0)
-        roofShape.lineTo(1000,500) // rotate로 인해 x는 높이, y는 깊이
+        roofShape.lineTo(500,500) // rotate로 인해 x는 높이, y는 깊이
         roofShape.lineTo(0,1000) 
-        roofShape.lineTo(1000,1500)
+        roofShape.lineTo(500,1500)
         roofShape.lineTo(0,2000)
 
         const extrudeSettings = {
@@ -140,13 +142,25 @@ const ThreeScene = () => {
         };
 
         const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
-        const roofMaterial = new THREE.MeshBasicMaterial({color:0x00ff00})
+        const roofMaterial = new THREE.MeshBasicMaterial({color:0xFF9500})
         const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
 
         roofMesh.rotateZ(Math.PI / 2)
         roofMesh.rotateX(Math.PI / 2)
-        roofMesh.position.set(-1500, 500, -1000)
+        roofMesh.position.set(-1500, 510, -1000)
         scene.add(roofMesh)
+
+        // GLTF 로더 //
+
+        // 지붕에 달린 창문
+        const loader = new GLTFLoader()
+
+        loader.load("/models/saloon_window/scene.gltf", (gltf) => {
+            console.log(gltf)
+            gltf.scene.position.set(-900,750,800)
+            gltf.scene.rotateX(-Math.PI/4)
+            scene.add(gltf.scene)
+        })
         
         // 렌더러
         renderer = new THREE.WebGLRenderer({antialias: true})
