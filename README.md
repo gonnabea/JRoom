@@ -35,13 +35,17 @@
 - [ ] 책 페이지 넘기기
 - [ ] 댓글 기능
 
+#### Bonus
+
+- Firebase 서버
+
 #### References
 
 - https://activetheory.net/work
 
 - https://sketchfab.com/3d-models/richards-art-gallery-audio-tour-0e3e19faa6474fd5974e6a7ed1b221d8
 
-### Concepts
+#### Concepts
 
 거실(로비)이 하나 있고, 프로젝트마다 하나의 방을 가집니다.
 

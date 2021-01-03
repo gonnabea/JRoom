@@ -3,7 +3,7 @@ import * as THREE from "three"
 import styled from "styled-components"
 import { OrbitControls } from 'three-orbitcontrols-ts';
 import {GodRaysEffect, RenderPass, EffectPass, EffectComposer} from "postprocessing"
-import { Shape, ShapePath } from "three";
+import { CullFaceFront, Shape, ShapePath } from "three";
 import floorImage from "../resources/images/floor1.jpg"
 import floorImage2 from "../resources/images/floor2.jpg"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -90,6 +90,7 @@ const ThreeScene = () => {
         //// 프로젝트 방 (Just-Read-It) ////
 
         const project1Geo = new THREE.BoxGeometry(3000,1000,2000)
+        
         const project1Mat = new THREE.MeshPhongMaterial()
         const project1Mesh = new THREE.Mesh(project1Geo, project1Mat)
         
@@ -98,6 +99,8 @@ const ThreeScene = () => {
 
         const newMesh = new THREE.Mesh(project1Geo, project1Mat)
         newMesh.material.side = THREE.BackSide
+        // 윗면 faces 지우기 <- 효율적인 방법 찾기
+        newMesh.geometry.faces.splice(4,2)
         scene.add(newMesh)
 
         // 바닥
@@ -126,10 +129,9 @@ const ThreeScene = () => {
         // 지붕
         const roofShape = new THREE.Shape()
         roofShape.moveTo(0,0)
-        roofShape.lineTo(500,500) // rotate로 인해 x는 높이, y는 깊이
-        roofShape.lineTo(0,1000) 
-        roofShape.lineTo(500,1500)
-        roofShape.lineTo(0,2000)
+        roofShape.lineTo(1000,1000) // rotate로 인해 x는 높이, y는 깊이
+        roofShape.lineTo(0,2000) 
+        
 
         const extrudeSettings = {
             steps: 2,
@@ -143,12 +145,15 @@ const ThreeScene = () => {
 
         const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
         const roofMaterial = new THREE.MeshBasicMaterial({color:0xFF9500})
+        roofMaterial.side = THREE.BackSide;
         const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
-
+        
+        console.log(roofGeometry.faces)
         roofMesh.rotateZ(Math.PI / 2)
         roofMesh.rotateX(Math.PI / 2)
         roofMesh.position.set(-1500, 510, -1000)
         scene.add(roofMesh)
+       
 
         // GLTF 로더 //
 
@@ -156,9 +161,9 @@ const ThreeScene = () => {
         const loader = new GLTFLoader()
 
         loader.load("/models/saloon_window/scene.gltf", (gltf) => {
-            console.log(gltf)
             gltf.scene.position.set(-900,750,800)
             gltf.scene.rotateX(-Math.PI/4)
+            gltf.scene.scale.set(2,2,2)
             scene.add(gltf.scene)
         })
         
@@ -225,7 +230,6 @@ const ThreeScene = () => {
        
         if(ThreeContainer.current !== null ){
             ThreeContainer.current.appendChild(renderer.domElement)
-            console.log(ThreeContainer.current)
             // renderer.setAnimationLoop( animate ); <- GPU 메모리 100% 버그 유발
             animate()
         }
