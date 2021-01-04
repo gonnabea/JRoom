@@ -3,11 +3,11 @@ import * as THREE from "three"
 import styled from "styled-components"
 import { OrbitControls } from 'three-orbitcontrols-ts';
 import {GodRaysEffect, RenderPass, EffectPass, EffectComposer} from "postprocessing"
-import { CullFaceFront, Shape, ShapePath } from "three";
+import { CullFaceFront, FlatShading, Shape, ShapePath } from "three";
 import floorImage from "../resources/images/floor1.jpg"
 import floorImage2 from "../resources/images/floor2.jpg"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-
+import { CSG } from "three-csg-ts"
 
 const Container = styled.div`
 cursor: grab;
@@ -37,7 +37,7 @@ const ThreeScene = () => {
         // 건물 박스
         const buildingGeometry = new THREE.BoxGeometry(2000,1000,4000)
         const buildingTexture = new THREE.TextureLoader()
-        const buildingMaterial = new THREE.MeshPhongMaterial({color:0xC2CEE9})
+        const buildingMaterial = new THREE.MeshPhongMaterial({color:0xC2CEE9, specular:"blue", flatShading:true})
         const ExhibitionRoom = new THREE.Mesh(buildingGeometry, buildingMaterial)
         ExhibitionRoom.position.set(0,0,-3000)
 
@@ -92,7 +92,7 @@ const ThreeScene = () => {
 
         const project1Geo = new THREE.BoxGeometry(3000,1000,2000)
         
-        const project1Mat = new THREE.MeshPhongMaterial()
+        const project1Mat = new THREE.MeshPhongMaterial({specular:"orange", flatShading:true})
         const project1Mesh = new THREE.Mesh(project1Geo, project1Mat)
         
         ExhibitionRoom.updateMatrix()
@@ -104,13 +104,25 @@ const ThreeScene = () => {
         newMesh.geometry.faces.splice(4,2)
         scene.add(newMesh)
 
+        // 프로젝트 룸1에 구멍 뚫기 (창문)
+        const windowHoleMesh = new THREE.Mesh(new THREE.BoxGeometry(300,300,300), new THREE.MeshBasicMaterial({color:0x32a852}))
+     
+        const bspProject1Room = CSG.fromMesh(project1Mesh)
+        const bspWindowHole = CSG.fromMesh(windowHoleMesh)
+
+        const project1BspResult = bspProject1Room.subtract(bspWindowHole)
+        const project1BspMeshResult = CSG.toMesh(project1BspResult, project1Mesh.matrix)
+
+        project1BspMeshResult.material = project1Mesh.material
+        console.log(project1BspMeshResult)
+        scene.add(project1BspMeshResult)
         // 바닥
         const floorGeo = new THREE.PlaneGeometry(3000,2000) // width, height
         const floorTexture = new THREE.TextureLoader().load(floorImage2)
         floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
         floorTexture.repeat.set( 5, 5 );
         floorTexture.encoding = THREE.sRGBEncoding;
-        const floorMat = new THREE.MeshStandardMaterial({map:floorTexture})
+        const floorMat = new THREE.MeshPhongMaterial({map:floorTexture, specular:"white", flatShading:true, shininess: 10})
         const floorMesh = new THREE.Mesh(floorGeo, floorMat)
         floorMesh.receiveShadow = true;
         floorMesh.rotateX(-Math.PI / 2) // -90도 로테이션
@@ -145,7 +157,7 @@ const ThreeScene = () => {
         };
 
         const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
-        const roofMaterial = new THREE.MeshBasicMaterial({color:0xFF9500})
+        const roofMaterial = new THREE.MeshPhongMaterial({color:0xFF9500, specular:"orange", flatShading:true})
         roofMaterial.side = THREE.BackSide;
         const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
         
@@ -167,8 +179,10 @@ const ThreeScene = () => {
             gltf.scene.rotateY(-Math.PI)
             gltf.scene.scale.set(7,7,7)
             scene.add(gltf.scene)
+            
         })
         
+
         
         // 렌더러
         renderer = new THREE.WebGLRenderer({antialias: true})
