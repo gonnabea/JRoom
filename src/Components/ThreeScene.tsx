@@ -145,7 +145,7 @@ const ThreeScene = () => {
         roofShape.lineTo(1000,1000) // rotate로 인해 x는 높이, y는 깊이
         roofShape.lineTo(0,2000) 
         
-
+        
         const extrudeSettings = {
             steps: 2,
             depth: 3000, // Z축 깊이 (rotate로 인해 너비가 됨)
@@ -162,6 +162,7 @@ const ThreeScene = () => {
         const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
         
         console.log(roofGeometry.faces)
+        roofGeometry.faces.splice(20,4)
         roofMesh.rotateZ(Math.PI / 2)
         roofMesh.rotateX(Math.PI / 2)
         roofMesh.position.set(-1500, 510, -1000)
