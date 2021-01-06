@@ -145,7 +145,7 @@ const ThreeScene = () => {
         roofShape.lineTo(1000,1000) // rotate로 인해 x는 높이, y는 깊이
         roofShape.lineTo(0,2000) 
         
-        
+
         const extrudeSettings = {
             steps: 2,
             depth: 3000, // Z축 깊이 (rotate로 인해 너비가 됨)
@@ -156,13 +156,21 @@ const ThreeScene = () => {
             bevelSegments: 1
         };
 
+        const roofWindowHole1 = new THREE.Path()
+        roofWindowHole1.moveTo(700,1500)
+        roofWindowHole1.lineTo(300,1500)
+        // roofWindowHole1.lineTo()
+        
+        
+        roofShape.holes.push(roofWindowHole1)
+
         const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
         const roofMaterial = new THREE.MeshPhongMaterial({color:0xFF9500, specular:"orange", flatShading:true})
-        roofMaterial.side = THREE.BackSide;
+        roofMaterial.side = THREE.DoubleSide
         const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
         
         console.log(roofGeometry.faces)
-        roofGeometry.faces.splice(20,4)
+        roofGeometry.faces.splice(20,4) // 지붕의 밑면 제거
         roofMesh.rotateZ(Math.PI / 2)
         roofMesh.rotateX(Math.PI / 2)
         roofMesh.position.set(-1500, 510, -1000)
