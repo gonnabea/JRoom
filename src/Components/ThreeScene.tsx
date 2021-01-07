@@ -162,15 +162,15 @@ const ThreeScene = () => {
         // roofWindowHole1.lineTo()
         
         
+        
         roofShape.holes.push(roofWindowHole1)
-
         const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
         const roofMaterial = new THREE.MeshPhongMaterial({color:0xFF9500, specular:"orange", flatShading:true})
         roofMaterial.side = THREE.DoubleSide
         const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
         
         console.log(roofGeometry.faces)
-        roofGeometry.faces.splice(20,4) // 지붕의 밑면 제거
+        roofGeometry.faces.splice(26,4) // 지붕의 밑면 제거
         roofMesh.rotateZ(Math.PI / 2)
         roofMesh.rotateX(Math.PI / 2)
         roofMesh.position.set(-1500, 510, -1000)
