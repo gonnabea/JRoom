@@ -3,7 +3,7 @@ import * as THREE from "three"
 import styled from "styled-components"
 import { OrbitControls } from 'three-orbitcontrols-ts';
 import {GodRaysEffect, RenderPass, EffectPass, EffectComposer} from "postprocessing"
-import { CullFaceFront, FlatShading, Shape, ShapePath } from "three";
+import { Color, CullFaceFront, FlatShading, Shape, ShapePath } from "three";
 import floorImage from "../resources/images/floor1.jpg"
 import floorImage2 from "../resources/images/floor2.jpg"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -104,18 +104,7 @@ const ThreeScene = () => {
         newMesh.geometry.faces.splice(4,2)
         scene.add(newMesh)
 
-        // 프로젝트 룸1에 구멍 뚫기 (창문)
-        const windowHoleMesh = new THREE.Mesh(new THREE.BoxGeometry(300,300,300), new THREE.MeshBasicMaterial({color:0x32a852}))
-     
-        const bspProject1Room = CSG.fromMesh(project1Mesh)
-        const bspWindowHole = CSG.fromMesh(windowHoleMesh)
-
-        const project1BspResult = bspProject1Room.subtract(bspWindowHole)
-        const project1BspMeshResult = CSG.toMesh(project1BspResult, project1Mesh.matrix)
-
-        project1BspMeshResult.material = project1Mesh.material
-        console.log(project1BspMeshResult)
-        scene.add(project1BspMeshResult)
+        
         // 바닥
         const floorGeo = new THREE.PlaneGeometry(3000,2000) // width, height
         const floorTexture = new THREE.TextureLoader().load(floorImage2)
@@ -148,7 +137,7 @@ const ThreeScene = () => {
 
         const extrudeSettings = {
             steps: 2,
-            depth: 3000, // Z축 깊이 (rotate로 인해 너비가 됨)
+            depth: 3000, // Z축: 깊이 (rotate로 인해 너비가 됨)
             bevelEnabled: true,
             bevelThickness: 1,
             bevelSize: 1,
@@ -157,20 +146,30 @@ const ThreeScene = () => {
         };
 
         const roofWindowHole1 = new THREE.Path()
-        roofWindowHole1.moveTo(700,1500)
-        roofWindowHole1.lineTo(300,1500)
+        roofWindowHole1.moveTo(300,1500) // 시작점 옮김
+        roofWindowHole1.lineTo(600,1500) // 시작점에서 위쪽에 점을 찍음
+        roofWindowHole1.moveTo(600,1500) // 시작점을 위의 점으로 옮김
+        roofWindowHole1.lineTo(300,1800) // 옮긴 시작점에서 대각의 위치에 점을 찍음
+        
+        
+
+        // const roofWindowHole2 = new THREE.BoxGeometry(100,100,100)
+        // const roofWindowMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00})
+        // const roofWindowHoleMesh = new THREE.Mesh(roofWindowHole2, roofWindowMaterial)
+        // scene.add(roofWindowHoleMesh)
         // roofWindowHole1.lineTo()
         
         
         
         roofShape.holes.push(roofWindowHole1)
+        
         const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
         const roofMaterial = new THREE.MeshPhongMaterial({color:0xFF9500, specular:"orange", flatShading:true})
         roofMaterial.side = THREE.DoubleSide
         const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
         
         console.log(roofGeometry.faces)
-        roofGeometry.faces.splice(26,4) // 지붕의 밑면 제거
+        roofGeometry.faces.splice(20,4) // 지붕의 밑면 제거
         roofMesh.rotateZ(Math.PI / 2)
         roofMesh.rotateX(Math.PI / 2)
         roofMesh.position.set(-1500, 510, -1000)
