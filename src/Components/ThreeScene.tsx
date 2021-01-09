@@ -7,7 +7,8 @@ import { Color, CullFaceFront, FlatShading, Shape, ShapePath } from "three";
 import floorImage from "../resources/images/floor1.jpg"
 import floorImage2 from "../resources/images/floor2.jpg"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { CSG } from "three-csg-ts"
+import { CSG } from "three-csg-ts";
+
 
 const Container = styled.div`
 cursor: grab;
@@ -145,23 +146,8 @@ const ThreeScene = () => {
             bevelSegments: 1
         };
 
-        const roofWindowHole1 = new THREE.Path()
-        roofWindowHole1.moveTo(300,1500) // 시작점 옮김
-        roofWindowHole1.lineTo(600,1500) // 시작점에서 위쪽에 점을 찍음
-        roofWindowHole1.moveTo(600,1500) // 시작점을 위의 점으로 옮김
-        roofWindowHole1.lineTo(300,1800) // 옮긴 시작점에서 대각의 위치에 점을 찍음
         
         
-
-        // const roofWindowHole2 = new THREE.BoxGeometry(100,100,100)
-        // const roofWindowMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00})
-        // const roofWindowHoleMesh = new THREE.Mesh(roofWindowHole2, roofWindowMaterial)
-        // scene.add(roofWindowHoleMesh)
-        // roofWindowHole1.lineTo()
-        
-        
-        
-        roofShape.holes.push(roofWindowHole1)
         
         const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
         const roofMaterial = new THREE.MeshPhongMaterial({color:0xFF9500, specular:"orange", flatShading:true})
@@ -189,8 +175,25 @@ const ThreeScene = () => {
             scene.add(gltf.scene)
             
         })
-        
 
+        const boxA = new THREE.Mesh(new THREE.BoxGeometry(100,100,100))
+        const boxB = new THREE.Mesh(new THREE.BoxGeometry(50,50,50))
+        
+        boxB.position.set(0,30,30)
+
+        boxA.updateMatrix()
+        boxB.updateMatrix()
+
+        const bspA = CSG.fromMesh(boxA)
+        const bspB = CSG.fromMesh(boxB)
+
+        const bspResult = bspA.subtract(bspB)
+
+        const bspMeshResult = CSG.toMesh(bspResult, boxA.matrix)
+
+        bspMeshResult.material = new THREE.MeshPhongMaterial()
+
+        scene.add(bspMeshResult)
         
         // 렌더러
         renderer = new THREE.WebGLRenderer({antialias: true})
