@@ -147,7 +147,7 @@ const ThreeScene = () => {
         };
         
         const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
-        const roofMaterial = new THREE.MeshPhongMaterial({color:0xFF9500, specular:"orange", flatShading:true})
+        const roofMaterial = new THREE.MeshPhongMaterial({color:0x8C989C, specular:"orange", flatShading:true})
         roofMaterial.side = THREE.DoubleSide
         const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
         
@@ -157,16 +157,27 @@ const ThreeScene = () => {
 
         // 창문 구멍 뚫기
         const roofWindowHole = new THREE.Mesh(new THREE.BoxGeometry(600,500,600), new THREE.MeshPhongMaterial())
+        const roofWindowHole2 = new THREE.Mesh(new THREE.BoxGeometry(600,500,600), new THREE.MeshPhongMaterial())
+        const roofWindowHole3 = new THREE.Mesh(new THREE.BoxGeometry(600,500,600), new THREE.MeshPhongMaterial())
+
+
+        
         roofWindowHole.rotateZ(-Math.PI/4)
+        roofWindowHole2.rotateZ(-Math.PI/4)
+        roofWindowHole3.rotateZ(-Math.PI/4)
+
         
         roofWindowHole.position.set(500,1500,750)
-        roofWindowHole.material.transparent = true
-        roofWindowHole.material.opacity = 0;
+        roofWindowHole2.position.set(500,1500,1500)
+        roofWindowHole3.position.set(500,1500,2250)
         
         roofMesh.updateMatrix()
         roofWindowHole.updateMatrix()
-      
+        roofWindowHole2.updateMatrix()
+        roofWindowHole3.updateMatrix()
 
+      
+        // 첫번째 창문 구멍 생성
         const bspWindowHole = CSG.fromMesh(roofWindowHole)
         const bspRoof = CSG.fromMesh(roofMesh)
 
@@ -175,18 +186,39 @@ const ThreeScene = () => {
         const bspMeshResult = CSG.toMesh(bspResult, roofMesh.matrix)
         
         bspMeshResult.material = roofMesh.material
-        bspMeshResult.rotateZ(Math.PI / 2)
-        bspMeshResult.rotateX(Math.PI / 2)
-        bspMeshResult.position.set(-1500, 510, -1000)
-        bspMeshResult.material.side = DoubleSide;
-        console.log(bspMeshResult.geometry.faces)
        
-        bspMeshResult.geometry.faces.splice(98,15) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
-      
+        bspMeshResult.geometry.faces.splice(97,15) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
       
 
+        // 두번째 창문 구멍 생성
 
-        scene.add(bspMeshResult)
+        const bspWindowHole2 = CSG.fromMesh(roofWindowHole2)
+        const bspRoof2 = CSG.fromMesh(bspMeshResult)
+
+        const bspResult2 = bspRoof2.subtract(bspWindowHole2)
+        const bspMeshResult2 = CSG.toMesh(bspResult2, bspMeshResult.matrix)
+        bspMeshResult2.material = roofMesh.material
+
+        bspMeshResult2.geometry.faces.splice(97,16)
+
+
+        // 세번쨰 창문 구멍 생성
+
+        const bspWindowHole3 = CSG.fromMesh(roofWindowHole3)
+        const bspRoof3 = CSG.fromMesh(bspMeshResult2)
+
+        const bspResult3 = bspRoof3.subtract(bspWindowHole3)
+        const bspMeshResult3 = CSG.toMesh(bspResult3, bspMeshResult.matrix)
+        bspMeshResult3.material = roofMesh.material
+
+        bspMeshResult3.geometry.faces.splice(97,18)
+
+        bspMeshResult3.rotateZ(Math.PI / 2)
+        bspMeshResult3.rotateX(Math.PI / 2)
+        bspMeshResult3.position.set(-1500, 510, -1000)
+        bspMeshResult3.material.side = DoubleSide;
+
+        scene.add(bspMeshResult3)
        
 
         // GLTF 로더 //
