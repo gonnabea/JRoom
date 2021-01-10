@@ -3,7 +3,7 @@ import * as THREE from "three"
 import styled from "styled-components"
 import { OrbitControls } from 'three-orbitcontrols-ts';
 import {GodRaysEffect, RenderPass, EffectPass, EffectComposer} from "postprocessing"
-import { Color, CullFaceFront, FlatShading, Shape, ShapePath } from "three";
+import { BackSide, Color, CullFaceFront, DoubleSide, FlatShading, Shape, ShapePath } from "three";
 import floorImage from "../resources/images/floor1.jpg"
 import floorImage2 from "../resources/images/floor2.jpg"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -145,9 +145,6 @@ const ThreeScene = () => {
             bevelOffset: 0,
             bevelSegments: 1
         };
-
-        
-        
         
         const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
         const roofMaterial = new THREE.MeshPhongMaterial({color:0xFF9500, specular:"orange", flatShading:true})
@@ -156,10 +153,40 @@ const ThreeScene = () => {
         
         console.log(roofGeometry.faces)
         roofGeometry.faces.splice(20,4) // 지붕의 밑면 제거
-        roofMesh.rotateZ(Math.PI / 2)
-        roofMesh.rotateX(Math.PI / 2)
-        roofMesh.position.set(-1500, 510, -1000)
-        scene.add(roofMesh)
+        
+
+        // 창문 구멍 뚫기
+        const roofWindowHole = new THREE.Mesh(new THREE.BoxGeometry(600,500,600), new THREE.MeshPhongMaterial())
+        roofWindowHole.rotateZ(-Math.PI/4)
+        
+        roofWindowHole.position.set(500,1500,750)
+        roofWindowHole.material.transparent = true
+        roofWindowHole.material.opacity = 0;
+        
+        roofMesh.updateMatrix()
+        roofWindowHole.updateMatrix()
+      
+
+        const bspWindowHole = CSG.fromMesh(roofWindowHole)
+        const bspRoof = CSG.fromMesh(roofMesh)
+
+        const bspResult = bspRoof.subtract(bspWindowHole)
+
+        const bspMeshResult = CSG.toMesh(bspResult, roofMesh.matrix)
+        
+        bspMeshResult.material = roofMesh.material
+        bspMeshResult.rotateZ(Math.PI / 2)
+        bspMeshResult.rotateX(Math.PI / 2)
+        bspMeshResult.position.set(-1500, 510, -1000)
+        bspMeshResult.material.side = DoubleSide;
+        console.log(bspMeshResult.geometry.faces)
+       
+        bspMeshResult.geometry.faces.splice(98,15) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
+      
+      
+
+
+        scene.add(bspMeshResult)
        
 
         // GLTF 로더 //
@@ -168,32 +195,16 @@ const ThreeScene = () => {
         const loader = new GLTFLoader()
 
         loader.load("/models/window_landscape/scene.gltf", (gltf) => {
-            gltf.scene.position.set(-700,400,1100)
+            gltf.scene.position.set(-700,400,1200)
             gltf.scene.rotateX(-Math.PI/4)
             gltf.scene.rotateY(-Math.PI)
-            gltf.scene.scale.set(7,7,7)
+            gltf.scene.scale.set(7.5,7.5,7.5)
             scene.add(gltf.scene)
             
         })
 
-        const boxA = new THREE.Mesh(new THREE.BoxGeometry(100,100,100))
-        const boxB = new THREE.Mesh(new THREE.BoxGeometry(50,50,50))
+
         
-        boxB.position.set(0,30,30)
-
-        boxA.updateMatrix()
-        boxB.updateMatrix()
-
-        const bspA = CSG.fromMesh(boxA)
-        const bspB = CSG.fromMesh(boxB)
-
-        const bspResult = bspA.subtract(bspB)
-
-        const bspMeshResult = CSG.toMesh(bspResult, boxA.matrix)
-
-        bspMeshResult.material = new THREE.MeshPhongMaterial()
-
-        scene.add(bspMeshResult)
         
         // 렌더러
         renderer = new THREE.WebGLRenderer({antialias: true})
