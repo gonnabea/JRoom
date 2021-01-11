@@ -3,7 +3,7 @@ import * as THREE from "three"
 import styled from "styled-components"
 import { OrbitControls } from 'three-orbitcontrols-ts';
 import {GodRaysEffect, RenderPass, EffectPass, EffectComposer} from "postprocessing"
-import { BackSide, Color, CullFaceFront, DoubleSide, FlatShading, Shape, ShapePath } from "three";
+import { AmbientLight, BackSide, Color, CullFaceFront, DoubleSide, FlatShading, Shape, ShapePath } from "three";
 import floorImage from "../resources/images/floor1.jpg"
 import floorImage2 from "../resources/images/floor2.jpg"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -72,22 +72,22 @@ const ThreeScene = () => {
                 
         // 스포트라이트 (창문 통과하는 햇빛)
         const spotLight_distance = 0; // 빛의 최대범위
-        const spotLight_angle = Math.PI / 10;
-        const spotLight_penumbra = 0.5;
-        const spotLight_decay = 1.0
+        const spotLight_angle = Math.PI / 18;
         const spotLight = new THREE.SpotLight(0xffffff, 0.9, spotLight_distance, spotLight_angle)
         spotLight.penumbra = 1;
         spotLight.decay = 0.5;
         // 창문 위치
         spotLight.position.set(-900,750,800)
         spotLight.target = targetObject;
-        spotLight.target.position.set(-400,-500,-500)
+        spotLight.target.position.set(-400,-500,-100)
         spotLight.target.updateMatrixWorld();
 
         const spotLightHelper = new THREE.SpotLightHelper(spotLight)
         scene.add(spotLightHelper)
         
         scene.add( spotLight );
+
+        
 
         //// 프로젝트 방 (Just-Read-It) ////
 
@@ -258,6 +258,21 @@ const ThreeScene = () => {
             
         })
 
+        
+        // 창문 밝히기
+        const windowLight = new THREE.RectAreaLight(0xffffff)
+        windowLight.position.set(-1000,1300,700)
+        windowLight.intensity = 200
+        windowLight.width = 500
+        windowLight.height = 500
+        windowLight.lookAt(-750,975,500)
+        scene.add(windowLight)
+
+        
+
+        
+        
+
         loader.load("/models/window1/scene.gltf", (gltf) => {
             console.log(gltf)
             gltf.scene.position.set(0,975,500)
@@ -314,7 +329,11 @@ const ThreeScene = () => {
             CylinderGeometry.faces.splice(24,1)
             CylinderGeometry.faces.splice(28,1)
             CylinderGeometry.faces.splice(32,1)
-            CylinderGeometry.faces.splice(36,1)
+            CylinderGeometry.faces.splice(40,1)
+            CylinderGeometry.faces.splice(44,1)
+            CylinderGeometry.faces.splice(48,1)
+            CylinderGeometry.faces.splice(52,1)
+
     
             const CylinderMaterial = new THREE.MeshBasicMaterial({
                 color: 0xF2F1C7
