@@ -301,36 +301,57 @@ const ThreeScene = () => {
         renderer.setClearColor('#ffffff')
 
         // 갓레이이펙트
-        const CylinderGeometry = new THREE.CylinderGeometry( 5, 5, 20, 32 );
-        const CylinderMaterial = new THREE.MeshBasicMaterial({
-            color: 0xEBBD48
-        })
-        CylinderMaterial.transparent = true
-        CylinderMaterial.opacity = 0.3;
-        const CylinderMesh = new THREE.Mesh(CylinderGeometry, CylinderMaterial)
-        CylinderMesh.scale.set(60,60,30)
-        CylinderMesh.position.set(-900,300,500)
-        CylinderGeometry.rotateZ(0)
-        CylinderGeometry.rotateX(Math.PI/3)
-        scene.add(CylinderMesh)
-        const godraysEffect = new GodRaysEffect(camera, CylinderMesh, {
-            resolutionScale: 1,
-            density: 0.9,
-            decay: 0.9,
-            weight: 0.5,
-            samples: 100,
-            blurriness: 5,
-            opacity: 0.5
-        })
-        
-        const renderPass = new RenderPass(scene, camera)
-        const effectPass = new EffectPass(camera,godraysEffect)
-        effectPass.renderToScreen = true
-        
-        composer = new EffectComposer(renderer)
-        composer.addPass(renderPass)
-        composer.addPass(effectPass)
 
+        const createSunLight = (x:number,y:number,z:number) => {
+            const CylinderGeometry = new THREE.CylinderGeometry( 3,4,20,32);
+            console.log(CylinderGeometry)
+            CylinderGeometry.faces.splice(0,1)
+            CylinderGeometry.faces.splice(4,1)
+            CylinderGeometry.faces.splice(8,1)
+            CylinderGeometry.faces.splice(12,1)
+            CylinderGeometry.faces.splice(16,1)
+            CylinderGeometry.faces.splice(20,1)
+            CylinderGeometry.faces.splice(24,1)
+            CylinderGeometry.faces.splice(28,1)
+            CylinderGeometry.faces.splice(32,1)
+            CylinderGeometry.faces.splice(36,1)
+    
+            const CylinderMaterial = new THREE.MeshBasicMaterial({
+                color: 0xF2F1C7
+            })
+            CylinderMaterial.transparent = true
+            CylinderMaterial.opacity = 0.1;
+            const CylinderMesh = new THREE.Mesh(CylinderGeometry, CylinderMaterial)
+            CylinderMesh.scale.set(60,100,90)
+            CylinderMesh.position.set(x,y,z)
+            CylinderGeometry.rotateZ(0)
+            CylinderGeometry.rotateX(Math.PI/6)
+            CylinderGeometry.rotateY(-Math.PI/4)
+    
+            scene.add(CylinderMesh)
+            const godraysEffect = new GodRaysEffect(camera, CylinderMesh, {
+                resolutionScale: 1,
+                density: 0.9,
+                decay: 0.9,
+                weight: 0.5,
+                samples: 100,
+                blurriness: 5,
+                opacity: 0.5
+            })
+            
+            const renderPass = new RenderPass(scene, camera)
+            const effectPass = new EffectPass(camera,godraysEffect)
+            effectPass.renderToScreen = true
+            
+            composer = new EffectComposer(renderer)
+            composer.addPass(renderPass)
+            composer.addPass(effectPass)
+        }
+        
+
+        createSunLight(-600,200,100)
+        createSunLight(200,200,100)
+        createSunLight(1000,200,100)
 
         
         controls = new OrbitControls(camera, renderer.domElement)
