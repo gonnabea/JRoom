@@ -159,22 +159,32 @@ const ThreeScene = () => {
         const roofWindowHole = new THREE.Mesh(new THREE.BoxGeometry(600,500,600), new THREE.MeshPhongMaterial())
         const roofWindowHole2 = new THREE.Mesh(new THREE.BoxGeometry(600,500,600), new THREE.MeshPhongMaterial())
         const roofWindowHole3 = new THREE.Mesh(new THREE.BoxGeometry(600,500,600), new THREE.MeshPhongMaterial())
+        const roofWindowHole4 = new THREE.Mesh(new THREE.BoxGeometry(600,500,700), new THREE.MeshPhongMaterial())
 
 
+        
         
         roofWindowHole.rotateZ(-Math.PI/4)
         roofWindowHole2.rotateZ(-Math.PI/4)
         roofWindowHole3.rotateZ(-Math.PI/4)
+        roofWindowHole4.rotateZ(Math.PI/4)
+        
+
+
 
         
         roofWindowHole.position.set(500,1500,750)
         roofWindowHole2.position.set(500,1500,1500)
         roofWindowHole3.position.set(500,1500,2250)
+        roofWindowHole4.position.set(500,700,1500)
+
         
         roofMesh.updateMatrix()
         roofWindowHole.updateMatrix()
         roofWindowHole2.updateMatrix()
         roofWindowHole3.updateMatrix()
+        roofWindowHole4.updateMatrix()
+
 
       
         // 첫번째 창문 구멍 생성
@@ -213,13 +223,25 @@ const ThreeScene = () => {
 
         bspMeshResult3.geometry.faces.splice(97,18)
 
-        bspMeshResult3.rotateZ(Math.PI / 2)
-        bspMeshResult3.rotateX(Math.PI / 2)
-        bspMeshResult3.position.set(-1500, 510, -1000)
-        bspMeshResult3.material.side = DoubleSide;
 
-        scene.add(bspMeshResult3)
+
+        // 네번째 창문 구멍 생성
+        const bspWindowHole4 = CSG.fromMesh(roofWindowHole4)
+        const bspRoof4 = CSG.fromMesh(bspMeshResult3)
+
+        const bspResult4 = bspRoof4.subtract(bspWindowHole4)
+        const bspMeshResult4 = CSG.toMesh(bspResult4, bspMeshResult.matrix)
+        bspMeshResult4.material = roofMesh.material
+
+        console.log(bspMeshResult4.geometry.faces)
+        bspMeshResult4.geometry.faces.splice(190,15)
        
+        bspMeshResult4.rotateZ(Math.PI / 2)
+        bspMeshResult4.rotateX(Math.PI / 2)
+        bspMeshResult4.position.set(-1500, 510, -1000)
+        bspMeshResult4.material.side = DoubleSide;
+
+        scene.add(bspMeshResult4)
 
         // GLTF 로더 //
 
