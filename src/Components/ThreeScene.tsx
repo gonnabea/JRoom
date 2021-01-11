@@ -248,11 +248,12 @@ const ThreeScene = () => {
         // 지붕에 달린 창문
         const loader = new GLTFLoader()
 
-        loader.load("/models/window_landscape/scene.gltf", (gltf) => {
-            gltf.scene.position.set(-700,400,1200)
+        loader.load("/models/window1/scene.gltf", (gltf) => {
+            console.log(gltf)
+            gltf.scene.position.set(-750,975,500)
             gltf.scene.rotateX(-Math.PI/4)
             gltf.scene.rotateY(-Math.PI)
-            gltf.scene.scale.set(7.5,7.5,7.5)
+            gltf.scene.scale.set(400,315,300)
             scene.add(gltf.scene)
             
         })
