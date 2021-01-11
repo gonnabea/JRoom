@@ -245,7 +245,7 @@ const ThreeScene = () => {
 
         // GLTF 로더 //
 
-        // 지붕에 달린 창문
+        // 지붕에 달린 창문 (앞면 3개)
         const loader = new GLTFLoader()
 
         loader.load("/models/window1/scene.gltf", (gltf) => {
@@ -257,6 +257,39 @@ const ThreeScene = () => {
             scene.add(gltf.scene)
             
         })
+
+        loader.load("/models/window1/scene.gltf", (gltf) => {
+            console.log(gltf)
+            gltf.scene.position.set(0,975,500)
+            gltf.scene.rotateX(-Math.PI/4)
+            gltf.scene.rotateY(-Math.PI)
+            gltf.scene.scale.set(400,315,300)
+            scene.add(gltf.scene)
+            
+        })
+
+        loader.load("/models/window1/scene.gltf", (gltf) => {
+            console.log(gltf)
+            gltf.scene.position.set(750,975,500)
+            gltf.scene.rotateX(-Math.PI/4)
+            gltf.scene.rotateY(-Math.PI)
+            gltf.scene.scale.set(400,315,300)
+            scene.add(gltf.scene)
+            
+        })
+
+        // 지붕에 달린 창문 (뒷면 1개)
+        
+        loader.load("/models/window1/scene.gltf", (gltf) => {
+            console.log(gltf)
+            gltf.scene.position.set(0,1050,-400)
+            gltf.scene.rotateX(Math.PI/4)
+            gltf.scene.rotateY(-Math.PI)
+            gltf.scene.scale.set(500,350,300)
+            scene.add(gltf.scene)
+            
+        })
+        
 
 
         
