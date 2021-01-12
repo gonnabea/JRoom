@@ -293,12 +293,72 @@ const ThreeScene = () => {
     // 지붕에 달린 창문 (뒷면 1개)
 
     loader.load("/models/window1/scene.gltf", (gltf) => {
-      console.log(gltf)
       gltf.scene.position.set(0, 1050, -400)
       gltf.scene.rotateX(Math.PI / 4)
       gltf.scene.rotateY(-Math.PI)
       gltf.scene.scale.set(500, 350, 300)
       scene.add(gltf.scene)
+    })
+
+    // 벽에 붙일 책 모형
+    loader.load("/models/book/scene.gltf", (gltf) => {
+      gltf.scene.scale.set(1000, 1000, 1000)
+      gltf.scene.rotateX(Math.PI / 2)
+      gltf.scene.position.set(-300, 0, -900)
+      scene.add(gltf.scene)
+    })
+    const bookCoverMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(720, 1000, 40),
+      new THREE.MeshPhongMaterial({ color: 0x292a2e, specular: "orange", flatShading: true })
+    )
+    bookCoverMesh.position.set(100, 0, -890)
+    bookCoverMesh.material.side = DoubleSide
+    scene.add(bookCoverMesh)
+    // 책 모형에 붙일 텍스트 geometry
+    const fontLoader = new THREE.FontLoader()
+    // 프로젝트 제목
+    fontLoader.load("/fonts/helvetiker_regular.typeface.json", function (font) {
+      const geometry = new THREE.TextGeometry("Just Read It", {
+        font: font,
+        size: 80,
+        height: 50,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 10,
+        bevelSize: 8,
+        bevelOffset: 0,
+        bevelSegments: 5,
+      })
+      const material = new THREE.MeshPhongMaterial({
+        color: 0xff9500,
+        specular: "orange",
+        flatShading: true,
+      })
+      const mesh = new THREE.Mesh(geometry, material)
+      mesh.position.set(-200, 200, -900)
+      scene.add(mesh)
+    })
+    // 제작자 이름
+    fontLoader.load("/fonts/helvetiker_regular.typeface.json", function (font) {
+      const geometry = new THREE.TextGeometry("Made By.Jiwon", {
+        font: font,
+        size: 30,
+        height: 50,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 10,
+        bevelSize: 1,
+        bevelOffset: 0,
+        bevelSegments: 5,
+      })
+      const material = new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        specular: "orange",
+        flatShading: true,
+      })
+      const mesh = new THREE.Mesh(geometry, material)
+      mesh.position.set(150, 100, -900)
+      scene.add(mesh)
     })
 
     // 렌더러
