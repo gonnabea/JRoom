@@ -16,14 +16,20 @@ const Video = styled.video`
 `
 
 interface IProps {
-  videoList: Array<string>,
+  videoList: Array<string>
   selectIndex: number
-} 
+}
 
-const VideoBackground:React.FC<IProps> = ({ videoList, selectIndex = 0 }) => (
+const VideoBackground: React.FC<IProps> = ({ videoList, selectIndex = 0 }) => (
   <Container>
-      <Video src={videoList[selectIndex]} onContextMenu={(e) => e.preventDefault()} autoPlay muted loop></Video>
-    </Container>
-);
+    <Video
+      src={videoList[selectIndex]}
+      onContextMenu={(e) => e.preventDefault()}
+      autoPlay
+      muted
+      loop
+    ></Video>
+  </Container>
+)
 
 export default VideoBackground

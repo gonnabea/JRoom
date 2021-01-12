@@ -1,5 +1,5 @@
-import GlobalStyles from "./Components/GlobalStyles";
-import { GlobalRouter } from "./routes";
+import GlobalStyles from "./Components/GlobalStyles"
+import { GlobalRouter } from "./routes"
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <GlobalStyles />
       <GlobalRouter />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

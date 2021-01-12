@@ -22,12 +22,13 @@
 
 - [x] 건물 구조 잡기
 - [ ] 내부 인테리어 (GLTF 로드) 📌 (진행중)
-- [ ] 창문 GodRaysEffect
+- [x] 햇빛 GodRaysEffect
+- [ ] 창문 모양으로 빛 반사시키기
 - [ ] Iframe in Scene
 - [ ] 선택버튼 만들기 (DOM 요소로 부드러운 카메라 이동)
 - [ ] 그림자 효과
 - [ ] 광원 효과
-- [ ] 산들바라 효과
+- [ ] 산들바람 효과
 
 ### Documents
 
@@ -37,7 +38,8 @@
 
 #### Bonus
 
-- Firebase 서버
+- [ ] 백엔드 서버
+- [ ] 방명록 포스트 잇
 
 #### References
 
