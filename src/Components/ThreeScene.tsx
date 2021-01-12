@@ -60,13 +60,13 @@ const ThreeScene = () => {
 
     // 디렉셔널 라이트 (햇빛)
     const dirLight = new THREE.DirectionalLight(0xffffff, 0.3)
-    dirLight.position.set(2000, 2000, 0)
+    dirLight.position.set(-1000, 2000, 2000)
     dirLight.castShadow = true
 
     const targetObject = new THREE.Object3D()
     scene.add(targetObject)
     dirLight.target = targetObject
-    dirLight.target.position.set(-400, 500, 1000)
+    dirLight.target.position.set(-500, 1000, 800)
     dirLight.target.updateMatrixWorld()
 
     const dirLightHelper = new THREE.DirectionalLightHelper(dirLight, 300, 0xa0c2f9)
@@ -342,7 +342,7 @@ const ThreeScene = () => {
     fontLoader.load("/fonts/helvetiker_regular.typeface.json", function (font) {
       const geometry = new THREE.TextGeometry("Made By.Jiwon", {
         font: font,
-        size: 30,
+        size: 35,
         height: 50,
         curveSegments: 12,
         bevelEnabled: true,
@@ -357,7 +357,7 @@ const ThreeScene = () => {
         flatShading: true,
       })
       const mesh = new THREE.Mesh(geometry, material)
-      mesh.position.set(150, 100, -900)
+      mesh.position.set(100, 100, -900)
       scene.add(mesh)
     })
 
