@@ -47,6 +47,22 @@ const ThreeScene = () => {
     ambientLight.position.set(0, 6000, 0)
     scene.add(ambientLight)
 
+    //// 프로젝트 방 (Just-Read-It) ////
+
+    const project1Geo = new THREE.BoxGeometry(3000, 1000, 2000)
+
+    const project1Mat = new THREE.MeshPhongMaterial({ specular: "orange", flatShading: true })
+    const project1Mesh = new THREE.Mesh(project1Geo, project1Mat)
+
+    ExhibitionRoom.updateMatrix()
+    project1Geo.merge(buildingGeometry, ExhibitionRoom.matrix)
+
+    const newMesh = new THREE.Mesh(project1Geo, project1Mat)
+    newMesh.material.side = THREE.BackSide
+    // 윗면 faces 지우기 <- 효율적인 방법 찾기
+    newMesh.geometry.faces.splice(4, 2)
+    scene.add(newMesh)
+
     // 디렉셔널 라이트 (햇빛)
 
     const addDirLight = ([x, y, z]: Array<number>, [x1, y1, z1]: Array<number>) => {
@@ -85,47 +101,42 @@ const ThreeScene = () => {
 
     addSpotLight([-900, 750, 800], [-400, -500, -100], Math.PI / 18)
 
-    //// 프로젝트 방 (Just-Read-It) ////
-
-    const project1Geo = new THREE.BoxGeometry(3000, 1000, 2000)
-
-    const project1Mat = new THREE.MeshPhongMaterial({ specular: "orange", flatShading: true })
-    const project1Mesh = new THREE.Mesh(project1Geo, project1Mat)
-
-    ExhibitionRoom.updateMatrix()
-    project1Geo.merge(buildingGeometry, ExhibitionRoom.matrix)
-
-    const newMesh = new THREE.Mesh(project1Geo, project1Mat)
-    newMesh.material.side = THREE.BackSide
-    // 윗면 faces 지우기 <- 효율적인 방법 찾기
-    newMesh.geometry.faces.splice(4, 2)
-    scene.add(newMesh)
+    interface typeAddFloor {
+      width: number
+      height: number
+      x: number
+      y: number
+      z: number
+    }
 
     // 바닥
-    const floorGeo = new THREE.PlaneGeometry(3000, 2000) // width, height
-    const floorTexture = new THREE.TextureLoader().load(floorImage2)
-    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping
-    floorTexture.repeat.set(5, 5)
-    floorTexture.encoding = THREE.sRGBEncoding
-    const floorMat = new THREE.MeshPhongMaterial({
-      map: floorTexture,
-      specular: "white",
-      flatShading: true,
-      shininess: 10,
-    })
-    const floorMesh = new THREE.Mesh(floorGeo, floorMat)
-    floorMesh.receiveShadow = true
-    floorMesh.rotateX(-Math.PI / 2) // -90도 로테이션
-    floorMesh.position.set(0, -490, 0) // 위치 조정
-    scene.add(floorMesh)
+    const addFloor = ({ width, height, x, y, z }: typeAddFloor) => {
+      const floorGeo = new THREE.PlaneGeometry(width, height) // width, height
+      const floorTexture = new THREE.TextureLoader().load(floorImage2)
+      floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping
+      floorTexture.repeat.set(5, 5)
+      floorTexture.encoding = THREE.sRGBEncoding
+      const floorMat = new THREE.MeshPhongMaterial({
+        map: floorTexture,
+        specular: "white",
+        flatShading: true,
+        shininess: 10,
+      })
+      const floorMesh = new THREE.Mesh(floorGeo, floorMat)
+      floorMesh.receiveShadow = true
+      floorMesh.rotateX(-Math.PI / 2) // -90도 로테이션
+      floorMesh.position.set(x, y, z) // 위치 조정
+      scene.add(floorMesh)
 
-    // 메인룸 바닥
-    const mainFloor = floorMesh.clone()
-    mainFloor.scale.set(4 / 3, 1, 1)
-    mainFloor.position.set(0, -490, -3500)
-    mainFloor.rotateZ(Math.PI / 2)
-    scene.add(mainFloor)
+      // 메인룸 바닥
+      const mainFloor = floorMesh.clone()
+      mainFloor.scale.set(4 / 3, 1, 1)
+      mainFloor.position.set(x, y, -3500)
+      mainFloor.rotateZ(Math.PI / 2)
+      scene.add(mainFloor)
+    }
 
+    addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0 })
     ////
 
     // 지붕
