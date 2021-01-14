@@ -21,8 +21,8 @@ let camera: THREE.PerspectiveCamera, scene: THREE.Scene, renderer: THREE.WebGLRe
 let geometry: THREE.BoxGeometry, material, mesh
 let controls: OrbitControls
 let composer: { addPass: (arg0: any) => void; render: (arg0: number) => void }
-let sphereCamera: THREE.CubeCamera
-let sphere: THREE.Mesh
+let floorCamera: THREE.CubeCamera
+let floorMesh: THREE.Mesh
 const ThreeScene = () => {
   const ThreeContainer = useRef<HTMLDivElement>(null)
 
@@ -117,45 +117,35 @@ const ThreeScene = () => {
       floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping
       floorTexture.repeat.set(5, 5)
       floorTexture.encoding = THREE.sRGBEncoding
-      const floorMat = new THREE.MeshPhongMaterial({
-        map: floorTexture,
-        specular: "white",
-        flatShading: true,
-        shininess: 10,
+
+      // project1 바닥 반사 효과
+      const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(256, {
+        format: THREE.RGBFormat,
+        generateMipmaps: true,
+        minFilter: THREE.LinearMipmapLinearFilter,
       })
-      const floorMesh = new THREE.Mesh(floorGeo, floorMat)
-      floorMesh.receiveShadow = true
+
+      floorCamera = new THREE.CubeCamera(1, 1000, cubeRenderTarget)
+      floorCamera.position.set(0, 100, 0)
+      scene.add(floorCamera)
+
+      const sphereMaterial = new THREE.MeshBasicMaterial({
+        envMap: cubeRenderTarget.texture,
+        map: floorTexture,
+        flatShading: true,
+      })
+
+      floorMesh = new THREE.Mesh(floorGeo, sphereMaterial)
+      floorMesh.position.set(0, 100, 0)
+
       floorMesh.rotateX(-Math.PI / 2) // -90도 로테이션
       floorMesh.position.set(x, y, z) // 위치 조정
       scene.add(floorMesh)
-
-      // 메인룸 바닥
-      const mainFloor = floorMesh.clone()
-      mainFloor.scale.set(4 / 3, 1, 1)
-      mainFloor.position.set(x, y, -3500)
-      mainFloor.rotateZ(Math.PI / 2)
-      scene.add(mainFloor)
+      scene.add(floorMesh)
     }
 
     addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0 })
-    // 메인룸 바닥 반사 효과
-    const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(128, {
-      format: THREE.RGBFormat,
-      generateMipmaps: true,
-      minFilter: THREE.LinearMipmapLinearFilter,
-    })
 
-    sphereCamera = new THREE.CubeCamera(1, 1000, cubeRenderTarget)
-    sphereCamera.position.set(0, 100, 0)
-    scene.add(sphereCamera)
-
-    const sphereMaterial = new THREE.MeshBasicMaterial({
-      envMap: cubeRenderTarget.texture,
-    })
-    const sphereGeo = new THREE.SphereGeometry(350, 50, 50)
-    sphere = new THREE.Mesh(sphereGeo, sphereMaterial)
-    sphere.position.set(0, 100, 0)
-    scene.add(sphere)
     ////
 
     // 지붕
@@ -478,7 +468,7 @@ const ThreeScene = () => {
     requestAnimationFrame(animate)
     // renderer.render(scene, camera)
     composer.render(0.1)
-    sphereCamera.update(renderer, scene)
+    floorCamera.update(renderer, scene)
   }
 
   function resize() {
