@@ -7,6 +7,11 @@ import { CubeCamera, DoubleSide } from "three"
 import floorImage2 from "../resources/images/floor2.jpg"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { CSG } from "three-csg-ts"
+import nodeLogo from "../resources/images/nodejs.png"
+import mongodb from "../resources/images/mongodb.png"
+import vanillajs from "../resources/images/vanillajs.png"
+import htmlLogo from "../resources/images/html.png"
+import cssLogo from "../resources/images/css.webp"
 
 const Container = styled.div`
   cursor: grab;
@@ -373,6 +378,27 @@ const ThreeScene = () => {
       mesh.position.set(100, 100, -900)
       scene.add(mesh)
     })
+
+    // 기술스택 박스 만들기
+
+    const createLogoBox = (x: number, y: number, z: number, image: string) => {
+      const logoBoxGeo = new THREE.BoxGeometry(300, 300, 300)
+      const logoBoxTexture = new THREE.TextureLoader().load(image)
+      const logoBoxMat = new THREE.MeshPhongMaterial({
+        color: 0x8c989c,
+        specular: "orange",
+        flatShading: true,
+        map: logoBoxTexture,
+      })
+      const logoBox = new THREE.Mesh(logoBoxGeo, logoBoxMat)
+      logoBox.position.set(x, y, z)
+      scene.add(logoBox)
+    }
+
+    createLogoBox(-500, 200, -840, nodeLogo)
+    createLogoBox(-500, -200, -840, mongodb)
+    createLogoBox(500, 200, -840, htmlLogo)
+    createLogoBox(500, -200, -840, cssLogo)
 
     // 렌더러
     renderer = new THREE.WebGLRenderer({ antialias: true })
