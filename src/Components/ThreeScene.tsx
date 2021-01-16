@@ -431,11 +431,23 @@ const ThreeScene = () => {
     cssScene.add(cssObject)
 
     // TV GLTF 모델 로드
+
     loader.load("/models/2018_flat_screen_tv/scene.gltf", (gltf) => {
       gltf.scene.scale.set(750, 750, 2000)
       gltf.scene.position.set(-1200, 0, 0)
 
       gltf.scene.rotateY(Math.PI / 2)
+      scene.add(gltf.scene)
+    })
+
+    // 소퍼 모델 로드
+
+    loader.load("/models/leather_black_sofa/scene.gltf", (gltf) => {
+      gltf.scene.scale.set(300, 300, 300)
+      gltf.scene.position.set(0, -600, 1050)
+
+      gltf.scene.rotateY(-Math.PI / 2)
+
       scene.add(gltf.scene)
     })
 
