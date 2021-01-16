@@ -3,7 +3,7 @@ import * as THREE from "three"
 import styled from "styled-components"
 import { OrbitControls } from "three-orbitcontrols-ts"
 import { GodRaysEffect, RenderPass, EffectPass, EffectComposer } from "postprocessing"
-import { CubeCamera, DoubleSide } from "three"
+import { BackSide, CubeCamera, DoubleSide, FrontSide } from "three"
 import floorImage2 from "../resources/images/floor2.jpg"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { CSG } from "three-csg-ts"
@@ -46,7 +46,7 @@ const ThreeScene = () => {
     scene = new THREE.Scene()
     cssRenderer = new CSS3D.CSS3DRenderer()
     cssScene = new THREE.Scene()
-    cssRenderer.setSize(window.innerWidth, window.innerHeight)
+    cssRenderer.setSize(window.innerWidth / 1.01, window.innerHeight / 1.01)
     cssRenderer.domElement.style.position = "absolute"
     cssRenderer.domElement.style.top = 0
     document.body.appendChild(cssRenderer.domElement)
@@ -418,29 +418,33 @@ const ThreeScene = () => {
 
     // Three.js에 html embed 시키기
 
-    const material = new THREE.MeshBasicMaterial({ wireframe: true })
-    const geometry = new THREE.PlaneGeometry(500, 500)
+    const material = new THREE.MeshBasicMaterial()
+    const geometry = new THREE.PlaneGeometry(1024, 768)
     const planeMesh = new THREE.Mesh(geometry, material)
-
+    planeMesh.position.set(-1000, 0, -1000)
     scene.add(planeMesh)
 
-    const element = document.createElement("iframe")
-    element.src =
-      "https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik"
-    element.width = "300px"
-    element.height = "200px"
+    const embedWebsite = document.createElement("iframe")
+    embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
+    embedWebsite.width = "1400px"
+    embedWebsite.height = "800px"
 
-    const cssObject = new CSS3D.CSS3DObject(element)
-    cssObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
-
+    const cssObject = new CSS3D.CSS3DObject(embedWebsite)
+    cssObject.position.set(-1200, 10, 0)
+    cssObject.rotation.set(0, Math.PI / 2, 0)
     cssScene.add(cssObject)
 
-    material.color.set("black")
-    material.opacity = 0
-    material.blending = THREE.NoBlending
+    // TV GLTF 모델 로드
+    loader.load("/models/2018_flat_screen_tv/scene.gltf", (gltf) => {
+      gltf.scene.scale.set(750, 750, 2000)
+      gltf.scene.position.set(-1200, 0, 0)
+
+      gltf.scene.rotateY(Math.PI / 2)
+      scene.add(gltf.scene)
+    })
 
     // 렌더러
-    renderer = new THREE.WebGLRenderer({ antialias: true })
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
     renderer.shadowMap.enabled = true
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setClearColor("#ffffff")
@@ -507,7 +511,6 @@ const ThreeScene = () => {
       if (camera.zoom < 5) {
         camera.zoom = camera.zoom + 0.1
         camera.updateProjectionMatrix()
-        cssObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
 
         console.log(camera.zoom)
       }
@@ -516,7 +519,6 @@ const ThreeScene = () => {
       if (camera.zoom > 0.2) {
         camera.zoom = camera.zoom - 0.1
         camera.updateProjectionMatrix()
-        cssObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
 
         console.log(camera.zoom)
       }
