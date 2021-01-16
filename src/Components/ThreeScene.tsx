@@ -443,6 +443,13 @@ const ThreeScene = () => {
       scene.add(gltf.scene)
     })
 
+    // const tvPointLight = new THREE.PointLight(0xffffff, 1, 1000)
+    // tvPointLight.position.set(-1000, -300, 0)
+    // const tvLightHelper = new THREE.PointLightHelper(tvPointLight, 300)
+    // tvLightHelper.color = new THREE.Color(0xfffff)
+    // scene.add(tvPointLight)
+    // scene.add(tvLightHelper)
+
     // 렌더러
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
     renderer.shadowMap.enabled = true
@@ -544,10 +551,10 @@ const ThreeScene = () => {
 
   function resize() {
     if (ThreeContainer.current) {
-      // cssRenderer.setSize(
-      //   ThreeContainer.current?.clientWidth,
-      //   ThreeContainer.current?.clientHeight
-      // )
+      cssRenderer.setSize(
+        ThreeContainer.current?.clientWidth / 1.03,
+        ThreeContainer.current?.clientHeight / 1.03
+      )
 
       renderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
       camera.aspect = ThreeContainer.current?.clientWidth / ThreeContainer.current?.clientHeight
