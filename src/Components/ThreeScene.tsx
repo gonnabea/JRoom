@@ -7,6 +7,9 @@ import { CubeCamera, DoubleSide } from "three"
 import floorImage2 from "../resources/images/floor2.jpg"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { CSG } from "three-csg-ts"
+import CSS3D from "three-css3drenderer"
+
+// 이미지 임포트
 import nodeLogo from "../resources/images/nodejs.png"
 import mongodbLogo from "../resources/images/mongodb.png"
 import vanillajsLogo from "../resources/images/vanillajs.png"
@@ -28,6 +31,12 @@ let controls: OrbitControls
 let composer: { addPass: (arg0: any) => void; render: (arg0: number) => void }
 let floorCamera: THREE.CubeCamera
 let floorMesh: THREE.Mesh
+let cssRenderer: {
+  setSize: (arg0: number, arg1: number) => void
+  domElement: any
+  render: (arg0: THREE.Scene, arg1: THREE.PerspectiveCamera) => void
+}
+let cssScene: THREE.Scene
 const ThreeScene = () => {
   const ThreeContainer = useRef<HTMLDivElement>(null)
 
@@ -35,6 +44,12 @@ const ThreeScene = () => {
     camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 8000)
     camera.position.set(0, 0, 5000)
     scene = new THREE.Scene()
+    cssRenderer = new CSS3D.CSS3DRenderer()
+    cssScene = new THREE.Scene()
+    cssRenderer.setSize(window.innerWidth, window.innerHeight)
+    cssRenderer.domElement.style.position = "absolute"
+    cssRenderer.domElement.style.top = 0
+    document.body.appendChild(cssRenderer.domElement)
 
     // 건물 박스
     const buildingGeometry = new THREE.BoxGeometry(2000, 1000, 4000)
@@ -401,6 +416,29 @@ const ThreeScene = () => {
     createLogoBox(700, -200, -840, cssLogo)
     createLogoBox(1100, 0, -840, vanillajsLogo)
 
+    // Three.js에 html embed 시키기
+
+    const material = new THREE.MeshBasicMaterial({ wireframe: true })
+    const geometry = new THREE.PlaneGeometry(500, 500)
+    const planeMesh = new THREE.Mesh(geometry, material)
+
+    scene.add(planeMesh)
+
+    const element = document.createElement("iframe")
+    element.src =
+      "https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik"
+    element.width = "300px"
+    element.height = "200px"
+
+    const cssObject = new CSS3D.CSS3DObject(element)
+    cssObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
+
+    cssScene.add(cssObject)
+
+    material.color.set("black")
+    material.opacity = 0
+    material.blending = THREE.NoBlending
+
     // 렌더러
     renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.shadowMap.enabled = true
@@ -469,6 +507,8 @@ const ThreeScene = () => {
       if (camera.zoom < 5) {
         camera.zoom = camera.zoom + 0.1
         camera.updateProjectionMatrix()
+        cssObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
+
         console.log(camera.zoom)
       }
     }
@@ -476,6 +516,8 @@ const ThreeScene = () => {
       if (camera.zoom > 0.2) {
         camera.zoom = camera.zoom - 0.1
         camera.updateProjectionMatrix()
+        cssObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
+
         console.log(camera.zoom)
       }
     }
@@ -493,13 +535,18 @@ const ThreeScene = () => {
 
   function animate() {
     requestAnimationFrame(animate)
-    // renderer.render(scene, camera)
+    cssRenderer.render(cssScene, camera)
     composer.render(0.1)
     floorCamera.update(renderer, scene)
   }
 
   function resize() {
     if (ThreeContainer.current) {
+      // cssRenderer.setSize(
+      //   ThreeContainer.current?.clientWidth,
+      //   ThreeContainer.current?.clientHeight
+      // )
+
       renderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
       camera.aspect = ThreeContainer.current?.clientWidth / ThreeContainer.current?.clientHeight
       camera.updateProjectionMatrix()
