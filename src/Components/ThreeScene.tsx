@@ -10,11 +10,9 @@ import { CSG } from "three-csg-ts"
 import CSS3D from "three-css3drenderer"
 
 // 이미지 임포트
-import nodeLogo from "../resources/images/nodejs.png"
-import mongodbLogo from "../resources/images/mongodb.png"
-import vanillajsLogo from "../resources/images/vanillajs.png"
-import htmlLogo from "../resources/images/html.png"
-import cssLogo from "../resources/images/css.webp"
+import reactLogo from "../resources/images/reactLogo.jpg"
+import styledComponentsLogo from "../resources/images/styledComponents.jpg"
+import netlifyLogo from "../resources/images/netlify.jpg"
 
 const Container = styled.div`
   cursor: grab;
@@ -68,7 +66,7 @@ const ThreeScene = () => {
     ambientLight.position.set(0, 6000, 0)
     scene.add(ambientLight)
 
-    //// 프로젝트 방 (Just-Read-It) ////
+    //// 프로젝트 방 (J-Flix) ////
 
     const project1Geo = new THREE.BoxGeometry(3000, 1000, 2000)
 
@@ -351,7 +349,7 @@ const ThreeScene = () => {
     const fontLoader = new THREE.FontLoader()
     // 프로젝트 제목
     fontLoader.load("/fonts/helvetiker_regular.typeface.json", function (font) {
-      const geometry = new THREE.TextGeometry("Just Read It", {
+      const geometry = new THREE.TextGeometry("J-Flix", {
         font: font,
         size: 80,
         height: 50,
@@ -363,12 +361,12 @@ const ThreeScene = () => {
         bevelSegments: 5,
       })
       const material = new THREE.MeshPhongMaterial({
-        color: 0xff9500,
+        color: 0x02f6d5,
         specular: "orange",
         flatShading: true,
       })
       const mesh = new THREE.Mesh(geometry, material)
-      mesh.position.set(-200, 200, -900)
+      mesh.position.set(100, 200, -900)
       scene.add(mesh)
     })
     // 제작자 이름
@@ -410,11 +408,9 @@ const ThreeScene = () => {
       scene.add(logoBox)
     }
 
-    createLogoBox(-500, 200, -840, nodeLogo)
-    createLogoBox(-500, -200, -840, mongodbLogo)
-    createLogoBox(700, 200, -840, htmlLogo)
-    createLogoBox(700, -200, -840, cssLogo)
-    createLogoBox(1100, 0, -840, vanillajsLogo)
+    createLogoBox(-500, 200, -840, reactLogo)
+    createLogoBox(-500, -200, -840, styledComponentsLogo)
+    createLogoBox(700, 100, -840, netlifyLogo)
 
     // Three.js에 html embed 시키기
 
@@ -452,8 +448,11 @@ const ThreeScene = () => {
 
     // 렌더러
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-    renderer.shadowMap.enabled = true
+
     renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.domElement.style.position = "absolute"
+    renderer.domElement.style.top = "0"
+    renderer.domElement.style.zIndex = "-1"
     renderer.setClearColor("#ffffff")
 
     // 갓레이이펙트
@@ -552,8 +551,8 @@ const ThreeScene = () => {
   function resize() {
     if (ThreeContainer.current) {
       cssRenderer.setSize(
-        ThreeContainer.current?.clientWidth / 1.03,
-        ThreeContainer.current?.clientHeight / 1.03
+        ThreeContainer.current?.clientWidth / 1.01,
+        ThreeContainer.current?.clientHeight / 1.01
       )
 
       renderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
