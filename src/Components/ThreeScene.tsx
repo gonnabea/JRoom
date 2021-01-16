@@ -8,8 +8,8 @@ import floorImage2 from "../resources/images/floor2.jpg"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { CSG } from "three-csg-ts"
 import nodeLogo from "../resources/images/nodejs.png"
-import mongodb from "../resources/images/mongodb.png"
-import vanillajs from "../resources/images/vanillajs.png"
+import mongodbLogo from "../resources/images/mongodb.png"
+import vanillajsLogo from "../resources/images/vanillajs.png"
 import htmlLogo from "../resources/images/html.png"
 import cssLogo from "../resources/images/css.webp"
 
@@ -124,19 +124,19 @@ const ThreeScene = () => {
       floorTexture.encoding = THREE.sRGBEncoding
 
       // project1 바닥 반사 효과
-      const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(256, {
+      const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(640, {
         format: THREE.RGBFormat,
         generateMipmaps: true,
         minFilter: THREE.LinearMipmapLinearFilter,
       })
 
-      floorCamera = new THREE.CubeCamera(1, 1000, cubeRenderTarget)
-      floorCamera.position.set(0, 100, 0)
+      floorCamera = new THREE.CubeCamera(500, 1500, cubeRenderTarget)
+      floorCamera.position.set(0, 0, 0)
       scene.add(floorCamera)
 
-      const sphereMaterial = new THREE.MeshBasicMaterial({
+      const sphereMaterial = new THREE.MeshPhongMaterial({
         envMap: cubeRenderTarget.texture,
-        map: floorTexture,
+
         flatShading: true,
       })
 
@@ -396,9 +396,10 @@ const ThreeScene = () => {
     }
 
     createLogoBox(-500, 200, -840, nodeLogo)
-    createLogoBox(-500, -200, -840, mongodb)
-    createLogoBox(500, 200, -840, htmlLogo)
-    createLogoBox(500, -200, -840, cssLogo)
+    createLogoBox(-500, -200, -840, mongodbLogo)
+    createLogoBox(700, 200, -840, htmlLogo)
+    createLogoBox(700, -200, -840, cssLogo)
+    createLogoBox(1100, 0, -840, vanillajsLogo)
 
     // 렌더러
     renderer = new THREE.WebGLRenderer({ antialias: true })
