@@ -47,7 +47,8 @@ const ThreeScene = () => {
     cssRenderer.setSize(window.innerWidth, window.innerHeight)
     cssRenderer.domElement.style.top = 0
     cssRenderer.domElement.style.position = "absolute"
-    ThreeContainer.current?.appendChild(cssRenderer.domElement)
+    cssRenderer.domElement.style.zIndex = "-1"
+    document.body?.appendChild(cssRenderer.domElement)
 
     // 건물 박스
     const buildingGeometry = new THREE.BoxGeometry(2000, 1000, 4000)
@@ -413,47 +414,6 @@ const ThreeScene = () => {
     createLogoBox(-500, -200, -840, styledComponentsLogo)
     createLogoBox(700, 100, -840, netlifyLogo)
 
-    // Three.js에 html embed 시키기
-
-    const geometry = new THREE.PlaneGeometry(1400, 800)
-    const material = new THREE.MeshBasicMaterial({
-      blending: THREE.NoBlending,
-      opacity: 0.2,
-      side: THREE.DoubleSide,
-      color: new THREE.Color("black"),
-    })
-    const planeMesh = new THREE.Mesh(geometry, material)
-    planeMesh.position.set(-1200, 10, 0)
-    planeMesh.rotation.set(0, Math.PI / 2, 0)
-    scene.add(planeMesh)
-
-    planeMesh.castShadow = false
-    planeMesh.receiveShadow = true
-
-    const embedWebsite = document.createElement("iframe")
-    embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
-    embedWebsite.width = "1400px"
-    embedWebsite.height = "800px"
-
-    const cssObject = new CSS3D.CSS3DObject(embedWebsite)
-    cssObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
-    cssObject.rotation.set(0, Math.PI / 2, 0)
-    cssScene.add(cssObject)
-
-    // 테스트용 cssObject 만들기
-
-    const memo = document.createElement("div")
-    memo.innerHTML = "테스트용 텍스트입니다!! .Jiwon"
-    memo.style.width = "1400px"
-    memo.style.height = "800px"
-    memo.style.backgroundColor = "black"
-    memo.style.fontSize = "50px"
-
-    const memoObject = new CSS3D.CSS3DObject(memo)
-    memoObject.position.set(planeMesh.position.x - 1, planeMesh.position.y, planeMesh.position.z)
-    memoObject.rotation.set(0, Math.PI / 2, 0)
-    cssScene.add(memoObject)
-
     // TV GLTF 모델 로드
 
     loader.load("/models/2018_flat_screen_tv/scene.gltf", (gltf) => {
@@ -466,11 +426,11 @@ const ThreeScene = () => {
 
     // 소퍼 모델 로드
 
-    loader.load("/models/leather_black_sofa/scene.gltf", (gltf) => {
-      gltf.scene.scale.set(300, 300, 300)
-      gltf.scene.position.set(0, -600, 1050)
+    loader.load("/models/sofa/scene.gltf", (gltf) => {
+      gltf.scene.scale.set(220, 220, 220)
+      gltf.scene.position.set(0, -500, 100)
 
-      gltf.scene.rotateY(-Math.PI / 2)
+      gltf.scene.rotateY(Math.PI)
 
       scene.add(gltf.scene)
     })
@@ -484,15 +444,56 @@ const ThreeScene = () => {
 
     // 렌더러
     renderer = new THREE.WebGLRenderer({
-      alpha: true,
       antialias: true,
+      alpha: true,
+      preserveDrawingBuffer: true,
     })
 
     renderer.shadowMap.enabled = true
+    renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setClearColor("#ffffff")
-    renderer.shadowMap.enabled = true
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap
+    renderer.setClearColor(0x00ff00, 0.5)
+    renderer.domElement.style.position = "absolute"
+    renderer.domElement.style.top = "0"
+    renderer.domElement.style.zIndex = "1"
+
+    // Three.js에 html embed 시키기
+
+    const geometry = new THREE.PlaneGeometry(1400, 800)
+
+    const material = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      opacity: 0.0,
+      side: THREE.DoubleSide,
+    })
+    const planeMesh = new THREE.Mesh(geometry, material)
+    planeMesh.position.set(-1200, 10, 0)
+    planeMesh.rotation.set(0, Math.PI / 2, 0)
+    scene.add(planeMesh)
+
+    const embedWebsite = document.createElement("iframe")
+    embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
+    embedWebsite.width = "1400px"
+    embedWebsite.height = "800px"
+
+    const cssObject = new CSS3D.CSS3DObject(embedWebsite)
+    cssObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
+    cssObject.rotation.set(0, Math.PI / 2, 0)
+    cssScene.add(cssObject)
+
+    // 테스트용 cssObject 만들기
+
+    // const memo = document.createElement("div")
+    // memo.innerHTML = "테스트용 텍스트입니다!! .Jiwon"
+    // memo.style.width = "1400px"
+    // memo.style.height = "800px"
+    // memo.style.backgroundColor = "white"
+    // memo.style.fontSize = "50px"
+
+    // const memoObject = new CSS3D.CSS3DObject(memo)
+    // memoObject.position.set(boxMesh.position.x - 1, boxMesh.position.y, boxMesh.position.z)
+    // memoObject.rotation.set(0, Math.PI / 2, 0)
+    // cssScene.add(memoObject)
 
     // 갓레이이펙트
 
@@ -532,8 +533,8 @@ const ThreeScene = () => {
         decay: 0.9,
         weight: 0.5,
         samples: 100,
-        blurriness: 5,
-        opacity: 0.5,
+        blurriness: 10,
+        opacity: 1,
       })
 
       const renderPass = new RenderPass(scene, camera)
@@ -574,17 +575,17 @@ const ThreeScene = () => {
     })
 
     if (ThreeContainer.current !== null) {
-      ThreeContainer.current.appendChild(renderer.domElement)
+      document.body.appendChild(renderer.domElement)
       // renderer.setAnimationLoop( animate ); <- GPU 메모리 100% 버그 유발
       animate()
     }
   }
 
   function animate() {
-    requestAnimationFrame(animate)
     cssRenderer.render(cssScene, camera)
     composer.render(0.1)
     floorCamera.update(renderer, scene)
+    requestAnimationFrame(animate)
   }
 
   function resize() {
