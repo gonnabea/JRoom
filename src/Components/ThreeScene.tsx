@@ -44,10 +44,10 @@ const ThreeScene = () => {
     scene = new THREE.Scene()
     cssRenderer = new CSS3D.CSS3DRenderer()
     cssScene = new THREE.Scene()
-    cssRenderer.setSize(window.innerWidth / 1.01, window.innerHeight / 1.01)
-    cssRenderer.domElement.style.position = "absolute"
+    cssRenderer.setSize(window.innerWidth, window.innerHeight)
     cssRenderer.domElement.style.top = 0
-    document.body.appendChild(cssRenderer.domElement)
+    cssRenderer.domElement.style.position = "absolute"
+    ThreeContainer.current?.appendChild(cssRenderer.domElement)
 
     // 건물 박스
     const buildingGeometry = new THREE.BoxGeometry(2000, 1000, 4000)
@@ -62,7 +62,8 @@ const ThreeScene = () => {
 
     ExhibitionRoom.material.side = THREE.BackSide // mesh 내부에서도 면이 보이게 만들어 줌.
 
-    const ambientLight = new THREE.AmbientLight(0xc2cee9, 0.7) // soft white light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7) // soft white light
+    ambientLight.castShadow = true
     ambientLight.position.set(0, 6000, 0)
     scene.add(ambientLight)
 
@@ -414,11 +415,20 @@ const ThreeScene = () => {
 
     // Three.js에 html embed 시키기
 
-    const material = new THREE.MeshBasicMaterial()
-    const geometry = new THREE.PlaneGeometry(1024, 768)
+    const geometry = new THREE.PlaneGeometry(1400, 800)
+    const material = new THREE.MeshBasicMaterial({
+      blending: THREE.NoBlending,
+      opacity: 0.2,
+      side: THREE.DoubleSide,
+      color: new THREE.Color("black"),
+    })
     const planeMesh = new THREE.Mesh(geometry, material)
-    planeMesh.position.set(-1000, 0, -1000)
+    planeMesh.position.set(-1200, 10, 0)
+    planeMesh.rotation.set(0, Math.PI / 2, 0)
     scene.add(planeMesh)
+
+    planeMesh.castShadow = false
+    planeMesh.receiveShadow = true
 
     const embedWebsite = document.createElement("iframe")
     embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
@@ -426,9 +436,23 @@ const ThreeScene = () => {
     embedWebsite.height = "800px"
 
     const cssObject = new CSS3D.CSS3DObject(embedWebsite)
-    cssObject.position.set(-1200, 10, 0)
+    cssObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
     cssObject.rotation.set(0, Math.PI / 2, 0)
     cssScene.add(cssObject)
+
+    // 테스트용 cssObject 만들기
+
+    const memo = document.createElement("div")
+    memo.innerHTML = "테스트용 텍스트입니다!! .Jiwon"
+    memo.style.width = "1400px"
+    memo.style.height = "800px"
+    memo.style.backgroundColor = "black"
+    memo.style.fontSize = "50px"
+
+    const memoObject = new CSS3D.CSS3DObject(memo)
+    memoObject.position.set(planeMesh.position.x - 1, planeMesh.position.y, planeMesh.position.z)
+    memoObject.rotation.set(0, Math.PI / 2, 0)
+    cssScene.add(memoObject)
 
     // TV GLTF 모델 로드
 
@@ -459,13 +483,16 @@ const ThreeScene = () => {
     // scene.add(tvLightHelper)
 
     // 렌더러
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+    })
 
+    renderer.shadowMap.enabled = true
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.domElement.style.position = "absolute"
-    renderer.domElement.style.top = "0"
-    renderer.domElement.style.zIndex = "-1"
     renderer.setClearColor("#ffffff")
+    renderer.shadowMap.enabled = true
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
     // 갓레이이펙트
 
