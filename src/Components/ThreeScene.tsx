@@ -47,7 +47,7 @@ const ThreeScene = () => {
     cssRenderer.setSize(window.innerWidth, window.innerHeight)
     cssRenderer.domElement.style.top = 0
     cssRenderer.domElement.style.position = "absolute"
-    cssRenderer.domElement.style.zIndex = "-1"
+    cssRenderer.domElement.style.zIndex = "5"
     document.body?.appendChild(cssRenderer.domElement)
 
     // 건물 박스
@@ -63,7 +63,7 @@ const ThreeScene = () => {
 
     ExhibitionRoom.material.side = THREE.BackSide // mesh 내부에서도 면이 보이게 만들어 줌.
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7) // soft white light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5) // soft white light
     ambientLight.castShadow = true
     ambientLight.position.set(0, 6000, 0)
     scene.add(ambientLight)
@@ -424,7 +424,7 @@ const ThreeScene = () => {
       scene.add(gltf.scene)
     })
 
-    // 소퍼 모델 로드
+    // 소파 모델 로드
 
     loader.load("/models/sofa/scene.gltf", (gltf) => {
       gltf.scene.scale.set(220, 220, 220)
@@ -435,12 +435,15 @@ const ThreeScene = () => {
       scene.add(gltf.scene)
     })
 
-    // const tvPointLight = new THREE.PointLight(0xffffff, 1, 1000)
-    // tvPointLight.position.set(-1000, -300, 0)
-    // const tvLightHelper = new THREE.PointLightHelper(tvPointLight, 300)
-    // tvLightHelper.color = new THREE.Color(0xfffff)
-    // scene.add(tvPointLight)
-    // scene.add(tvLightHelper)
+    // 팝콘 모델 로드
+
+    loader.load("/models/popcorn_bucket/scene.gltf", (gltf) => {
+      gltf.scene.scale.set(100, 100, 100)
+      gltf.scene.position.set(-1000, -500, 850)
+
+      gltf.scene.rotateY(Math.PI)
+      scene.add(gltf.scene)
+    })
 
     // 렌더러
     renderer = new THREE.WebGLRenderer({
