@@ -486,17 +486,17 @@ const ThreeScene = () => {
 
     // 테스트용 cssObject 만들기
 
-    // const memo = document.createElement("div")
-    // memo.innerHTML = "테스트용 텍스트입니다!! .Jiwon"
-    // memo.style.width = "1400px"
-    // memo.style.height = "800px"
-    // memo.style.backgroundColor = "white"
-    // memo.style.fontSize = "50px"
+    const memo = document.createElement("div")
+    memo.innerHTML = "테스트용 텍스트입니다!! .Jiwon"
+    memo.style.width = "1400px"
+    memo.style.height = "800px"
+    memo.style.backgroundColor = "black"
+    memo.style.fontSize = "50px"
 
-    // const memoObject = new CSS3D.CSS3DObject(memo)
-    // memoObject.position.set(boxMesh.position.x - 1, boxMesh.position.y, boxMesh.position.z)
-    // memoObject.rotation.set(0, Math.PI / 2, 0)
-    // cssScene.add(memoObject)
+    const memoObject = new CSS3D.CSS3DObject(memo)
+    memoObject.position.set(planeMesh.position.x - 2, planeMesh.position.y, planeMesh.position.z)
+    memoObject.rotation.set(0, Math.PI / 2, 0)
+    cssScene.add(memoObject)
 
     // 갓레이이펙트
 
@@ -553,7 +553,7 @@ const ThreeScene = () => {
     createSunLight(200, 200, 100)
     createSunLight(1000, 200, 100)
 
-    controls = new OrbitControls(camera, renderer.domElement)
+    controls = new OrbitControls(camera, cssRenderer.domElement)
 
     // 마우스 휠로 줌 조절
     controls.dollyOut = function () {
@@ -593,10 +593,7 @@ const ThreeScene = () => {
 
   function resize() {
     if (ThreeContainer.current) {
-      cssRenderer.setSize(
-        ThreeContainer.current?.clientWidth / 1.01,
-        ThreeContainer.current?.clientHeight / 1.01
-      )
+      cssRenderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
 
       renderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
       camera.aspect = ThreeContainer.current?.clientWidth / ThreeContainer.current?.clientHeight
