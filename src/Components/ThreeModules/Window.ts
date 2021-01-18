@@ -3,7 +3,6 @@ import { scene } from "../ThreeScene"
 
 const loader = new GLTFLoader()
 
-// 지붕에 달린 창문 (앞면 3개)
 export const loadWindow = (
   position: { x: number; y: number; z: number },
   scale: { x: number; y: number; z: number },

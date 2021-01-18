@@ -18,6 +18,8 @@ import groundImg from "../resources/images/ground.jpg"
 import { loadWindow } from "./ThreeModules/Window"
 import { addDirLight } from "./ThreeModules/DirectionalLight"
 import { addSpotLight } from "./ThreeModules/SpotLight"
+import { createLogoBox } from "./ThreeModules/LogoBox"
+import { addFloor } from "./ThreeModules/floor"
 
 const Container = styled.div`
   cursor: grab;
@@ -34,8 +36,8 @@ let renderer: THREE.WebGLRenderer
 let geometry: THREE.BoxGeometry, material, mesh
 let controls: OrbitControls
 let composer: { addPass: (arg0: any) => void; render: (arg0: number) => void }
-let floorCamera: THREE.CubeCamera
-let floorMesh: THREE.Mesh
+export let floorCamera: THREE.CubeCamera
+export let floorMesh: THREE.Mesh
 let cssRenderer: {
   setSize: (arg0: number, arg1: number) => void
   domElement: any
@@ -95,50 +97,9 @@ const ThreeScene = () => {
     addDirLight({ x: -1000, y: 2000, z: 2000 }, { x: -500, y: 1000, z: 800 })
 
     // 스포트라이트 (창문 통과하는 햇빛)
-
     addSpotLight({ x: -900, y: 750, z: 800 }, { x: -400, y: -500, z: -100 }, Math.PI / 18)
 
-    interface typeAddFloor {
-      width: number
-      height: number
-      x: number
-      y: number
-      z: number
-    }
-
     // 바닥
-    const addFloor = ({ width, height, x, y, z }: typeAddFloor) => {
-      const floorGeo = new THREE.PlaneBufferGeometry(width, height) // width, height
-      const floorTexture = new THREE.TextureLoader().load(floorImage2)
-      floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping
-      floorTexture.repeat.set(5, 5)
-      floorTexture.encoding = THREE.sRGBEncoding
-
-      // project1 바닥 반사 효과
-      const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(640, {
-        format: THREE.RGBFormat,
-        generateMipmaps: true,
-        minFilter: THREE.LinearMipmapLinearFilter,
-      })
-
-      floorCamera = new THREE.CubeCamera(500, 1500, cubeRenderTarget)
-      floorCamera.position.set(0, 0, 0)
-      scene.add(floorCamera)
-
-      const sphereMaterial = new THREE.MeshPhongMaterial({
-        envMap: cubeRenderTarget.texture,
-
-        flatShading: true,
-      })
-
-      floorMesh = new THREE.Mesh(floorGeo, sphereMaterial)
-      floorMesh.position.set(0, 100, 0)
-
-      floorMesh.rotateX(-Math.PI / 2) // -90도 로테이션
-      floorMesh.position.set(x, y, z) // 위치 조정
-      scene.add(floorMesh)
-      scene.add(floorMesh)
-    }
 
     addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0 })
 
@@ -359,23 +320,9 @@ const ThreeScene = () => {
 
     // 기술스택 박스 만들기
 
-    const createLogoBox = (x: number, y: number, z: number, image: string) => {
-      const logoBoxGeo = new THREE.BoxBufferGeometry(300, 300, 300)
-      const logoBoxTexture = new THREE.TextureLoader().load(image)
-      const logoBoxMat = new THREE.MeshBasicMaterial({
-        color: 0x8c989c,
-
-        flatShading: true,
-        map: logoBoxTexture,
-      })
-      const logoBox = new THREE.Mesh(logoBoxGeo, logoBoxMat)
-      logoBox.position.set(x, y, z)
-      scene.add(logoBox)
-    }
-
-    createLogoBox(-500, 200, -840, reactLogo)
-    createLogoBox(-500, -200, -840, styledComponentsLogo)
-    createLogoBox(700, 100, -840, netlifyLogo)
+    createLogoBox({ x: -500, y: 200, z: -840 }, reactLogo)
+    createLogoBox({ x: -500, y: -200, z: -840 }, styledComponentsLogo)
+    createLogoBox({ x: 700, y: 100, z: -840 }, netlifyLogo)
 
     // TV GLTF 모델 로드
 
@@ -474,7 +421,7 @@ const ThreeScene = () => {
     cssObject.rotation.set(0, Math.PI / 2, 0)
     cssScene.add(cssObject)
 
-    // 테스트용 cssObject 만들기
+    // TV 뒷면 가리기 위한 Div Box
 
     const memo = document.createElement("div")
     memo.innerHTML = "Nomflix.Jiwon"
