@@ -287,16 +287,45 @@ const ThreeScene = () => {
     // GLTF 로더 //
 
     // 지붕에 달린 창문 (앞면 3개)
+    const loadWindow = (
+      position: { x: number; y: number; z: number },
+      scale: { x: number; y: number; z: number },
+      rotation: { x: any; y: any; z: any }
+    ) => {
+      loader.load("/models/window1/scene.gltf", (gltf) => {
+        console.log(gltf)
+        gltf.scene.position.set(position.x, position.y, position.z)
+        gltf.scene.rotation.set(rotation.x, rotation.y, rotation.z)
+        gltf.scene.scale.set(scale.x, scale.y, scale.z)
+        scene.add(gltf.scene)
+      })
+    }
+
     const loader = new GLTFLoader()
 
-    loader.load("/models/window1/scene.gltf", (gltf) => {
-      console.log(gltf)
-      gltf.scene.position.set(-750, 975, 500)
-      gltf.scene.rotateX(-Math.PI / 4)
-      gltf.scene.rotateY(-Math.PI)
-      gltf.scene.scale.set(400, 315, 300)
-      scene.add(gltf.scene)
-    })
+    loadWindow(
+      { x: -750, y: 975, z: 500 },
+      { x: 400, y: 315, z: 300 },
+      { x: -Math.PI / 4, y: -Math.PI, z: 0 }
+    ) // Arguments: {position, scale, rotation}
+    loadWindow(
+      { x: 0, y: 975, z: 500 },
+      { x: 400, y: 315, z: 300 },
+      { x: -Math.PI / 4, y: -Math.PI, z: 0 }
+    )
+    loadWindow(
+      { x: 750, y: 975, z: 500 },
+      { x: 400, y: 315, z: 300 },
+      { x: -Math.PI / 4, y: -Math.PI, z: 0 }
+    )
+
+    // 지붕에 달린 창문 (뒷면 1개)
+
+    loadWindow(
+      { x: 0, y: 1050, z: -400 },
+      { x: 500, y: 350, z: 300 },
+      { x: Math.PI / 4, y: -Math.PI, z: 0 }
+    )
 
     // 창문 밝히기
     const windowLight = new THREE.RectAreaLight(0xffffff)
@@ -306,34 +335,6 @@ const ThreeScene = () => {
     windowLight.height = 500
     windowLight.lookAt(-750, 975, 500)
     scene.add(windowLight)
-
-    loader.load("/models/window1/scene.gltf", (gltf) => {
-      console.log(gltf)
-      gltf.scene.position.set(0, 975, 500)
-      gltf.scene.rotateX(-Math.PI / 4)
-      gltf.scene.rotateY(-Math.PI)
-      gltf.scene.scale.set(400, 315, 300)
-      scene.add(gltf.scene)
-    })
-
-    loader.load("/models/window1/scene.gltf", (gltf) => {
-      console.log(gltf)
-      gltf.scene.position.set(750, 975, 500)
-      gltf.scene.rotateX(-Math.PI / 4)
-      gltf.scene.rotateY(-Math.PI)
-      gltf.scene.scale.set(400, 315, 300)
-      scene.add(gltf.scene)
-    })
-
-    // 지붕에 달린 창문 (뒷면 1개)
-
-    loader.load("/models/window1/scene.gltf", (gltf) => {
-      gltf.scene.position.set(0, 1050, -400)
-      gltf.scene.rotateX(Math.PI / 4)
-      gltf.scene.rotateY(-Math.PI)
-      gltf.scene.scale.set(500, 350, 300)
-      scene.add(gltf.scene)
-    })
 
     // 벽에 붙일 책 모형
     loader.load("/models/book/scene.gltf", (gltf) => {
