@@ -13,6 +13,8 @@ import CSS3D from "three-css3drenderer"
 import reactLogo from "../resources/images/reactLogo.jpg"
 import styledComponentsLogo from "../resources/images/styledComponents.jpg"
 import netlifyLogo from "../resources/images/netlify.jpg"
+import sunsetImg1 from "../resources/images/Sunset Backgrounds/sunset12.jpg"
+import groundImg from "../resources/images/ground.jpg"
 
 const Container = styled.div`
   cursor: grab;
@@ -39,7 +41,7 @@ const ThreeScene = () => {
   const ThreeContainer = useRef<HTMLDivElement>(null)
 
   function ThreeSceneInit() {
-    camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 8000)
+    camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 21000)
     camera.position.set(0, 0, 5000)
     scene = new THREE.Scene()
     cssRenderer = new CSS3D.CSS3DRenderer()
@@ -445,6 +447,34 @@ const ThreeScene = () => {
       scene.add(gltf.scene)
     })
 
+    // 노을 배경 박스 생성
+    const materialArray = []
+    const texture_ft = new THREE.TextureLoader().load(
+      "https://media-exp1.licdn.com/dms/image/C511BAQE0NnIkjkotGA/company-background_10000/0/1541489744017?e=2159024400&v=beta&t=8CzJngJh5TrtF6_WFRYSlDeycAkT52hAfb4qLYGYnv8"
+    )
+    const texture_bk = new THREE.TextureLoader().load(
+      "https://media-exp1.licdn.com/dms/image/C511BAQE0NnIkjkotGA/company-background_10000/0/1541489744017?e=2159024400&v=beta&t=8CzJngJh5TrtF6_WFRYSlDeycAkT52hAfb4qLYGYnv8"
+    )
+    const texture_up = new THREE.TextureLoader().load(
+      "https://media-exp1.licdn.com/dms/image/C511BAQE0NnIkjkotGA/company-background_10000/0/1541489744017?e=2159024400&v=beta&t=8CzJngJh5TrtF6_WFRYSlDeycAkT52hAfb4qLYGYnv8"
+    )
+    const texture_dn = new THREE.TextureLoader().load(groundImg)
+
+    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
+    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
+    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
+    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_dn }))
+    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
+    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
+
+    const skyboxGeo = new THREE.BoxGeometry(19000, 19000, 19000)
+    const skybox = new THREE.Mesh(skyboxGeo, materialArray)
+    skybox.position.set(0, 8990, 0)
+    materialArray.map((mat) => {
+      mat.side = THREE.BackSide
+    })
+    scene.add(skybox)
+
     // 렌더러
     renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -454,7 +484,7 @@ const ThreeScene = () => {
 
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setClearColor(0x00ff00, 0.5)
+    renderer.setClearColor(0xffffff, 0.5)
     renderer.domElement.style.position = "absolute"
     renderer.domElement.style.top = "0"
     renderer.domElement.style.zIndex = "1"
@@ -584,7 +614,15 @@ const ThreeScene = () => {
     }
   }
 
+  setInterval(() => {
+    console.log(`${frameCount} fps`)
+    frameCount = 0
+  }, 1000)
+
+  let frameCount = 0
   function animate() {
+    frameCount += 1
+
     cssRenderer.render(cssScene, camera)
     composer.render(0.1)
     // floorCamera.update(renderer, scene) <- GPU 점유율 대폭 상승 유발
