@@ -15,6 +15,9 @@ import styledComponentsLogo from "../resources/images/styledComponents.jpg"
 import netlifyLogo from "../resources/images/netlify.jpg"
 import sunsetImg1 from "../resources/images/Sunset Backgrounds/sunset12.jpg"
 import groundImg from "../resources/images/ground.jpg"
+import { loadWindow } from "./ThreeModules/Window"
+import { addDirLight } from "./ThreeModules/DirectionalLight"
+import { addSpotLight } from "./ThreeModules/SpotLight"
 
 const Container = styled.div`
   cursor: grab;
@@ -25,7 +28,9 @@ const Container = styled.div`
   }
 `
 
-let camera: THREE.PerspectiveCamera, scene: THREE.Scene, renderer: THREE.WebGLRenderer
+let camera: THREE.PerspectiveCamera
+export let scene: THREE.Scene
+let renderer: THREE.WebGLRenderer
 let geometry: THREE.BoxGeometry, material, mesh
 let controls: OrbitControls
 let composer: { addPass: (arg0: any) => void; render: (arg0: number) => void }
@@ -87,42 +92,11 @@ const ThreeScene = () => {
     scene.add(newMesh)
 
     // 디렉셔널 라이트 (햇빛)
-
-    const addDirLight = ([x, y, z]: Array<number>, [x1, y1, z1]: Array<number>) => {
-      const dirLight = new THREE.DirectionalLight(0xffffff, 0.3)
-      dirLight.position.set(x, y, z)
-      dirLight.castShadow = true
-
-      dirLight.target.position.set(x1, y1, z1)
-      dirLight.target.updateMatrixWorld()
-
-      const dirLightHelper = new THREE.DirectionalLightHelper(dirLight, 300, 0xa0c2f9)
-      dirLightHelper.update()
-
-      scene.add(dirLight, dirLight.target)
-      scene.add(dirLightHelper)
-    }
-    addDirLight([-1000, 2000, 2000], [-500, 1000, 800])
+    addDirLight({ x: -1000, y: 2000, z: 2000 }, { x: -500, y: 1000, z: 800 })
 
     // 스포트라이트 (창문 통과하는 햇빛)
 
-    const addSpotLight = ([x, y, z]: Array<number>, [x1, y1, z1]: Array<number>, angle: number) => {
-      const spotLight_distance = 0 // 빛의 최대범위
-      const spotLight = new THREE.SpotLight(0xffffff, 0.9, spotLight_distance, angle)
-      spotLight.penumbra = 1
-      spotLight.decay = 0.5
-      // 창문 위치
-      spotLight.position.set(x, y, z)
-      spotLight.target.position.set(x1, y1, z1)
-      spotLight.target.updateMatrixWorld()
-
-      const spotLightHelper = new THREE.SpotLightHelper(spotLight)
-      scene.add(spotLightHelper)
-
-      scene.add(spotLight)
-    }
-
-    addSpotLight([-900, 750, 800], [-400, -500, -100], Math.PI / 18)
+    addSpotLight({ x: -900, y: 750, z: 800 }, { x: -400, y: -500, z: -100 }, Math.PI / 18)
 
     interface typeAddFloor {
       width: number
@@ -287,21 +261,6 @@ const ThreeScene = () => {
     // GLTF 로더 //
 
     // 지붕에 달린 창문 (앞면 3개)
-    const loadWindow = (
-      position: { x: number; y: number; z: number },
-      scale: { x: number; y: number; z: number },
-      rotation: { x: any; y: any; z: any }
-    ) => {
-      loader.load("/models/window1/scene.gltf", (gltf) => {
-        console.log(gltf)
-        gltf.scene.position.set(position.x, position.y, position.z)
-        gltf.scene.rotation.set(rotation.x, rotation.y, rotation.z)
-        gltf.scene.scale.set(scale.x, scale.y, scale.z)
-        scene.add(gltf.scene)
-      })
-    }
-
-    const loader = new GLTFLoader()
 
     loadWindow(
       { x: -750, y: 975, z: 500 },
@@ -337,6 +296,7 @@ const ThreeScene = () => {
     scene.add(windowLight)
 
     // 벽에 붙일 책 모형
+    const loader = new GLTFLoader()
     loader.load("/models/book/scene.gltf", (gltf) => {
       gltf.scene.scale.set(1000, 1000, 1000)
       gltf.scene.rotateX(Math.PI / 2)
