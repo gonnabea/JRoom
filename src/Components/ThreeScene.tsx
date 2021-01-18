@@ -19,8 +19,9 @@ import { loadWindow } from "./ThreeModules/Window"
 import { addDirLight } from "./ThreeModules/DirectionalLight"
 import { addSpotLight } from "./ThreeModules/SpotLight"
 import { createLogoBox } from "./ThreeModules/LogoBox"
-import { addFloor } from "./ThreeModules/floor"
+import { addFloor } from "./ThreeModules/Floor"
 import { AddRoofWindowHole } from "./ThreeModules/RoofWIndowHole"
+import { createSunLight } from "./ThreeModules/SunLight"
 
 const Container = styled.div`
   cursor: grab;
@@ -31,12 +32,12 @@ const Container = styled.div`
   }
 `
 
-let camera: THREE.PerspectiveCamera
+export let camera: THREE.PerspectiveCamera
 export let scene: THREE.Scene
-let renderer: THREE.WebGLRenderer
+export let renderer: THREE.WebGLRenderer
 let geometry: THREE.BoxGeometry, material, mesh
 let controls: OrbitControls
-let composer: { addPass: (arg0: any) => void; render: (arg0: number) => void }
+export let composer: { addPass: (arg0: any) => void; render: (arg0: number) => void }
 export let floorCamera: THREE.CubeCamera
 export let floorMesh: THREE.Mesh
 let cssRenderer: {
@@ -357,58 +358,9 @@ const ThreeScene = () => {
 
     // 갓레이이펙트
 
-    const createSunLight = (x: number, y: number, z: number) => {
-      const CylinderGeometry = new THREE.CylinderGeometry(3, 4, 20, 32)
-      console.log(CylinderGeometry)
-      CylinderGeometry.faces.splice(0, 1)
-      CylinderGeometry.faces.splice(4, 1)
-      CylinderGeometry.faces.splice(8, 1)
-      CylinderGeometry.faces.splice(12, 1)
-      CylinderGeometry.faces.splice(16, 1)
-      CylinderGeometry.faces.splice(20, 1)
-      CylinderGeometry.faces.splice(24, 1)
-      CylinderGeometry.faces.splice(28, 1)
-      CylinderGeometry.faces.splice(32, 1)
-      CylinderGeometry.faces.splice(40, 1)
-      CylinderGeometry.faces.splice(44, 1)
-      CylinderGeometry.faces.splice(48, 1)
-      CylinderGeometry.faces.splice(52, 1)
-
-      const CylinderMaterial = new THREE.MeshBasicMaterial({
-        color: 0xf2f1c7,
-      })
-      CylinderMaterial.transparent = true
-      CylinderMaterial.opacity = 0.1
-      const CylinderMesh = new THREE.Mesh(CylinderGeometry, CylinderMaterial)
-      CylinderMesh.scale.set(60, 100, 90)
-      CylinderMesh.position.set(x, y, z)
-      CylinderGeometry.rotateZ(0)
-      CylinderGeometry.rotateX(Math.PI / 6)
-      CylinderGeometry.rotateY(-Math.PI / 4)
-
-      scene.add(CylinderMesh)
-      const godraysEffect = new GodRaysEffect(camera, CylinderMesh, {
-        resolutionScale: 1,
-        density: 0.9,
-        decay: 0.9,
-        weight: 0.5,
-        samples: 100,
-        blurriness: 10,
-        opacity: 1,
-      })
-
-      const renderPass = new RenderPass(scene, camera)
-      const effectPass = new EffectPass(camera, godraysEffect)
-      effectPass.renderToScreen = true
-
-      composer = new EffectComposer(renderer)
-      composer.addPass(renderPass)
-      composer.addPass(effectPass)
-    }
-
-    createSunLight(-600, 200, 100)
-    createSunLight(200, 200, 100)
-    createSunLight(1000, 200, 100)
+    composer = createSunLight({ x: -600, y: 200, z: 100 })
+    composer = createSunLight({ x: 200, y: 200, z: 100 })
+    composer = createSunLight({ x: 1000, y: 200, z: 100 })
 
     controls = new OrbitControls(camera, cssRenderer.domElement)
 
