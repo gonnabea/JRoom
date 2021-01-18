@@ -48,10 +48,10 @@ const ThreeScene = () => {
     cssRenderer.domElement.style.top = 0
     cssRenderer.domElement.style.position = "absolute"
     cssRenderer.domElement.style.zIndex = "5"
-    document.body?.appendChild(cssRenderer.domElement)
+    ThreeContainer?.current?.appendChild(cssRenderer.domElement)
 
     // 건물 박스
-    const buildingGeometry = new THREE.BoxGeometry(2000, 1000, 4000)
+    const buildingGeometry = new THREE.BoxGeometry(2500, 1000, 3000)
     const buildingTexture = new THREE.TextureLoader()
     const buildingMaterial = new THREE.MeshPhongMaterial({
       color: 0xc2cee9,
@@ -59,12 +59,12 @@ const ThreeScene = () => {
       flatShading: true,
     })
     const ExhibitionRoom = new THREE.Mesh(buildingGeometry, buildingMaterial)
-    ExhibitionRoom.position.set(0, 0, -3000)
+    ExhibitionRoom.position.set(0, 0, -2500)
 
     ExhibitionRoom.material.side = THREE.BackSide // mesh 내부에서도 면이 보이게 만들어 줌.
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5) // soft white light
-    ambientLight.castShadow = true
+
     ambientLight.position.set(0, 6000, 0)
     scene.add(ambientLight)
 
@@ -132,7 +132,7 @@ const ThreeScene = () => {
 
     // 바닥
     const addFloor = ({ width, height, x, y, z }: typeAddFloor) => {
-      const floorGeo = new THREE.PlaneGeometry(width, height) // width, height
+      const floorGeo = new THREE.PlaneBufferGeometry(width, height) // width, height
       const floorTexture = new THREE.TextureLoader().load(floorImage2)
       floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping
       floorTexture.repeat.set(5, 5)
@@ -198,19 +198,19 @@ const ThreeScene = () => {
 
     // 창문 구멍 뚫기
     const roofWindowHole = new THREE.Mesh(
-      new THREE.BoxGeometry(600, 500, 600),
+      new THREE.BoxBufferGeometry(600, 500, 600),
       new THREE.MeshPhongMaterial()
     )
     const roofWindowHole2 = new THREE.Mesh(
-      new THREE.BoxGeometry(600, 500, 600),
+      new THREE.BoxBufferGeometry(600, 500, 600),
       new THREE.MeshPhongMaterial()
     )
     const roofWindowHole3 = new THREE.Mesh(
-      new THREE.BoxGeometry(600, 500, 600),
+      new THREE.BoxBufferGeometry(600, 500, 600),
       new THREE.MeshPhongMaterial()
     )
     const roofWindowHole4 = new THREE.Mesh(
-      new THREE.BoxGeometry(600, 500, 700),
+      new THREE.BoxBufferGeometry(600, 500, 700),
       new THREE.MeshPhongMaterial()
     )
 
@@ -341,7 +341,7 @@ const ThreeScene = () => {
       scene.add(gltf.scene)
     })
     const bookCoverMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(720, 1000, 40),
+      new THREE.PlaneBufferGeometry(720, 1000, 40),
       new THREE.MeshPhongMaterial({ color: 0x292a2e, specular: "orange", flatShading: true })
     )
     bookCoverMesh.position.set(100, 0, -890)
@@ -351,7 +351,7 @@ const ThreeScene = () => {
     const fontLoader = new THREE.FontLoader()
     // 프로젝트 제목
     fontLoader.load("/fonts/helvetiker_regular.typeface.json", function (font) {
-      const geometry = new THREE.TextGeometry("J-Flix", {
+      const geometry = new THREE.TextBufferGeometry("J-Flix", {
         font: font,
         size: 80,
         height: 50,
@@ -373,7 +373,7 @@ const ThreeScene = () => {
     })
     // 제작자 이름
     fontLoader.load("/fonts/helvetiker_regular.typeface.json", function (font) {
-      const geometry = new THREE.TextGeometry("Made By.Jiwon", {
+      const geometry = new THREE.TextBufferGeometry("Made By.Jiwon", {
         font: font,
         size: 35,
         height: 50,
@@ -397,11 +397,11 @@ const ThreeScene = () => {
     // 기술스택 박스 만들기
 
     const createLogoBox = (x: number, y: number, z: number, image: string) => {
-      const logoBoxGeo = new THREE.BoxGeometry(300, 300, 300)
+      const logoBoxGeo = new THREE.BoxBufferGeometry(300, 300, 300)
       const logoBoxTexture = new THREE.TextureLoader().load(image)
-      const logoBoxMat = new THREE.MeshPhongMaterial({
+      const logoBoxMat = new THREE.MeshBasicMaterial({
         color: 0x8c989c,
-        specular: "orange",
+
         flatShading: true,
         map: logoBoxTexture,
       })
@@ -452,7 +452,6 @@ const ThreeScene = () => {
       preserveDrawingBuffer: true,
     })
 
-    renderer.shadowMap.enabled = true
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setClearColor(0x00ff00, 0.5)
@@ -462,7 +461,7 @@ const ThreeScene = () => {
 
     // Three.js에 html embed 시키기
 
-    const geometry = new THREE.PlaneGeometry(1400, 800)
+    const geometry = new THREE.PlaneBufferGeometry(1400, 800)
 
     const material = new THREE.MeshBasicMaterial({
       color: 0xffffff,
@@ -487,11 +486,12 @@ const ThreeScene = () => {
     // 테스트용 cssObject 만들기
 
     const memo = document.createElement("div")
-    memo.innerHTML = "테스트용 텍스트입니다!! .Jiwon"
+    memo.innerHTML = "Nomflix.Jiwon"
     memo.style.width = "1400px"
     memo.style.height = "800px"
     memo.style.backgroundColor = "black"
-    memo.style.fontSize = "50px"
+    memo.style.color = "white"
+    memo.style.fontSize = "80px"
 
     const memoObject = new CSS3D.CSS3DObject(memo)
     memoObject.position.set(planeMesh.position.x - 2, planeMesh.position.y, planeMesh.position.z)
@@ -578,7 +578,7 @@ const ThreeScene = () => {
     })
 
     if (ThreeContainer.current !== null) {
-      document.body.appendChild(renderer.domElement)
+      ThreeContainer.current?.appendChild(renderer.domElement)
       // renderer.setAnimationLoop( animate ); <- GPU 메모리 100% 버그 유발
       animate()
     }
@@ -587,7 +587,7 @@ const ThreeScene = () => {
   function animate() {
     cssRenderer.render(cssScene, camera)
     composer.render(0.1)
-    floorCamera.update(renderer, scene)
+    // floorCamera.update(renderer, scene) <- GPU 점유율 대폭 상승 유발
     requestAnimationFrame(animate)
   }
 
