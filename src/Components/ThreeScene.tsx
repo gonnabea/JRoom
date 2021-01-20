@@ -22,6 +22,7 @@ import { addLogoBox } from "./ThreeModules/LogoBox"
 import { addFloor } from "./ThreeModules/Floor"
 import { addRoofWindowHole } from "./ThreeModules/RoofWIndowHole"
 import { addSunLight } from "./ThreeModules/SunLight"
+import { FontLoder } from "./ThreeModules/FontLoader"
 
 const Container = styled.div`
   cursor: grab;
@@ -192,30 +193,33 @@ const ThreeScene = () => {
     bookCoverMesh.material.side = DoubleSide
     scene.add(bookCoverMesh)
     // 책 모형에 붙일 텍스트 geometry
-    const fontLoader = new THREE.FontLoader()
-    // 프로젝트 제목
-    fontLoader.load("/fonts/helvetiker_regular.typeface.json", function (font) {
-      const geometry = new THREE.TextBufferGeometry("J-Flix", {
-        font: font,
+
+    FontLoder(
+      {
+        fontModelUrl: "/fonts/helvetiker_regular.typeface.json",
+        text: "J-Flix",
         size: 80,
         height: 50,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: 10,
-        bevelSize: 8,
-        bevelOffset: 0,
-        bevelSegments: 5,
-      })
-      const material = new THREE.MeshPhongMaterial({
         color: 0x02f6d5,
-        specular: "orange",
-        flatShading: true,
-      })
-      const mesh = new THREE.Mesh(geometry, material)
-      mesh.position.set(100, 200, -900)
-      scene.add(mesh)
-    })
+        bevelSize: 8,
+      },
+      { x: 100, y: 200, z: -900 }
+    )
+    // 프로젝트 제목
+
     // 제작자 이름
+    FontLoder(
+      {
+        fontModelUrl: "/fonts/helvetiker_regular.typeface.json",
+        text: "Made By.Jiwon",
+        size: 35,
+        height: 50,
+        color: 0xffffff,
+        bevelSize: 3,
+      },
+      { x: 100, y: 100, z: -900 }
+    )
+    const fontLoader = new THREE.FontLoader()
     fontLoader.load("/fonts/helvetiker_regular.typeface.json", function (font) {
       const geometry = new THREE.TextBufferGeometry("Made By.Jiwon", {
         font: font,
