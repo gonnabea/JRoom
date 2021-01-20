@@ -15,13 +15,13 @@ import styledComponentsLogo from "../resources/images/styledComponents.jpg"
 import netlifyLogo from "../resources/images/netlify.jpg"
 import sunsetImg1 from "../resources/images/Sunset Backgrounds/sunset12.jpg"
 import groundImg from "../resources/images/ground.jpg"
-import { loadWindow } from "./ThreeModules/Window"
+import { addWindow } from "./ThreeModules/Window"
 import { addDirLight } from "./ThreeModules/DirectionalLight"
 import { addSpotLight } from "./ThreeModules/SpotLight"
-import { createLogoBox } from "./ThreeModules/LogoBox"
+import { addLogoBox } from "./ThreeModules/LogoBox"
 import { addFloor } from "./ThreeModules/Floor"
-import { AddRoofWindowHole } from "./ThreeModules/RoofWIndowHole"
-import { createSunLight } from "./ThreeModules/SunLight"
+import { addRoofWindowHole } from "./ThreeModules/RoofWIndowHole"
+import { addSunLight } from "./ThreeModules/SunLight"
 
 const Container = styled.div`
   cursor: grab;
@@ -137,23 +137,23 @@ const ThreeScene = () => {
 
     // 창문 구멍 뚫기
 
-    AddRoofWindowHole(roofMesh)
+    addRoofWindowHole(roofMesh)
 
     // GLTF 로더 //
 
     // 지붕에 달린 창문 (앞면 3개)
 
-    loadWindow(
+    addWindow(
       { x: -750, y: 975, z: 500 },
       { x: 400, y: 315, z: 300 },
       { x: -Math.PI / 4, y: -Math.PI, z: 0 }
     ) // Arguments: {position, scale, rotation}
-    loadWindow(
+    addWindow(
       { x: 0, y: 975, z: 500 },
       { x: 400, y: 315, z: 300 },
       { x: -Math.PI / 4, y: -Math.PI, z: 0 }
     )
-    loadWindow(
+    addWindow(
       { x: 750, y: 975, z: 500 },
       { x: 400, y: 315, z: 300 },
       { x: -Math.PI / 4, y: -Math.PI, z: 0 }
@@ -161,7 +161,7 @@ const ThreeScene = () => {
 
     // 지붕에 달린 창문 (뒷면 1개)
 
-    loadWindow(
+    addWindow(
       { x: 0, y: 1050, z: -400 },
       { x: 500, y: 350, z: 300 },
       { x: Math.PI / 4, y: -Math.PI, z: 0 }
@@ -240,9 +240,9 @@ const ThreeScene = () => {
 
     // 기술스택 박스 만들기
 
-    createLogoBox({ x: -500, y: 200, z: -840 }, reactLogo)
-    createLogoBox({ x: -500, y: -200, z: -840 }, styledComponentsLogo)
-    createLogoBox({ x: 700, y: 100, z: -840 }, netlifyLogo)
+    addLogoBox({ x: -500, y: 200, z: -840 }, reactLogo)
+    addLogoBox({ x: -500, y: -200, z: -840 }, styledComponentsLogo)
+    addLogoBox({ x: 700, y: 100, z: -840 }, netlifyLogo)
 
     // TV GLTF 모델 로드
 
@@ -273,6 +273,36 @@ const ThreeScene = () => {
 
       gltf.scene.rotateY(Math.PI)
       scene.add(gltf.scene)
+    })
+
+    // 자동차 모델 로드
+
+    loader.load("/models/free_porsche_911_carrera_4s/scene.gltf", (gltf) => {
+      gltf.scene.scale.set(300, 300, 300)
+      gltf.scene.position.set(-500, -200, 3000)
+      scene.add(gltf.scene)
+
+      const carLight = new THREE.PointLight(0xffffff, 10, 2000)
+      carLight.position.set(0, -200, 3000)
+      const lightIndicator = new THREE.PointLightHelper(carLight, 300)
+      lightIndicator.color = 0x3f83f8
+
+      const carLight2 = new THREE.PointLight(0x119be3, 10, 2000)
+      carLight2.position.set(-1000, -200, 3000)
+      const lightIndicator2 = new THREE.PointLightHelper(carLight2, 300)
+      lightIndicator2.color = 0x3f83f8
+
+      const carLight3 = new THREE.PointLight(0xffffff, 10, 3000)
+      carLight3.position.set(-500, -200, 4000)
+      const lightIndicator3 = new THREE.PointLightHelper(carLight3, 300)
+      lightIndicator3.color = 0x3f83f8
+
+      scene.add(carLight)
+      scene.add(lightIndicator)
+      scene.add(carLight2)
+      scene.add(lightIndicator2)
+      scene.add(carLight3)
+      scene.add(lightIndicator3)
     })
 
     // 노을 배경 박스 생성
@@ -358,9 +388,9 @@ const ThreeScene = () => {
 
     // 갓레이이펙트
 
-    composer = createSunLight({ x: -600, y: 200, z: 100 })
-    composer = createSunLight({ x: 200, y: 200, z: 100 })
-    composer = createSunLight({ x: 1000, y: 200, z: 100 })
+    composer = addSunLight({ x: -600, y: 200, z: 100 })
+    composer = addSunLight({ x: 200, y: 200, z: 100 })
+    composer = addSunLight({ x: 1000, y: 200, z: 100 })
 
     controls = new OrbitControls(camera, cssRenderer.domElement)
 

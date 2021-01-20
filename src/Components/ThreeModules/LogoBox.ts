@@ -1,7 +1,8 @@
 import * as THREE from "three"
+import { FlatShading } from "three"
 import { scene } from "../ThreeScene"
 
-export const createLogoBox = (position: { x: number; y: number; z: number }, image: string) => {
+export const addLogoBox = (position: { x: number; y: number; z: number }, image: string) => {
   const logoBoxGeo = new THREE.BoxBufferGeometry(300, 300, 300)
   const logoBoxTexture = new THREE.TextureLoader().load(image)
   const logoBoxMat = new THREE.MeshBasicMaterial({

@@ -3,7 +3,7 @@ import { scene } from "../ThreeScene"
 
 const loader = new GLTFLoader()
 
-export const loadWindow = (
+export const addWindow = (
   position: { x: number; y: number; z: number },
   scale: { x: number; y: number; z: number },
   rotation: { x: any; y: any; z: any }

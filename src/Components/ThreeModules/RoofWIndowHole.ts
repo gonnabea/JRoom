@@ -2,7 +2,7 @@ import * as THREE from "three"
 import { CSG } from "three-csg-ts"
 import { scene } from "../ThreeScene"
 
-export const AddRoofWindowHole = (
+export const addRoofWindowHole = (
   roofMesh: THREE.Mesh<THREE.ExtrudeGeometry, THREE.MeshPhongMaterial>
 ) => {
   const roofWindowHole = new THREE.Mesh(

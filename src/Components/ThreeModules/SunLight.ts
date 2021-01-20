@@ -2,7 +2,7 @@ import * as THREE from "three"
 import { scene, camera, renderer } from "../ThreeScene"
 import { GodRaysEffect, RenderPass, EffectPass, EffectComposer } from "postprocessing"
 
-export const createSunLight = (position: { x: number; y: number; z: number }) => {
+export const addSunLight = (position: { x: number; y: number; z: number }) => {
   const CylinderGeometry = new THREE.CylinderGeometry(3, 4, 20, 32)
   console.log(CylinderGeometry)
   CylinderGeometry.faces.splice(0, 1)
