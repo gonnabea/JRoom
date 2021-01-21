@@ -1,4 +1,5 @@
 import * as THREE from "three"
+import { FlatShading } from "three"
 import { scene } from "../ThreeScene"
 
 export const addLogoBox = (position: { x: number; y: number; z: number }, image: string) => {

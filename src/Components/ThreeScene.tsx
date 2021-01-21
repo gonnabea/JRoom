@@ -194,7 +194,6 @@ const ThreeScene = () => {
     scene.add(bookCoverMesh)
     // 책 모형에 붙일 텍스트 geometry
 
-    // 프로젝트 제목
     FontLoder(
       {
         fontModelUrl: "/fonts/helvetiker_regular.typeface.json",
@@ -206,6 +205,7 @@ const ThreeScene = () => {
       },
       { x: 100, y: 200, z: -900 }
     )
+    // 프로젝트 제목
 
     // 제작자 이름
     FontLoder(
@@ -219,6 +219,28 @@ const ThreeScene = () => {
       },
       { x: 100, y: 100, z: -900 }
     )
+    const fontLoader = new THREE.FontLoader()
+    fontLoader.load("/fonts/helvetiker_regular.typeface.json", function (font) {
+      const geometry = new THREE.TextBufferGeometry("Made By.Jiwon", {
+        font: font,
+        size: 35,
+        height: 50,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 10,
+        bevelSize: 1,
+        bevelOffset: 0,
+        bevelSegments: 5,
+      })
+      const material = new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        specular: "orange",
+        flatShading: true,
+      })
+      const mesh = new THREE.Mesh(geometry, material)
+      mesh.position.set(100, 100, -900)
+      scene.add(mesh)
+    })
 
     // 기술스택 박스 만들기
 
