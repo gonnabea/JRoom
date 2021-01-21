@@ -22,7 +22,7 @@ import { addLogoBox } from "./ThreeModules/LogoBox"
 import { addFloor } from "./ThreeModules/Floor"
 import { addRoofWindowHole } from "./ThreeModules/RoofWIndowHole"
 import { addSunLight } from "./ThreeModules/SunLight"
-import { FontLoder } from "./ThreeModules/FontLoader"
+import { JFlixObjects } from "./ThreeModules/JFlixObjects"
 
 const Container = styled.div`
   cursor: grab;
@@ -192,64 +192,8 @@ const ThreeScene = () => {
     bookCoverMesh.position.set(100, 0, -890)
     bookCoverMesh.material.side = DoubleSide
     scene.add(bookCoverMesh)
-    // 책 모형에 붙일 텍스트 geometry
-
-    FontLoder(
-      {
-        fontModelUrl: "/fonts/helvetiker_regular.typeface.json",
-        text: "J-Flix",
-        size: 80,
-        height: 50,
-        color: 0x02f6d5,
-        bevelSize: 8,
-      },
-      { x: 100, y: 200, z: -900 }
-    )
-    // 프로젝트 제목
-
-    // 제작자 이름
-    FontLoder(
-      {
-        fontModelUrl: "/fonts/helvetiker_regular.typeface.json",
-        text: "Made By.Jiwon",
-        size: 35,
-        height: 50,
-        color: 0xffffff,
-        bevelSize: 3,
-      },
-      { x: 100, y: 100, z: -900 }
-    )
-    const fontLoader = new THREE.FontLoader()
-    fontLoader.load("/fonts/helvetiker_regular.typeface.json", function (font) {
-      const geometry = new THREE.TextBufferGeometry("Made By.Jiwon", {
-        font: font,
-        size: 35,
-        height: 50,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: 10,
-        bevelSize: 1,
-        bevelOffset: 0,
-        bevelSegments: 5,
-      })
-      const material = new THREE.MeshPhongMaterial({
-        color: 0xffffff,
-        specular: "orange",
-        flatShading: true,
-      })
-      const mesh = new THREE.Mesh(geometry, material)
-      mesh.position.set(100, 100, -900)
-      scene.add(mesh)
-    })
-
-    // 기술스택 박스 만들기
-
-    addLogoBox({ x: -500, y: 200, z: -840 }, reactLogo)
-    addLogoBox({ x: -500, y: -200, z: -840 }, styledComponentsLogo)
-    addLogoBox({ x: 700, y: 100, z: -840 }, netlifyLogo)
 
     // TV GLTF 모델 로드
-
     loader.load("/models/2018_flat_screen_tv/scene.gltf", (gltf) => {
       gltf.scene.scale.set(750, 750, 2000)
       gltf.scene.position.set(-1200, 0, 0)
@@ -258,26 +202,7 @@ const ThreeScene = () => {
       scene.add(gltf.scene)
     })
 
-    // 소파 모델 로드
-
-    loader.load("/models/sofa/scene.gltf", (gltf) => {
-      gltf.scene.scale.set(220, 220, 220)
-      gltf.scene.position.set(0, -500, 100)
-
-      gltf.scene.rotateY(Math.PI)
-
-      scene.add(gltf.scene)
-    })
-
-    // 팝콘 모델 로드
-
-    loader.load("/models/popcorn_bucket/scene.gltf", (gltf) => {
-      gltf.scene.scale.set(100, 100, 100)
-      gltf.scene.position.set(-1000, -500, 850)
-
-      gltf.scene.rotateY(Math.PI)
-      scene.add(gltf.scene)
-    })
+    JFlixObjects()
 
     // 자동차 모델 로드
 
@@ -285,29 +210,28 @@ const ThreeScene = () => {
       gltf.scene.scale.set(300, 300, 300)
       gltf.scene.position.set(-500, -200, 3000)
       scene.add(gltf.scene)
-
-      const carLight = new THREE.PointLight(0xffffff, 10, 2000)
-      carLight.position.set(0, -200, 3000)
-      const lightIndicator = new THREE.PointLightHelper(carLight, 300)
-      lightIndicator.color = 0x3f83f8
-
-      const carLight2 = new THREE.PointLight(0x119be3, 10, 2000)
-      carLight2.position.set(-1000, -200, 3000)
-      const lightIndicator2 = new THREE.PointLightHelper(carLight2, 300)
-      lightIndicator2.color = 0x3f83f8
-
-      const carLight3 = new THREE.PointLight(0xffffff, 10, 3000)
-      carLight3.position.set(-500, -200, 4000)
-      const lightIndicator3 = new THREE.PointLightHelper(carLight3, 300)
-      lightIndicator3.color = 0x3f83f8
-
-      scene.add(carLight)
-      scene.add(lightIndicator)
-      scene.add(carLight2)
-      scene.add(lightIndicator2)
-      scene.add(carLight3)
-      scene.add(lightIndicator3)
     })
+    const carLight = new THREE.PointLight(0xffffff, 10, 2000)
+    carLight.position.set(0, -200, 3000)
+    const lightIndicator = new THREE.PointLightHelper(carLight, 300)
+    lightIndicator.color = 0x3f83f8
+
+    const carLight2 = new THREE.PointLight(0x119be3, 10, 2000)
+    carLight2.position.set(-1000, -200, 3000)
+    const lightIndicator2 = new THREE.PointLightHelper(carLight2, 300)
+    lightIndicator2.color = 0x3f83f8
+
+    const carLight3 = new THREE.PointLight(0xffffff, 10, 3000)
+    carLight3.position.set(-500, -200, 4000)
+    const lightIndicator3 = new THREE.PointLightHelper(carLight3, 300)
+    lightIndicator3.color = 0x3f83f8
+
+    scene.add(carLight)
+    scene.add(lightIndicator)
+    scene.add(carLight2)
+    scene.add(lightIndicator2)
+    scene.add(carLight3)
+    scene.add(lightIndicator3)
 
     // 노을 배경 박스 생성
     const materialArray = []
