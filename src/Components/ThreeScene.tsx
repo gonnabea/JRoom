@@ -210,6 +210,25 @@ const ThreeScene = () => {
       gltf.scene.scale.set(300, 300, 300)
       gltf.scene.position.set(-500, -200, 3000)
       scene.add(gltf.scene)
+
+      // 자동차 컨트롤
+      window.addEventListener("keydown", (e) => {
+        console.log(e.key)
+        if (e.key === "ArrowUp") {
+          // 가속력을 고려한 자동차의 움직임 구현
+          gltf.scene.translateZ(60)
+          const moveFoward = setInterval(() => gltf.scene.translateZ(10), 100)
+          setTimeout(() => clearInterval(moveFoward), 1000)
+        } else if (e.key === "ArrowDown") {
+          gltf.scene.translateZ(-60)
+          const moveBackward = setInterval(() => gltf.scene.translateZ(-10), 100)
+          setTimeout(() => clearInterval(moveBackward), 1000)
+        } else if (e.key === "ArrowLeft") {
+          gltf.scene.rotateY(0.2)
+        } else if (e.key === "ArrowRight") {
+          gltf.scene.rotateY(-0.2)
+        }
+      })
     })
     const carLight = new THREE.PointLight(0xffffff, 10, 2000)
     carLight.position.set(0, -200, 3000)
