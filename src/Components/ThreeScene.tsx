@@ -51,7 +51,7 @@ const ThreeScene = () => {
   const ThreeContainer = useRef<HTMLDivElement>(null)
 
   function ThreeSceneInit() {
-    camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 21000)
+    camera = new THREE.PerspectiveCamera(5, window.innerWidth / window.innerHeight, 1, 21000)
     camera.position.set(0, 0, 5000)
     scene = new THREE.Scene()
     cssRenderer = new CSS3D.CSS3DRenderer()
@@ -75,7 +75,7 @@ const ThreeScene = () => {
 
     ExhibitionRoom.material.side = THREE.BackSide // mesh 내부에서도 면이 보이게 만들어 줌.
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5) // soft white light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6) // soft white light
 
     ambientLight.position.set(0, 6000, 0)
     scene.add(ambientLight)
@@ -211,23 +211,57 @@ const ThreeScene = () => {
       gltf.scene.position.set(-500, -200, 3000)
       scene.add(gltf.scene)
 
+      // 자동차 바퀴 제거: rotation 애니메이션 구현을 위해 다른 바퀴 로드 필요.
+      gltf.scene.children[0].children[0].children[0].children[7].visible = false
+      gltf.scene.children[0].children[0].children[0].children[20].visible = false
       // 자동차 컨트롤
+      let keysPressed = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false }
+
       window.addEventListener("keydown", (e) => {
         console.log(e.key)
         if (e.key === "ArrowUp") {
+          keysPressed.ArrowUp = true
+        } else if (e.key === "ArrowDown") {
+          keysPressed.ArrowDown = true
+        } else if (e.key === "ArrowLeft") {
+          keysPressed.ArrowLeft = true
+        } else if (e.key === "ArrowRight") {
+          keysPressed.ArrowRight = true
+        }
+
+        if (keysPressed.ArrowUp) {
+          const forwardSoundUrl = "/sounds/car-start.mp3"
+          const soundEffect = document.createElement("audio")
+          const audioSource = document.createElement("source")
+          soundEffect.appendChild(audioSource)
+          soundEffect.currentTime = 1
+          audioSource.src = forwardSoundUrl
+          soundEffect.play()
+          setTimeout(() => soundEffect.pause(), 2000)
           // 가속력을 고려한 자동차의 움직임 구현
           gltf.scene.translateZ(60)
           const moveFoward = setInterval(() => gltf.scene.translateZ(10), 100)
           setTimeout(() => clearInterval(moveFoward), 1000)
-        } else if (e.key === "ArrowDown") {
+        } else if (keysPressed.ArrowDown) {
           gltf.scene.translateZ(-60)
           const moveBackward = setInterval(() => gltf.scene.translateZ(-10), 100)
           setTimeout(() => clearInterval(moveBackward), 1000)
-        } else if (e.key === "ArrowLeft") {
+        } else if (keysPressed.ArrowLeft) {
           gltf.scene.rotateY(0.2)
-        } else if (e.key === "ArrowRight") {
+        } else if (keysPressed.ArrowRight) {
           gltf.scene.rotateY(-0.2)
         }
+        window.addEventListener("keyup", (e) => {
+          if (e.key === "ArrowUp") {
+            keysPressed.ArrowUp = false
+          } else if (e.key === "ArrowDown") {
+            keysPressed.ArrowDown = false
+          } else if (e.key === "ArrowLeft") {
+            keysPressed.ArrowLeft = false
+          } else if (e.key === "ArrowRight") {
+            keysPressed.ArrowRight = false
+          }
+        })
       })
     })
     const carLight = new THREE.PointLight(0xffffff, 10, 2000)
