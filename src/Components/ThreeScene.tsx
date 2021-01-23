@@ -23,6 +23,7 @@ import { addFloor } from "./ThreeModules/Floor"
 import { addRoofWindowHole } from "./ThreeModules/RoofWIndowHole"
 import { addSunLight } from "./ThreeModules/SunLight"
 import { JFlixObjects } from "./ThreeModules/JFlixObjects"
+import nomadLogo from "../resources/images/nomadLogo.png"
 
 const Container = styled.div`
   cursor: grab;
@@ -51,7 +52,7 @@ const ThreeScene = () => {
   const ThreeContainer = useRef<HTMLDivElement>(null)
 
   function ThreeSceneInit() {
-    camera = new THREE.PerspectiveCamera(5, window.innerWidth / window.innerHeight, 1, 21000)
+    camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 21000)
     camera.position.set(0, 0, 5000)
     scene = new THREE.Scene()
     cssRenderer = new CSS3D.CSS3DRenderer()
@@ -207,6 +208,16 @@ const ThreeScene = () => {
     // 자동차 모델 로드
 
     loader.load("/models/free_porsche_911_carrera_4s/scene.gltf", (gltf) => {
+      loader.load("/models/ferrari_f2012_wheel/scene.gltf", (wheelGltf) => {
+        wheelGltf.scene.scale.set(150, 150, 150)
+        wheelGltf.scene.position.set(-500, -500, 3000)
+        let rotateIndex = 0
+        setInterval(() => {
+          rotateIndex += 1
+          wheelGltf.scene.rotation.y = rotateIndex
+        }, 50)
+        scene.add(wheelGltf.scene)
+      })
       gltf.scene.scale.set(300, 300, 300)
       gltf.scene.position.set(-500, -200, 3000)
       scene.add(gltf.scene)
@@ -314,6 +325,31 @@ const ThreeScene = () => {
     })
     scene.add(skybox)
 
+    // 액자 모델
+    loader.load("/models/3d_architecture__photo_frame/scene.gltf", (gltf) => {
+      gltf.scene.scale.set(10, 10, 10)
+      gltf.scene.position.set(1480, 0, 0)
+      gltf.scene.rotateY(Math.PI)
+      scene.add(gltf.scene)
+
+      // 액자에 들어갈 그림
+
+      const sizeCheckBox = new THREE.Box3().setFromObject(gltf.scene) // 액자 크기 측정을 위한 가상 박스
+      console.log(sizeCheckBox)
+      const frameWidth = sizeCheckBox.max.z - sizeCheckBox.min.z - 50
+      const frameHeight = sizeCheckBox.max.y - sizeCheckBox.min.y - 50
+      const frameDepth = sizeCheckBox.max.x - sizeCheckBox.min.x
+
+      const imageInFrameGeo = new THREE.PlaneBufferGeometry(frameWidth, frameHeight, frameDepth)
+      const imageInFrameTexture = new THREE.TextureLoader().load(nomadLogo)
+      const imageInFrameMat = new THREE.MeshPhongMaterial({ map: imageInFrameTexture })
+      const imageInFrame = new THREE.Mesh(imageInFrameGeo, imageInFrameMat)
+      imageInFrame.rotateY(-Math.PI / 2)
+      imageInFrame.position.set(1460, 0, 0)
+
+      scene.add(imageInFrame)
+    })
+
     // 렌더러
     renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -354,18 +390,22 @@ const ThreeScene = () => {
 
     // TV 뒷면 가리기 위한 Div Box
 
-    const memo = document.createElement("div")
-    memo.innerHTML = "Nomflix.Jiwon"
-    memo.style.width = "1400px"
-    memo.style.height = "800px"
-    memo.style.backgroundColor = "black"
-    memo.style.color = "white"
-    memo.style.fontSize = "80px"
+    const tvBackCover = document.createElement("div")
+    tvBackCover.innerHTML = "Nomflix.Jiwon"
+    tvBackCover.style.width = "1400px"
+    tvBackCover.style.height = "800px"
+    tvBackCover.style.backgroundColor = "black"
+    tvBackCover.style.color = "white"
+    tvBackCover.style.fontSize = "80px"
 
-    const memoObject = new CSS3D.CSS3DObject(memo)
-    memoObject.position.set(planeMesh.position.x - 2, planeMesh.position.y, planeMesh.position.z)
-    memoObject.rotation.set(0, Math.PI / 2, 0)
-    cssScene.add(memoObject)
+    const tvBackCoverObject = new CSS3D.CSS3DObject(tvBackCover)
+    tvBackCoverObject.position.set(
+      planeMesh.position.x - 2,
+      planeMesh.position.y,
+      planeMesh.position.z
+    )
+    tvBackCoverObject.rotation.set(0, Math.PI / 2, 0)
+    cssScene.add(tvBackCoverObject)
 
     // 갓레이이펙트
 
