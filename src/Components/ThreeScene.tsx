@@ -127,7 +127,7 @@ const ThreeScene = () => {
 
     const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
     const roofMaterial = new THREE.MeshPhongMaterial({
-      color: 0x8c989c,
+      color: 0xf79001,
       specular: "orange",
       flatShading: true,
     })
@@ -336,8 +336,8 @@ const ThreeScene = () => {
 
       const sizeCheckBox = new THREE.Box3().setFromObject(gltf.scene) // 액자 크기 측정을 위한 가상 박스
       console.log(sizeCheckBox)
-      const frameWidth = sizeCheckBox.max.z - sizeCheckBox.min.z - 50
-      const frameHeight = sizeCheckBox.max.y - sizeCheckBox.min.y - 50
+      const frameWidth = sizeCheckBox.max.z - sizeCheckBox.min.z - 100
+      const frameHeight = sizeCheckBox.max.y - sizeCheckBox.min.y - 100
       const frameDepth = sizeCheckBox.max.x - sizeCheckBox.min.x
 
       const imageInFrameGeo = new THREE.PlaneBufferGeometry(frameWidth, frameHeight, frameDepth)
@@ -407,6 +407,43 @@ const ThreeScene = () => {
     tvBackCoverObject.rotation.set(0, Math.PI / 2, 0)
     cssScene.add(tvBackCoverObject)
 
+    // 선택 버튼
+
+    const selectBtn = document.createElement("button")
+    selectBtn.innerHTML = "1"
+    selectBtn.style.width = "100px"
+    selectBtn.style.height = "100px"
+    selectBtn.style.fontSize = "60px"
+    selectBtn.style.borderRadius = "100%"
+    selectBtn.style.background = "rgba(0,0,0,0.5)"
+    selectBtn.style.color = "white"
+
+    selectBtn.onmouseover = () => {
+      selectBtn.style.color = "skyblue"
+      selectBtn.style.border = "10px solid skyblue"
+      selectBtn.style.cursor = "pointer"
+    }
+    selectBtn.onmouseleave = () => {
+      selectBtn.style.border = "none"
+
+      selectBtn.style.color = "white"
+    }
+
+    const selectBtnObj = new CSS3D.CSS3DObject(selectBtn)
+    selectBtnObj.position.set(-1300, 600, 500)
+    selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
+
+    cssScene.add(selectBtnObj)
+
+    // const btnMap = new THREE.TextureLoader().load(nomadLogo)
+    // const btnMat = new THREE.SpriteMaterial({
+    //   map: btnMap,
+    // })
+
+    // const sprite = new THREE.Sprite(btnMat)
+    // sprite.scale.set(100, 100, 100)
+    // scene.add(sprite)
+
     // 갓레이이펙트
 
     composer = addSunLight({ x: -600, y: 200, z: 100 })
@@ -416,25 +453,43 @@ const ThreeScene = () => {
     controls = new OrbitControls(camera, cssRenderer.domElement)
 
     // 마우스 휠로 줌 조절
+    // 확대
     controls.dollyOut = function () {
       if (camera.zoom < 5) {
         camera.zoom = camera.zoom + 0.1
         camera.updateProjectionMatrix()
-
+        selectBtnObj.scale.set(
+          selectBtnObj.scale.x - 0.3,
+          selectBtnObj.scale.y - 0.3,
+          selectBtnObj.scale.z - 0.3
+        )
         console.log(camera.zoom)
       }
     }
+    // 축소
     controls.dollyIn = function () {
       if (camera.zoom > 0.2) {
         camera.zoom = camera.zoom - 0.1
+        selectBtnObj.scale.set(
+          selectBtnObj.scale.x + 0.3,
+          selectBtnObj.scale.y + 0.3,
+          selectBtnObj.scale.z + 0.3
+        )
+
         camera.updateProjectionMatrix()
 
         console.log(camera.zoom)
       }
     }
 
-    window.addEventListener("click", () => {
+    window.addEventListener("mousedown", () => {
       console.log(camera.position)
+      selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
+    })
+
+    window.addEventListener("mouseup", () => {
+      console.log(camera.position)
+      selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
     })
 
     if (ThreeContainer.current !== null) {

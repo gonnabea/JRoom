@@ -18,6 +18,10 @@ export const addFloor = ({ width, height, x, y, z }: typeAddFloor) => {
   floorTexture.repeat.set(5, 5)
   floorTexture.encoding = THREE.sRGBEncoding
 
+  const floorMaterial = new THREE.MeshPhongMaterial({
+    map: floorTexture,
+  })
+
   //바닥 반사 효과
   const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(640, {
     format: THREE.RGBFormat,
@@ -35,7 +39,7 @@ export const addFloor = ({ width, height, x, y, z }: typeAddFloor) => {
     flatShading: true,
   })
 
-  const floorMesh = new THREE.Mesh(floorGeo, sphereMaterial)
+  const floorMesh = new THREE.Mesh(floorGeo, floorMaterial)
   floorMesh.position.set(0, 100, 0)
 
   floorMesh.rotateX(-Math.PI / 2) // -90도 로테이션

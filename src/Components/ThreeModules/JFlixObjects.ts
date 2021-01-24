@@ -38,9 +38,9 @@ export const JFlixObjects = () => {
 
   // 기술스택 박스 만들기
 
-  addLogoBox({ x: -500, y: 200, z: -840 }, reactLogo)
-  addLogoBox({ x: -500, y: -200, z: -840 }, styledComponentsLogo)
-  addLogoBox({ x: 700, y: 100, z: -840 }, netlifyLogo)
+  addLogoBox({ x: -500, y: 200, z: -940 }, reactLogo)
+  addLogoBox({ x: -500, y: -200, z: -940 }, styledComponentsLogo)
+  addLogoBox({ x: 700, y: 100, z: -940 }, netlifyLogo)
 
   const loader = new GLTFLoader()
 
