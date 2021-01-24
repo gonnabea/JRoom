@@ -330,6 +330,7 @@ const ThreeScene = () => {
       gltf.scene.scale.set(10, 10, 10)
       gltf.scene.position.set(1480, 0, 0)
       gltf.scene.rotateY(Math.PI)
+
       scene.add(gltf.scene)
 
       // 액자에 들어갈 그림
@@ -383,15 +384,15 @@ const ThreeScene = () => {
     embedWebsite.width = "1400px"
     embedWebsite.height = "800px"
 
-    const cssObject = new CSS3D.CSS3DObject(embedWebsite)
-    cssObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
-    cssObject.rotation.set(0, Math.PI / 2, 0)
-    cssScene.add(cssObject)
+    const websiteObject = new CSS3D.CSS3DObject(embedWebsite)
+    websiteObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
+    websiteObject.rotation.set(0, Math.PI / 2, 0)
+    cssScene.add(websiteObject)
 
     // TV 뒷면 가리기 위한 Div Box
 
     const tvBackCover = document.createElement("div")
-    tvBackCover.innerHTML = "Nomflix.Jiwon"
+
     tvBackCover.style.width = "1400px"
     tvBackCover.style.height = "800px"
     tvBackCover.style.backgroundColor = "black"
@@ -400,7 +401,7 @@ const ThreeScene = () => {
 
     const tvBackCoverObject = new CSS3D.CSS3DObject(tvBackCover)
     tvBackCoverObject.position.set(
-      planeMesh.position.x - 2,
+      planeMesh.position.x - 3,
       planeMesh.position.y,
       planeMesh.position.z
     )
@@ -432,8 +433,24 @@ const ThreeScene = () => {
     const selectBtnObj = new CSS3D.CSS3DObject(selectBtn)
     selectBtnObj.position.set(-1300, 600, 500)
     selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
-
     cssScene.add(selectBtnObj)
+
+    selectBtn.onclick = () => {
+      camera.rotation.set(
+        websiteObject.rotation.x,
+        websiteObject.rotation.y,
+        websiteObject.rotation.z
+      )
+      camera.position.set(4991.472829384942, 0, 0)
+
+      camera.zoom = 0.8
+
+      selectBtnObj.scale.set(1, 1, 1)
+      selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
+      camera.updateProjectionMatrix()
+      camera.updateMatrix()
+      cssScene.updateMatrixWorld()
+    }
 
     // const btnMap = new THREE.TextureLoader().load(nomadLogo)
     // const btnMat = new THREE.SpriteMaterial({
@@ -483,12 +500,13 @@ const ThreeScene = () => {
     }
 
     window.addEventListener("mousedown", () => {
-      console.log(camera.position)
       selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
     })
 
     window.addEventListener("mouseup", () => {
       console.log(camera.position)
+      console.log(camera.rotation)
+
       selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
     })
 
