@@ -48,7 +48,10 @@ let cssRenderer: {
   render: (arg0: THREE.Scene, arg1: THREE.PerspectiveCamera) => void
 }
 let cssScene: THREE.Scene
+export let selectBtnObjs: any[]
+
 const ThreeScene = () => {
+  selectBtnObjs = []
   const ThreeContainer = useRef<HTMLDivElement>(null)
 
   function ThreeSceneInit() {
@@ -208,23 +211,23 @@ const ThreeScene = () => {
     // 자동차 모델 로드
 
     loader.load("/models/free_porsche_911_carrera_4s/scene.gltf", (gltf) => {
-      loader.load("/models/ferrari_f2012_wheel/scene.gltf", (wheelGltf) => {
-        wheelGltf.scene.scale.set(150, 150, 150)
-        wheelGltf.scene.position.set(-500, -500, 3000)
-        let rotateIndex = 0
-        setInterval(() => {
-          rotateIndex += 1
-          wheelGltf.scene.rotation.y = rotateIndex
-        }, 50)
-        scene.add(wheelGltf.scene)
-      })
+      // loader.load("/models/ferrari_f2012_wheel/scene.gltf", (wheelGltf) => {
+      //   wheelGltf.scene.scale.set(150, 150, 150)
+      //   wheelGltf.scene.position.set(-500, -500, 3000)
+      //   let rotateIndex = 0
+      //   setInterval(() => {
+      //     rotateIndex += 1
+      //     wheelGltf.scene.rotation.z = rotateIndex
+      //   }, 50)
+      //   scene.add(wheelGltf.scene)
+      // })
       gltf.scene.scale.set(300, 300, 300)
       gltf.scene.position.set(-500, -200, 3000)
       scene.add(gltf.scene)
 
       // 자동차 바퀴 제거: rotation 애니메이션 구현을 위해 다른 바퀴 로드 필요.
-      gltf.scene.children[0].children[0].children[0].children[7].visible = false
-      gltf.scene.children[0].children[0].children[0].children[20].visible = false
+      // gltf.scene.children[0].children[0].children[0].children[7].visible = false
+      // gltf.scene.children[0].children[0].children[0].children[20].visible = false
       // 자동차 컨트롤
       let keysPressed = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false }
 
@@ -408,53 +411,89 @@ const ThreeScene = () => {
     tvBackCoverObject.rotation.set(0, Math.PI / 2, 0)
     cssScene.add(tvBackCoverObject)
 
-    // 선택 버튼
-
-    const selectBtn = document.createElement("button")
-    selectBtn.innerHTML = "1"
-    selectBtn.style.width = "100px"
-    selectBtn.style.height = "100px"
-    selectBtn.style.fontSize = "60px"
-    selectBtn.style.borderRadius = "100%"
-    selectBtn.style.background = "rgba(0,0,0,0.5)"
-    selectBtn.style.color = "white"
-
-    selectBtn.onmouseover = () => {
-      selectBtn.style.color = "skyblue"
-      selectBtn.style.border = "10px solid skyblue"
-      selectBtn.style.cursor = "pointer"
-    }
-    selectBtn.onmouseleave = () => {
-      selectBtn.style.border = "none"
-
+    // 선택 버튼 생성
+    const addSelectBtn = (contents: {
+      text: string
+      btnPosition: { x: number; y: number; z: number }
+      cameraPosition: { x: number; y: number; z: number }
+      zoomIndex: number
+    }) => {
+      const selectBtn = document.createElement("button")
+      selectBtn.innerHTML = contents.text
+      selectBtn.style.width = "100px"
+      selectBtn.style.height = "100px"
+      selectBtn.style.fontSize = "60px"
+      selectBtn.style.borderRadius = "100%"
+      selectBtn.style.background = "rgba(0,0,0,0.5)"
       selectBtn.style.color = "white"
-    }
 
-    const selectBtnObj = new CSS3D.CSS3DObject(selectBtn)
-    selectBtnObj.position.set(-1300, 600, 500)
-    selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
-    cssScene.add(selectBtnObj)
+      selectBtn.onmouseover = () => {
+        selectBtn.style.color = "skyblue"
+        selectBtn.style.border = "10px solid skyblue"
+        selectBtn.style.cursor = "pointer"
+      }
+      selectBtn.onmouseleave = () => {
+        selectBtn.style.border = "none"
 
-    selectBtn.onclick = () => {
-      camera.rotation.set(
-        websiteObject.rotation.x,
-        websiteObject.rotation.y,
-        websiteObject.rotation.z
+        selectBtn.style.color = "white"
+      }
+
+      const selectBtnObj = new CSS3D.CSS3DObject(selectBtn)
+
+      selectBtnObjs.push(selectBtnObj)
+
+      selectBtnObj.position.set(
+        contents.btnPosition.x,
+        contents.btnPosition.y,
+        contents.btnPosition.z
       )
-      camera.position.set(4991.472829384942, 0, 0)
-
-      camera.zoom = 0.8
-
-      selectBtnObj.scale.set(1, 1, 1)
       selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
-      camera.updateProjectionMatrix()
-      camera.updateMatrix()
-      cssScene.updateMatrixWorld()
+      cssScene.add(selectBtnObj)
 
-      // 카메라 자동 이동 시 iframe이 비활성화되는 현상 해결책
-      controls.rotateUp(-0.01)
-      controls.update()
+      selectBtn.onclick = () => {
+        camera.rotation.set(
+          websiteObject.rotation.x,
+          websiteObject.rotation.y,
+          websiteObject.rotation.z
+        )
+        camera.position.set(
+          contents.cameraPosition.x,
+          contents.cameraPosition.y,
+          contents.cameraPosition.z
+        )
+
+        camera.zoom = contents.zoomIndex
+
+        selectBtnObj.scale.set(1, 1, 1)
+        camera.updateProjectionMatrix()
+        camera.updateMatrix()
+        cssScene.updateMatrixWorld()
+
+        // 카메라 자동 이동 시 iframe이 비활성화되는 현상 해결책
+        controls.rotateUp(-0.01)
+        controls.update()
+
+        selectBtnObjs.map((selectBtnObj) => {
+          selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
+          camera.updateProjectionMatrix()
+          camera.updateMatrix()
+          cssScene.updateMatrixWorld()
+        })
+      }
     }
+
+    addSelectBtn({
+      text: "1",
+      btnPosition: { x: -1300, y: 600, z: 500 },
+      cameraPosition: { x: 4991.472829384942, y: 0, z: 0 },
+      zoomIndex: 0.8,
+    })
+    addSelectBtn({
+      text: "0",
+      btnPosition: { x: 0, y: 0, z: -800 },
+      cameraPosition: { x: -2773.8192101111504, y: 490.0248603839669, z: 4120.7527992239675 },
+      zoomIndex: 0.3,
+    })
 
     // const btnMap = new THREE.TextureLoader().load(nomadLogo)
     // const btnMat = new THREE.SpriteMaterial({
@@ -479,11 +518,15 @@ const ThreeScene = () => {
       if (camera.zoom < 5) {
         camera.zoom = camera.zoom + 0.1
         camera.updateProjectionMatrix()
-        selectBtnObj.scale.set(
-          selectBtnObj.scale.x - 0.3,
-          selectBtnObj.scale.y - 0.3,
-          selectBtnObj.scale.z - 0.3
-        )
+        if (selectBtnObjs) {
+          selectBtnObjs.map((selectBtnObj) => {
+            selectBtnObj.scale.set(
+              selectBtnObj.scale.x - 0.3,
+              selectBtnObj.scale.y - 0.3,
+              selectBtnObj.scale.z - 0.3
+            )
+          })
+        }
         console.log(camera.zoom)
       }
     }
@@ -491,11 +534,15 @@ const ThreeScene = () => {
     controls.dollyIn = function () {
       if (camera.zoom > 0.2) {
         camera.zoom = camera.zoom - 0.1
-        selectBtnObj.scale.set(
-          selectBtnObj.scale.x + 0.3,
-          selectBtnObj.scale.y + 0.3,
-          selectBtnObj.scale.z + 0.3
-        )
+        if (selectBtnObjs) {
+          selectBtnObjs.map((selectBtnObj) => {
+            selectBtnObj.scale.set(
+              selectBtnObj.scale.x + 0.3,
+              selectBtnObj.scale.y + 0.3,
+              selectBtnObj.scale.z + 0.3
+            )
+          })
+        }
 
         camera.updateProjectionMatrix()
 
@@ -504,14 +551,21 @@ const ThreeScene = () => {
     }
 
     window.addEventListener("mousedown", () => {
-      selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
+      if (selectBtnObjs) {
+        selectBtnObjs.map((selectBtnObj) => {
+          selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
+        })
+      }
     })
 
     window.addEventListener("mouseup", () => {
       console.log(camera.position)
       console.log(camera.rotation)
-
-      selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
+      if (selectBtnObjs) {
+        selectBtnObjs.map((selectBtnObj) => {
+          selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
+        })
+      }
     })
 
     if (ThreeContainer.current !== null) {
