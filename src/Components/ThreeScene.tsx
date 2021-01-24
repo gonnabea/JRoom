@@ -450,6 +450,10 @@ const ThreeScene = () => {
       camera.updateProjectionMatrix()
       camera.updateMatrix()
       cssScene.updateMatrixWorld()
+
+      // 카메라 자동 이동 시 iframe이 비활성화되는 현상 해결책
+      controls.rotateUp(-0.01)
+      controls.update()
     }
 
     // const btnMap = new THREE.TextureLoader().load(nomadLogo)
