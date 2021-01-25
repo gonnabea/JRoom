@@ -196,7 +196,6 @@ const ThreeScene = () => {
     )
     bookCoverMesh.position.set(100, 0, -890)
     bookCoverMesh.material.side = DoubleSide
-    bookCoverMesh.name = "bookCover"
     scene.add(bookCoverMesh)
 
     // TV GLTF 모델 로드
@@ -358,6 +357,8 @@ const ThreeScene = () => {
 
     // 레이캐스터 (클릭이벤트)
 
+    // 마우스 움직일 때마다 오브젝트 감지
+
     const onMouseMove = (event: { clientX: number; clientY: number }) => {
       // calculate mouse position in normalized device coordinates
       // (-1 to +1) for both components
@@ -367,14 +368,11 @@ const ThreeScene = () => {
 
       // update the picking ray with the camera and mouse position
       raycaster.setFromCamera(mouse, camera)
-
       // calculate objects intersecting the picking ray
       const intersects = raycaster.intersectObjects(scene.children)
 
       for (let i = 0; i < intersects.length; i++) {
-        if (intersects[i] && intersects[i].object.name === "bookCover") {
-          console.log(intersects[i])
-        }
+        // 임의로 지정해 줬던 object name으로 구별
       }
     }
 
@@ -442,6 +440,16 @@ const ThreeScene = () => {
       cameraPosition: { x: number; y: number; z: number }
       zoomIndex: number
     }) => {
+      function chooseProject() {
+        if (embedWebsite.src === "https://nomfilx-jiwon.netlify.app/#/") {
+          embedWebsite.src = "https://gonnabea.github.io/Music-Player/"
+        } else if (embedWebsite.src === "https://gonnabea.github.io/Music-Player/") {
+          embedWebsite.src = "https://gonnabea.github.io/Typing-Game/"
+        } else if (embedWebsite.src === "https://gonnabea.github.io/Typing-Game/") {
+          embedWebsite.src = "https://gonnabea.github.io/Hangman-Game/"
+        }
+      }
+
       const selectBtn = document.createElement("button")
       selectBtn.innerHTML = contents.text
       selectBtn.style.width = "100px"
@@ -475,6 +483,9 @@ const ThreeScene = () => {
       cssScene.add(selectBtnObj)
 
       selectBtn.onclick = () => {
+        if (contents.text === "✨") {
+          chooseProject()
+        }
         camera.rotation.set(
           websiteObject.rotation.x,
           websiteObject.rotation.y,
@@ -509,6 +520,12 @@ const ThreeScene = () => {
     addSelectBtn({
       text: "1",
       btnPosition: { x: -1300, y: 600, z: 500 },
+      cameraPosition: { x: 4991.472829384942, y: 0, z: 0 },
+      zoomIndex: 0.8,
+    })
+    addSelectBtn({
+      text: "✨",
+      btnPosition: { x: -1300, y: 600, z: 0 },
       cameraPosition: { x: 4991.472829384942, y: 0, z: 0 },
       zoomIndex: 0.8,
     })
@@ -633,7 +650,7 @@ const ThreeScene = () => {
       ThreeSceneInit()
     }
   })
-  return <Container ref={ThreeContainer}></Container>
+  return <Container id="container" ref={ThreeContainer}></Container>
 }
 
 export default ThreeScene
