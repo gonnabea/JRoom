@@ -49,7 +49,8 @@ let cssRenderer: {
 }
 let cssScene: THREE.Scene
 export let selectBtnObjs: any[]
-
+let raycaster = new THREE.Raycaster()
+let mouse = new THREE.Vector2()
 const ThreeScene = () => {
   selectBtnObjs = []
   const ThreeContainer = useRef<HTMLDivElement>(null)
@@ -195,6 +196,7 @@ const ThreeScene = () => {
     )
     bookCoverMesh.position.set(100, 0, -890)
     bookCoverMesh.material.side = DoubleSide
+    bookCoverMesh.name = "bookCover"
     scene.add(bookCoverMesh)
 
     // TV GLTF 모델 로드
@@ -353,6 +355,28 @@ const ThreeScene = () => {
 
       scene.add(imageInFrame)
     })
+
+    // 레이캐스터 (클릭이벤트)
+
+    const onMouseMove = (event: { clientX: number; clientY: number }) => {
+      // calculate mouse position in normalized device coordinates
+      // (-1 to +1) for both components
+
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
+
+      // update the picking ray with the camera and mouse position
+      raycaster.setFromCamera(mouse, camera)
+
+      // calculate objects intersecting the picking ray
+      const intersects = raycaster.intersectObjects(scene.children)
+
+      for (let i = 0; i < intersects.length; i++) {
+        if (intersects[i] && intersects[i].object.name === "bookCover") {
+          console.log(intersects[i])
+        }
+      }
+    }
 
     // 렌더러
     renderer = new THREE.WebGLRenderer({
@@ -559,14 +583,14 @@ const ThreeScene = () => {
     })
 
     window.addEventListener("mouseup", () => {
-      console.log(camera.position)
-      console.log(camera.rotation)
       if (selectBtnObjs) {
         selectBtnObjs.map((selectBtnObj) => {
           selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
         })
       }
     })
+
+    window.addEventListener("mousemove", onMouseMove)
 
     if (ThreeContainer.current !== null) {
       ThreeContainer.current?.appendChild(renderer.domElement)
@@ -587,6 +611,7 @@ const ThreeScene = () => {
     cssRenderer.render(cssScene, camera)
     composer.render(0.1)
     // floorCamera.update(renderer, scene) <- GPU 점유율 대폭 상승 유발
+
     requestAnimationFrame(animate)
   }
 

@@ -20,6 +20,8 @@ export const addFloor = ({ width, height, x, y, z }: typeAddFloor) => {
 
   const floorMaterial = new THREE.MeshPhongMaterial({
     map: floorTexture,
+    specular: "orange",
+    flatShading: true,
   })
 
   //바닥 반사 효과
