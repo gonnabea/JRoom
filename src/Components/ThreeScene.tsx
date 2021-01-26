@@ -337,6 +337,23 @@ const ThreeScene = () => {
 
       scene.add(gltf.scene)
 
+      // 카메라 시점이 액자 뒤로 갔을 때 사라지게 하는 알고리즘
+      window.addEventListener("mouseup", () => {
+        console.log(camera.position)
+        console.log(camera.rotation)
+        const meshsOfFrame =
+          gltf.scene.children[0].children[0].children[0].children[0].children[0].children[0]
+            .children
+
+        meshsOfFrame.map((object) => {
+          if (camera.rotation.z > 0.2) {
+            object.visible = false
+          } else {
+            object.visible = true
+          }
+        })
+      })
+
       // 액자에 들어갈 그림
 
       const sizeCheckBox = new THREE.Box3().setFromObject(gltf.scene) // 액자 크기 측정을 위한 가상 박스
@@ -441,12 +458,16 @@ const ThreeScene = () => {
       zoomIndex: number
     }) => {
       function chooseProject() {
+        // 순차적으로 프로젝트 변경
+        // 나중에 버튼을 여러개 만들어 각각 선택할 수 있게 할까 고민중.
         if (embedWebsite.src === "https://nomfilx-jiwon.netlify.app/#/") {
           embedWebsite.src = "https://gonnabea.github.io/Music-Player/"
         } else if (embedWebsite.src === "https://gonnabea.github.io/Music-Player/") {
           embedWebsite.src = "https://gonnabea.github.io/Typing-Game/"
         } else if (embedWebsite.src === "https://gonnabea.github.io/Typing-Game/") {
           embedWebsite.src = "https://gonnabea.github.io/Hangman-Game/"
+        } else {
+          embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
         }
       }
 
@@ -517,18 +538,23 @@ const ThreeScene = () => {
       }
     }
 
+    // tv 포커싱
     addSelectBtn({
       text: "1",
       btnPosition: { x: -1300, y: 600, z: 500 },
       cameraPosition: { x: 4991.472829384942, y: 0, z: 0 },
       zoomIndex: 0.8,
     })
+
+    // 채널 변경 버튼 & tv 포커싱
     addSelectBtn({
       text: "✨",
       btnPosition: { x: -1300, y: 600, z: 0 },
       cameraPosition: { x: 4991.472829384942, y: 0, z: 0 },
       zoomIndex: 0.8,
     })
+
+    // J-Flix 방 포커싱
     addSelectBtn({
       text: "0",
       btnPosition: { x: 0, y: 0, z: -800 },
