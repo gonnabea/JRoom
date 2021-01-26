@@ -17,7 +17,7 @@ export const JFlixObjects = () => {
       size: 80,
       height: 50,
       color: 0x02f6d5,
-      bevelSize: 8,
+      bevelSize: 7,
     },
     { x: 100, y: 200, z: -900 }
   )
@@ -34,6 +34,19 @@ export const JFlixObjects = () => {
       bevelSize: 3,
     },
     { x: 100, y: 100, z: -900 }
+  )
+
+  FontLoder(
+    {
+      fontModelUrl: "/fonts/D2D.json",
+      text:
+        "HTML,CSS,순수_JavaScript로_만든\n\n미니_프로젝트들과_\n\n_리액트를_사용하여_만든_\n\nnomflix_클론입니다",
+      size: 20,
+      height: 10,
+      color: 0xffffff,
+      bevelSize: 1,
+    },
+    { x: -200, y: 0, z: -900 }
   )
 
   // 기술스택 박스 만들기

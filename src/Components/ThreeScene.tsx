@@ -330,19 +330,21 @@ const ThreeScene = () => {
     scene.add(skybox)
 
     // 액자 모델
+    let frameGroupMesh: THREE.Object3D
     loader.load("/models/3d_architecture__photo_frame/scene.gltf", (gltf) => {
-      gltf.scene.scale.set(10, 10, 10)
-      gltf.scene.position.set(1480, 0, 0)
-      gltf.scene.rotateY(Math.PI)
+      frameGroupMesh = gltf.scene
+      frameGroupMesh.scale.set(10, 10, 10)
+      frameGroupMesh.position.set(1480, 0, 0)
+      frameGroupMesh.rotateY(Math.PI)
 
-      scene.add(gltf.scene)
+      scene.add(frameGroupMesh)
 
       // 카메라 시점이 액자 뒤로 갔을 때 사라지게 하는 알고리즘
       window.addEventListener("mouseup", () => {
         console.log(camera.position)
         console.log(camera.rotation)
         const meshsOfFrame =
-          gltf.scene.children[0].children[0].children[0].children[0].children[0].children[0]
+          frameGroupMesh.children[0].children[0].children[0].children[0].children[0].children[0]
             .children
 
         meshsOfFrame.map((object) => {
@@ -504,8 +506,27 @@ const ThreeScene = () => {
       cssScene.add(selectBtnObj)
 
       selectBtn.onclick = () => {
+        // (TV 버튼을 클릭했을 경우)
+        if (contents.text === "1") {
+          const meshsOfFrame =
+            frameGroupMesh.children[0].children[0].children[0].children[0].children[0].children[0]
+              .children
+
+          meshsOfFrame.map((object) => {
+            object.visible = false
+          })
+        }
+
+        // 프로젝트 변경 버튼을 클릭했을 경우
         if (contents.text === "✨") {
           chooseProject()
+          const meshsOfFrame =
+            frameGroupMesh.children[0].children[0].children[0].children[0].children[0].children[0]
+              .children
+
+          meshsOfFrame.map((object) => {
+            object.visible = false
+          })
         }
         camera.rotation.set(
           websiteObject.rotation.x,
@@ -520,7 +541,6 @@ const ThreeScene = () => {
 
         camera.zoom = contents.zoomIndex
 
-        selectBtnObj.scale.set(1, 1, 1)
         camera.updateProjectionMatrix()
         camera.updateMatrix()
         cssScene.updateMatrixWorld()
@@ -530,6 +550,7 @@ const ThreeScene = () => {
         controls.update()
 
         selectBtnObjs.map((selectBtnObj) => {
+          selectBtnObj.scale.set(1, 1, 1)
           selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
           camera.updateProjectionMatrix()
           camera.updateMatrix()
@@ -557,7 +578,7 @@ const ThreeScene = () => {
     // J-Flix 방 포커싱
     addSelectBtn({
       text: "0",
-      btnPosition: { x: 0, y: 0, z: -800 },
+      btnPosition: { x: 0, y: 300, z: -800 },
       cameraPosition: { x: -2773.8192101111504, y: 490.0248603839669, z: 4120.7527992239675 },
       zoomIndex: 0.3,
     })
