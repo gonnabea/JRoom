@@ -212,23 +212,23 @@ const ThreeScene = () => {
     // 자동차 모델 로드
 
     loader.load("/models/free_porsche_911_carrera_4s/scene.gltf", (gltf) => {
-      // loader.load("/models/ferrari_f2012_wheel/scene.gltf", (wheelGltf) => {
-      //   wheelGltf.scene.scale.set(150, 150, 150)
-      //   wheelGltf.scene.position.set(-500, -500, 3000)
-      //   let rotateIndex = 0
-      //   setInterval(() => {
-      //     rotateIndex += 1
-      //     wheelGltf.scene.rotation.z = rotateIndex
-      //   }, 50)
-      //   scene.add(wheelGltf.scene)
-      // })
+      let wheel: THREE.Group
+      let rotateIndex = 0
+      loader.load("/models/sports_car_wheel/scene.gltf", (wheelGltf) => {
+        wheelGltf.scene.scale.set(240, 240, 240)
+        wheelGltf.scene.position.set(-750, -300, 3390)
+
+        scene.add(wheelGltf.scene)
+        wheel = wheelGltf.scene
+      })
       gltf.scene.scale.set(300, 300, 300)
       gltf.scene.position.set(-500, -200, 3000)
       scene.add(gltf.scene)
 
       // 자동차 바퀴 제거: rotation 애니메이션 구현을 위해 다른 바퀴 로드 필요.
-      // gltf.scene.children[0].children[0].children[0].children[7].visible = false
-      // gltf.scene.children[0].children[0].children[0].children[20].visible = false
+      gltf.scene.children[0].children[0].children[0].children[7].visible = false
+      gltf.scene.children[0].children[0].children[0].children[20].visible = false
+
       // 자동차 컨트롤
       let keysPressed = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false }
 
@@ -245,6 +245,11 @@ const ThreeScene = () => {
         }
 
         if (keysPressed.ArrowUp) {
+          // 바퀴 돌리기
+          setInterval(() => {
+            rotateIndex += 2
+            wheel.rotation.x = rotateIndex
+          }, 10)
           const forwardSoundUrl = "/sounds/car-start.mp3"
           const soundEffect = document.createElement("audio")
           const audioSource = document.createElement("source")
@@ -255,7 +260,11 @@ const ThreeScene = () => {
           setTimeout(() => soundEffect.pause(), 2000)
           // 가속력을 고려한 자동차의 움직임 구현
           gltf.scene.translateZ(60)
-          const moveFoward = setInterval(() => gltf.scene.translateZ(10), 100)
+
+          const moveFoward = setInterval(() => {
+            gltf.scene.translateZ(10)
+            wheel.position.z += 17
+          }, 100)
           setTimeout(() => clearInterval(moveFoward), 1000)
         } else if (keysPressed.ArrowDown) {
           gltf.scene.translateZ(-60)
@@ -317,7 +326,7 @@ const ThreeScene = () => {
     materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
     materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
     materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
-    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_dn }))
+    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_dn })) // 땅 텍스쳐
     materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
     materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
 
