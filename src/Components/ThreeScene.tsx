@@ -45,11 +45,6 @@ let raycaster = new THREE.Raycaster()
 let mouse = new THREE.Vector2()
 export let embedWebsite: HTMLIFrameElement
 export let websiteObject: THREE.Object3D
-export let frameGroupMesh: {
-  children: {
-    children: { children: { children: { children: { children: { children: any }[] }[] }[] }[] }[]
-  }[]
-}
 const ThreeScene = () => {
   const ThreeContainer = useRef<HTMLDivElement>(null)
 
@@ -69,14 +64,14 @@ const ThreeScene = () => {
     const buildingGeometry = new THREE.BoxGeometry(2500, 1000, 3000)
     const buildingTexture = new THREE.TextureLoader()
     const buildingMaterial = new THREE.MeshPhongMaterial({
-      color: 0xc2cee9,
+      color: 0xffffff,
       specular: "blue",
       flatShading: true,
     })
     const ExhibitionRoom = new THREE.Mesh(buildingGeometry, buildingMaterial)
     ExhibitionRoom.position.set(0, 0, -2500)
 
-    ExhibitionRoom.material.side = THREE.BackSide // mesh 내부에서도 면이 보이게 만들어 줌.
+    ExhibitionRoom.material.side = THREE.BackSide // mesh 내부에서만 면이 보이게 만들어 줌.
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6) // soft white light
 
@@ -87,7 +82,11 @@ const ThreeScene = () => {
 
     const project1Geo = new THREE.BoxGeometry(3000, 1000, 2000)
 
-    const project1Mat = new THREE.MeshPhongMaterial({ specular: "orange", flatShading: true })
+    const project1Mat = new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      specular: "orange",
+      flatShading: true,
+    })
     const project1Mesh = new THREE.Mesh(project1Geo, project1Mat)
 
     ExhibitionRoom.updateMatrix()
@@ -334,6 +333,31 @@ const ThreeScene = () => {
       }
     }
 
+    // 천장과 벽지 이음새
+    const ceilConnecting = () => {
+      const shape = new THREE.Shape()
+      shape.moveTo(0, 0)
+      shape.lineTo(10, 0)
+      shape.lineTo(10, 10)
+
+      const setting = {
+        steps: 2,
+        depth: 200,
+        bevelEnabled: true,
+        bevelThickness: 1,
+        bevelSize: 10,
+        bevelOffset: 0,
+        bevelSegments: 1,
+      }
+
+      const geo = new THREE.ExtrudeGeometry(shape, setting)
+      const mat = new THREE.MeshBasicMaterial({ color: "brown" })
+      const mesh = new THREE.Mesh(geo, mat)
+      mesh.scale.set(1, 3, 6)
+      mesh.rotation.z = Math.PI / 2
+      scene.add(mesh)
+    }
+    ceilConnecting()
     // 렌더러
     renderer = new THREE.WebGLRenderer({
       antialias: true,
