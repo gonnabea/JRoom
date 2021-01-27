@@ -17,6 +17,7 @@ import { JFlixObjects } from "./ThreeModules/JFlixObjects"
 import { addBackgroundBox } from "./ThreeModules/BackgroundBox"
 import { addFrame } from "./ThreeModules/Frame"
 import { addSelectBtn } from "./ThreeModules/SelectBtn"
+import { addCeilConnector } from "./ThreeModules/CeilConnetor"
 
 const Container = styled.div`
   cursor: grab;
@@ -333,31 +334,13 @@ const ThreeScene = () => {
       }
     }
 
-    // 천장과 벽지 이음새
-    const ceilConnecting = () => {
-      const shape = new THREE.Shape()
-      shape.moveTo(0, 0)
-      shape.lineTo(10, 0)
-      shape.lineTo(10, 10)
+    // 천장과 벽지 이음새 생성
+    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: 1480, y: 490, z: -1000 }, "black", {
+      x: 0,
+      y: 0,
+      z: Math.PI / 2,
+    })
 
-      const setting = {
-        steps: 2,
-        depth: 200,
-        bevelEnabled: true,
-        bevelThickness: 1,
-        bevelSize: 10,
-        bevelOffset: 0,
-        bevelSegments: 1,
-      }
-
-      const geo = new THREE.ExtrudeGeometry(shape, setting)
-      const mat = new THREE.MeshBasicMaterial({ color: "brown" })
-      const mesh = new THREE.Mesh(geo, mat)
-      mesh.scale.set(1, 3, 6)
-      mesh.rotation.z = Math.PI / 2
-      scene.add(mesh)
-    }
-    ceilConnecting()
     // 렌더러
     renderer = new THREE.WebGLRenderer({
       antialias: true,
