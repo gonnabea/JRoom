@@ -24,6 +24,9 @@ import { addRoofWindowHole } from "./ThreeModules/RoofWIndowHole"
 import { addSunLight } from "./ThreeModules/SunLight"
 import { JFlixObjects } from "./ThreeModules/JFlixObjects"
 import nomadLogo from "../resources/images/nomadLogo.png"
+import { addBackgroundBox } from "./ThreeModules/BackgroundBox"
+import { addFrame } from "./ThreeModules/Frame"
+import { addSelectBtn } from "./ThreeModules/SelectBtn"
 
 const Container = styled.div`
   cursor: grab;
@@ -38,7 +41,7 @@ export let camera: THREE.PerspectiveCamera
 export let scene: THREE.Scene
 export let renderer: THREE.WebGLRenderer
 let geometry: THREE.BoxGeometry, material, mesh
-let controls: OrbitControls
+export let controls: OrbitControls
 export let composer: { addPass: (arg0: any) => void; render: (arg0: number) => void }
 export let floorCamera: THREE.CubeCamera
 export let floorMesh: THREE.Mesh
@@ -47,12 +50,18 @@ let cssRenderer: {
   domElement: any
   render: (arg0: THREE.Scene, arg1: THREE.PerspectiveCamera) => void
 }
-let cssScene: THREE.Scene
-export let selectBtnObjs: any[]
+export let cssScene: THREE.Scene
+export let selectBtnObjs: any[] = []
 let raycaster = new THREE.Raycaster()
 let mouse = new THREE.Vector2()
+export let embedWebsite: HTMLIFrameElement
+export let websiteObject: THREE.Object3D
+export let frameGroupMesh: {
+  children: {
+    children: { children: { children: { children: { children: { children: any }[] }[] }[] }[] }[]
+  }[]
+}
 const ThreeScene = () => {
-  selectBtnObjs = []
   const ThreeContainer = useRef<HTMLDivElement>(null)
 
   function ThreeSceneInit() {
@@ -311,80 +320,12 @@ const ThreeScene = () => {
     scene.add(lightIndicator3)
 
     // 노을 배경 박스 생성
-    const materialArray = []
-    const texture_ft = new THREE.TextureLoader().load(
-      "https://media-exp1.licdn.com/dms/image/C511BAQE0NnIkjkotGA/company-background_10000/0/1541489744017?e=2159024400&v=beta&t=8CzJngJh5TrtF6_WFRYSlDeycAkT52hAfb4qLYGYnv8"
-    )
-    const texture_bk = new THREE.TextureLoader().load(
-      "https://media-exp1.licdn.com/dms/image/C511BAQE0NnIkjkotGA/company-background_10000/0/1541489744017?e=2159024400&v=beta&t=8CzJngJh5TrtF6_WFRYSlDeycAkT52hAfb4qLYGYnv8"
-    )
-    const texture_up = new THREE.TextureLoader().load(
-      "https://media-exp1.licdn.com/dms/image/C511BAQE0NnIkjkotGA/company-background_10000/0/1541489744017?e=2159024400&v=beta&t=8CzJngJh5TrtF6_WFRYSlDeycAkT52hAfb4qLYGYnv8"
-    )
-    const texture_dn = new THREE.TextureLoader().load(groundImg)
+    addBackgroundBox()
 
-    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
-    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
-    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
-    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_dn })) // 땅 텍스쳐
-    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
-    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
-
-    const skyboxGeo = new THREE.BoxGeometry(19000, 19000, 19000)
-    const skybox = new THREE.Mesh(skyboxGeo, materialArray)
-    skybox.position.set(0, 8990, 0)
-    materialArray.map((mat) => {
-      mat.side = THREE.BackSide
-    })
-    scene.add(skybox)
-
-    // 액자 모델
-    let frameGroupMesh: THREE.Object3D
-    loader.load("/models/3d_architecture__photo_frame/scene.gltf", (gltf) => {
-      frameGroupMesh = gltf.scene
-      frameGroupMesh.scale.set(10, 10, 10)
-      frameGroupMesh.position.set(1480, 0, 0)
-      frameGroupMesh.rotateY(Math.PI)
-
-      scene.add(frameGroupMesh)
-
-      // 카메라 시점이 액자 뒤로 갔을 때 사라지게 하는 알고리즘
-      window.addEventListener("mouseup", () => {
-        console.log(camera.position)
-        console.log(camera.rotation)
-        const meshsOfFrame =
-          frameGroupMesh.children[0].children[0].children[0].children[0].children[0].children[0]
-            .children
-
-        meshsOfFrame.map((object) => {
-          if (camera.rotation.z > 0.2) {
-            object.visible = false
-          } else {
-            object.visible = true
-          }
-        })
-      })
-
-      // 액자에 들어갈 그림
-
-      const sizeCheckBox = new THREE.Box3().setFromObject(gltf.scene) // 액자 크기 측정을 위한 가상 박스
-      console.log(sizeCheckBox)
-      const frameWidth = sizeCheckBox.max.z - sizeCheckBox.min.z - 100
-      const frameHeight = sizeCheckBox.max.y - sizeCheckBox.min.y - 100
-      const frameDepth = sizeCheckBox.max.x - sizeCheckBox.min.x
-
-      const imageInFrameGeo = new THREE.PlaneBufferGeometry(frameWidth, frameHeight, frameDepth)
-      const imageInFrameTexture = new THREE.TextureLoader().load(nomadLogo)
-      const imageInFrameMat = new THREE.MeshPhongMaterial({ map: imageInFrameTexture })
-      const imageInFrame = new THREE.Mesh(imageInFrameGeo, imageInFrameMat)
-      imageInFrame.rotateY(-Math.PI / 2)
-      imageInFrame.position.set(1460, 0, 0)
-
-      scene.add(imageInFrame)
-    })
+    // 액자 모델 추가, 노마드 로고 그림 배치
+    addFrame()
 
     // 레이캐스터 (클릭이벤트)
-
     // 마우스 움직일 때마다 오브젝트 감지
 
     const onMouseMove = (event: { clientX: number; clientY: number }) => {
@@ -432,12 +373,12 @@ const ThreeScene = () => {
     planeMesh.rotation.set(0, Math.PI / 2, 0)
     scene.add(planeMesh)
 
-    const embedWebsite = document.createElement("iframe")
+    embedWebsite = document.createElement("iframe")
     embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
     embedWebsite.width = "1400px"
     embedWebsite.height = "800px"
 
-    const websiteObject = new CSS3D.CSS3DObject(embedWebsite)
+    websiteObject = new CSS3D.CSS3DObject(embedWebsite)
     websiteObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
     websiteObject.rotation.set(0, Math.PI / 2, 0)
     cssScene.add(websiteObject)
@@ -462,111 +403,6 @@ const ThreeScene = () => {
     cssScene.add(tvBackCoverObject)
 
     // 선택 버튼 생성
-    const addSelectBtn = (contents: {
-      text: string
-      btnPosition: { x: number; y: number; z: number }
-      cameraPosition: { x: number; y: number; z: number }
-      zoomIndex: number
-    }) => {
-      function chooseProject() {
-        // 순차적으로 프로젝트 변경
-        // 나중에 버튼을 여러개 만들어 각각 선택할 수 있게 할까 고민중.
-        if (embedWebsite.src === "https://nomfilx-jiwon.netlify.app/#/") {
-          embedWebsite.src = "https://gonnabea.github.io/Music-Player/"
-        } else if (embedWebsite.src === "https://gonnabea.github.io/Music-Player/") {
-          embedWebsite.src = "https://gonnabea.github.io/Typing-Game/"
-        } else if (embedWebsite.src === "https://gonnabea.github.io/Typing-Game/") {
-          embedWebsite.src = "https://gonnabea.github.io/Hangman-Game/"
-        } else {
-          embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
-        }
-      }
-
-      const selectBtn = document.createElement("button")
-      selectBtn.innerHTML = contents.text
-      selectBtn.style.width = "100px"
-      selectBtn.style.height = "100px"
-      selectBtn.style.fontSize = "60px"
-      selectBtn.style.borderRadius = "100%"
-      selectBtn.style.background = "rgba(0,0,0,0.5)"
-      selectBtn.style.color = "white"
-
-      selectBtn.onmouseover = () => {
-        selectBtn.style.color = "skyblue"
-        selectBtn.style.border = "10px solid skyblue"
-        selectBtn.style.cursor = "pointer"
-      }
-      selectBtn.onmouseleave = () => {
-        selectBtn.style.border = "none"
-
-        selectBtn.style.color = "white"
-      }
-
-      const selectBtnObj = new CSS3D.CSS3DObject(selectBtn)
-
-      selectBtnObjs.push(selectBtnObj)
-
-      selectBtnObj.position.set(
-        contents.btnPosition.x,
-        contents.btnPosition.y,
-        contents.btnPosition.z
-      )
-      selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
-      cssScene.add(selectBtnObj)
-
-      selectBtn.onclick = () => {
-        // (TV 버튼을 클릭했을 경우)
-        if (contents.text === "1") {
-          const meshsOfFrame =
-            frameGroupMesh.children[0].children[0].children[0].children[0].children[0].children[0]
-              .children
-
-          meshsOfFrame.map((object) => {
-            object.visible = false
-          })
-        }
-
-        // 프로젝트 변경 버튼을 클릭했을 경우
-        if (contents.text === "✨") {
-          chooseProject()
-          const meshsOfFrame =
-            frameGroupMesh.children[0].children[0].children[0].children[0].children[0].children[0]
-              .children
-
-          meshsOfFrame.map((object) => {
-            object.visible = false
-          })
-        }
-        camera.rotation.set(
-          websiteObject.rotation.x,
-          websiteObject.rotation.y,
-          websiteObject.rotation.z
-        )
-        camera.position.set(
-          contents.cameraPosition.x,
-          contents.cameraPosition.y,
-          contents.cameraPosition.z
-        )
-
-        camera.zoom = contents.zoomIndex
-
-        camera.updateProjectionMatrix()
-        camera.updateMatrix()
-        cssScene.updateMatrixWorld()
-
-        // 카메라 자동 이동 시 iframe이 비활성화되는 현상 해결책
-        controls.rotateUp(-0.01)
-        controls.update()
-
-        selectBtnObjs.map((selectBtnObj) => {
-          selectBtnObj.scale.set(1, 1, 1)
-          selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
-          camera.updateProjectionMatrix()
-          camera.updateMatrix()
-          cssScene.updateMatrixWorld()
-        })
-      }
-    }
 
     // tv 포커싱
     addSelectBtn({
