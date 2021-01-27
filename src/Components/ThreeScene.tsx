@@ -2,28 +2,18 @@ import React, { useEffect, useRef } from "react"
 import * as THREE from "three"
 import styled from "styled-components"
 import { OrbitControls } from "three-orbitcontrols-ts"
-import { GodRaysEffect, RenderPass, EffectPass, EffectComposer } from "postprocessing"
-import { BackSide, CubeCamera, DoubleSide, FrontSide } from "three"
-import floorImage2 from "../resources/images/floor2.jpg"
+import { DoubleSide } from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { CSG } from "three-csg-ts"
 import CSS3D from "three-css3drenderer"
 
 // 이미지 임포트
-import reactLogo from "../resources/images/reactLogo.jpg"
-import styledComponentsLogo from "../resources/images/styledComponents.jpg"
-import netlifyLogo from "../resources/images/netlify.jpg"
-import sunsetImg1 from "../resources/images/Sunset Backgrounds/sunset12.jpg"
-import groundImg from "../resources/images/ground.jpg"
 import { addWindow } from "./ThreeModules/Window"
 import { addDirLight } from "./ThreeModules/DirectionalLight"
 import { addSpotLight } from "./ThreeModules/SpotLight"
-import { addLogoBox } from "./ThreeModules/LogoBox"
 import { addFloor } from "./ThreeModules/Floor"
 import { addRoofWindowHole } from "./ThreeModules/RoofWIndowHole"
 import { addSunLight } from "./ThreeModules/SunLight"
 import { JFlixObjects } from "./ThreeModules/JFlixObjects"
-import nomadLogo from "../resources/images/nomadLogo.png"
 import { addBackgroundBox } from "./ThreeModules/BackgroundBox"
 import { addFrame } from "./ThreeModules/Frame"
 import { addSelectBtn } from "./ThreeModules/SelectBtn"
@@ -40,7 +30,6 @@ const Container = styled.div`
 export let camera: THREE.PerspectiveCamera
 export let scene: THREE.Scene
 export let renderer: THREE.WebGLRenderer
-let geometry: THREE.BoxGeometry, material, mesh
 export let controls: OrbitControls
 export let composer: { addPass: (arg0: any) => void; render: (arg0: number) => void }
 export let floorCamera: THREE.CubeCamera
@@ -524,13 +513,13 @@ const ThreeScene = () => {
     requestAnimationFrame(animate)
   }
 
+  // 작동이 안되어 고칠 필요가 있음
   function resize() {
     if (ThreeContainer.current) {
-      cssRenderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
-
-      renderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
-      camera.aspect = ThreeContainer.current?.clientWidth / ThreeContainer.current?.clientHeight
-      camera.updateProjectionMatrix()
+      // cssRenderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
+      // renderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
+      // camera.aspect = ThreeContainer.current?.clientWidth / ThreeContainer.current?.clientHeight
+      // camera.updateProjectionMatrix()
     }
   }
 
@@ -539,7 +528,6 @@ const ThreeScene = () => {
     ThreeSceneInit()
     return () => {
       scene.remove.apply(scene, scene.children)
-      ThreeSceneInit()
     }
   })
   return <Container id="container" ref={ThreeContainer}></Container>
