@@ -74,7 +74,7 @@ const ThreeScene = () => {
 
     ExhibitionRoom.material.side = THREE.BackSide // mesh 내부에서만 면이 보이게 만들어 줌.
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6) // soft white light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4) // soft white light
 
     ambientLight.position.set(0, 0, 0)
     scene.add(ambientLight)
@@ -102,7 +102,7 @@ const ThreeScene = () => {
     // 디렉셔널 라이트 (햇빛)
     addDirLight({ x: -1000, y: 2000, z: 2000 }, { x: -500, y: 1000, z: 800 })
 
-    addDirLight({ x: 0, y: 2000, z: 2000 }, { x: 500, y: 1000, z: 800 })
+    addDirLight({ x: 0, y: 2000, z: -2000 }, { x: 0, y: 1000, z: 0 })
 
     // 스포트라이트 (창문 통과하는 햇빛)
     addSpotLight({ x: -900, y: 750, z: 800 }, { x: -400, y: -500, z: -100 }, Math.PI / 18)
@@ -491,13 +491,17 @@ const ThreeScene = () => {
       if (camera.zoom < 5) {
         camera.zoom = camera.zoom + 0.1
         camera.updateProjectionMatrix()
+
+        // 카메라 줌에 따른 버튼 크기 조정
         if (selectBtnObjs) {
           selectBtnObjs.map((selectBtnObj) => {
-            selectBtnObj.scale.set(
-              selectBtnObj.scale.x - 0.3,
-              selectBtnObj.scale.y - 0.3,
-              selectBtnObj.scale.z - 0.3
-            )
+            if (selectBtnObj.scale.x > 1) {
+              selectBtnObj.scale.set(
+                selectBtnObj.scale.x - 0.3,
+                selectBtnObj.scale.y - 0.3,
+                selectBtnObj.scale.z - 0.3
+              )
+            }
           })
         }
         console.log(camera.zoom)
@@ -507,6 +511,8 @@ const ThreeScene = () => {
     controls.dollyIn = function () {
       if (camera.zoom > 0.2) {
         camera.zoom = camera.zoom - 0.1
+
+        // 카메라 줌에 따른 버튼 크기 조정
         if (selectBtnObjs) {
           selectBtnObjs.map((selectBtnObj) => {
             selectBtnObj.scale.set(

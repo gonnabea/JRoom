@@ -6,7 +6,6 @@ export const addLogoBox = (position: { x: number; y: number; z: number }, image:
   const logoBoxGeo = new THREE.BoxBufferGeometry(300, 300, 100)
   const logoBoxTexture = new THREE.TextureLoader().load(image)
   const logoBoxMat = new THREE.MeshPhongMaterial({
-    color: 0x8c989c,
     specular: "orange",
     flatShading: true,
     map: logoBoxTexture,
