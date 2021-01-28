@@ -7,7 +7,7 @@ export const addSpotLight = (
   angle: number
 ) => {
   const spotLight_distance = 0 // 빛의 최대범위
-  const spotLight = new THREE.SpotLight(0xffffff, 0.9, spotLight_distance, angle)
+  const spotLight = new THREE.SpotLight(0xffffff, 1.5, spotLight_distance, angle)
   spotLight.penumbra = 1
   spotLight.decay = 0.5
   // 창문 위치

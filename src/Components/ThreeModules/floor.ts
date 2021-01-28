@@ -1,6 +1,7 @@
 import * as THREE from "three"
 import { scene } from "../ThreeScene"
 import floorImage2 from "../../resources/images/floor2.jpg"
+import floorImage3 from "../../resources/images/floor3.jpg"
 
 interface typeAddFloor {
   width: number
@@ -13,7 +14,7 @@ interface typeAddFloor {
 
 export const addFloor = ({ width, height, x, y, z }: typeAddFloor) => {
   const floorGeo = new THREE.PlaneBufferGeometry(width, height) // width, height
-  const floorTexture = new THREE.TextureLoader().load(floorImage2)
+  const floorTexture = new THREE.TextureLoader().load(floorImage3)
   floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping
   floorTexture.repeat.set(5, 5)
   floorTexture.encoding = THREE.sRGBEncoding

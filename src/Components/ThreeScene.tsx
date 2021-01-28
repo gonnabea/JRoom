@@ -76,7 +76,7 @@ const ThreeScene = () => {
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6) // soft white light
 
-    ambientLight.position.set(0, 6000, 0)
+    ambientLight.position.set(0, 0, 0)
     scene.add(ambientLight)
 
     //// 프로젝트 방 (J-Flix) ////
@@ -101,6 +101,8 @@ const ThreeScene = () => {
 
     // 디렉셔널 라이트 (햇빛)
     addDirLight({ x: -1000, y: 2000, z: 2000 }, { x: -500, y: 1000, z: 800 })
+
+    addDirLight({ x: 0, y: 2000, z: 2000 }, { x: 500, y: 1000, z: 800 })
 
     // 스포트라이트 (창문 통과하는 햇빛)
     addSpotLight({ x: -900, y: 750, z: 800 }, { x: -400, y: -500, z: -100 }, Math.PI / 18)
@@ -339,6 +341,48 @@ const ThreeScene = () => {
       x: 0,
       y: 0,
       z: Math.PI / 2,
+    })
+
+    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: -1460, y: 490, z: -1000 }, "black", {
+      x: 0,
+      y: 0,
+      z: Math.PI,
+    })
+
+    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: 480, z: -970 }, "black", {
+      x: 0,
+      y: Math.PI / 2,
+      z: Math.PI / 2,
+    })
+    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: 485, z: 970 }, "black", {
+      x: 0,
+      y: Math.PI / 2,
+      z: -Math.PI / 2,
+    })
+
+    // 바닥 이음새
+    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: 1480, y: -490, z: -1000 }, "grey", {
+      x: 0,
+      y: 0,
+      z: Math.PI / 2,
+    })
+
+    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: -1460, y: -490, z: -1000 }, "grey", {
+      x: 0,
+      y: 0,
+      z: Math.PI,
+    })
+
+    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: -480, z: -970 }, "grey", {
+      x: 0,
+      y: Math.PI / 2,
+      z: Math.PI / 2,
+    })
+
+    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: -485, z: 970 }, "grey", {
+      x: 0,
+      y: Math.PI / 2,
+      z: -Math.PI / 2,
     })
 
     // 렌더러

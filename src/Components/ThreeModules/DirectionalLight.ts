@@ -5,7 +5,7 @@ export const addDirLight = (
   position: { x: number; y: number; z: number },
   targetPosition: { x: number; y: number; z: number }
 ) => {
-  const dirLight = new THREE.DirectionalLight(0xffffff, 0.3)
+  const dirLight = new THREE.DirectionalLight(0xffffff, 0.4)
   dirLight.position.set(position.x, position.y, position.z)
   dirLight.castShadow = true
 

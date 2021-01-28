@@ -1,5 +1,6 @@
 import { scene } from "../ThreeScene"
 import * as THREE from "three"
+import { BackSide, FrontSide } from "three"
 
 // 천장과 벽지 이음새
 export const addCeilConnector = (
@@ -30,5 +31,6 @@ export const addCeilConnector = (
   mesh.scale.set(scale.x, scale.y, scale.z)
   mesh.rotation.set(rotation.x, rotation.y, rotation.z)
   mesh.position.set(position.x, position.y, position.z)
+  material.side = FrontSide
   scene.add(mesh)
 }

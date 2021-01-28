@@ -63,28 +63,28 @@ export const addSelectBtn = (contents: {
 
   selectBtn.onclick = () => {
     // (TV 버튼을 클릭했을 경우)
+    const meshsOfFrame =
+      frameGroupMesh?.children[0].children[0].children[0].children[0].children[0].children[0]
+        .children
     if (contents.text === "1") {
       console.log(frameGroupMesh)
-      const meshsOfFrame =
-        frameGroupMesh?.children[0].children[0].children[0].children[0].children[0].children[0]
-          .children
 
       meshsOfFrame.map((object: { visible: boolean }) => {
         object.visible = false
       })
-    }
-
-    // 프로젝트 변경 버튼을 클릭했을 경우
-    if (contents.text === "✨") {
+    } // 프로젝트 변경 버튼을 클릭했을 경우
+    else if (contents.text === "✨") {
       chooseProject()
-      const meshsOfFrame =
-        frameGroupMesh?.children[0].children[0].children[0].children[0].children[0].children[0]
-          .children
 
       meshsOfFrame.map((object: { visible: boolean }) => {
         object.visible = false
       })
+    } else {
+      meshsOfFrame.map((object: { visible: boolean }) => {
+        object.visible = true
+      })
     }
+
     camera.rotation.set(
       websiteObject.rotation.x,
       websiteObject.rotation.y,
