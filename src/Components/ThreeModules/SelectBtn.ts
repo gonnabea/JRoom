@@ -28,6 +28,14 @@ export const addSelectBtn = (contents: {
       embedWebsite.src = "https://gonnabea.github.io/Typing-Game/"
     } else if (embedWebsite.src === "https://gonnabea.github.io/Typing-Game/") {
       embedWebsite.src = "https://gonnabea.github.io/Hangman-Game/"
+    } else if (embedWebsite.src === "https://gonnabea.github.io/Hangman-Game/") {
+      embedWebsite.src = "https://gonnabea.github.io/Expense-Tracker/"
+    } else if (embedWebsite.src === "https://gonnabea.github.io/Expense-Tracker/") {
+      embedWebsite.src = "https://gonnabea.github.io/Speech-Text-Reader/"
+    } else if (embedWebsite.src === "https://gonnabea.github.io/Speech-Text-Reader/") {
+      embedWebsite.src = "https://gonnabea.github.io/Sortable-List/"
+    } else if (embedWebsite.src === "https://gonnabea.github.io/Sortable-List/") {
+      embedWebsite.src = "https://gonnabea.github.io/Breakout-Game/"
     } else {
       embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
     }

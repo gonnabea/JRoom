@@ -16,7 +16,7 @@ export const addFloor = ({ width, height, x, y, z }: typeAddFloor) => {
   const floorGeo = new THREE.PlaneBufferGeometry(width, height) // width, height
   const floorTexture = new THREE.TextureLoader().load(floorImage3)
   floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping
-  floorTexture.repeat.set(5, 5)
+  floorTexture.repeat.set(7, 7)
   floorTexture.encoding = THREE.sRGBEncoding
 
   const floorMaterial = new THREE.MeshPhongMaterial({

@@ -46,10 +46,21 @@ let raycaster = new THREE.Raycaster()
 let mouse = new THREE.Vector2()
 export let embedWebsite: HTMLIFrameElement
 export let websiteObject: THREE.Object3D
+let frameCount = 0
 const ThreeScene = () => {
   const ThreeContainer = useRef<HTMLDivElement>(null)
 
-  function ThreeSceneInit() {
+  // 작동이 안되어 고칠 필요가 있음
+  function resize() {
+    if (ThreeContainer.current) {
+      // cssRenderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
+      // renderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
+      // camera.aspect = ThreeContainer.current?.clientWidth / ThreeContainer.current?.clientHeight
+      // camera.updateProjectionMatrix()
+    }
+  }
+
+  useEffect(() => {
     camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 21000)
     camera.position.set(0, 0, 5000)
     scene = new THREE.Scene()
@@ -552,41 +563,28 @@ const ThreeScene = () => {
       // renderer.setAnimationLoop( animate ); <- GPU 메모리 100% 버그 유발
       animate()
     }
-  }
 
-  setInterval(() => {
-    console.log(`${frameCount} fps`)
-    frameCount = 0
-  }, 1000)
+    setInterval(() => {
+      console.log(`${frameCount} fps`)
+      frameCount = 0
+    }, 1000)
 
-  let frameCount = 0
-  function animate() {
-    frameCount += 1
+    function animate() {
+      frameCount += 1
 
-    cssRenderer.render(cssScene, camera)
-    composer.render(0.1)
-    // floorCamera.update(renderer, scene) <- GPU 점유율 대폭 상승 유발
+      cssRenderer.render(cssScene, camera)
+      composer.render(0.1)
+      // floorCamera.update(renderer, scene) <- GPU 점유율 대폭 상승 유발
 
-    requestAnimationFrame(animate)
-  }
-
-  // 작동이 안되어 고칠 필요가 있음
-  function resize() {
-    if (ThreeContainer.current) {
-      // cssRenderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
-      // renderer.setSize(ThreeContainer.current?.clientWidth, ThreeContainer.current?.clientHeight)
-      // camera.aspect = ThreeContainer.current?.clientWidth / ThreeContainer.current?.clientHeight
-      // camera.updateProjectionMatrix()
+      requestAnimationFrame(animate)
     }
-  }
-
-  useEffect(() => {
+    console.log("dsafas")
     window.addEventListener("resize", resize)
-    ThreeSceneInit()
+
     return () => {
       scene.remove.apply(scene, scene.children)
     }
-  })
+  }, [])
   return <Container id="container" ref={ThreeContainer}></Container>
 }
 

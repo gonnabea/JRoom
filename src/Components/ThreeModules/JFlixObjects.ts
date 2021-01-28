@@ -6,6 +6,7 @@ import { addLogoBox } from "./LogoBox"
 import reactLogo from "../../resources/images/reactLogo.jpg"
 import styledComponentsLogo from "../../resources/images/styledComponents.jpg"
 import netlifyLogo from "../../resources/images/netlify.jpg"
+import jsLogo from "../../resources/images/vanillajs.png"
 import sunsetImg1 from "../resources/images/Sunset Backgrounds/sunset12.jpg"
 
 export const JFlixObjects = () => {
@@ -54,6 +55,7 @@ export const JFlixObjects = () => {
   addLogoBox({ x: -500, y: 200, z: -940 }, reactLogo)
   addLogoBox({ x: -500, y: -200, z: -940 }, styledComponentsLogo)
   addLogoBox({ x: 700, y: 100, z: -940 }, netlifyLogo)
+  addLogoBox({ x: 700, y: -300, z: -940 }, jsLogo)
 
   const loader = new GLTFLoader()
 
