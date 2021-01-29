@@ -112,7 +112,7 @@ const ThreeScene = () => {
 
     //// 프로젝트 방 (Just=Read-It) ////
 
-    const project2Geo = new THREE.BoxGeometry(3000, 2000, 4000)
+    const project2Geo = new THREE.BoxGeometry(3000, 2000, 3000)
 
     const project2Mat = new THREE.MeshPhongMaterial({
       color: 0xffffff,
@@ -121,13 +121,14 @@ const ThreeScene = () => {
     })
     const project2Mesh = new THREE.Mesh(project2Geo, project2Mat)
 
-    project2Mesh.position.set(3000,-490,-2000)
+    project2Mesh.position.set(3000,-490,-2490)
+    project2Mesh.material.side = THREE.BackSide
 
     scene.add(project2Mesh)
 
     //// 프로젝트 방 (Our-Now) ////
 
-    const project3Geo = new THREE.BoxGeometry(3000, 2000, 4000)
+    const project3Geo = new THREE.BoxGeometry(3000, 2000, 3000)
 
     const project3Mat = new THREE.MeshPhongMaterial({
       color: 0xffffff,
@@ -136,7 +137,9 @@ const ThreeScene = () => {
     })
     const project3Mesh = new THREE.Mesh(project3Geo, project3Mat)
 
-    project3Mesh.position.set(-3000,-490,-2000)
+    project3Mesh.position.set(-3000,-490,-2490)
+    project3Mesh.material.side = THREE.BackSide
+
 
     scene.add(project3Mesh)
 
@@ -155,6 +158,11 @@ const ThreeScene = () => {
     addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0 }) // J-Flix 바닥
 
     addFloor({width: 3000, height: 2900, x: 0, y: -490, z: -2500}) // 메인 홀 바닥
+
+    addFloor({width: 3000, height: 2900, x: 3000, y: -490, z: -2500}) // Just-Read-It 바닥
+
+    addFloor({width: 3000, height: 2900, x: -3000, y: -490, z: -2500}) // Our-Now 바닥
+
 
     ////
 
