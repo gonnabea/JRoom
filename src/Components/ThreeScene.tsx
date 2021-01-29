@@ -72,8 +72,8 @@ const ThreeScene = () => {
     cssRenderer.domElement.style.zIndex = "5"
     ThreeContainer?.current?.appendChild(cssRenderer.domElement)
 
-    // 건물 박스
-    const buildingGeometry = new THREE.BoxGeometry(2500, 1000, 3000)
+    // 메인 홀
+    const buildingGeometry = new THREE.BoxGeometry(3000, 1000, 3000)
     const buildingTexture = new THREE.TextureLoader()
     const buildingMaterial = new THREE.MeshPhongMaterial({
       color: 0xffffff,
@@ -81,7 +81,7 @@ const ThreeScene = () => {
       flatShading: true,
     })
     const ExhibitionRoom = new THREE.Mesh(buildingGeometry, buildingMaterial)
-    ExhibitionRoom.position.set(0, 0, -2500)
+    ExhibitionRoom.position.set(0, 0, -2510)
 
     ExhibitionRoom.material.side = THREE.BackSide // mesh 내부에서만 면이 보이게 만들어 줌.
 
@@ -110,6 +110,38 @@ const ThreeScene = () => {
     newMesh.geometry.faces.splice(4, 2)
     scene.add(newMesh)
 
+    //// 프로젝트 방 (Just=Read-It) ////
+
+    const project2Geo = new THREE.BoxGeometry(3000, 2000, 4000)
+
+    const project2Mat = new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      specular: "orange",
+      flatShading: true,
+    })
+    const project2Mesh = new THREE.Mesh(project2Geo, project2Mat)
+
+    project2Mesh.position.set(3000,-490,-2000)
+
+    scene.add(project2Mesh)
+
+    //// 프로젝트 방 (Our-Now) ////
+
+    const project3Geo = new THREE.BoxGeometry(3000, 2000, 4000)
+
+    const project3Mat = new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      specular: "orange",
+      flatShading: true,
+    })
+    const project3Mesh = new THREE.Mesh(project3Geo, project3Mat)
+
+    project3Mesh.position.set(-3000,-490,-2000)
+
+    scene.add(project3Mesh)
+
+    
+
     // 디렉셔널 라이트 (햇빛)
     addDirLight({ x: -1000, y: 2000, z: 2000 }, { x: -500, y: 1000, z: 800 })
 
@@ -120,7 +152,9 @@ const ThreeScene = () => {
 
     // 바닥
 
-    addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0 })
+    addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0 }) // J-Flix 바닥
+
+    addFloor({width: 3000, height: 2900, x: 0, y: -490, z: -2500}) // 메인 홀 바닥
 
     ////
 
