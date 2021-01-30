@@ -62,7 +62,7 @@ const ThreeScene = () => {
 
   useEffect(() => {
     camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 21000)
-    camera.position.set(0, 0, 5000)
+    camera.position.set(0, 0, 1000)
     scene = new THREE.Scene()
     cssRenderer = new CSS3D.CSS3DRenderer()
     cssScene = new THREE.Scene()
@@ -121,7 +121,7 @@ const ThreeScene = () => {
     })
     const project2Mesh = new THREE.Mesh(project2Geo, project2Mat)
 
-    project2Mesh.position.set(3000,-490,-2490)
+    project2Mesh.position.set(3000, -490, -2490)
     project2Mesh.material.side = THREE.BackSide
 
     scene.add(project2Mesh)
@@ -137,13 +137,10 @@ const ThreeScene = () => {
     })
     const project3Mesh = new THREE.Mesh(project3Geo, project3Mat)
 
-    project3Mesh.position.set(-3000,-490,-2490)
+    project3Mesh.position.set(-3000, -490, -2490)
     project3Mesh.material.side = THREE.BackSide
 
-
     scene.add(project3Mesh)
-
-    
 
     // 디렉셔널 라이트 (햇빛)
     addDirLight({ x: -1000, y: 2000, z: 2000 }, { x: -500, y: 1000, z: 800 })
@@ -157,12 +154,11 @@ const ThreeScene = () => {
 
     addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0 }) // J-Flix 바닥
 
-    addFloor({width: 3000, height: 2900, x: 0, y: -490, z: -2500}) // 메인 홀 바닥
+    addFloor({ width: 3000, height: 2900, x: 0, y: -490, z: -2500 }) // 메인 홀 바닥
 
-    addFloor({width: 3000, height: 2900, x: 3000, y: -490, z: -2500}) // Just-Read-It 바닥
+    addFloor({ width: 3000, height: 2900, x: 3000, y: -490, z: -2500 }) // Just-Read-It 바닥
 
-    addFloor({width: 3000, height: 2900, x: -3000, y: -490, z: -2500}) // Our-Now 바닥
-
+    addFloor({ width: 3000, height: 2900, x: -3000, y: -490, z: -2500 }) // Our-Now 바닥
 
     ////
 
@@ -191,7 +187,6 @@ const ThreeScene = () => {
     roofMaterial.side = THREE.DoubleSide
     const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
 
-    console.log(roofGeometry.faces)
     roofGeometry.faces.splice(20, 4) // 지붕의 밑면 제거
 
     // 창문 구멍 뚫기
@@ -286,7 +281,6 @@ const ThreeScene = () => {
       let keysPressed = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false }
 
       window.addEventListener("keydown", (e) => {
-        console.log(e.key)
         if (e.key === "ArrowUp") {
           keysPressed.ArrowUp = true
         } else if (e.key === "ArrowDown") {
@@ -501,8 +495,8 @@ const ThreeScene = () => {
     addSelectBtn({
       text: "1",
       btnPosition: { x: -1300, y: 600, z: 500 },
-      cameraPosition: { x: 4991.472829384942, y: 0, z: 0 },
-      zoomIndex: 0.8,
+      cameraPosition: { x: 0, y: 0, z: 1000 },
+      zoomIndex: 0.5,
     })
 
     // 채널 변경 버튼 & tv 포커싱
@@ -521,14 +515,14 @@ const ThreeScene = () => {
       zoomIndex: 0.3,
     })
 
-    // const btnMap = new THREE.TextureLoader().load(nomadLogo)
-    // const btnMat = new THREE.SpriteMaterial({
-    //   map: btnMap,
-    // })
+    //////////////////// Just-Read-It /////////////////////////////////
 
-    // const sprite = new THREE.Sprite(btnMat)
-    // sprite.scale.set(100, 100, 100)
-    // scene.add(sprite)
+    loader.load("/models/note_book/scene.gltf", (gltf) => {
+      gltf.scene.scale.set(10, 10, 10)
+      scene.add(gltf.scene)
+    })
+
+    //////////////////// Just-Read-It /////////////////////////////////
 
     // 갓레이이펙트
 
@@ -557,7 +551,6 @@ const ThreeScene = () => {
             }
           })
         }
-        console.log(camera.zoom)
       }
     }
     // 축소
@@ -577,8 +570,6 @@ const ThreeScene = () => {
         }
 
         camera.updateProjectionMatrix()
-
-        console.log(camera.zoom)
       }
     }
 
@@ -620,7 +611,7 @@ const ThreeScene = () => {
 
       requestAnimationFrame(animate)
     }
-    console.log("dsafas")
+
     window.addEventListener("resize", resize)
 
     return () => {

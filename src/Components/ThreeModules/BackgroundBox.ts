@@ -24,7 +24,7 @@ export const addBackgroundBox = () => {
   materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
   materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }))
 
-  const skyboxGeo = new THREE.BoxGeometry(19000, 19000, 19000)
+  const skyboxGeo = new THREE.BoxGeometry(9000, 19000, 19000)
   const skybox = new THREE.Mesh(skyboxGeo, materialArray)
   skybox.position.set(0, 8990, 0)
   materialArray.map((mat) => {
