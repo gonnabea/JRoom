@@ -108,6 +108,7 @@ const ThreeScene = () => {
     const totalMesh = new THREE.Mesh(project1Geo, project1Mat)
     totalMesh.material.side = THREE.BackSide
     // 윗면 faces 지우기 <- 효율적인 방법 찾기
+    totalMesh.geometry.faces.splice(4, 2)
 
     // J-Flix 방문 구멍내기
     const JFlixDoorHole = new THREE.Mesh(
@@ -117,6 +118,7 @@ const ThreeScene = () => {
     JFlixDoorHole.position.set(1200, -500, -1000)
 
     JFlixDoorHole.updateMatrix()
+    totalMesh.updateMatrix()
     const bspJFlixDoorHole = CSG.fromMesh(JFlixDoorHole)
     const bspJFlixRoom = CSG.fromMesh(totalMesh)
 
@@ -126,8 +128,7 @@ const ThreeScene = () => {
 
     bspJFlixMeshResult.material = totalMesh.material
     bspJFlixMeshResult.updateMatrix()
-    bspJFlixMeshResult.geometry.faces.splice(97, 15) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
-
+    bspJFlixMeshResult.geometry.faces.splice(85, 20) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
     scene.add(bspJFlixMeshResult)
 
     //// 프로젝트 방 (Just=Read-It) ////
@@ -141,7 +142,7 @@ const ThreeScene = () => {
     })
     const project2Mesh = new THREE.Mesh(project2Geo, project2Mat)
 
-    project2Mesh.position.set(3000, -490, -2490)
+    project2Mesh.position.set(3000, 500, -2490)
     project2Mesh.material.side = THREE.BackSide
 
     scene.add(project2Mesh)
@@ -157,7 +158,7 @@ const ThreeScene = () => {
     })
     const project3Mesh = new THREE.Mesh(project3Geo, project3Mat)
 
-    project3Mesh.position.set(-3000, -490, -2490)
+    project3Mesh.position.set(-3000, 500, -2490)
     project3Mesh.material.side = THREE.BackSide
 
     scene.add(project3Mesh)
