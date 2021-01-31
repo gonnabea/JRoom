@@ -105,27 +105,28 @@ const ThreeScene = () => {
 
     project1Geo.merge(buildingGeometry, ExhibitionRoom.matrix)
 
-    const newMesh = new THREE.Mesh(project1Geo, project1Mat)
-    newMesh.material.side = THREE.BackSide
+    const totalMesh = new THREE.Mesh(project1Geo, project1Mat)
+    totalMesh.material.side = THREE.BackSide
     // 윗면 faces 지우기 <- 효율적인 방법 찾기
 
-    // 방문 구멍내기
+    // J-Flix 방문 구멍내기
     const JFlixDoorHole = new THREE.Mesh(
-      new THREE.BoxBufferGeometry(400, 1500, 100),
+      new THREE.BoxBufferGeometry(380, 1500, 100),
       new THREE.MeshPhongMaterial()
     )
     JFlixDoorHole.position.set(1200, -500, -1000)
 
+    JFlixDoorHole.updateMatrix()
     const bspJFlixDoorHole = CSG.fromMesh(JFlixDoorHole)
-    const bspJFlixRoom = CSG.fromMesh(ExhibitionRoom)
+    const bspJFlixRoom = CSG.fromMesh(totalMesh)
 
     const bspJFlixResult = bspJFlixRoom.subtract(bspJFlixDoorHole)
 
-    const bspJFlixMeshResult = CSG.toMesh(bspJFlixResult, newMesh.matrix)
+    const bspJFlixMeshResult = CSG.toMesh(bspJFlixResult, totalMesh.matrix)
 
-    bspJFlixMeshResult.material = newMesh.material
-
-    // bspJFlixMeshResult.geometry.faces.splice(97, 15) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
+    bspJFlixMeshResult.material = totalMesh.material
+    bspJFlixMeshResult.updateMatrix()
+    bspJFlixMeshResult.geometry.faces.splice(97, 15) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
 
     scene.add(bspJFlixMeshResult)
 
