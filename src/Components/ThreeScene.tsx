@@ -18,6 +18,7 @@ import { addBackgroundBox } from "./ThreeModules/BackgroundBox"
 import { addFrame } from "./ThreeModules/Frame"
 import { addSelectBtn } from "./ThreeModules/SelectBtn"
 import { addCeilConnector } from "./ThreeModules/CeilConnetor"
+import { CSG } from "three-csg-ts"
 
 const Container = styled.div`
   cursor: grab;
@@ -99,16 +100,34 @@ const ThreeScene = () => {
       specular: "orange",
       flatShading: true,
     })
-    const project1Mesh = new THREE.Mesh(project1Geo, project1Mat)
 
     ExhibitionRoom.updateMatrix()
+
     project1Geo.merge(buildingGeometry, ExhibitionRoom.matrix)
 
     const newMesh = new THREE.Mesh(project1Geo, project1Mat)
     newMesh.material.side = THREE.BackSide
     // 윗면 faces 지우기 <- 효율적인 방법 찾기
-    newMesh.geometry.faces.splice(4, 2)
-    scene.add(newMesh)
+
+    // 방문 구멍내기
+    const JFlixDoorHole = new THREE.Mesh(
+      new THREE.BoxBufferGeometry(400, 1500, 100),
+      new THREE.MeshPhongMaterial()
+    )
+    JFlixDoorHole.position.set(1200, -500, -1000)
+
+    const bspJFlixDoorHole = CSG.fromMesh(JFlixDoorHole)
+    const bspJFlixRoom = CSG.fromMesh(ExhibitionRoom)
+
+    const bspJFlixResult = bspJFlixRoom.subtract(bspJFlixDoorHole)
+
+    const bspJFlixMeshResult = CSG.toMesh(bspJFlixResult, newMesh.matrix)
+
+    bspJFlixMeshResult.material = newMesh.material
+
+    // bspJFlixMeshResult.geometry.faces.splice(97, 15) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
+
+    scene.add(bspJFlixMeshResult)
 
     //// 프로젝트 방 (Just=Read-It) ////
 
