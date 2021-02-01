@@ -8,6 +8,7 @@ import styledComponentsLogo from "../../resources/images/styledComponents.jpg"
 import netlifyLogo from "../../resources/images/netlify.jpg"
 import jsLogo from "../../resources/images/vanillajs.png"
 import sunsetImg1 from "../resources/images/Sunset Backgrounds/sunset12.jpg"
+import { addCeilConnector } from "./CeilConnetor"
 
 export const JFlixObjects = () => {
   // 책 모형에 붙일 텍스트 geometry
@@ -88,5 +89,54 @@ export const JFlixObjects = () => {
     gltf.scene.rotateY(Math.PI / 2)
 
     scene.add(gltf.scene)
+  })
+
+  // 천장과 벽지 이음새 생성
+  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: 1480, y: 490, z: -1000 }, "black", {
+    x: 0,
+    y: 0,
+    z: Math.PI / 2,
+  })
+
+  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: -1460, y: 490, z: -1000 }, "black", {
+    x: 0,
+    y: 0,
+    z: Math.PI,
+  })
+
+  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: 480, z: -970 }, "black", {
+    x: 0,
+    y: Math.PI / 2,
+    z: Math.PI / 2,
+  })
+  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: 485, z: 970 }, "black", {
+    x: 0,
+    y: Math.PI / 2,
+    z: -Math.PI / 2,
+  })
+
+  // 바닥 이음새
+  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: 1480, y: -490, z: -1000 }, "grey", {
+    x: 0,
+    y: 0,
+    z: Math.PI / 2,
+  })
+
+  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: -1460, y: -490, z: -1000 }, "grey", {
+    x: 0,
+    y: 0,
+    z: Math.PI,
+  })
+
+  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: -480, z: -970 }, "grey", {
+    x: 0,
+    y: Math.PI / 2,
+    z: Math.PI / 2,
+  })
+
+  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: -485, z: 970 }, "grey", {
+    x: 0,
+    y: Math.PI / 2,
+    z: -Math.PI / 2,
   })
 }

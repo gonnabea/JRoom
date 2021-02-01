@@ -19,6 +19,9 @@ import { addFrame } from "./ThreeModules/Frame"
 import { addSelectBtn } from "./ThreeModules/SelectBtn"
 import { addCeilConnector } from "./ThreeModules/CeilConnetor"
 import { CSG } from "three-csg-ts"
+import floorImage2 from "../resources/images/floor2.jpg"
+import floorImage3 from "../resources/images/floor3.jpg"
+import MainHallObjects from "./ThreeModules/MainHallObjects"
 
 const Container = styled.div`
   cursor: grab;
@@ -176,13 +179,13 @@ const ThreeScene = () => {
 
     // 바닥
 
-    addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0 }) // J-Flix 바닥
+    addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0, imageSrc: floorImage3 }) // J-Flix 바닥
 
-    addFloor({ width: 3000, height: 2900, x: 0, y: -490, z: -2500 }) // 메인 홀 바닥
+    addFloor({ width: 3000, height: 2900, x: 0, y: -490, z: -2500, imageSrc: floorImage2 }) // 메인 홀 바닥
 
-    addFloor({ width: 3000, height: 2900, x: 3000, y: -490, z: -2500 }) // Just-Read-It 바닥
+    addFloor({ width: 3000, height: 2900, x: 3000, y: -490, z: -2500, imageSrc: floorImage3 }) // Just-Read-It 바닥
 
-    addFloor({ width: 3000, height: 2900, x: -3000, y: -490, z: -2500 }) // Our-Now 바닥
+    addFloor({ width: 3000, height: 2900, x: -3000, y: -490, z: -2500, imageSrc: floorImage3 }) // Our-Now 바닥
 
     ////
 
@@ -280,6 +283,7 @@ const ThreeScene = () => {
     })
 
     JFlixObjects()
+    MainHallObjects()
 
     // 자동차 모델 로드
 
@@ -406,55 +410,6 @@ const ThreeScene = () => {
         // 임의로 지정해 줬던 object name으로 구별
       }
     }
-
-    // 천장과 벽지 이음새 생성
-    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: 1480, y: 490, z: -1000 }, "black", {
-      x: 0,
-      y: 0,
-      z: Math.PI / 2,
-    })
-
-    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: -1460, y: 490, z: -1000 }, "black", {
-      x: 0,
-      y: 0,
-      z: Math.PI,
-    })
-
-    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: 480, z: -970 }, "black", {
-      x: 0,
-      y: Math.PI / 2,
-      z: Math.PI / 2,
-    })
-    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: 485, z: 970 }, "black", {
-      x: 0,
-      y: Math.PI / 2,
-      z: -Math.PI / 2,
-    })
-
-    // 바닥 이음새
-    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: 1480, y: -490, z: -1000 }, "grey", {
-      x: 0,
-      y: 0,
-      z: Math.PI / 2,
-    })
-
-    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: -1460, y: -490, z: -1000 }, "grey", {
-      x: 0,
-      y: 0,
-      z: Math.PI,
-    })
-
-    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: -480, z: -970 }, "grey", {
-      x: 0,
-      y: Math.PI / 2,
-      z: Math.PI / 2,
-    })
-
-    addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: -485, z: 970 }, "grey", {
-      x: 0,
-      y: Math.PI / 2,
-      z: -Math.PI / 2,
-    })
 
     // 렌더러
     renderer = new THREE.WebGLRenderer({

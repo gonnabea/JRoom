@@ -10,7 +10,8 @@ export const FontLoder = (
     color: number
     bevelSize: number
   },
-  position: { x: number; y: number; z: number }
+  position: { x: number; y: number; z: number },
+  rotation?: { x: number; y: number; z: number }
 ) => {
   const fontLoader = new THREE.FontLoader()
   fontLoader.load(params.fontModelUrl, (font) => {
@@ -32,6 +33,9 @@ export const FontLoder = (
     })
     const mesh = new THREE.Mesh(geometry, material)
     mesh.position.set(position.x, position.y, position.z)
+    if (rotation) {
+      mesh.rotation.set(rotation.x, rotation.y, rotation.z)
+    }
     scene.add(mesh)
   })
 }
