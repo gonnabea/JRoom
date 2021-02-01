@@ -63,7 +63,10 @@ const ThreeScene = () => {
 
   useEffect(() => {
     camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 21000)
-    camera.position.set(0, 0, 1000)
+    camera.position.set(-2773.8192101111504, 490.0248603839669, 4120.7527992239675)
+    camera.zoom = 0.3
+    camera.updateProjectionMatrix()
+    camera.updateMatrix()
     scene = new THREE.Scene()
     cssRenderer = new CSS3D.CSS3DRenderer()
     cssScene = new THREE.Scene()
@@ -516,16 +519,16 @@ const ThreeScene = () => {
     addSelectBtn({
       text: "1",
       btnPosition: { x: -1300, y: 600, z: 500 },
-      cameraPosition: { x: 0, y: 0, z: 1000 },
-      zoomIndex: 0.5,
+      cameraPosition: { x: 1500, y: 300, z: 0 },
+      zoomIndex: 0.3,
     })
 
     // 채널 변경 버튼 & tv 포커싱
     addSelectBtn({
       text: "✨",
       btnPosition: { x: -1300, y: 600, z: 0 },
-      cameraPosition: { x: 4991.472829384942, y: 0, z: 0 },
-      zoomIndex: 0.8,
+      cameraPosition: { x: 1500, y: 300, z: 0 },
+      zoomIndex: 0.3,
     })
 
     // J-Flix 방 포커싱
@@ -534,6 +537,14 @@ const ThreeScene = () => {
       btnPosition: { x: 0, y: 300, z: -800 },
       cameraPosition: { x: -2773.8192101111504, y: 490.0248603839669, z: 4120.7527992239675 },
       zoomIndex: 0.3,
+    })
+
+    // 거실 (로비) 포커싱
+    addSelectBtn({
+      text: "2",
+      btnPosition: { x: 1200, y: 300, z: -1000 },
+      cameraPosition: { x: 0, y: 0, z: -3000.7527992239675 },
+      zoomIndex: 0.1,
     })
 
     //////////////////// Just-Read-It /////////////////////////////////
@@ -557,7 +568,7 @@ const ThreeScene = () => {
     // 확대
     controls.dollyOut = function () {
       if (camera.zoom < 5) {
-        camera.zoom = camera.zoom + 0.1
+        camera.zoom = camera.zoom + 0.05
         camera.updateProjectionMatrix()
 
         // 카메라 줌에 따른 버튼 크기 조정
@@ -577,7 +588,7 @@ const ThreeScene = () => {
     // 축소
     controls.dollyIn = function () {
       if (camera.zoom > 0.2) {
-        camera.zoom = camera.zoom - 0.1
+        camera.zoom = camera.zoom - 0.05
 
         // 카메라 줌에 따른 버튼 크기 조정
         if (selectBtnObjs) {

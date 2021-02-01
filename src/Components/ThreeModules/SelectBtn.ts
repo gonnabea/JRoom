@@ -70,12 +70,19 @@ export const addSelectBtn = (contents: {
   cssScene.add(selectBtnObj)
 
   selectBtn.onclick = () => {
-    // (TV 버튼을 클릭했을 경우)
+    // 액자 모델 프레임
     const meshsOfFrame =
       frameGroupMesh?.children[0].children[0].children[0].children[0].children[0].children[0]
         .children
+    // (TV 버튼을 클릭했을 경우)
+    if (contents.text === "0") {
+      controls.target.set(0, 0, 0)
+    }
+
     if (contents.text === "1") {
-      console.log(frameGroupMesh)
+      controls.target.set(websiteObject.position.x, 0, websiteObject.position.z)
+
+      camera.updateMatrix()
 
       meshsOfFrame.map((object: { visible: boolean }) => {
         object.visible = false
@@ -83,21 +90,24 @@ export const addSelectBtn = (contents: {
     } // 프로젝트 변경 버튼을 클릭했을 경우
     else if (contents.text === "✨") {
       chooseProject()
+      controls.target.set(websiteObject.position.x, 0, websiteObject.position.z)
+
+      camera.updateMatrix()
+      console.log(camera.rotation)
 
       meshsOfFrame.map((object: { visible: boolean }) => {
         object.visible = false
       })
+    } else if (contents.text === "2") {
+      websiteObject.visible = false
+      controls.target.set(0, 0, -2000)
     } else {
       meshsOfFrame.map((object: { visible: boolean }) => {
         object.visible = true
       })
+      controls.target.set(0, 0, 0)
     }
 
-    camera.rotation.set(
-      websiteObject.rotation.x,
-      websiteObject.rotation.y,
-      websiteObject.rotation.z
-    )
     camera.position.set(
       contents.cameraPosition.x,
       contents.cameraPosition.y,
