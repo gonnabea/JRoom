@@ -499,7 +499,7 @@ const ThreeScene = () => {
       text: "2",
       btnPosition: { x: 1200, y: 300, z: -1000 },
       cameraPosition: { x: 0, y: 0, z: -3000.7527992239675 },
-      zoomIndex: 0.1,
+      zoomIndex: 0.2,
     })
 
     //////////////////// Just-Read-It /////////////////////////////////

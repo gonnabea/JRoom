@@ -3,6 +3,7 @@ import { DoubleSide } from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { scene } from "../ThreeScene"
 import { FontLoder } from "./FontLoader"
+import JsLogo from "../../resources/images/vanillajs.png"
 
 const loader = new GLTFLoader()
 
@@ -17,15 +18,17 @@ const MainHallObjects = () => {
 
     // 알림판 앞면 커버
     const JFlixRoomBoardGeo = new THREE.PlaneGeometry(350, 400)
+    const JFlixRoomBoardTexture = new THREE.TextureLoader().load(JsLogo)
     const JFlixRoomBoardMat = new THREE.MeshPhongMaterial({
-      specular: 0x0077cc,
+      specular: "orange",
       flatShading: true,
       color: "gray",
+      map: JFlixRoomBoardTexture,
     })
     const JFlixRoomBoardMesh = new THREE.Mesh(JFlixRoomBoardGeo, JFlixRoomBoardMat)
     JFlixRoomBoardMesh.position.set(800, -230, -1290)
+    JFlixRoomBoardMesh.rotation.set(Math.PI / 12, Math.PI, 0)
     JFlixRoomBoardMesh.material.side = DoubleSide
-    JFlixRoomBoardMesh.rotateX(Math.PI / 12)
 
     FontLoder(
       {
