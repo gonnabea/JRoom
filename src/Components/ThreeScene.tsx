@@ -521,6 +521,14 @@ const ThreeScene = () => {
       zoomIndex: 0.2,
     })
 
+    // 자동차 로드 포커싱
+    addSelectBtn({
+      text: "3",
+      btnPosition: { x: 0, y: 0, z: -3000 },
+      cameraPosition: { x: 0, y: 0, z: -4000.7527992239675 },
+      zoomIndex: 0.2,
+    })
+
     //////////////////// Just-Read-It /////////////////////////////////
 
     loader.load("/models/note_book/scene.gltf", (gltf) => {
@@ -612,7 +620,7 @@ const ThreeScene = () => {
       frameCount += 1
 
       cssRenderer.render(cssScene, camera)
-      composer.render(0.1)
+      composer.render(1)
       // floorCamera.update(renderer, scene) <- GPU 점유율 대폭 상승 유발
 
       requestAnimationFrame(animate)

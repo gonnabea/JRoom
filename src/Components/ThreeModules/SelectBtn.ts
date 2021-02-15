@@ -101,6 +101,8 @@ export const addSelectBtn = (contents: {
     } else if (contents.text === "2") {
       websiteObject.visible = false
       controls.target.set(0, 0, -2000)
+    } else if (contents.text === "3") {
+      controls.target.set(0, 0, -3000)
     } else {
       meshsOfFrame.map((object: { visible: boolean }) => {
         object.visible = true
