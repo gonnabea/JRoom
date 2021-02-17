@@ -1,0 +1,11 @@
+Model Information:
+* title:	The Witch's Bookshelf
+* source:	https://sketchfab.com/3d-models/the-witchs-bookshelf-f169db6c015b45ccb98d71e80fd9b028
+* author:	elunabear (https://sketchfab.com/elunabear)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "The Witch's Bookshelf" (https://sketchfab.com/3d-models/the-witchs-bookshelf-f169db6c015b45ccb98d71e80fd9b028) by elunabear (https://sketchfab.com/elunabear) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
