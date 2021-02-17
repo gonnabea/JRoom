@@ -22,6 +22,7 @@ import { CSG } from "three-csg-ts"
 import floorImage2 from "../resources/images/floor2.jpg"
 import floorImage3 from "../resources/images/floor3.jpg"
 import MainHallObjects from "./ThreeModules/MainHallObjects"
+import { JustReadItObjs } from "./ThreeModules/JustReadItObjs"
 
 const Container = styled.div`
   cursor: grab;
@@ -156,7 +157,7 @@ const ThreeScene = () => {
     bspMainRoomMesh.geometry.faces.splice(180, 20) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
     scene.add(bspMainRoomMesh)
 
-    //// 프로젝트 방 (Just=Read-It) ////
+    //// 프로젝트 방 (Our-Now) ////
 
     const project2Geo = new THREE.BoxGeometry(3000, 2000, 3000)
 
@@ -172,9 +173,9 @@ const ThreeScene = () => {
 
     scene.add(project2Mesh)
 
-    //// 프로젝트 방 (Our-Now) ////
+    //// 프로젝트 방 (Just-Read-It) ////
 
-    const project3Geo = new THREE.BoxGeometry(3000, 2000, 3000)
+    const project3Geo = new THREE.BoxGeometry(2900, 2000, 3000)
 
     const project3Mat = new THREE.MeshPhongMaterial({
       color: 0xffffff,
@@ -183,7 +184,7 @@ const ThreeScene = () => {
     })
     const project3Mesh = new THREE.Mesh(project3Geo, project3Mat)
 
-    project3Mesh.position.set(-3000, 500, -2490)
+    project3Mesh.position.set(-2950, 500, -2490)
     project3Mesh.material.side = THREE.BackSide
 
     scene.add(project3Mesh)
@@ -303,6 +304,7 @@ const ThreeScene = () => {
 
     JFlixObjects()
     MainHallObjects()
+    JustReadItObjs()
 
     // 자동차 모델 로드
 
@@ -524,8 +526,16 @@ const ThreeScene = () => {
     // 자동차 로드 포커싱
     addSelectBtn({
       text: "3",
-      btnPosition: { x: 0, y: 0, z: -3000 },
+      btnPosition: { x: 0, y: 0, z: -3500 },
       cameraPosition: { x: 0, y: 0, z: -4000.7527992239675 },
+      zoomIndex: 0.2,
+    })
+
+    // Just-Read-It 포커싱
+    addSelectBtn({
+      text: "4",
+      btnPosition: { x: -1500, y: 0, z: -3000 },
+      cameraPosition: { x: -4000, y: 0, z: -3000.7527992239675 },
       zoomIndex: 0.2,
     })
 
@@ -571,15 +581,17 @@ const ThreeScene = () => {
     controls.dollyIn = function () {
       if (camera.zoom > 0.2) {
         camera.zoom = camera.zoom - 0.05
-
+        console.log(camera.zoom)
         // 카메라 줌에 따른 버튼 크기 조정
         if (selectBtnObjs) {
           selectBtnObjs.map((selectBtnObj) => {
-            selectBtnObj.scale.set(
-              selectBtnObj.scale.x + 0.3,
-              selectBtnObj.scale.y + 0.3,
-              selectBtnObj.scale.z + 0.3
-            )
+            if (camera.zoom < 0.5) {
+              selectBtnObj.scale.set(
+                selectBtnObj.scale.x + 0.3,
+                selectBtnObj.scale.y + 0.3,
+                selectBtnObj.scale.z + 0.3
+              )
+            }
           })
         }
 

@@ -1,5 +1,5 @@
 import * as THREE from "three"
-import { DoubleSide } from "three"
+import { DoubleSide, VideoTexture } from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { scene } from "../ThreeScene"
 import { FontLoder } from "./FontLoader"
@@ -44,18 +44,18 @@ const MainHallObjects = () => {
     )
 
     scene.add(JFlixRoomBoardMesh)
+  })
 
-    loader.load("/models/drawer_of_blacksmith_table_-_a (1)/scene.gltf", (gltf) => {
-      gltf.scene.scale.set(390, 500, 1100)
-      gltf.scene.position.set(100, 0, -3000)
-      scene.add(gltf.scene)
-    })
+  loader.load("/models/drawer_of_blacksmith_table_-_a (1)/scene.gltf", (gltf) => {
+    gltf.scene.scale.set(390, 500, 1100)
+    gltf.scene.position.set(100, 0, -3000)
+    scene.add(gltf.scene)
+  })
 
-    loader.load("/models/motocross_track/scene.gltf", (gltf) => {
-      gltf.scene.scale.set(30, 30, 30)
-      gltf.scene.position.set(200, -210, -3000)
-      scene.add(gltf.scene)
-    })
+  loader.load("/models/motocross_track/scene.gltf", (gltf) => {
+    gltf.scene.scale.set(30, 30, 30)
+    gltf.scene.position.set(200, -210, -3000)
+    scene.add(gltf.scene)
   })
 
   // 창문 모델 로드
