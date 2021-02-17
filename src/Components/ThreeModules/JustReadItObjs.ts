@@ -12,7 +12,7 @@ export const JustReadItObjs = () => {
   videoTexture.minFilter = THREE.LinearFilter
   videoTexture.magFilter = THREE.LinearFilter
   videoTexture.format = THREE.RGBFormat
-  const rectangleGeo = new THREE.PlaneBufferGeometry(1000, 1000)
+  const rectangleGeo = new THREE.PlaneBufferGeometry(1600, 900)
   const rectangleMat = new THREE.MeshBasicMaterial({ map: videoTexture, toneMapped: false })
   rectangleMat.side = DoubleSide
   videoTexture.needsUpdate = true
@@ -20,6 +20,6 @@ export const JustReadItObjs = () => {
 
   const videoMesh = new THREE.Mesh(rectangleGeo, rectangleMat)
   videoMesh.rotateY(Math.PI / 2)
-  videoMesh.position.set(-4000, 0, -2000)
+  videoMesh.position.set(-4300, 0, -2500)
   scene.add(videoMesh)
 }

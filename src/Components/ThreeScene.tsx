@@ -535,7 +535,7 @@ const ThreeScene = () => {
     addSelectBtn({
       text: "4",
       btnPosition: { x: -1500, y: 0, z: -3000 },
-      cameraPosition: { x: -4000, y: 0, z: -3000.7527992239675 },
+      cameraPosition: { x: -3000, y: 0, z: -500 },
       zoomIndex: 0.2,
     })
 
