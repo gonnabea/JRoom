@@ -2,6 +2,7 @@ import { scene } from "../ThreeScene"
 import * as THREE from "three"
 import { BackSide, DoubleSide } from "three"
 import { GLTFModelLoader } from "./GLTFModelLoader"
+import { FontLoder } from "./FontLoader"
 
 export const JustReadItObjs = () => {
   const IntroVideo = document.createElement("video")
@@ -54,5 +55,18 @@ export const JustReadItObjs = () => {
     { x: 6, y: 6, z: 6 },
     { x: -2300, y: -400, z: -2000 },
     { x: 0, y: Math.PI / 2, z: 0 }
+  )
+
+  // 방 제목 폰트모델
+  FontLoder(
+    {
+      fontModelUrl: "/fonts/helvetiker_regular.typeface.json",
+      text: "Just-Read-It",
+      size: 80,
+      height: 50,
+      color: 0xff991f,
+      bevelSize: 7,
+    },
+    { x: -3500, y: 700, z: -4000 }
   )
 }

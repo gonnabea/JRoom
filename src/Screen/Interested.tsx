@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import Header from "../Components/Header"
 
 const Container = styled.section`
   overflow: auto;
@@ -8,6 +9,7 @@ const Container = styled.section`
 const Interested = () => {
   return (
     <Container>
+      <Header title="사용 기술" />
       <h1>My Stack</h1>
       <h2>언어</h2>
       <ul>

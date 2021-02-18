@@ -23,7 +23,9 @@ import floorImage3 from "../resources/images/floor3.jpg"
 import MainHallObjects from "./ThreeModules/MainHallObjects"
 import { JustReadItObjs } from "./ThreeModules/JustReadItObjs"
 
-const Container = styled.div`
+const Container = styled.section`
+  width: 100%;
+  height: 100%;
   cursor: grab;
   cursor: -moz-grab;
   cursor: -webkit-grab;
@@ -398,9 +400,6 @@ const ThreeScene = () => {
 
     // 노을 배경 박스 생성
     addBackgroundBox()
-
-    // 액자 모델 추가, 노마드 로고 그림 배치
-    addFrame()
 
     // 레이캐스터 (클릭이벤트)
     // 마우스 움직일 때마다 오브젝트 감지

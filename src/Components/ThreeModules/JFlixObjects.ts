@@ -9,6 +9,7 @@ import netlifyLogo from "../../resources/images/netlify.jpg"
 import jsLogo from "../../resources/images/vanillajs.png"
 import sunsetImg1 from "../resources/images/Sunset Backgrounds/sunset12.jpg"
 import { addCeilConnector } from "./CeilConnetor"
+import { addFrame } from "./Frame"
 
 export const JFlixObjects = () => {
   // 책 모형에 붙일 텍스트 geometry
@@ -99,6 +100,9 @@ export const JFlixObjects = () => {
 
     scene.add(gltf.scene)
   })
+
+  // 액자 모델 추가, 노마드 로고 그림 배치
+  addFrame()
 
   // 천장과 벽지 이음새 생성
   addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: 1480, y: 490, z: -1000 }, "black", {

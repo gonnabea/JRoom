@@ -1,8 +1,9 @@
 import React from "react"
 import styled from "styled-components"
+import Header from "../Components/Header"
 import ThreeScene from "../Components/ThreeScene"
 
-const Container = styled.section`
+const Container = styled.main`
   width: 100vw;
   height: 100vh;
   overflow: auto;
@@ -17,7 +18,12 @@ const Container = styled.section`
 `
 
 const Exhibition: React.FC = () => {
-  return <ThreeScene />
+  return (
+    <Container>
+      <Header title="J-Flix" />
+      <ThreeScene />
+    </Container>
+  )
 }
 
 export default Exhibition
