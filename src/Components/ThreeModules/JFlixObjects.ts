@@ -60,6 +60,15 @@ export const JFlixObjects = () => {
 
   const loader = new GLTFLoader()
 
+  // TV GLTF 모델 로드
+  loader.load("/models/2018_flat_screen_tv/scene.gltf", (gltf) => {
+    gltf.scene.scale.set(750, 750, 2000)
+    gltf.scene.position.set(-1200, 0, 0)
+
+    gltf.scene.rotateY(Math.PI / 2)
+    scene.add(gltf.scene)
+  })
+
   // 소파 모델 로드
 
   loader.load("/models/sofa/scene.gltf", (gltf) => {

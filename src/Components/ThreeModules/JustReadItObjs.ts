@@ -24,6 +24,7 @@ export const JustReadItObjs = () => {
   videoMesh.position.set(-4300, 0, -2500)
   scene.add(videoMesh)
 
+  // 스켈레톤 책장 모델
   GLTFModelLoader(
     "/models/bookshelf_household_props_12 (1)/scene.gltf",
     { x: 1, y: 1, z: 1 },
@@ -31,10 +32,27 @@ export const JustReadItObjs = () => {
     { x: 0, y: 0, z: 0 }
   )
 
+  // 일반 책장 모델
   GLTFModelLoader(
     "/models/the_witchs_bookshelf/scene.gltf",
     { x: 100, y: 100, z: 100 },
     { x: -3500, y: -500, z: -3900 },
     { x: 0, y: -Math.PI / 2, z: 0 }
+  )
+
+  // 책상 모델
+  GLTFModelLoader(
+    "/models/table_with_things/scene.gltf",
+    { x: 80, y: 80, z: 80 },
+    { x: -3000, y: -500, z: -2500 },
+    { x: 0, y: -Math.PI / 2, z: 0 }
+  )
+
+  // 의자 모델
+  GLTFModelLoader(
+    "/models/office_chair/scene.gltf",
+    { x: 6, y: 6, z: 6 },
+    { x: -2300, y: -400, z: -2000 },
+    { x: 0, y: Math.PI / 2, z: 0 }
   )
 }

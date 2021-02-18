@@ -17,7 +17,6 @@ import { JFlixObjects } from "./ThreeModules/JFlixObjects"
 import { addBackgroundBox } from "./ThreeModules/BackgroundBox"
 import { addFrame } from "./ThreeModules/Frame"
 import { addSelectBtn } from "./ThreeModules/SelectBtn"
-import { addCeilConnector } from "./ThreeModules/CeilConnetor"
 import { CSG } from "three-csg-ts"
 import floorImage2 from "../resources/images/floor2.jpg"
 import floorImage3 from "../resources/images/floor3.jpg"
@@ -293,15 +292,6 @@ const ThreeScene = () => {
     bookCoverMesh.material.side = DoubleSide
     scene.add(bookCoverMesh)
 
-    // TV GLTF 모델 로드
-    loader.load("/models/2018_flat_screen_tv/scene.gltf", (gltf) => {
-      gltf.scene.scale.set(750, 750, 2000)
-      gltf.scene.position.set(-1200, 0, 0)
-
-      gltf.scene.rotateY(Math.PI / 2)
-      scene.add(gltf.scene)
-    })
-
     JFlixObjects()
     MainHallObjects()
     JustReadItObjs()
@@ -538,15 +528,6 @@ const ThreeScene = () => {
       cameraPosition: { x: -3000, y: 0, z: -500 },
       zoomIndex: 0.2,
     })
-
-    //////////////////// Just-Read-It /////////////////////////////////
-
-    loader.load("/models/note_book/scene.gltf", (gltf) => {
-      gltf.scene.scale.set(10, 10, 10)
-      scene.add(gltf.scene)
-    })
-
-    //////////////////// Just-Read-It /////////////////////////////////
 
     // 갓레이이펙트
 
