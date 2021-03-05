@@ -77,7 +77,12 @@ export const JFlixObjects = () => {
     gltf.scene.position.set(0, -500, 100)
 
     gltf.scene.rotateY(Math.PI)
-
+    gltf.scene.traverse(function (child) {
+      if ((<THREE.Mesh>child).isMesh) {
+        child.castShadow = true
+        child.receiveShadow = true
+      }
+    })
     scene.add(gltf.scene)
   })
 

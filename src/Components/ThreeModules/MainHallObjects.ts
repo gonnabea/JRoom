@@ -30,6 +30,7 @@ const MainHallObjects = () => {
     JFlixRoomBoardMesh.rotation.set(Math.PI / 12, Math.PI, 0)
     JFlixRoomBoardMesh.material.side = DoubleSide
 
+    // J-FLIX 안내판
     FontLoder(
       {
         fontModelUrl: "/fonts/helvetiker_regular.typeface.json",
@@ -46,17 +47,18 @@ const MainHallObjects = () => {
     scene.add(JFlixRoomBoardMesh)
   })
 
-  loader.load("/models/drawer_of_blacksmith_table_-_a (1)/scene.gltf", (gltf) => {
-    gltf.scene.scale.set(390, 500, 1100)
-    gltf.scene.position.set(100, 0, -3000)
-    scene.add(gltf.scene)
-  })
+  // 미니 자동차 트랙
+  // loader.load("/models/drawer_of_blacksmith_table_-_a (1)/scene.gltf", (gltf) => {
+  //   gltf.scene.scale.set(390, 500, 1100)
+  //   gltf.scene.position.set(100, 0, -3000)
+  //   scene.add(gltf.scene)
+  // })
 
-  loader.load("/models/motocross_track/scene.gltf", (gltf) => {
-    gltf.scene.scale.set(30, 30, 30)
-    gltf.scene.position.set(200, -210, -3000)
-    scene.add(gltf.scene)
-  })
+  // loader.load("/models/motocross_track/scene.gltf", (gltf) => {
+  //   gltf.scene.scale.set(30, 30, 30)
+  //   gltf.scene.position.set(200, -210, -3000)
+  //   scene.add(gltf.scene)
+  // })
 
   // 창문 모델 로드
   loader.load("/models/window1/scene.gltf", (gltf) => {

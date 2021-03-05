@@ -6,7 +6,7 @@
 - [x] TypeScript
 - [x] React
 - [x] Three.js 💎
-- [ ] React-Three-Fiber
+- [ ] Ammo.js
 
 ## TodoList
 
@@ -33,6 +33,7 @@
 - [ ] 기상 효과 (눈 or 비)
 - [x] 마당에 자동차 컨트롤
 - [ ] OpenCV를 이용한 자동차 핸들링
+- [ ] 물리엔진 적용
 
 ### Documents
 
@@ -57,7 +58,6 @@ CS이론을 공부하기 위한 효과적인 방법 중 하나는
 
 - [ ] 백엔드 서버
 - [ ] 방명록 포스트 잇
-- [ ] 물리엔진 적용
 
 #### References
 

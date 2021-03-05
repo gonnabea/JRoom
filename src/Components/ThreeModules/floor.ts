@@ -37,15 +37,9 @@ export const addFloor = ({ width, height, x, y, z, imageSrc }: typeAddFloor) => 
   floorCamera.position.set(0, 0, 0)
   scene.add(floorCamera)
 
-  const sphereMaterial = new THREE.MeshPhongMaterial({
-    envMap: cubeRenderTarget.texture,
-
-    flatShading: true,
-  })
-
   const floorMesh = new THREE.Mesh(floorGeo, floorMaterial)
   floorMesh.position.set(0, 100, 0)
-
+  floorMesh.receiveShadow = true
   floorMesh.rotateX(-Math.PI / 2) // -90도 로테이션
   floorMesh.position.set(x, y, z) // 위치 조정
   scene.add(floorMesh)

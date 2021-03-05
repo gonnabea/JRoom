@@ -10,7 +10,11 @@ export const addLogoBox = (position: { x: number; y: number; z: number }, image:
     flatShading: true,
     map: logoBoxTexture,
   })
+
   const logoBox = new THREE.Mesh(logoBoxGeo, logoBoxMat)
+  logoBox.receiveShadow = true
+  logoBox.castShadow = true
+
   logoBox.position.set(position.x, position.y, position.z)
   scene.add(logoBox)
 }

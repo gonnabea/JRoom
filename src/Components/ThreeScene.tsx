@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react"
 import * as THREE from "three"
 import styled from "styled-components"
 import { OrbitControls } from "three-orbitcontrols-ts"
-import { DoubleSide } from "three"
+import { DoubleSide, FrontSide } from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import CSS3D from "three-css3drenderer"
 
@@ -94,7 +94,7 @@ const ThreeScene = () => {
 
     ExhibitionRoom.material.side = THREE.BackSide // mesh 내부에서만 면이 보이게 만들어 줌.
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4) // soft white light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.2) // soft white light
 
     ambientLight.position.set(0, 0, 0)
     scene.add(ambientLight)
@@ -153,9 +153,12 @@ const ThreeScene = () => {
     const bspMainRoomMesh = CSG.toMesh(bspMainRoomResult, bspJFlixMeshResult.matrix)
 
     bspMainRoomMesh.material = bspJFlixMeshResult.material
+
     bspMainRoomMesh.updateMatrix()
     console.log(bspMainRoomMesh.geometry.faces)
     bspMainRoomMesh.geometry.faces.splice(180, 20) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
+    bspMainRoomMesh.castShadow = true
+    bspMainRoomMesh.receiveShadow = true
     scene.add(bspMainRoomMesh)
 
     //// 프로젝트 방 (Our-Now) ////
@@ -298,105 +301,105 @@ const ThreeScene = () => {
     MainHallObjects()
     JustReadItObjs()
 
-    // 자동차 모델 로드
+    // // 자동차 모델 로드
 
-    loader.load("/models/free_porsche_911_carrera_4s/scene.gltf", (gltf) => {
-      let wheel: THREE.Group
-      let rotateIndex = 0
-      loader.load("/models/sports_car_wheel/scene.gltf", (wheelGltf) => {
-        wheelGltf.scene.scale.set(240, 240, 240)
-        wheelGltf.scene.position.set(-750, -300, 3390)
+    // loader.load("/models/free_porsche_911_carrera_4s/scene.gltf", (gltf) => {
+    //   let wheel: THREE.Group
+    //   let rotateIndex = 0
+    //   loader.load("/models/sports_car_wheel/scene.gltf", (wheelGltf) => {
+    //     wheelGltf.scene.scale.set(240, 240, 240)
+    //     wheelGltf.scene.position.set(-750, -300, 3390)
 
-        scene.add(wheelGltf.scene)
-        wheel = wheelGltf.scene
-      })
-      gltf.scene.scale.set(300, 300, 300)
-      gltf.scene.position.set(-500, -200, 3000)
-      scene.add(gltf.scene)
+    //     scene.add(wheelGltf.scene)
+    //     wheel = wheelGltf.scene
+    //   })
+    //   gltf.scene.scale.set(300, 300, 300)
+    //   gltf.scene.position.set(-500, -200, 3000)
+    //   scene.add(gltf.scene)
 
-      // 자동차 바퀴 제거: rotation 애니메이션 구현을 위해 다른 바퀴 로드 필요.
-      gltf.scene.children[0].children[0].children[0].children[7].visible = false
-      gltf.scene.children[0].children[0].children[0].children[20].visible = false
+    //   // 자동차 바퀴 제거: rotation 애니메이션 구현을 위해 다른 바퀴 로드 필요.
+    //   gltf.scene.children[0].children[0].children[0].children[7].visible = false
+    //   gltf.scene.children[0].children[0].children[0].children[20].visible = false
 
-      // 자동차 컨트롤
-      let keysPressed = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false }
+    //   // 자동차 컨트롤
+    //   let keysPressed = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false }
 
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowUp") {
-          keysPressed.ArrowUp = true
-        } else if (e.key === "ArrowDown") {
-          keysPressed.ArrowDown = true
-        } else if (e.key === "ArrowLeft") {
-          keysPressed.ArrowLeft = true
-        } else if (e.key === "ArrowRight") {
-          keysPressed.ArrowRight = true
-        }
+    //   window.addEventListener("keydown", (e) => {
+    //     if (e.key === "ArrowUp") {
+    //       keysPressed.ArrowUp = true
+    //     } else if (e.key === "ArrowDown") {
+    //       keysPressed.ArrowDown = true
+    //     } else if (e.key === "ArrowLeft") {
+    //       keysPressed.ArrowLeft = true
+    //     } else if (e.key === "ArrowRight") {
+    //       keysPressed.ArrowRight = true
+    //     }
 
-        if (keysPressed.ArrowUp) {
-          // 바퀴 돌리기
-          setInterval(() => {
-            rotateIndex += 2
-            wheel.rotation.x = rotateIndex
-          }, 10)
-          const forwardSoundUrl = "/sounds/car-start.mp3"
-          const soundEffect = document.createElement("audio")
-          const audioSource = document.createElement("source")
-          soundEffect.appendChild(audioSource)
-          soundEffect.currentTime = 1
-          audioSource.src = forwardSoundUrl
-          soundEffect.play()
-          setTimeout(() => soundEffect.pause(), 2000)
-          // 가속력을 고려한 자동차의 움직임 구현
-          gltf.scene.translateZ(60)
+    //     if (keysPressed.ArrowUp) {
+    //       // 바퀴 돌리기
+    //       setInterval(() => {
+    //         rotateIndex += 2
+    //         wheel.rotation.x = rotateIndex
+    //       }, 10)
+    //       const forwardSoundUrl = "/sounds/car-start.mp3"
+    //       const soundEffect = document.createElement("audio")
+    //       const audioSource = document.createElement("source")
+    //       soundEffect.appendChild(audioSource)
+    //       soundEffect.currentTime = 1
+    //       audioSource.src = forwardSoundUrl
+    //       soundEffect.play()
+    //       setTimeout(() => soundEffect.pause(), 2000)
+    //       // 가속력을 고려한 자동차의 움직임 구현
+    //       gltf.scene.translateZ(60)
 
-          const moveFoward = setInterval(() => {
-            gltf.scene.translateZ(10)
-            wheel.position.z += 17
-          }, 100)
-          setTimeout(() => clearInterval(moveFoward), 1000)
-        } else if (keysPressed.ArrowDown) {
-          gltf.scene.translateZ(-60)
-          const moveBackward = setInterval(() => gltf.scene.translateZ(-10), 100)
-          setTimeout(() => clearInterval(moveBackward), 1000)
-        } else if (keysPressed.ArrowLeft) {
-          gltf.scene.rotateY(0.2)
-        } else if (keysPressed.ArrowRight) {
-          gltf.scene.rotateY(-0.2)
-        }
-        window.addEventListener("keyup", (e) => {
-          if (e.key === "ArrowUp") {
-            keysPressed.ArrowUp = false
-          } else if (e.key === "ArrowDown") {
-            keysPressed.ArrowDown = false
-          } else if (e.key === "ArrowLeft") {
-            keysPressed.ArrowLeft = false
-          } else if (e.key === "ArrowRight") {
-            keysPressed.ArrowRight = false
-          }
-        })
-      })
-    })
-    const carLight = new THREE.PointLight(0xffffff, 10, 2000)
-    carLight.position.set(0, -200, 3000)
-    const lightIndicator = new THREE.PointLightHelper(carLight, 300)
-    lightIndicator.color = 0x3f83f8
+    //       const moveFoward = setInterval(() => {
+    //         gltf.scene.translateZ(10)
+    //         wheel.position.z += 17
+    //       }, 100)
+    //       setTimeout(() => clearInterval(moveFoward), 1000)
+    //     } else if (keysPressed.ArrowDown) {
+    //       gltf.scene.translateZ(-60)
+    //       const moveBackward = setInterval(() => gltf.scene.translateZ(-10), 100)
+    //       setTimeout(() => clearInterval(moveBackward), 1000)
+    //     } else if (keysPressed.ArrowLeft) {
+    //       gltf.scene.rotateY(0.2)
+    //     } else if (keysPressed.ArrowRight) {
+    //       gltf.scene.rotateY(-0.2)
+    //     }
+    //     window.addEventListener("keyup", (e) => {
+    //       if (e.key === "ArrowUp") {
+    //         keysPressed.ArrowUp = false
+    //       } else if (e.key === "ArrowDown") {
+    //         keysPressed.ArrowDown = false
+    //       } else if (e.key === "ArrowLeft") {
+    //         keysPressed.ArrowLeft = false
+    //       } else if (e.key === "ArrowRight") {
+    //         keysPressed.ArrowRight = false
+    //       }
+    //     })
+    //   })
+    // })
+    // const carLight = new THREE.PointLight(0xffffff, 10, 2000)
+    // carLight.position.set(0, -200, 3000)
+    // const lightIndicator = new THREE.PointLightHelper(carLight, 300)
+    // lightIndicator.color = 0x3f83f8
 
-    const carLight2 = new THREE.PointLight(0x119be3, 10, 2000)
-    carLight2.position.set(-1000, -200, 3000)
-    const lightIndicator2 = new THREE.PointLightHelper(carLight2, 300)
-    lightIndicator2.color = 0x3f83f8
+    // const carLight2 = new THREE.PointLight(0x119be3, 10, 2000)
+    // carLight2.position.set(-1000, -200, 3000)
+    // const lightIndicator2 = new THREE.PointLightHelper(carLight2, 300)
+    // lightIndicator2.color = 0x3f83f8
 
-    const carLight3 = new THREE.PointLight(0xffffff, 10, 3000)
-    carLight3.position.set(-500, -200, 4000)
-    const lightIndicator3 = new THREE.PointLightHelper(carLight3, 300)
-    lightIndicator3.color = 0x3f83f8
+    // const carLight3 = new THREE.PointLight(0xffffff, 10, 3000)
+    // carLight3.position.set(-500, -200, 4000)
+    // const lightIndicator3 = new THREE.PointLightHelper(carLight3, 300)
+    // lightIndicator3.color = 0x3f83f8
 
-    scene.add(carLight)
-    scene.add(lightIndicator)
-    scene.add(carLight2)
-    scene.add(lightIndicator2)
-    scene.add(carLight3)
-    scene.add(lightIndicator3)
+    // scene.add(carLight)
+    // scene.add(lightIndicator)
+    // scene.add(carLight2)
+    // scene.add(lightIndicator2)
+    // scene.add(carLight3)
+    // scene.add(lightIndicator3)
 
     // 노을 배경 박스 생성
     addBackgroundBox()
@@ -428,6 +431,10 @@ const ThreeScene = () => {
       preserveDrawingBuffer: true,
     })
 
+    renderer.shadowMap.enabled = true
+
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap
+
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setClearColor(0xffffff, 0.5)
@@ -453,6 +460,14 @@ const ThreeScene = () => {
     embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
     embedWebsite.width = "1400px"
     embedWebsite.height = "800px"
+    embedWebsite.onmouseover = () => {
+      embedWebsite.style.opacity = "1"
+      tvBackCover.style.opacity = "1"
+    }
+    embedWebsite.onmouseleave = () => {
+      embedWebsite.style.opacity = "0"
+      tvBackCover.style.opacity = "0"
+    }
 
     websiteObject = new CSS3D.CSS3DObject(embedWebsite)
     websiteObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
@@ -621,6 +636,7 @@ const ThreeScene = () => {
     window.addEventListener("resize", resize)
 
     return () => {
+      animate()
       scene.remove.apply(scene, scene.children)
     }
   }, [])
