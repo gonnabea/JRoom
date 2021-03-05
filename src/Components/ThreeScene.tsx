@@ -22,7 +22,7 @@ import floorImage2 from "../resources/images/floor2.jpg"
 import floorImage3 from "../resources/images/floor3.jpg"
 import MainHallObjects from "./ThreeModules/MainHallObjects"
 import { JustReadItObjs } from "./ThreeModules/JustReadItObjs"
-import { addFloor } from "./ThreeModules/Floor"
+import { addFloor } from "./ThreeModules/floor"
 
 const Container = styled.section`
   width: 100%;
