@@ -10,7 +10,7 @@ import CSS3D from "three-css3drenderer"
 import { addWindow } from "./ThreeModules/Window"
 import { addDirLight } from "./ThreeModules/DirectionalLight"
 import { addSpotLight } from "./ThreeModules/SpotLight"
-import { addFloor } from "./ThreeModules/Floor"
+
 import { addRoofWindowHole } from "./ThreeModules/RoofWIndowHole"
 import { addSunLight } from "./ThreeModules/SunLight"
 import { JFlixObjects } from "./ThreeModules/JFlixObjects"
@@ -22,6 +22,7 @@ import floorImage2 from "../resources/images/floor2.jpg"
 import floorImage3 from "../resources/images/floor3.jpg"
 import MainHallObjects from "./ThreeModules/MainHallObjects"
 import { JustReadItObjs } from "./ThreeModules/JustReadItObjs"
+import { addFloor } from "./ThreeModules/Floor"
 
 const Container = styled.section`
   width: 100%;
