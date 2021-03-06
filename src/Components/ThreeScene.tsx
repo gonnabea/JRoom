@@ -69,7 +69,7 @@ const ThreeScene = () => {
 
   useEffect(() => {
     camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 21000)
-    camera.position.set(-2773.8192101111504, 490.0248603839669, 4120.7527992239675)
+    camera.position.set(-2773.8192101111504, 490.0248603839669, 7120.7527992239675)
     camera.zoom = 0.3
     camera.updateProjectionMatrix()
     camera.updateMatrix()
@@ -174,7 +174,7 @@ const ThreeScene = () => {
     const project2Mesh = new THREE.Mesh(project2Geo, project2Mat)
 
     project2Mesh.position.set(3000, 500, -2490)
-    project2Mesh.material.side = THREE.BackSide
+    project2Mesh.material.side = THREE.DoubleSide
 
     scene.add(project2Mesh)
 
@@ -190,7 +190,7 @@ const ThreeScene = () => {
     const project3Mesh = new THREE.Mesh(project3Geo, project3Mat)
 
     project3Mesh.position.set(-2950, 500, -2490)
-    project3Mesh.material.side = THREE.BackSide
+    project3Mesh.material.side = THREE.DoubleSide
 
     scene.add(project3Mesh)
 
@@ -201,6 +201,33 @@ const ThreeScene = () => {
 
     // 스포트라이트 (창문 통과하는 햇빛)
     addSpotLight({ x: -900, y: 750, z: 800 }, { x: -400, y: -500, z: -100 }, Math.PI / 18)
+
+    // main area 지붕
+
+    const roofShape = new THREE.Shape()
+    roofShape.moveTo(-5000, 1500)
+    roofShape.lineTo(-2000, 3000) // rotate로 인해 x는 높이, y는 깊이
+    roofShape.lineTo(5000, 1500)
+    const extrudeSettings = {
+      steps: 2,
+      depth: 4000, // Z축: 깊이 (rotate로 인해 너비가 됨)
+      bevelEnabled: true,
+      bevelThickness: 1,
+      bevelSize: 1,
+      bevelOffset: 0,
+      bevelSegments: 1,
+    }
+
+    const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
+    const roofMaterial = new THREE.MeshPhongMaterial({
+      color: 0xf79001,
+      specular: "orange",
+      flatShading: true,
+    })
+    roofMaterial.side = THREE.DoubleSide
+    const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
+    roofMesh.position.set(0, 0, -5000)
+    scene.add(roofMesh)
 
     // 바닥
 
