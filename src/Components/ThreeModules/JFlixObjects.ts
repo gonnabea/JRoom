@@ -13,6 +13,7 @@ import { addFrame } from "./Frame"
 import * as THREE from "three"
 import CSS3D from "three-css3drenderer"
 import { cssScene } from "../ThreeScene"
+import addDescriptionBoard from "./DescriptionPane"
 
 export const JFlixObjects = () => {
   // 책 모형에 붙일 텍스트 geometry
@@ -162,25 +163,14 @@ export const JFlixObjects = () => {
   })
 
   // 프로젝트 설명 DOM 오브젝트
-  const geometry = new THREE.PlaneBufferGeometry(300, 400)
-
-  const material = new THREE.MeshBasicMaterial({
-    color: 0x272a2f,
-    side: THREE.DoubleSide,
+  addDescriptionBoard({
+    width: "300px",
+    height: "400px",
+    description:
+      "영화 소개 사이트 입니다. 리액트 내에서 ajax를 사용해 만들었으며, 순수 JavaScript와 비교해서 어떤 점이 리액트가 우수한 지 알 수 있었던 프로젝트였습니다.",
+    title: "J-Flix",
+    titleColor: "#10EEC6",
+    position: { x: -1200, y: 600, z: -500 },
+    rotation: { x: 0, y: Math.PI / 2, z: 0 },
   })
-  const planeMesh = new THREE.Mesh(geometry, material)
-  planeMesh.position.set(-1000, -200, -700)
-  planeMesh.rotation.set(0, Math.PI / 2, 0)
-  scene.add(planeMesh)
-
-  const descriptionBox = document.createElement("div")
-  descriptionBox.style.width = "300px"
-  descriptionBox.style.height = "400px"
-  descriptionBox.style.fontSize = "30px"
-  descriptionBox.innerHTML = "테스트입니다"
-
-  const descriptionObject = new CSS3D.CSS3DObject(descriptionBox)
-  descriptionObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
-  descriptionObject.rotation.set(0, Math.PI / 2, 0)
-  cssScene.add(descriptionObject)
 }
