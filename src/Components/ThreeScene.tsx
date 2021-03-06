@@ -444,7 +444,7 @@ const ThreeScene = () => {
     renderer.domElement.style.zIndex = "1"
 
     // Three.js에 html embed 시키기
-
+    // TV 모델에 올려진 plane mesh
     const geometry = new THREE.PlaneBufferGeometry(1400, 800)
 
     const material = new THREE.MeshBasicMaterial({

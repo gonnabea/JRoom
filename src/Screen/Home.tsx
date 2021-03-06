@@ -21,7 +21,7 @@ const Home: React.FC = () => {
           "Exhibition ✨",
           "Documents",
           "Books",
-          "Interested",
+          "Tech Stack",
           "Contact Me...",
           "Github",
         ]}

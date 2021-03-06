@@ -10,6 +10,9 @@ import jsLogo from "../../resources/images/vanillajs.png"
 import sunsetImg1 from "../resources/images/Sunset Backgrounds/sunset12.jpg"
 import { addCeilConnector } from "./CeilConnetor"
 import { addFrame } from "./Frame"
+import * as THREE from "three"
+import CSS3D from "three-css3drenderer"
+import { cssScene } from "../ThreeScene"
 
 export const JFlixObjects = () => {
   // 책 모형에 붙일 텍스트 geometry
@@ -157,4 +160,27 @@ export const JFlixObjects = () => {
     y: Math.PI / 2,
     z: -Math.PI / 2,
   })
+
+  // 프로젝트 설명 DOM 오브젝트
+  const geometry = new THREE.PlaneBufferGeometry(300, 400)
+
+  const material = new THREE.MeshBasicMaterial({
+    color: 0x272a2f,
+    side: THREE.DoubleSide,
+  })
+  const planeMesh = new THREE.Mesh(geometry, material)
+  planeMesh.position.set(-1000, -200, -700)
+  planeMesh.rotation.set(0, Math.PI / 2, 0)
+  scene.add(planeMesh)
+
+  const descriptionBox = document.createElement("div")
+  descriptionBox.style.width = "300px"
+  descriptionBox.style.height = "400px"
+  descriptionBox.style.fontSize = "30px"
+  descriptionBox.innerHTML = "테스트입니다"
+
+  const descriptionObject = new CSS3D.CSS3DObject(descriptionBox)
+  descriptionObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
+  descriptionObject.rotation.set(0, Math.PI / 2, 0)
+  cssScene.add(descriptionObject)
 }

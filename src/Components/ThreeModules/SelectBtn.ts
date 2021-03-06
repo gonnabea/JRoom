@@ -22,6 +22,7 @@ export const addSelectBtn = (contents: {
   function chooseProject() {
     // 순차적으로 프로젝트 변경
     // 나중에 버튼을 여러개 만들어 각각 선택할 수 있게 할까 고민중.
+    // switch - case로 변경 예정
     if (embedWebsite.src === "https://nomfilx-jiwon.netlify.app/#/") {
       embedWebsite.src = "https://gonnabea.github.io/Music-Player/"
     } else if (embedWebsite.src === "https://gonnabea.github.io/Music-Player/") {
@@ -74,11 +75,12 @@ export const addSelectBtn = (contents: {
     const meshsOfFrame =
       frameGroupMesh?.children[0].children[0].children[0].children[0].children[0].children[0]
         .children
-    // (TV 버튼을 클릭했을 경우)
+
     if (contents.text === "0") {
       controls.target.set(0, 0, 0)
     }
 
+    // TV 버튼을 클릭했을 경우
     if (contents.text === "1") {
       controls.target.set(websiteObject.position.x, 0, websiteObject.position.z)
 

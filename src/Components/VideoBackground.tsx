@@ -2,8 +2,8 @@ import React from "react"
 import styled from "styled-components"
 
 const Container = styled.section`
-  width: 70vw;
-  height: 70vh;
+  width: 50vw;
+  height: 50vh;
   z-index: -1;
   box-shadow: 0 0 200px green;
 `
