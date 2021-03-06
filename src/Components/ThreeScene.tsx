@@ -214,66 +214,9 @@ const ThreeScene = () => {
 
     ////
 
-    // 지붕
-    const roofShape = new THREE.Shape()
-    roofShape.moveTo(0, 0)
-    roofShape.lineTo(1000, 1000) // rotate로 인해 x는 높이, y는 깊이
-    roofShape.lineTo(0, 2000)
-
-    const extrudeSettings = {
-      steps: 2,
-      depth: 3000, // Z축: 깊이 (rotate로 인해 너비가 됨)
-      bevelEnabled: true,
-      bevelThickness: 1,
-      bevelSize: 1,
-      bevelOffset: 0,
-      bevelSegments: 1,
-    }
-
-    const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
-    const roofMaterial = new THREE.MeshPhongMaterial({
-      color: 0xf79001,
-      specular: "orange",
-      flatShading: true,
-    })
-    roofMaterial.side = THREE.DoubleSide
-    const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
-
-    roofGeometry.faces.splice(20, 4) // 지붕의 밑면 제거
-
-    // 창문 구멍 뚫기
-
-    addRoofWindowHole(roofMesh)
-
     // GLTF 로더 //
 
-    // 지붕에 달린 창문 (앞면 3개)
-
-    addWindow(
-      { x: -750, y: 975, z: 500 },
-      { x: 400, y: 315, z: 300 },
-      { x: -Math.PI / 4, y: -Math.PI, z: 0 }
-    ) // Arguments: {position, scale, rotation}
-    addWindow(
-      { x: 0, y: 975, z: 500 },
-      { x: 400, y: 315, z: 300 },
-      { x: -Math.PI / 4, y: -Math.PI, z: 0 }
-    )
-    addWindow(
-      { x: 750, y: 975, z: 500 },
-      { x: 400, y: 315, z: 300 },
-      { x: -Math.PI / 4, y: -Math.PI, z: 0 }
-    )
-
-    // 지붕에 달린 창문 (뒷면 1개)
-
-    addWindow(
-      { x: 0, y: 1050, z: -400 },
-      { x: 500, y: 350, z: 300 },
-      { x: Math.PI / 4, y: -Math.PI, z: 0 }
-    )
-
-    // 창문 밝히기
+    // 창문 빛으로 밝히기
     const windowLight = new THREE.RectAreaLight(0xffffff)
     windowLight.position.set(-1000, 1300, 700)
     windowLight.intensity = 200
@@ -496,30 +439,6 @@ const ThreeScene = () => {
 
     // 선택 버튼 생성
 
-    // tv 포커싱
-    addSelectBtn({
-      text: "1",
-      btnPosition: { x: -1300, y: 600, z: 500 },
-      cameraPosition: { x: 1500, y: 300, z: 0 },
-      zoomIndex: 0.3,
-    })
-
-    // 채널 변경 버튼 & tv 포커싱
-    addSelectBtn({
-      text: "✨",
-      btnPosition: { x: -1300, y: 600, z: 0 },
-      cameraPosition: { x: 1500, y: 300, z: 0 },
-      zoomIndex: 0.3,
-    })
-
-    // J-Flix 방 포커싱
-    addSelectBtn({
-      text: "0",
-      btnPosition: { x: 0, y: 300, z: -800 },
-      cameraPosition: { x: -2773.8192101111504, y: 490.0248603839669, z: 4120.7527992239675 },
-      zoomIndex: 0.3,
-    })
-
     // 거실 (로비) 포커싱
     addSelectBtn({
       text: "2",
@@ -595,6 +514,7 @@ const ThreeScene = () => {
       }
     }
 
+    // 카메라 회전시 버튼이 정면에서 보이도록.
     window.addEventListener("mousedown", () => {
       if (selectBtnObjs) {
         selectBtnObjs.map((selectBtnObj) => {

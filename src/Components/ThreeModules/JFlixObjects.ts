@@ -13,9 +13,69 @@ import { addFrame } from "./Frame"
 import * as THREE from "three"
 import CSS3D from "three-css3drenderer"
 import { cssScene } from "../ThreeScene"
-import addDescriptionBoard from "./DescriptionPane"
+import addDescriptionBoard from "./DescriptionBoard"
+import { addRoofWindowHole } from "./RoofWIndowHole"
+import { addWindow } from "./Window"
+import { addSelectBtn } from "./SelectBtn"
 
 export const JFlixObjects = () => {
+  // J-Flix 지붕
+  const roofShape = new THREE.Shape()
+  roofShape.moveTo(0, 0)
+  roofShape.lineTo(1000, 1000) // rotate로 인해 x는 높이, y는 깊이
+  roofShape.lineTo(0, 2000)
+
+  const extrudeSettings = {
+    steps: 2,
+    depth: 3000, // Z축: 깊이 (rotate로 인해 너비가 됨)
+    bevelEnabled: true,
+    bevelThickness: 1,
+    bevelSize: 1,
+    bevelOffset: 0,
+    bevelSegments: 1,
+  }
+
+  const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
+  const roofMaterial = new THREE.MeshPhongMaterial({
+    color: 0xf79001,
+    specular: "orange",
+    flatShading: true,
+  })
+  roofMaterial.side = THREE.DoubleSide
+  const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
+
+  roofGeometry.faces.splice(20, 4) // 지붕의 밑면 제거
+
+  // 창문 구멍 뚫기
+
+  addRoofWindowHole(roofMesh)
+
+  // 지붕에 달린 창문 (앞면 3개)
+
+  addWindow(
+    { x: -750, y: 975, z: 500 },
+    { x: 400, y: 315, z: 300 },
+    { x: -Math.PI / 4, y: -Math.PI, z: 0 }
+  ) // Arguments: {position, scale, rotation}
+  addWindow(
+    { x: 0, y: 975, z: 500 },
+    { x: 400, y: 315, z: 300 },
+    { x: -Math.PI / 4, y: -Math.PI, z: 0 }
+  )
+  addWindow(
+    { x: 750, y: 975, z: 500 },
+    { x: 400, y: 315, z: 300 },
+    { x: -Math.PI / 4, y: -Math.PI, z: 0 }
+  )
+
+  // 지붕에 달린 창문 (뒷면 1개)
+
+  addWindow(
+    { x: 0, y: 1050, z: -400 },
+    { x: 500, y: 350, z: 300 },
+    { x: Math.PI / 4, y: -Math.PI, z: 0 }
+  )
+
   // 책 모형에 붙일 텍스트 geometry
   FontLoder(
     {
@@ -162,15 +222,42 @@ export const JFlixObjects = () => {
     z: -Math.PI / 2,
   })
 
+  // 선택 버튼 생성
+
+  // tv 포커싱
+  addSelectBtn({
+    text: "1",
+    btnPosition: { x: -1300, y: 600, z: 500 },
+    cameraPosition: { x: 1500, y: 300, z: 0 },
+    zoomIndex: 0.25,
+  })
+
+  // 채널 변경 버튼 & tv 포커싱
+  addSelectBtn({
+    text: "✨",
+    btnPosition: { x: -1300, y: 600, z: 300 },
+    cameraPosition: { x: 1500, y: 300, z: 0 },
+    zoomIndex: 0.25,
+  })
+
+  // J-Flix 방 포커싱
+  addSelectBtn({
+    text: "0",
+    btnPosition: { x: 0, y: 300, z: -800 },
+    cameraPosition: { x: -2773.8192101111504, y: 490.0248603839669, z: 4120.7527992239675 },
+    zoomIndex: 0.3,
+  })
+
   // 프로젝트 설명 DOM 오브젝트
   addDescriptionBoard({
-    width: "300px",
+    width: "500px",
     height: "400px",
     description:
-      "영화 소개 사이트 입니다. 리액트 내에서 ajax를 사용해 만들었으며, 순수 JavaScript와 비교해서 어떤 점이 리액트가 우수한 지 알 수 있었던 프로젝트였습니다.",
+      "영화 소개 사이트 입니다. 리액트 내에서 ajax를 사용해 만들었으며, json 데이터의 동적 처리, SPA, 컴포넌트 활용 등 순수 JavaScript와 비교해서 어떤 점이 리액트가 우수한 지 알 수 있었던 프로젝트였습니다.",
     title: "J-Flix",
     titleColor: "#10EEC6",
-    position: { x: -1200, y: 600, z: -500 },
+    siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
+    position: { x: -1200, y: 610, z: -400 },
     rotation: { x: 0, y: Math.PI / 2, z: 0 },
   })
 }

@@ -93,10 +93,7 @@ export const addSelectBtn = (contents: {
     else if (contents.text === "✨") {
       chooseProject()
       controls.target.set(websiteObject.position.x, 0, websiteObject.position.z)
-
       camera.updateMatrix()
-      console.log(camera.rotation)
-
       meshsOfFrame.map((object: { visible: boolean }) => {
         object.visible = false
       })

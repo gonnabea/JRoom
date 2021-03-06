@@ -10,25 +10,37 @@ const addDescriptionBoard = (props: {
   title: string
   titleColor: string
   description: string
+  siteUrl?: string
   position: { x: number; y: number; z: number }
   rotation: { x: number; y: number; z: number }
 }) => {
-  const geometry = new THREE.PlaneBufferGeometry(300, 400)
+  const geometry = new THREE.PlaneBufferGeometry(parseInt(props.width), parseInt(props.height))
 
   const material = new THREE.MeshBasicMaterial({
     color: 0x272a2f,
     side: THREE.DoubleSide,
   })
+
   const planeMesh = new THREE.Mesh(geometry, material)
   planeMesh.position.set(props.position.x, props.position.y, props.position.z)
   planeMesh.rotation.set(props.rotation.x, props.rotation.y, props.rotation.z)
+
   scene.add(planeMesh)
 
-  const descriptionBox = document.createElement("div")
+  // 프로젝트 실제 링크 박스
+  const descriptionBox = document.createElement("a")
   descriptionBox.style.width = props.width
   descriptionBox.style.height = props.height
   descriptionBox.style.opacity = "0.7"
   descriptionBox.style.cursor = "pointer"
+  descriptionBox.style.borderRadius = "100%" // border-radius가 안먹힘
+  descriptionBox.style.paddingLeft = "20px"
+  descriptionBox.style.paddingRight = "20px"
+  descriptionBox.style.textDecoration = "none"
+  descriptionBox.href = props.siteUrl ? props.siteUrl : ""
+  descriptionBox.target = "_blank"
+  descriptionBox.onmouseover = () => (descriptionBox.style.opacity = "1")
+  descriptionBox.onmouseout = () => (descriptionBox.style.opacity = "0.7")
 
   const title = document.createElement("h2")
   title.style.fontSize = "50px"
@@ -37,7 +49,7 @@ const addDescriptionBoard = (props: {
   descriptionBox.appendChild(title)
 
   const description = document.createElement("p")
-  description.style.fontSize = "25px"
+  description.style.fontSize = "30px"
   description.style.color = "white"
   description.innerHTML = props.description
   descriptionBox.appendChild(description)
