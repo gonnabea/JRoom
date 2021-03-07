@@ -470,6 +470,7 @@ const ThreeScene = () => {
       text: "2",
       btnPosition: { x: 1200, y: 300, z: -1000 },
       cameraPosition: { x: 0, y: 0, z: -3000.7527992239675 },
+      targetPosition: { x: 0, y: 0, z: -2000 },
       zoomIndex: 0.2,
     })
 
@@ -478,6 +479,7 @@ const ThreeScene = () => {
       text: "3",
       btnPosition: { x: 0, y: 0, z: -3500 },
       cameraPosition: { x: 0, y: 0, z: -4000.7527992239675 },
+      targetPosition: { x: 0, y: 0, z: -3000 },
       zoomIndex: 0.2,
     })
 
@@ -485,10 +487,10 @@ const ThreeScene = () => {
     addSelectBtn({
       text: "4",
       btnPosition: { x: -1500, y: 0, z: -3000 },
-      cameraPosition: { x: -3000, y: 0, z: -500 },
+      cameraPosition: { x: -1500, y: 0, z: -3000 },
+      targetPosition: { x: -4000, y: 0, z: -3000 },
       zoomIndex: 0.2,
     })
-
     // 갓레이이펙트
 
     composer = addSunLight({ x: -600, y: 200, z: 100 })

@@ -13,10 +13,11 @@ import CSS3D from "three-css3drenderer"
 import { frameGroupMesh } from "./Frame"
 
 // 선택 버튼 생성
-export const addSelectBtn = (contents: {
+export const addSelectBtn = (props: {
   text: string
   btnPosition: { x: number; y: number; z: number }
   cameraPosition: { x: number; y: number; z: number }
+  targetPosition?: { x: number; y: number; z: number }
   zoomIndex: number
 }) => {
   function chooseProject() {
@@ -43,7 +44,7 @@ export const addSelectBtn = (contents: {
   }
 
   const selectBtn = document.createElement("button")
-  selectBtn.innerHTML = contents.text
+  selectBtn.innerHTML = props.text
   selectBtn.style.width = "100px"
   selectBtn.style.height = "100px"
   selectBtn.style.fontSize = "60px"
@@ -53,7 +54,7 @@ export const addSelectBtn = (contents: {
 
   selectBtn.onmouseover = () => {
     selectBtn.style.color = "skyblue"
-    selectBtn.style.border = "10px solid skyblue"
+    selectBtn.style.border = "7px solid skyblue"
     selectBtn.style.cursor = "pointer"
   }
   selectBtn.onmouseleave = () => {
@@ -66,7 +67,7 @@ export const addSelectBtn = (contents: {
 
   selectBtnObjs.push(selectBtnObj)
 
-  selectBtnObj.position.set(contents.btnPosition.x, contents.btnPosition.y, contents.btnPosition.z)
+  selectBtnObj.position.set(props.btnPosition.x, props.btnPosition.y, props.btnPosition.z)
   selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
   cssScene.add(selectBtnObj)
 
@@ -76,13 +77,13 @@ export const addSelectBtn = (contents: {
       frameGroupMesh?.children[0].children[0].children[0].children[0].children[0].children[0]
         .children
 
-    if (contents.text === "0") {
+    if (props.text === "0") {
       controls.target.set(0, 0, 0)
     }
 
     // TV 버튼을 클릭했을 경우
-    if (contents.text === "1") {
-      controls.target.set(websiteObject.position.x, 0, websiteObject.position.z)
+    if (props.text === "1") {
+      controls.target.set(websiteObject.position.x, 0, websiteObject.position.z) // 예외적으로 타겟이 정해짐
 
       camera.updateMatrix()
 
@@ -90,34 +91,20 @@ export const addSelectBtn = (contents: {
         object.visible = false
       })
     } // 프로젝트 변경 버튼을 클릭했을 경우
-    else if (contents.text === "✨") {
+    else if (props.text === "✨") {
       chooseProject()
       controls.target.set(websiteObject.position.x, 0, websiteObject.position.z)
       camera.updateMatrix()
       meshsOfFrame.map((object: { visible: boolean }) => {
         object.visible = false
       })
-    } else if (contents.text === "2") {
-      websiteObject.visible = false
-      controls.target.set(0, 0, -2000)
-    } else if (contents.text === "3") {
-      controls.target.set(0, 0, -3000)
-    } else if (contents.text === "4") {
-      controls.target.set(-3000, 0, -3000)
-    } else {
-      meshsOfFrame.map((object: { visible: boolean }) => {
-        object.visible = true
-      })
-      controls.target.set(0, 0, 0)
     }
 
-    camera.position.set(
-      contents.cameraPosition.x,
-      contents.cameraPosition.y,
-      contents.cameraPosition.z
-    )
-
-    camera.zoom = contents.zoomIndex
+    if (props.targetPosition) {
+      controls.target.set(props.targetPosition.x, props.targetPosition.y, props.targetPosition.z)
+    }
+    camera.position.set(props.cameraPosition.x, props.cameraPosition.y, props.cameraPosition.z)
+    camera.zoom = props.zoomIndex
 
     camera.updateProjectionMatrix()
     camera.updateMatrix()

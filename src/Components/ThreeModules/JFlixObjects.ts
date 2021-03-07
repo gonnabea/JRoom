@@ -230,6 +230,15 @@ export const JFlixObjects = () => {
 
   // 선택 버튼 생성
 
+  // J-Flix 방 포커싱
+  addSelectBtn({
+    text: "0",
+    btnPosition: { x: 0, y: 300, z: -800 },
+    cameraPosition: { x: -2773.8192101111504, y: 490.0248603839669, z: 4120.7527992239675 },
+    targetPosition: { x: 0, y: 0, z: 0 },
+    zoomIndex: 0.3,
+  })
+
   // tv 포커싱
   addSelectBtn({
     text: "1",
@@ -244,14 +253,6 @@ export const JFlixObjects = () => {
     btnPosition: { x: -1300, y: 600, z: 300 },
     cameraPosition: { x: 1500, y: 300, z: 0 },
     zoomIndex: 0.25,
-  })
-
-  // J-Flix 방 포커싱
-  addSelectBtn({
-    text: "0",
-    btnPosition: { x: 0, y: 300, z: -800 },
-    cameraPosition: { x: -2773.8192101111504, y: 490.0248603839669, z: 4120.7527992239675 },
-    zoomIndex: 0.3,
   })
 
   // 프로젝트 설명 DOM 오브젝트
