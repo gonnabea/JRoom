@@ -23,6 +23,7 @@ import floorImage3 from "../resources/images/floor3.jpg"
 import MainHallObjects from "./ThreeModules/MainHallObjects"
 import { JustReadItObjs } from "./ThreeModules/JustReadItObjs"
 import { addFloor } from "./ThreeModules/floor"
+import onObjects from "./ThreeModules/ONObjects"
 
 const Container = styled.section`
   width: 100%;
@@ -267,9 +268,11 @@ const ThreeScene = () => {
     bookCoverMesh.material.side = DoubleSide
     scene.add(bookCoverMesh)
 
+    // 프로젝트별로 구분
     JFlixObjects()
     MainHallObjects()
     JustReadItObjs()
+    onObjects()
 
     // // 자동차 모델 로드
 
