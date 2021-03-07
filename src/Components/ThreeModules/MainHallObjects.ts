@@ -4,6 +4,11 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { scene } from "../ThreeScene"
 import { FontLoder } from "./FontLoader"
 import JsLogo from "../../resources/images/vanillajs.png"
+import tsLogo from "../../resources/images/tsLogo.png"
+import threejsLogo from "../../resources/images/threejsLogo.png"
+import reactLogo from "../../resources/images/reactLogo.jpg"
+
+import { addLogoBox } from "./LogoBox"
 
 const loader = new GLTFLoader()
 
@@ -68,6 +73,11 @@ const MainHallObjects = () => {
 
     scene.add(gltf.scene)
   })
+
+  // 기술 스택 로고 박스
+  addLogoBox({ x: -600, y: 200, z: -4000 }, threejsLogo)
+  addLogoBox({ x: -600, y: -100, z: -4000 }, reactLogo)
+  addLogoBox({ x: 600, y: 200, z: -4000 }, tsLogo)
 }
 
 export default MainHallObjects

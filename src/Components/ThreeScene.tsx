@@ -372,7 +372,7 @@ const ThreeScene = () => {
     // scene.add(lightIndicator3)
 
     // 노을 배경 박스 생성
-    addBackgroundBox()
+    // addBackgroundBox()
 
     // 레이캐스터 (클릭이벤트)
     // 마우스 움직일 때마다 오브젝트 감지
@@ -407,7 +407,7 @@ const ThreeScene = () => {
 
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setClearColor(0xffffff, 0.5)
+    renderer.setClearColor(0xffffff, 1)
     renderer.domElement.style.position = "absolute"
     renderer.domElement.style.top = "0"
     renderer.domElement.style.zIndex = "1"

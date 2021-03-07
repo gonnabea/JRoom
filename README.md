@@ -21,7 +21,7 @@
 ### Projects-Exhibition
 
 - [x] 건물 구조 잡기
-- [ ] 내부 인테리어 (GLTF 로드)
+- [x] 내부 인테리어 (GLTF 로드)
 - [x] 햇빛 GodRaysEffect
 - [ ] 창문 모양으로 빛 반사시키기
 - [x] Iframe in Scene (Three.js 내에 삽입된 웹페이지)
