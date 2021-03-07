@@ -20,7 +20,7 @@ const Container = styled.main`
 const Exhibition: React.FC = () => {
   return (
     <Container>
-      <Header title="J-Flix" />
+      <Header title="프로젝트 전시" />
       <ThreeScene />
     </Container>
   )

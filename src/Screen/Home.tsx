@@ -18,7 +18,7 @@ const Home: React.FC = () => {
       <SkewScrollMenu
         texts={[
           "About Me",
-          "Exhibition ✨",
+          "3D Exhibition ✨",
           "Documents",
           "Books",
           "Tech Stack",
