@@ -3,6 +3,7 @@ import * as THREE from "three"
 import { BackSide, DoubleSide } from "three"
 import { GLTFModelLoader } from "./GLTFModelLoader"
 import { FontLoder } from "./FontLoader"
+import addDescriptionBoard from "./DescriptionBoard"
 
 export const JustReadItObjs = () => {
   const IntroVideo = document.createElement("video")
@@ -22,8 +23,20 @@ export const JustReadItObjs = () => {
 
   const videoMesh = new THREE.Mesh(rectangleGeo, rectangleMat)
   videoMesh.rotateY(Math.PI / 2)
-  videoMesh.position.set(-4300, 0, -2500)
+  videoMesh.position.set(-4300, 500, -2500)
   scene.add(videoMesh)
+
+  addDescriptionBoard({
+    siteUrl: "https://just-read-it.herokuapp.com/",
+    width: "500px",
+    height: "400px",
+    title: "Just Read It",
+    titleColor: "orange",
+    description:
+      "node.js-express 서버와 자바스크립트 연습용 프로젝트입니다. 첫 사이드 프로젝트여서 현재는 도저히 수정이 힘들 정도로 코드 퀄리티가 안좋지만, 여러가지 신기한 기능이 들어간 프로젝트입니다.",
+    position: { x: -4300, y: -200, z: -3000 },
+    rotation: { x: 0, y: Math.PI / 2, z: 0 },
+  })
 
   // 스켈레톤 책장 모델
   GLTFModelLoader(

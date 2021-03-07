@@ -487,8 +487,8 @@ const ThreeScene = () => {
     addSelectBtn({
       text: "4",
       btnPosition: { x: -1500, y: 0, z: -3000 },
-      cameraPosition: { x: -1500, y: 0, z: -3000 },
-      targetPosition: { x: -4000, y: 0, z: -3000 },
+      cameraPosition: { x: -2000, y: 500, z: -2500 },
+      targetPosition: { x: -3000, y: 500, z: -2500 },
       zoomIndex: 0.2,
     })
     // 갓레이이펙트
