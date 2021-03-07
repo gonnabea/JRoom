@@ -4,6 +4,12 @@ import { BackSide, DoubleSide } from "three"
 import { GLTFModelLoader } from "./GLTFModelLoader"
 import { FontLoder } from "./FontLoader"
 import addDescriptionBoard from "./DescriptionBoard"
+import { addSelectBtn } from "./SelectBtn"
+import { addLogoBox } from "./LogoBox"
+import nodeLogo from "../../resources/images/nodeLogo.jpg"
+import mongoLogo from "../../resources/images/mongoLogo.jpg"
+import jsLogo from "../../resources/images/vanillajs.png"
+import herokuLogo from "../../resources/images/herokuLogo.png"
 
 export const JustReadItObjs = () => {
   const IntroVideo = document.createElement("video")
@@ -26,6 +32,7 @@ export const JustReadItObjs = () => {
   videoMesh.position.set(-4300, 500, -2500)
   scene.add(videoMesh)
 
+  // 프로젝트 설명 보드
   addDescriptionBoard({
     siteUrl: "https://just-read-it.herokuapp.com/",
     width: "500px",
@@ -34,7 +41,7 @@ export const JustReadItObjs = () => {
     titleColor: "orange",
     description:
       "node.js-express 서버와 자바스크립트 연습용 프로젝트입니다. 첫 사이드 프로젝트여서 현재는 도저히 수정이 힘들 정도로 코드 퀄리티가 안좋지만, 여러가지 신기한 기능이 들어간 프로젝트입니다.",
-    position: { x: -4300, y: -200, z: -3000 },
+    position: { x: -4300, y: -200, z: -3300 },
     rotation: { x: 0, y: Math.PI / 2, z: 0 },
   })
 
@@ -82,4 +89,18 @@ export const JustReadItObjs = () => {
     },
     { x: -3500, y: 700, z: -4000 }
   )
+
+  // Just-Read-It 포커싱
+  addSelectBtn({
+    text: "4",
+    btnPosition: { x: -1500, y: 0, z: -3000 },
+    cameraPosition: { x: -2000, y: 500, z: -2500 },
+    targetPosition: { x: -3000, y: 500, z: -2500 },
+    zoomIndex: 0.2,
+  })
+
+  addLogoBox({ x: -2700, y: 500, z: -1100 }, nodeLogo)
+  addLogoBox({ x: -3000, y: 500, z: -1100 }, mongoLogo)
+  addLogoBox({ x: -3000, y: 200, z: -1100 }, jsLogo)
+  addLogoBox({ x: -2700, y: 200, z: -1100 }, herokuLogo)
 }

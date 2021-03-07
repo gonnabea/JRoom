@@ -482,15 +482,6 @@ const ThreeScene = () => {
       targetPosition: { x: 0, y: 0, z: -3000 },
       zoomIndex: 0.2,
     })
-
-    // Just-Read-It 포커싱
-    addSelectBtn({
-      text: "4",
-      btnPosition: { x: -1500, y: 0, z: -3000 },
-      cameraPosition: { x: -2000, y: 500, z: -2500 },
-      targetPosition: { x: -3000, y: 500, z: -2500 },
-      zoomIndex: 0.2,
-    })
     // 갓레이이펙트
 
     composer = addSunLight({ x: -600, y: 200, z: 100 })

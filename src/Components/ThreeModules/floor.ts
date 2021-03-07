@@ -26,7 +26,7 @@ export const addFloor = ({ width, height, x, y, z, imageSrc }: typeAddFloor) => 
     flatShading: true,
   })
 
-  //바닥 반사 효과
+  // 바닥 반사 효과
   const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(640, {
     format: THREE.RGBFormat,
     generateMipmaps: true,
