@@ -52,7 +52,7 @@ export const addRoofWindowHole = (
 
   bspMeshResult.material = roofMesh.material
 
-  bspMeshResult.geometry.faces.splice(97, 15) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
+  bspMeshResult.geometry.faces.splice(97, 40) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
 
   // 두번째 창문 구멍 생성
 
@@ -76,21 +76,23 @@ export const addRoofWindowHole = (
 
   bspMeshResult3.geometry.faces.splice(97, 18)
 
+  bspMeshResult3.rotateZ(Math.PI / 2)
+  bspMeshResult3.rotateX(Math.PI / 2)
+  bspMeshResult3.position.set(-1500, 510, -1000)
+  bspMeshResult3.material.side = THREE.DoubleSide
+
+  scene.add(bspMeshResult3)
+
   // 네번째 창문 구멍 생성
-  const bspWindowHole4 = CSG.fromMesh(roofWindowHole4)
-  const bspRoof4 = CSG.fromMesh(bspMeshResult3)
+  // const bspWindowHole4 = CSG.fromMesh(roofWindowHole4)
+  // const bspRoof4 = CSG.fromMesh(bspMeshResult3)
 
-  const bspResult4 = bspRoof4.subtract(bspWindowHole4)
-  const bspMeshResult4 = CSG.toMesh(bspResult4, bspMeshResult.matrix)
-  bspMeshResult4.material = roofMesh.material
+  // const bspResult4 = bspRoof4.subtract(bspWindowHole4)
+  // const bspMeshResult4 = CSG.toMesh(bspResult4, bspMeshResult.matrix)
+  // bspMeshResult4.material = roofMesh.material
 
-  console.log(bspMeshResult4.geometry.faces)
-  bspMeshResult4.geometry.faces.splice(190, 15)
+  // console.log(bspMeshResult4.geometry.faces)
+  // bspMeshResult4.geometry.faces.splice(190, 15)
 
-  bspMeshResult4.rotateZ(Math.PI / 2)
-  bspMeshResult4.rotateX(Math.PI / 2)
-  bspMeshResult4.position.set(-1500, 510, -1000)
-  bspMeshResult4.material.side = THREE.DoubleSide
-
-  scene.add(bspMeshResult4)
+  // scene.add(bspMeshResult4)
 }

@@ -69,7 +69,7 @@ const ThreeScene = () => {
 
   useEffect(() => {
     camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 21000)
-    camera.position.set(-2773.8192101111504, 490.0248603839669, 7120.7527992239675)
+    camera.position.set(-2773.8192101111504, 490.0248603839669, 9020.7527992239675)
     camera.zoom = 0.3
     camera.updateProjectionMatrix()
     camera.updateMatrix()
@@ -86,7 +86,7 @@ const ThreeScene = () => {
     const buildingGeometry = new THREE.BoxGeometry(3000, 1000, 3000)
     const buildingTexture = new THREE.TextureLoader()
     const buildingMaterial = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
+      color: 0x4e61ff,
       specular: "blue",
       flatShading: true,
     })
@@ -105,7 +105,7 @@ const ThreeScene = () => {
     const project1Geo = new THREE.BoxGeometry(3000, 1000, 2000)
 
     const project1Mat = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
+      color: 0x8af4eb,
       specular: "orange",
       flatShading: true,
     })
@@ -154,7 +154,6 @@ const ThreeScene = () => {
     const bspMainRoomMesh = CSG.toMesh(bspMainRoomResult, bspJFlixMeshResult.matrix)
 
     bspMainRoomMesh.material = bspJFlixMeshResult.material
-
     bspMainRoomMesh.updateMatrix()
     console.log(bspMainRoomMesh.geometry.faces)
     bspMainRoomMesh.geometry.faces.splice(180, 20) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
@@ -167,7 +166,7 @@ const ThreeScene = () => {
     const project2Geo = new THREE.BoxGeometry(3000, 2000, 3000)
 
     const project2Mat = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
+      color: 0x344aff,
       specular: "orange",
       flatShading: true,
     })
@@ -183,7 +182,7 @@ const ThreeScene = () => {
     const project3Geo = new THREE.BoxGeometry(2900, 2000, 3000)
 
     const project3Mat = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
+      color: 0xff9500,
       specular: "orange",
       flatShading: true,
     })
@@ -205,9 +204,9 @@ const ThreeScene = () => {
     // main area 지붕
 
     const roofShape = new THREE.Shape()
-    roofShape.moveTo(-5000, 1500)
-    roofShape.lineTo(-2000, 3000) // rotate로 인해 x는 높이, y는 깊이
-    roofShape.lineTo(5000, 1500)
+    roofShape.moveTo(-4500, 1500)
+    roofShape.lineTo(0, 3000) // rotate로 인해 x는 높이, y는 깊이
+    roofShape.lineTo(4500, 1500)
     const extrudeSettings = {
       steps: 2,
       depth: 4000, // Z축: 깊이 (rotate로 인해 너비가 됨)
@@ -220,13 +219,13 @@ const ThreeScene = () => {
 
     const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
     const roofMaterial = new THREE.MeshPhongMaterial({
-      color: 0xf79001,
+      color: 0x24292e,
       specular: "orange",
       flatShading: true,
     })
     roofMaterial.side = THREE.DoubleSide
     const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
-    roofMesh.position.set(0, 0, -5000)
+    roofMesh.position.set(0, 0, -4000)
     scene.add(roofMesh)
 
     // 바닥

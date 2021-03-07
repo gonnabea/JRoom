@@ -22,7 +22,8 @@ export const JFlixObjects = () => {
   // J-Flix 지붕
   const roofShape = new THREE.Shape()
   roofShape.moveTo(0, 0)
-  roofShape.lineTo(1000, 1000) // rotate로 인해 x는 높이, y는 깊이
+  roofShape.lineTo(1000, 0) // rotate로 인해 x는 높이, y는 깊이
+  roofShape.lineTo(1000, 1000)
   roofShape.lineTo(0, 2000)
 
   const extrudeSettings = {
@@ -37,14 +38,14 @@ export const JFlixObjects = () => {
 
   const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
   const roofMaterial = new THREE.MeshPhongMaterial({
-    color: 0xf79001,
+    color: 0x24292e,
     specular: "orange",
     flatShading: true,
   })
   roofMaterial.side = THREE.DoubleSide
   const roofMesh = new THREE.Mesh(roofGeometry, roofMaterial)
 
-  roofGeometry.faces.splice(20, 4) // 지붕의 밑면 제거
+  // roofGeometry.faces.splice(20, 4) // 지붕의 밑면 제거
 
   // 창문 구멍 뚫기
 
@@ -70,11 +71,11 @@ export const JFlixObjects = () => {
 
   // 지붕에 달린 창문 (뒷면 1개)
 
-  addWindow(
-    { x: 0, y: 1050, z: -400 },
-    { x: 500, y: 350, z: 300 },
-    { x: Math.PI / 4, y: -Math.PI, z: 0 }
-  )
+  // addWindow(
+  //   { x: 0, y: 1050, z: -400 },
+  //   { x: 500, y: 350, z: 300 },
+  //   { x: Math.PI / 4, y: -Math.PI, z: 0 }
+  // )
 
   // 책 모형에 붙일 텍스트 geometry
   FontLoder(
@@ -129,7 +130,12 @@ export const JFlixObjects = () => {
   loader.load("/models/2018_flat_screen_tv/scene.gltf", (gltf) => {
     gltf.scene.scale.set(750, 750, 2000)
     gltf.scene.position.set(-1200, 0, 0)
-
+    gltf.scene.traverse(function (child) {
+      if ((<THREE.Mesh>child).isMesh) {
+        child.castShadow = true
+        child.receiveShadow = true
+      }
+    })
     gltf.scene.rotateY(Math.PI / 2)
     scene.add(gltf.scene)
   })
@@ -250,7 +256,7 @@ export const JFlixObjects = () => {
 
   // 프로젝트 설명 DOM 오브젝트
   addDescriptionBoard({
-    width: "500px",
+    width: "600px",
     height: "400px",
     description:
       "영화 소개 사이트 입니다. 리액트 내에서 ajax를 사용해 만들었으며, json 데이터의 동적 처리, SPA, 컴포넌트 활용 등 순수 JavaScript와 비교해서 어떤 점이 리액트가 우수한 지 알 수 있었던 프로젝트였습니다.",
