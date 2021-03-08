@@ -51,7 +51,9 @@ export const addRoofWindowHole = (
   const bspMeshResult = CSG.toMesh(bspResult, roofMesh.matrix)
 
   bspMeshResult.material = roofMesh.material
-  ;(bspMeshResult as any).geometry.faces.splice(97, 40) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
+  // netlify에서 geometry.faces 프로퍼티를 인식하지 못하여 조치
+  // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
+  ;(bspMeshResult as any).geometry.faces.splice(97, 40)
 
   // 두번째 창문 구멍 생성
 
@@ -61,6 +63,7 @@ export const addRoofWindowHole = (
   const bspResult2 = bspRoof2.subtract(bspWindowHole2)
   const bspMeshResult2 = CSG.toMesh(bspResult2, bspMeshResult.matrix)
   bspMeshResult2.material = roofMesh.material
+  // netlify에서 geometry.faces 프로퍼티를 인식하지 못하여 조치
   ;(bspMeshResult2 as any).geometry.faces.splice(97, 16)
 
   // 세번쨰 창문 구멍 생성
@@ -71,6 +74,7 @@ export const addRoofWindowHole = (
   const bspResult3 = bspRoof3.subtract(bspWindowHole3)
   const bspMeshResult3 = CSG.toMesh(bspResult3, bspMeshResult.matrix)
   bspMeshResult3.material = roofMesh.material
+  // netlify에서 geometry.faces 프로퍼티를 인식하지 못하여 조치
   ;(bspMeshResult3 as any).geometry.faces.splice(97, 18)
 
   bspMeshResult3.rotateZ(Math.PI / 2)

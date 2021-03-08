@@ -4,16 +4,16 @@ import { scene } from "../ThreeScene"
 
 const loader = new GLTFLoader()
 
-export const GLTFModelLoader = (
-  modelUrl: string,
-  scale: { x: number; y: number; z: number },
-  position: { x: number; y: number; z: number },
+export const GLTFModelLoader = (props: {
+  modelUrl: string
+  scale: { x: number; y: number; z: number }
+  position: { x: number; y: number; z: number }
   rotation: { x: number; y: number; z: number }
-) => {
-  loader.load(modelUrl, (gltf) => {
-    gltf.scene.scale.set(scale.x, scale.y, scale.z)
-    gltf.scene.position.set(position.x, position.y, position.z)
-    gltf.scene.rotation.set(rotation.x, rotation.y, rotation.z)
+}) => {
+  loader.load(props.modelUrl, (gltf) => {
+    gltf.scene.scale.set(props.scale.x, props.scale.y, props.scale.z)
+    gltf.scene.position.set(props.position.x, props.position.y, props.position.z)
+    gltf.scene.rotation.set(props.rotation.x, props.rotation.y, props.rotation.z)
 
     scene.add(gltf.scene)
   })

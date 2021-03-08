@@ -117,6 +117,7 @@ const ThreeScene = () => {
 
     const totalMesh = new THREE.Mesh(project1Geo, project1Mat)
     totalMesh.material.side = THREE.BackSide
+    // netlify에서 geometry.faces 프로퍼티를 인식하지 못하여 조치
     // 윗면 faces 지우기 <- 효율적인 방법 찾기
     ;(totalMesh as any).geometry.faces.splice(4, 2)
 
@@ -422,6 +423,15 @@ const ThreeScene = () => {
 
     // Three.js에 html embed 시키기
     // TV 모델에 올려진 plane mesh
+
+    // addIframeObj({
+    //   siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
+    //   width: 1400,
+    //   height: 800,
+    //   position: { x: -1200, y: 10, z: 0 },
+    //   rotation: { x: 0, y: Math.PI / 2, z: 0 },
+    // })
+
     const geometry = new THREE.PlaneBufferGeometry(1400, 800)
 
     const material = new THREE.MeshBasicMaterial({
