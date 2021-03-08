@@ -118,7 +118,7 @@ const ThreeScene = () => {
     const totalMesh = new THREE.Mesh(project1Geo, project1Mat)
     totalMesh.material.side = THREE.BackSide
     // 윗면 faces 지우기 <- 효율적인 방법 찾기
-    totalMesh.geometry.faces.splice(4, 2)
+    ;(totalMesh as any).geometry.faces.splice(4, 2)
 
     // J-Flix 방문 구멍내기
     const JFlixDoorHole = new THREE.Mesh(
@@ -138,7 +138,10 @@ const ThreeScene = () => {
 
     bspJFlixMeshResult.material = totalMesh.material
     bspJFlixMeshResult.updateMatrix()
-    bspJFlixMeshResult.geometry.faces.splice(85, 20) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
+
+    // netlify에서 geometry.faces 프로퍼티를 인식하지 못하여 조치
+    // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
+    ;(bspJFlixMeshResult as any).geometry.faces.splice(85, 20)
 
     // 메인 홀 창문 구멍내기
     const mainRoomHole = new THREE.Mesh(
@@ -156,8 +159,10 @@ const ThreeScene = () => {
 
     bspMainRoomMesh.material = bspJFlixMeshResult.material
     bspMainRoomMesh.updateMatrix()
-    console.log(bspMainRoomMesh.geometry.faces)
-    bspMainRoomMesh.geometry.faces.splice(180, 20) // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
+
+    // netlify에서 geometry.faces 프로퍼티를 인식하지 못하여 조치
+    // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
+    ;(bspMainRoomMesh as any).geometry.faces.splice(180, 20)
     bspMainRoomMesh.castShadow = true
     bspMainRoomMesh.receiveShadow = true
     scene.add(bspMainRoomMesh)

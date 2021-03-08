@@ -5,19 +5,21 @@ import { GodRaysEffect, RenderPass, EffectPass, EffectComposer } from "postproce
 export const addSunLight = (position: { x: number; y: number; z: number }) => {
   const CylinderGeometry = new THREE.CylinderGeometry(3, 4, 20, 32)
   console.log(CylinderGeometry)
-  CylinderGeometry.faces.splice(0, 1)
-  CylinderGeometry.faces.splice(4, 1)
-  CylinderGeometry.faces.splice(8, 1)
-  CylinderGeometry.faces.splice(12, 1)
-  CylinderGeometry.faces.splice(16, 1)
-  CylinderGeometry.faces.splice(20, 1)
-  CylinderGeometry.faces.splice(24, 1)
-  CylinderGeometry.faces.splice(28, 1)
-  CylinderGeometry.faces.splice(32, 1)
-  CylinderGeometry.faces.splice(40, 1)
-  CylinderGeometry.faces.splice(44, 1)
-  CylinderGeometry.faces.splice(48, 1)
-  CylinderGeometry.faces.splice(52, 1)
+
+  // netlify에서 geometry.faces 프로퍼티를 인식하지 못하여 조치
+  ;(CylinderGeometry as any).faces.splice(0, 1)
+  ;(CylinderGeometry as any).faces.splice(4, 1)
+  ;(CylinderGeometry as any).faces.splice(8, 1)
+  ;(CylinderGeometry as any).faces.splice(12, 1)
+  ;(CylinderGeometry as any).faces.splice(16, 1)
+  ;(CylinderGeometry as any).faces.splice(20, 1)
+  ;(CylinderGeometry as any).faces.splice(24, 1)
+  ;(CylinderGeometry as any).faces.splice(28, 1)
+  ;(CylinderGeometry as any).faces.splice(32, 1)
+  ;(CylinderGeometry as any).faces.splice(40, 1)
+  ;(CylinderGeometry as any).faces.splice(44, 1)
+  ;(CylinderGeometry as any).faces.splice(48, 1)
+  ;(CylinderGeometry as any).faces.splice(52, 1)
 
   const CylinderMaterial = new THREE.MeshBasicMaterial({
     color: 0xf2f1c7,
