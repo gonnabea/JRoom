@@ -14,7 +14,7 @@ interface typeAddFloor {
 }
 
 export const addFloor = ({ width, height, x, y, z, imageSrc }: typeAddFloor) => {
-  const floorGeo = new THREE.PlaneBufferGeometry(width, height) // width, height
+  const floorGeo = new THREE.PlaneBufferGeometry(width, height)
   const floorTexture = new THREE.TextureLoader().load(imageSrc)
   floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping
   floorTexture.repeat.set(7, 7)

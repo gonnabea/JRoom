@@ -170,7 +170,7 @@ const ThreeScene = () => {
 
     //// 프로젝트 방 (Our-Now) ////
 
-    const project2Geo = new THREE.BoxGeometry(3000, 2000, 3000)
+    const project2Geo = new THREE.BoxGeometry(3000, 2000, 3000, 1, 1, 1)
 
     const project2buffGeo = new THREE.BufferGeometry().fromGeometry(project2Geo)
     const project2Mat = new THREE.MeshPhongMaterial({
@@ -187,7 +187,7 @@ const ThreeScene = () => {
 
     //// 프로젝트 방 (Just-Read-It) ////
 
-    const project3Geo = new THREE.BoxGeometry(2900, 2000, 3000)
+    const project3Geo = new THREE.BoxGeometry(2900, 2000, 3000, 1, 1, 1)
     const project3BuffGeo = new THREE.BufferGeometry().fromGeometry(project3Geo)
     const project3Mat = new THREE.MeshPhongMaterial({
       color: 0xff9500,
@@ -198,7 +198,7 @@ const ThreeScene = () => {
 
     project3Mesh.position.set(-2950, 500, -2490)
     project3Mesh.material.side = THREE.DoubleSide
-
+    console.log(project3Mesh)
     scene.add(project3Mesh)
 
     // 디렉셔널 라이트 (햇빛)
@@ -223,6 +223,7 @@ const ThreeScene = () => {
       bevelSize: 1,
       bevelOffset: 0,
       bevelSegments: 1,
+      curveSegments: 1,
     }
 
     const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)

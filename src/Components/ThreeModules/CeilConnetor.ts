@@ -23,6 +23,7 @@ export const addCeilConnector = (
     bevelSize: 10,
     bevelOffset: 0,
     bevelSegments: 1,
+    curveSegments: 1,
   }
 
   const geometry = new THREE.ExtrudeGeometry(shape, setting)
