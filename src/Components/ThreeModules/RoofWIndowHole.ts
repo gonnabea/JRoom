@@ -6,23 +6,23 @@ export const addRoofWindowHole = (
   roofMesh: THREE.Mesh<THREE.ExtrudeGeometry, THREE.MeshPhongMaterial>
 ) => {
   const roofWindowHole = new THREE.Mesh(
-    new THREE.BoxBufferGeometry(600, 500, 600),
+    new THREE.BoxBufferGeometry(600, 500, 600, 1, 1, 1),
     new THREE.MeshPhongMaterial()
   )
   const roofWindowHole2 = new THREE.Mesh(
-    new THREE.BoxBufferGeometry(600, 500, 600),
+    new THREE.BoxBufferGeometry(600, 500, 600, 1, 1, 1),
     new THREE.MeshPhongMaterial()
   )
   const roofWindowHole3 = new THREE.Mesh(
-    new THREE.BoxBufferGeometry(600, 500, 600),
+    new THREE.BoxBufferGeometry(600, 500, 600, 1, 1, 1),
     new THREE.MeshPhongMaterial()
   )
   const roofWindowHole4 = new THREE.Mesh(
-    new THREE.BoxBufferGeometry(600, 500, 700),
+    new THREE.BoxBufferGeometry(600, 500, 700, 1, 1, 1),
     new THREE.MeshPhongMaterial()
   )
   const JFlixDoorHole = new THREE.Mesh(
-    new THREE.BoxBufferGeometry(600, 500, 700),
+    new THREE.BoxBufferGeometry(600, 500, 700, 1, 1, 1),
     new THREE.MeshPhongMaterial()
   )
 

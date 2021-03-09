@@ -84,7 +84,7 @@ const ThreeScene = () => {
     ThreeContainer?.current?.appendChild(cssRenderer.domElement)
 
     // 메인 홀
-    const buildingGeometry = new THREE.BoxGeometry(3000, 1000, 3000)
+    const buildingGeometry = new THREE.BoxGeometry(3000, 1000, 3000, 1, 1, 1)
     const buildingBuffGeometry = new THREE.BufferGeometry().fromGeometry(buildingGeometry)
     const buildingTexture = new THREE.TextureLoader()
     const buildingMaterial = new THREE.MeshPhongMaterial({
@@ -104,7 +104,7 @@ const ThreeScene = () => {
 
     //// 프로젝트 방 (J-Flix) ////
 
-    const project1Geo = new THREE.BoxGeometry(3000, 1000, 2000)
+    const project1Geo = new THREE.BoxGeometry(3000, 1000, 2000, 1, 1, 1)
     const project1Mat = new THREE.MeshPhongMaterial({
       color: 0x8af4eb,
       specular: "orange",
@@ -123,7 +123,7 @@ const ThreeScene = () => {
 
     // J-Flix 방문 구멍내기
     const JFlixDoorHole = new THREE.Mesh(
-      new THREE.BoxBufferGeometry(380, 1500, 100),
+      new THREE.BoxBufferGeometry(380, 1500, 100, 1, 1, 1),
       new THREE.MeshBasicMaterial()
     )
     JFlixDoorHole.position.set(1200, -500, -1000)
@@ -146,7 +146,7 @@ const ThreeScene = () => {
 
     // 메인 홀 창문 구멍내기
     const mainRoomHole = new THREE.Mesh(
-      new THREE.BoxBufferGeometry(500, 700, 100),
+      new THREE.BoxBufferGeometry(500, 700, 100, 1, 1, 1),
       new THREE.MeshBasicMaterial()
     )
     mainRoomHole.position.set(0, 100, -4000)
@@ -450,6 +450,7 @@ const ThreeScene = () => {
     embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
     embedWebsite.width = "1400px"
     embedWebsite.height = "800px"
+    embedWebsite.style.opacity = "0"
     embedWebsite.onmouseover = () => {
       embedWebsite.style.opacity = "1"
       tvBackCover.style.opacity = "1"
@@ -473,7 +474,7 @@ const ThreeScene = () => {
     tvBackCover.style.backgroundColor = "black"
     tvBackCover.style.color = "white"
     tvBackCover.style.fontSize = "80px"
-
+    tvBackCover.style.opacity = "0"
     const tvBackCoverObject = new CSS3D.CSS3DObject(tvBackCover)
     tvBackCoverObject.position.set(
       planeMesh.position.x - 3,

@@ -28,6 +28,7 @@ const addIframeObj = (props: {
   embedWebsite.src = props.siteUrl
   embedWebsite.width = `${props.width}px`
   embedWebsite.height = `${props.height}px`
+  embedWebsite.style.opacity = "0"
   embedWebsite.onmouseover = () => {
     embedWebsite.style.opacity = "1"
     tvBackCover.style.opacity = "1"
@@ -51,7 +52,7 @@ const addIframeObj = (props: {
   tvBackCover.style.backgroundColor = "black"
   tvBackCover.style.color = "white"
   tvBackCover.style.fontSize = "80px"
-
+  tvBackCover.style.opacity = "0"
   const tvBackCoverObject = new CSS3D.CSS3DObject(tvBackCover)
   tvBackCoverObject.position.set(
     planeMesh.position.x - 3,

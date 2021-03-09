@@ -2,6 +2,7 @@ import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { camera, scene } from "../ThreeScene"
 import nomadLogo from "../../resources/images/nomadLogo.png"
+import { PointLightHelper } from "three"
 
 // 액자 모델
 const loader = new GLTFLoader()
@@ -48,6 +49,11 @@ export const addFrame = () => {
     imageInFrame.rotateY(-Math.PI / 2)
     imageInFrame.position.set(1460, 0, 0)
 
+    const pointLight = new THREE.PointLight(0xffffff, 10, 500)
+    pointLight.position.set(1450, 0, 0)
+    const lightHelper = new THREE.PointLightHelper(pointLight, 0xffff00)
     scene.add(imageInFrame)
+    scene.add(pointLight)
+    scene.add(lightHelper)
   })
 }
