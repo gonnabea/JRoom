@@ -77,7 +77,7 @@ export const JustReadItObjs = () => {
     rotation: { x: 0, y: Math.PI / 2, z: 0 },
   })
 
-  // 방 제목 폰트모델
+  // 프로젝트 제목 폰트모델
   FontLoder(
     {
       fontModelUrl: "/fonts/helvetiker_regular.typeface.json",

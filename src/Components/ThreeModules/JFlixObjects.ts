@@ -142,10 +142,9 @@ export const JFlixObjects = () => {
 
   // 소파 모델 로드
 
-  loader.load("/models/sofa/scene.gltf", (gltf) => {
+  loader.load("/models/sofa-edit/scene.gltf", (gltf) => {
     gltf.scene.scale.set(220, 220, 220)
     gltf.scene.position.set(0, -500, 100)
-
     gltf.scene.rotateY(Math.PI)
     gltf.scene.traverse(function (child) {
       if ((<THREE.Mesh>child).isMesh) {
@@ -243,16 +242,18 @@ export const JFlixObjects = () => {
   addSelectBtn({
     text: "1",
     btnPosition: { x: -1300, y: 600, z: 500 },
-    cameraPosition: { x: 1500, y: 300, z: 0 },
-    zoomIndex: 0.25,
+    cameraPosition: { x: 1000, y: 300, z: 0 },
+    targetPosition: { x: 600, y: 250, z: 0 },
+    zoomIndex: 0.2,
   })
 
   // 채널 변경 버튼 & tv 포커싱
   addSelectBtn({
     text: "✨",
     btnPosition: { x: -1300, y: 600, z: 300 },
-    cameraPosition: { x: 1500, y: 300, z: 0 },
-    zoomIndex: 0.25,
+    cameraPosition: { x: 1000, y: 300, z: 0 },
+    targetPosition: { x: 900, y: 300, z: 0 },
+    zoomIndex: 0.2,
   })
 
   // 프로젝트 설명 DOM 오브젝트

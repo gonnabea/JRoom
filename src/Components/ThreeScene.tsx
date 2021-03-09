@@ -85,13 +85,14 @@ const ThreeScene = () => {
 
     // 메인 홀
     const buildingGeometry = new THREE.BoxGeometry(3000, 1000, 3000)
+    const buildingBuffGeometry = new THREE.BufferGeometry().fromGeometry(buildingGeometry)
     const buildingTexture = new THREE.TextureLoader()
     const buildingMaterial = new THREE.MeshPhongMaterial({
       color: 0x4e61ff,
       specular: "blue",
       flatShading: true,
     })
-    const ExhibitionRoom = new THREE.Mesh(buildingGeometry, buildingMaterial)
+    const ExhibitionRoom = new THREE.Mesh(buildingBuffGeometry, buildingMaterial)
     ExhibitionRoom.position.set(0, 0, -2510)
 
     ExhibitionRoom.material.side = THREE.BackSide // mesh 내부에서만 면이 보이게 만들어 줌.
@@ -104,7 +105,6 @@ const ThreeScene = () => {
     //// 프로젝트 방 (J-Flix) ////
 
     const project1Geo = new THREE.BoxGeometry(3000, 1000, 2000)
-
     const project1Mat = new THREE.MeshPhongMaterial({
       color: 0x8af4eb,
       specular: "orange",
@@ -172,12 +172,13 @@ const ThreeScene = () => {
 
     const project2Geo = new THREE.BoxGeometry(3000, 2000, 3000)
 
+    const project2buffGeo = new THREE.BufferGeometry().fromGeometry(project2Geo)
     const project2Mat = new THREE.MeshPhongMaterial({
       color: 0x344aff,
-      specular: "orange",
+      specular: "purple",
       flatShading: true,
     })
-    const project2Mesh = new THREE.Mesh(project2Geo, project2Mat)
+    const project2Mesh = new THREE.Mesh(project2buffGeo, project2Mat)
 
     project2Mesh.position.set(3000, 500, -2490)
     project2Mesh.material.side = THREE.DoubleSide
@@ -187,7 +188,7 @@ const ThreeScene = () => {
     //// 프로젝트 방 (Just-Read-It) ////
 
     const project3Geo = new THREE.BoxGeometry(2900, 2000, 3000)
-
+    const project3BuffGeo = new THREE.BufferGeometry().fromGeometry(project3Geo)
     const project3Mat = new THREE.MeshPhongMaterial({
       color: 0xff9500,
       specular: "orange",
@@ -405,7 +406,7 @@ const ThreeScene = () => {
 
     // 렌더러
     renderer = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: false,
       alpha: true,
       preserveDrawingBuffer: true,
     })

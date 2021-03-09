@@ -8,7 +8,7 @@ export const addWindow = (
   scale: { x: number; y: number; z: number },
   rotation: { x: any; y: any; z: any }
 ) => {
-  loader.load("/models/window1/scene.gltf", (gltf) => {
+  loader.load("/models/window1/window.gltf", (gltf) => {
     console.log(gltf)
     gltf.scene.position.set(position.x, position.y, position.z)
     gltf.scene.rotation.set(rotation.x, rotation.y, rotation.z)
