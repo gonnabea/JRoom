@@ -1,5 +1,5 @@
 import * as THREE from "three"
-import { scene } from "../ThreeScene"
+import { scene } from "../../Screen/ThreeScreens/ThreeScene"
 import floorImage2 from "../../resources/images/floor2.jpg"
 import floorImage3 from "../../resources/images/floor3.jpg"
 

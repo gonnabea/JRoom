@@ -1,6 +1,6 @@
 import CSS3D from "three-css3drenderer"
 import * as THREE from "three"
-import { cssScene, scene } from "../ThreeScene"
+import { cssScene, scene } from "../../Screen/ThreeScreens/ThreeScene"
 
 // Three.js에 html embed 시키기
 // TV 모델에 올려진 plane mesh

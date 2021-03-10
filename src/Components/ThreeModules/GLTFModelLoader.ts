@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { scene } from "../ThreeScene"
+import { scene } from "../../Screen/ThreeScreens/ThreeScene"
 
 const loader = new GLTFLoader()
 

@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import Header from "../Components/Header"
-import ThreeScene from "../Components/ThreeScene"
+import ThreeScene from "./ThreeScreens/ThreeScene"
 
 const Container = styled.main`
   width: 100vw;

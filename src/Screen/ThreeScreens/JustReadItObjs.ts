@@ -1,15 +1,17 @@
-import { scene } from "../ThreeScene"
+import { scene } from "./ThreeScene"
 import * as THREE from "three"
-import { BackSide, DoubleSide } from "three"
-import { GLTFModelLoader } from "./GLTFModelLoader"
-import { FontLoder } from "./FontLoader"
-import addDescriptionBoard from "./DescriptionBoard"
-import { addSelectBtn } from "./SelectBtn"
-import { addLogoBox } from "./LogoBox"
+import { DoubleSide } from "three"
+import { GLTFModelLoader } from "../../Components/ThreeModules/GLTFModelLoader"
+import { FontLoder } from "../../Components/ThreeModules/FontLoader"
+import addDescriptionBoard from "../../Components/ThreeModules/DescriptionBoard"
+import { addSelectBtn } from "../../Components/ThreeModules/SelectBtn"
+import { addLogoBox } from "../../Components/ThreeModules/LogoBox"
 import nodeLogo from "../../resources/images/nodeLogo.jpg"
 import mongoLogo from "../../resources/images/mongoLogo.jpg"
 import jsLogo from "../../resources/images/vanillajs.png"
 import herokuLogo from "../../resources/images/herokuLogo.png"
+import { addFloor } from "../../Components/ThreeModules/floor"
+import floorImage3 from "../../resources/images/floor3.jpg"
 
 export const JustReadItObjs = () => {
   const IntroVideo = document.createElement("video")
@@ -111,4 +113,6 @@ export const JustReadItObjs = () => {
     position: { x: -1490, y: -500, z: -2700 },
     rotation: { x: 0, y: 0, z: 0 },
   })
+
+  addFloor({ width: 3000, height: 2900, x: 3000, y: -490, z: -2500, imageSrc: floorImage3 }) // Just-Read-It 바닥
 }

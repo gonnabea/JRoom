@@ -1,4 +1,4 @@
-import { scene } from "../ThreeScene"
+import { scene } from "../../Screen/ThreeScreens/ThreeScene"
 import * as THREE from "three"
 import { BackSide, FrontSide } from "three"
 

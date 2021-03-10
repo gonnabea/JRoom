@@ -1,7 +1,7 @@
-import { scene } from "../ThreeScene"
+import { scene } from "../../Screen/ThreeScreens/ThreeScene"
 import * as THREE from "three"
 import CSS3D from "three-css3drenderer"
-import { cssScene } from "../ThreeScene"
+import { cssScene } from "../../Screen/ThreeScreens/ThreeScene"
 
 // 프로젝트 설명 DOM 오브젝트
 const addDescriptionBoard = (props: {

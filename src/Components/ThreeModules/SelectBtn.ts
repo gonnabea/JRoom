@@ -8,7 +8,7 @@ import {
   embedWebsite,
   controls,
   websiteObject,
-} from "../ThreeScene"
+} from "../../Screen/ThreeScreens/ThreeScene"
 import CSS3D from "three-css3drenderer"
 
 // 선택 버튼 생성

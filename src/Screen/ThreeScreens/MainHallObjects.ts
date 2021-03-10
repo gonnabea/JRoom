@@ -1,14 +1,17 @@
 import * as THREE from "three"
-import { DoubleSide, VideoTexture } from "three"
+import { DoubleSide } from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { scene } from "../ThreeScene"
-import { FontLoder } from "./FontLoader"
+import { scene } from "./ThreeScene"
+import { FontLoder } from "../../Components/ThreeModules/FontLoader"
 import JsLogo from "../../resources/images/vanillajs.png"
 import tsLogo from "../../resources/images/tsLogo.png"
 import threejsLogo from "../../resources/images/threejsLogo.png"
 import reactLogo from "../../resources/images/reactLogo.jpg"
 
-import { addLogoBox } from "./LogoBox"
+import { addLogoBox } from "../../Components/ThreeModules/LogoBox"
+import { addFloor } from "../../Components/ThreeModules/floor"
+import floorImage2 from "../../resources/images/floor2.jpg"
+import { addSelectBtn } from "../../Components/ThreeModules/SelectBtn"
 
 const loader = new GLTFLoader()
 
@@ -78,6 +81,26 @@ const MainHallObjects = () => {
   addLogoBox({ x: -600, y: 200, z: -4000 }, threejsLogo)
   addLogoBox({ x: -600, y: -100, z: -4000 }, reactLogo)
   addLogoBox({ x: 600, y: 200, z: -4000 }, tsLogo)
+
+  addFloor({ width: 3000, height: 2900, x: 0, y: -490, z: -2500, imageSrc: floorImage2 }) // 메인 홀 바닥
+
+  // 거실 (로비) 포커싱
+  addSelectBtn({
+    text: "2",
+    btnPosition: { x: 1200, y: 300, z: -1000 },
+    cameraPosition: { x: 0, y: 0, z: -3000.7527992239675 },
+    targetPosition: { x: 0, y: 0, z: -2000 },
+    zoomIndex: 0.2,
+  })
+
+  // 자동차 로드 포커싱
+  addSelectBtn({
+    text: "3",
+    btnPosition: { x: 0, y: 0, z: -3500 },
+    cameraPosition: { x: 0, y: 0, z: -4000.7527992239675 },
+    targetPosition: { x: 0, y: 0, z: -3000 },
+    zoomIndex: 0.2,
+  })
 }
 
 export default MainHallObjects

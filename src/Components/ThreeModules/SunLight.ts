@@ -1,5 +1,5 @@
 import * as THREE from "three"
-import { scene, camera, renderer } from "../ThreeScene"
+import { scene, camera, renderer } from "../../Screen/ThreeScreens/ThreeScene"
 import { GodRaysEffect, RenderPass, EffectPass, EffectComposer } from "postprocessing"
 
 export const addSunLight = (position: { x: number; y: number; z: number }) => {

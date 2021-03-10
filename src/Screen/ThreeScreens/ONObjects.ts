@@ -1,16 +1,18 @@
-import { addLogoBox } from "./LogoBox"
-import { addSelectBtn } from "./SelectBtn"
+import { addLogoBox } from "../../Components/ThreeModules/LogoBox"
+import { addSelectBtn } from "../../Components/ThreeModules/SelectBtn"
 import opencvLogo from "../../resources/images/opencvLogo.png"
 import socketioLogo from "../../resources/images/socketioLogo.png"
 import webrtcLogo from "../../resources/images/webrtcLogo.png"
 import pythonLogo from "../../resources/images/pythonLogo.jpg"
 import flaskLogo from "../../resources/images/flaskLogo.png"
 import mysqlLogo from "../../resources/images/mysqlLogo.png"
-import addDescriptionBoard from "./DescriptionBoard"
-import { GLTFModelLoader } from "./GLTFModelLoader"
-import addIframeObj from "./iframeObj"
-import { FontLoder } from "./FontLoader"
-import { scene } from "../ThreeScene"
+import addDescriptionBoard from "../../Components/ThreeModules/DescriptionBoard"
+import { GLTFModelLoader } from "../../Components/ThreeModules/GLTFModelLoader"
+import addIframeObj from "../../Components/ThreeModules/iframeObj"
+import { FontLoder } from "../../Components/ThreeModules/FontLoader"
+import { scene } from "./ThreeScene"
+import { addFloor } from "../../Components/ThreeModules/floor"
+import floorImage3 from "../../resources/images/floor3.jpg"
 
 const onObjects = () => {
   // 기술스택 박스 로드
@@ -103,5 +105,7 @@ const onObjects = () => {
     zoomIndex: 0.2,
     cameraPosition: { x: 2000, y: 500, z: -2500 },
   })
+
+  addFloor({ width: 3000, height: 2900, x: -3000, y: -490, z: -2500, imageSrc: floorImage3 }) // Our-Now 바닥
 }
 export default onObjects

@@ -1,5 +1,5 @@
 import groundImg from "../../resources/images/ground.jpg"
-import { scene } from "../ThreeScene"
+import { scene } from "../../Screen/ThreeScreens/ThreeScene"
 import * as THREE from "three"
 
 // 노을 배경 박스 생성

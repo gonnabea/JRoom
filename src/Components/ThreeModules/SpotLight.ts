@@ -1,5 +1,5 @@
 import * as THREE from "three"
-import { scene } from "../ThreeScene"
+import { scene } from "../../Screen/ThreeScreens/ThreeScene"
 
 export const addSpotLight = (
   position: { x: number; y: number; z: number },

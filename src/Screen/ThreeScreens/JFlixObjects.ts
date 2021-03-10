@@ -1,23 +1,23 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { scene } from "../ThreeScene"
-import { FontLoder } from "./FontLoader"
-import { addLogoBox } from "./LogoBox"
+import { scene } from "./ThreeScene"
+import { FontLoder } from "../../Components/ThreeModules/FontLoader"
+import { addLogoBox } from "../../Components/ThreeModules/LogoBox"
 
 import reactLogo from "../../resources/images/reactLogo.jpg"
 import styledComponentsLogo from "../../resources/images/styledComponents.jpg"
 import netlifyLogo from "../../resources/images/netlify.jpg"
 import jsLogo from "../../resources/images/vanillajs.png"
-import sunsetImg1 from "../resources/images/Sunset Backgrounds/sunset12.jpg"
-import { addCeilConnector } from "./CeilConnetor"
-import { addFrame } from "./Frame"
+import { addCeilConnector } from "../../Components/ThreeModules/CeilConnetor"
+import { addFrame } from "../../Components/ThreeModules/Frame"
 import * as THREE from "three"
-import CSS3D from "three-css3drenderer"
-import { cssScene } from "../ThreeScene"
-import addDescriptionBoard from "./DescriptionBoard"
-import { addRoofWindowHole } from "./RoofWIndowHole"
-import { addWindow } from "./Window"
-import { addSelectBtn } from "./SelectBtn"
 
+import addDescriptionBoard from "../../Components/ThreeModules/DescriptionBoard"
+import { addRoofWindowHole } from "../../Components/ThreeModules/RoofWIndowHole"
+import { addWindow } from "../../Components/ThreeModules/Window"
+import { addSelectBtn } from "../../Components/ThreeModules/SelectBtn"
+import { addFloor } from "../../Components/ThreeModules/floor"
+
+import floorImage3 from "../../resources/images/floor3.jpg"
 export const JFlixObjects = () => {
   // J-Flix 지붕
   const roofShape = new THREE.Shape()
@@ -268,4 +268,30 @@ export const JFlixObjects = () => {
     position: { x: -1200, y: 610, z: -400 },
     rotation: { x: 0, y: Math.PI / 2, z: 0 },
   })
+
+  addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0, imageSrc: floorImage3 }) // J-Flix 바닥
+
+  // 창문 빛으로 밝히기
+  const windowLight = new THREE.RectAreaLight(0xffffff)
+  windowLight.position.set(-1000, 1300, 700)
+  windowLight.intensity = 200
+  windowLight.width = 500
+  windowLight.height = 500
+  windowLight.lookAt(-750, 975, 500)
+  scene.add(windowLight)
+
+  // 벽에 붙일 책 모형
+  loader.load("/models/book/scene.gltf", (gltf) => {
+    gltf.scene.scale.set(1000, 1000, 1000)
+    gltf.scene.rotateX(Math.PI / 2)
+    gltf.scene.position.set(-300, 0, -900)
+    scene.add(gltf.scene)
+  })
+  const bookCoverMesh = new THREE.Mesh(
+    new THREE.PlaneBufferGeometry(720, 1000, 40),
+    new THREE.MeshPhongMaterial({ color: 0x292a2e, specular: "orange", flatShading: true })
+  )
+  bookCoverMesh.position.set(100, 0, -890)
+  bookCoverMesh.material.side = THREE.DoubleSide
+  scene.add(bookCoverMesh)
 }

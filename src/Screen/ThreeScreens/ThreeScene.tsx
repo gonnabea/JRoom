@@ -2,28 +2,15 @@ import React, { useEffect, useRef } from "react"
 import * as THREE from "three"
 import styled from "styled-components"
 import { OrbitControls } from "three-orbitcontrols-ts"
-import { DoubleSide, FrontSide } from "three"
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import CSS3D from "three-css3drenderer"
-
-// 이미지 임포트
-import { addWindow } from "./ThreeModules/Window"
-import { addDirLight } from "./ThreeModules/DirectionalLight"
-import { addSpotLight } from "./ThreeModules/SpotLight"
-
-import { addRoofWindowHole } from "./ThreeModules/RoofWIndowHole"
-import { addSunLight } from "./ThreeModules/SunLight"
-import { JFlixObjects } from "./ThreeModules/JFlixObjects"
-import { addBackgroundBox } from "./ThreeModules/BackgroundBox"
-import { addFrame } from "./ThreeModules/Frame"
-import { addSelectBtn } from "./ThreeModules/SelectBtn"
+import { addDirLight } from "../../Components/ThreeModules/DirectionalLight"
+import { addSpotLight } from "../../Components/ThreeModules/SpotLight"
+import { addSunLight } from "../../Components/ThreeModules/SunLight"
+import { JFlixObjects } from "./JFlixObjects"
 import { CSG } from "three-csg-ts"
-import floorImage2 from "../resources/images/floor2.jpg"
-import floorImage3 from "../resources/images/floor3.jpg"
-import MainHallObjects from "./ThreeModules/MainHallObjects"
-import { JustReadItObjs } from "./ThreeModules/JustReadItObjs"
-import { addFloor } from "./ThreeModules/floor"
-import onObjects from "./ThreeModules/ONObjects"
+import MainHallObjects from "./MainHallObjects"
+import { JustReadItObjs } from "./JustReadItObjs"
+import onObjects from "./ONObjects"
 
 const Container = styled.section`
   width: 100%;
@@ -237,44 +224,9 @@ const ThreeScene = () => {
     roofMesh.position.set(0, 0, -4000)
     scene.add(roofMesh)
 
-    // 바닥
-
-    addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0, imageSrc: floorImage3 }) // J-Flix 바닥
-
-    addFloor({ width: 3000, height: 2900, x: 0, y: -490, z: -2500, imageSrc: floorImage2 }) // 메인 홀 바닥
-
-    addFloor({ width: 3000, height: 2900, x: 3000, y: -490, z: -2500, imageSrc: floorImage3 }) // Just-Read-It 바닥
-
-    addFloor({ width: 3000, height: 2900, x: -3000, y: -490, z: -2500, imageSrc: floorImage3 }) // Our-Now 바닥
-
     ////
 
     // GLTF 로더 //
-
-    // 창문 빛으로 밝히기
-    const windowLight = new THREE.RectAreaLight(0xffffff)
-    windowLight.position.set(-1000, 1300, 700)
-    windowLight.intensity = 200
-    windowLight.width = 500
-    windowLight.height = 500
-    windowLight.lookAt(-750, 975, 500)
-    scene.add(windowLight)
-
-    // 벽에 붙일 책 모형
-    const loader = new GLTFLoader()
-    loader.load("/models/book/scene.gltf", (gltf) => {
-      gltf.scene.scale.set(1000, 1000, 1000)
-      gltf.scene.rotateX(Math.PI / 2)
-      gltf.scene.position.set(-300, 0, -900)
-      scene.add(gltf.scene)
-    })
-    const bookCoverMesh = new THREE.Mesh(
-      new THREE.PlaneBufferGeometry(720, 1000, 40),
-      new THREE.MeshPhongMaterial({ color: 0x292a2e, specular: "orange", flatShading: true })
-    )
-    bookCoverMesh.position.set(100, 0, -890)
-    bookCoverMesh.material.side = DoubleSide
-    scene.add(bookCoverMesh)
 
     // 프로젝트별로 구분
     JFlixObjects()
@@ -282,110 +234,6 @@ const ThreeScene = () => {
     JustReadItObjs()
     onObjects()
 
-    // // 자동차 모델 로드
-
-    // loader.load("/models/free_porsche_911_carrera_4s/scene.gltf", (gltf) => {
-    //   let wheel: THREE.Group
-    //   let rotateIndex = 0
-    //   loader.load("/models/sports_car_wheel/scene.gltf", (wheelGltf) => {
-    //     wheelGltf.scene.scale.set(240, 240, 240)
-    //     wheelGltf.scene.position.set(-750, -300, 3390)
-
-    //     scene.add(wheelGltf.scene)
-    //     wheel = wheelGltf.scene
-    //   })
-    //   gltf.scene.scale.set(300, 300, 300)
-    //   gltf.scene.position.set(-500, -200, 3000)
-    //   scene.add(gltf.scene)
-
-    //   // 자동차 바퀴 제거: rotation 애니메이션 구현을 위해 다른 바퀴 로드 필요.
-    //   gltf.scene.children[0].children[0].children[0].children[7].visible = false
-    //   gltf.scene.children[0].children[0].children[0].children[20].visible = false
-
-    //   // 자동차 컨트롤
-    //   let keysPressed = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false }
-
-    //   window.addEventListener("keydown", (e) => {
-    //     if (e.key === "ArrowUp") {
-    //       keysPressed.ArrowUp = true
-    //     } else if (e.key === "ArrowDown") {
-    //       keysPressed.ArrowDown = true
-    //     } else if (e.key === "ArrowLeft") {
-    //       keysPressed.ArrowLeft = true
-    //     } else if (e.key === "ArrowRight") {
-    //       keysPressed.ArrowRight = true
-    //     }
-
-    //     if (keysPressed.ArrowUp) {
-    //       // 바퀴 돌리기
-    //       setInterval(() => {
-    //         rotateIndex += 2
-    //         wheel.rotation.x = rotateIndex
-    //       }, 10)
-    //       const forwardSoundUrl = "/sounds/car-start.mp3"
-    //       const soundEffect = document.createElement("audio")
-    //       const audioSource = document.createElement("source")
-    //       soundEffect.appendChild(audioSource)
-    //       soundEffect.currentTime = 1
-    //       audioSource.src = forwardSoundUrl
-    //       soundEffect.play()
-    //       setTimeout(() => soundEffect.pause(), 2000)
-    //       // 가속력을 고려한 자동차의 움직임 구현
-    //       gltf.scene.translateZ(60)
-
-    //       const moveFoward = setInterval(() => {
-    //         gltf.scene.translateZ(10)
-    //         wheel.position.z += 17
-    //       }, 100)
-    //       setTimeout(() => clearInterval(moveFoward), 1000)
-    //     } else if (keysPressed.ArrowDown) {
-    //       gltf.scene.translateZ(-60)
-    //       const moveBackward = setInterval(() => gltf.scene.translateZ(-10), 100)
-    //       setTimeout(() => clearInterval(moveBackward), 1000)
-    //     } else if (keysPressed.ArrowLeft) {
-    //       gltf.scene.rotateY(0.2)
-    //     } else if (keysPressed.ArrowRight) {
-    //       gltf.scene.rotateY(-0.2)
-    //     }
-    //     window.addEventListener("keyup", (e) => {
-    //       if (e.key === "ArrowUp") {
-    //         keysPressed.ArrowUp = false
-    //       } else if (e.key === "ArrowDown") {
-    //         keysPressed.ArrowDown = false
-    //       } else if (e.key === "ArrowLeft") {
-    //         keysPressed.ArrowLeft = false
-    //       } else if (e.key === "ArrowRight") {
-    //         keysPressed.ArrowRight = false
-    //       }
-    //     })
-    //   })
-    // })
-    // const carLight = new THREE.PointLight(0xffffff, 10, 2000)
-    // carLight.position.set(0, -200, 3000)
-    // const lightIndicator = new THREE.PointLightHelper(carLight, 300)
-    // lightIndicator.color = 0x3f83f8
-
-    // const carLight2 = new THREE.PointLight(0x119be3, 10, 2000)
-    // carLight2.position.set(-1000, -200, 3000)
-    // const lightIndicator2 = new THREE.PointLightHelper(carLight2, 300)
-    // lightIndicator2.color = 0x3f83f8
-
-    // const carLight3 = new THREE.PointLight(0xffffff, 10, 3000)
-    // carLight3.position.set(-500, -200, 4000)
-    // const lightIndicator3 = new THREE.PointLightHelper(carLight3, 300)
-    // lightIndicator3.color = 0x3f83f8
-
-    // scene.add(carLight)
-    // scene.add(lightIndicator)
-    // scene.add(carLight2)
-    // scene.add(lightIndicator2)
-    // scene.add(carLight3)
-    // scene.add(lightIndicator3)
-
-    // 노을 배경 박스 생성
-    // addBackgroundBox()
-
-    // 레이캐스터 (클릭이벤트)
     // 마우스 움직일 때마다 오브젝트 감지
 
     const onMouseMove = (event: { clientX: number; clientY: number }) => {
@@ -425,14 +273,6 @@ const ThreeScene = () => {
 
     // Three.js에 html embed 시키기
     // TV 모델에 올려진 plane mesh
-
-    // addIframeObj({
-    //   siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
-    //   width: 1400,
-    //   height: 800,
-    //   position: { x: -1200, y: 10, z: 0 },
-    //   rotation: { x: 0, y: Math.PI / 2, z: 0 },
-    // })
 
     const geometry = new THREE.PlaneBufferGeometry(1400, 800)
 
@@ -484,25 +324,6 @@ const ThreeScene = () => {
     tvBackCoverObject.rotation.set(0, Math.PI / 2, 0)
     cssScene.add(tvBackCoverObject)
 
-    // 선택 버튼 생성
-
-    // 거실 (로비) 포커싱
-    addSelectBtn({
-      text: "2",
-      btnPosition: { x: 1200, y: 300, z: -1000 },
-      cameraPosition: { x: 0, y: 0, z: -3000.7527992239675 },
-      targetPosition: { x: 0, y: 0, z: -2000 },
-      zoomIndex: 0.2,
-    })
-
-    // 자동차 로드 포커싱
-    addSelectBtn({
-      text: "3",
-      btnPosition: { x: 0, y: 0, z: -3500 },
-      cameraPosition: { x: 0, y: 0, z: -4000.7527992239675 },
-      targetPosition: { x: 0, y: 0, z: -3000 },
-      zoomIndex: 0.2,
-    })
     // 갓레이이펙트
 
     composer = addSunLight({ x: -600, y: 200, z: 100 })
