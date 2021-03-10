@@ -49,8 +49,8 @@ export const addFrame = () => {
     imageInFrame.rotateY(-Math.PI / 2)
     imageInFrame.position.set(1460, 0, 0)
 
-    const pointLight = new THREE.PointLight(0xffffff, 10, 500)
-    pointLight.position.set(1450, 0, 0)
+    const pointLight = new THREE.PointLight(0xffffff, 5, 500)
+    pointLight.position.set(1420, 0, 0)
     const lightHelper = new THREE.PointLightHelper(pointLight, 0xffff00)
     scene.add(imageInFrame)
     scene.add(pointLight)

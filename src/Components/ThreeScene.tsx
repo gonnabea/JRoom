@@ -69,7 +69,7 @@ const ThreeScene = () => {
   }
 
   useEffect(() => {
-    camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 21000)
+    camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 100000)
     camera.position.set(-2773.8192101111504, 490.0248603839669, 9020.7527992239675)
     camera.zoom = 0.3
     camera.updateProjectionMatrix()
