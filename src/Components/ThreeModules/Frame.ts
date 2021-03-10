@@ -7,10 +7,9 @@ import { PointLightHelper } from "three"
 // 액자 모델
 const loader = new GLTFLoader()
 
-export let frameGroupMesh: THREE.Object3D
 export const addFrame = () => {
   loader.load("/models/3d_architecture__photo_frame/scene.gltf", (gltf) => {
-    frameGroupMesh = gltf.scene
+    const frameGroupMesh = gltf.scene
     frameGroupMesh.scale.set(10, 10, 10)
     frameGroupMesh.position.set(1480, 0, 0)
     frameGroupMesh.rotateY(Math.PI)

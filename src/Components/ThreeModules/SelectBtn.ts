@@ -10,7 +10,6 @@ import {
   websiteObject,
 } from "../ThreeScene"
 import CSS3D from "three-css3drenderer"
-import { frameGroupMesh } from "./Frame"
 
 // 선택 버튼 생성
 export const addSelectBtn = (props: {
@@ -73,9 +72,9 @@ export const addSelectBtn = (props: {
 
   selectBtn.onclick = () => {
     // 액자 모델 프레임
-    const meshsOfFrame =
-      frameGroupMesh?.children[0].children[0].children[0].children[0].children[0].children[0]
-        .children
+    // const meshsOfFrame =
+    //   frameGroupMesh?.children[0].children[0].children[0].children[0].children[0].children[0]
+    //     .children
 
     if (props.text === "0") {
       controls.target.set(0, 0, 0)
@@ -87,17 +86,17 @@ export const addSelectBtn = (props: {
 
       camera.updateMatrix()
 
-      meshsOfFrame.map((object: { visible: boolean }) => {
-        object.visible = false
-      })
+      // meshsOfFrame.map((object: { visible: boolean }) => {
+      //   object.visible = false
+      // })
     } // 프로젝트 변경 버튼을 클릭했을 경우
     else if (props.text === "✨") {
       chooseProject()
       controls.target.set(websiteObject.position.x, 0, websiteObject.position.z)
       camera.updateMatrix()
-      meshsOfFrame.map((object: { visible: boolean }) => {
-        object.visible = false
-      })
+      // meshsOfFrame.map((object: { visible: boolean }) => {
+      //   object.visible = false
+      // })
     }
 
     if (props.targetPosition) {

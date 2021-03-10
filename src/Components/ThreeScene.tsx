@@ -180,7 +180,7 @@ const ThreeScene = () => {
     })
     const project2Mesh = new THREE.Mesh(project2buffGeo, project2Mat)
 
-    project2Mesh.position.set(3000, 500, -2490)
+    project2Mesh.position.set(3010, 500, -2490)
     project2Mesh.material.side = THREE.DoubleSide
 
     scene.add(project2Mesh)
@@ -191,12 +191,12 @@ const ThreeScene = () => {
     const project3BuffGeo = new THREE.BufferGeometry().fromGeometry(project3Geo)
     const project3Mat = new THREE.MeshPhongMaterial({
       color: 0xff9500,
-      specular: "orange",
+      specular: "black",
       flatShading: true,
     })
     const project3Mesh = new THREE.Mesh(project3Geo, project3Mat)
 
-    project3Mesh.position.set(-2950, 500, -2490)
+    project3Mesh.position.set(-2960, 500, -2490)
     project3Mesh.material.side = THREE.DoubleSide
     console.log(project3Mesh)
     scene.add(project3Mesh)

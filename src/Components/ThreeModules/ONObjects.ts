@@ -10,16 +10,9 @@ import addDescriptionBoard from "./DescriptionBoard"
 import { GLTFModelLoader } from "./GLTFModelLoader"
 import addIframeObj from "./iframeObj"
 import { FontLoder } from "./FontLoader"
+import { scene } from "../ThreeScene"
 
 const onObjects = () => {
-  addSelectBtn({
-    text: "5",
-    btnPosition: { x: 1000, y: 0, z: -2500 },
-    targetPosition: { x: 3000, y: 300, z: -2000 },
-    zoomIndex: 0.2,
-    cameraPosition: { x: 2000, y: 300, z: -2000 },
-  })
-
   // 기술스택 박스 로드
   addLogoBox({ x: 2700, y: 500, z: -3900 }, opencvLogo)
   addLogoBox({ x: 3000, y: 500, z: -3900 }, socketioLogo)
@@ -31,17 +24,17 @@ const onObjects = () => {
   // 스마트폰 모델 로드
   GLTFModelLoader({
     modelUrl: "/models/smartphone/scene.gltf",
-    scale: { x: 900, y: 800, z: 600 },
-    position: { x: 4100, y: 400, z: -2700 },
-    rotation: { x: 0, y: -Math.PI / 2.5, z: 0 },
+    scale: { x: 950, y: 800, z: 600 },
+    position: { x: 4100, y: 400, z: -2400 },
+    rotation: { x: Math.PI / 2, y: -Math.PI / 2.5, z: 0 },
   })
 
   // iframe 웹사이트 로드
   addIframeObj({
     siteUrl: "https://our-now.herokuapp.com/#/",
-    position: { x: 4000, y: 400, z: -2700 },
-    width: 800,
-    height: 1200,
+    position: { x: 4000, y: 400, z: -2380 },
+    width: 1200,
+    height: 800,
     rotation: { x: 0, y: -Math.PI / 2, z: 0 },
   })
 
@@ -54,14 +47,14 @@ const onObjects = () => {
     titleColor: "purple",
     description:
       "카카오톡과 같이 실시간 채팅과 1:1, 다대다 채팅이 가능하며, 화상통화 기능과 얼굴인식을 통환 효과 각종 영상처리 넣기를 지원하는 웹입니다.",
-    position: { x: 4000, y: 800, z: -1950 },
+    position: { x: 4000, y: 1000, z: -1950 },
     rotation: { x: 0, y: -Math.PI / 2, z: 0 },
   })
   // 메세지 아이콘 모델 로드
   GLTFModelLoader({
     modelUrl: "/models/digital_message_icon/scene.gltf",
     scale: { x: 200, y: 200, z: 200 },
-    position: { x: 3700, y: 400, z: -1000 },
+    position: { x: 3000, y: 500, z: -1100 },
     rotation: { x: 0, y: 0, z: 0 },
   })
 
@@ -75,8 +68,40 @@ const onObjects = () => {
       color: 0x07e5fd,
       bevelSize: 7,
     },
-    { x: 3300, y: 600, z: -1000 },
+    { x: 3300, y: 1000, z: -1100 },
     { x: 0, y: Math.PI, z: 0 }
   )
+
+  // 수납장 모델 로드
+  GLTFModelLoader({
+    modelUrl: "/models/foyer_table/scene.gltf",
+    scale: { x: 5, y: 5, z: 5 },
+    position: { x: 3000, y: -500, z: -1100 },
+    rotation: { x: 0, y: Math.PI, z: 0 },
+  })
+
+  // 테이블 모델 로드
+  GLTFModelLoader({
+    modelUrl: "/models/square_dining_table/scene.gltf",
+    scale: { x: 8, y: 8, z: 8 },
+    position: { x: 3000, y: -400, z: -2500 },
+    rotation: { x: 0, y: -Math.PI / 2, z: 0 },
+  })
+
+  // 방문 모델 로드
+  GLTFModelLoader({
+    modelUrl: "/models/door/scene.gltf",
+    scale: { x: 600, y: 300, z: 300 },
+    position: { x: 1520, y: -500, z: -3000 },
+    rotation: { x: 0, y: 0, z: 0 },
+  })
+
+  addSelectBtn({
+    text: "5",
+    btnPosition: { x: 1520, y: 0, z: -3000 },
+    targetPosition: { x: 3000, y: 500, z: -2500 },
+    zoomIndex: 0.2,
+    cameraPosition: { x: 2000, y: 500, z: -2500 },
+  })
 }
 export default onObjects

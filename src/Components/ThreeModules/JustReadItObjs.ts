@@ -90,17 +90,25 @@ export const JustReadItObjs = () => {
     { x: -3500, y: 700, z: -4000 }
   )
 
-  // Just-Read-It 포커싱
+  addLogoBox({ x: -2700, y: 500, z: -1100 }, nodeLogo)
+  addLogoBox({ x: -3000, y: 500, z: -1100 }, mongoLogo)
+  addLogoBox({ x: -3000, y: 200, z: -1100 }, jsLogo)
+  addLogoBox({ x: -2700, y: 200, z: -1100 }, herokuLogo)
+
+  // 프로젝트 선택 버튼
   addSelectBtn({
     text: "4",
-    btnPosition: { x: -1500, y: 0, z: -3000 },
+    btnPosition: { x: -1500, y: 0, z: -2700 },
     cameraPosition: { x: -2000, y: 500, z: -2500 },
     targetPosition: { x: -3000, y: 500, z: -2500 },
     zoomIndex: 0.2,
   })
 
-  addLogoBox({ x: -2700, y: 500, z: -1100 }, nodeLogo)
-  addLogoBox({ x: -3000, y: 500, z: -1100 }, mongoLogo)
-  addLogoBox({ x: -3000, y: 200, z: -1100 }, jsLogo)
-  addLogoBox({ x: -2700, y: 200, z: -1100 }, herokuLogo)
+  // 방문 모델 로드
+  GLTFModelLoader({
+    modelUrl: "/models/door/scene.gltf",
+    scale: { x: 600, y: 300, z: 300 },
+    position: { x: -1490, y: -500, z: -2700 },
+    rotation: { x: 0, y: 0, z: 0 },
+  })
 }
