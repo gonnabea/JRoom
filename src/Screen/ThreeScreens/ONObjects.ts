@@ -13,6 +13,8 @@ import { FontLoder } from "../../Components/ThreeModules/FontLoader"
 import { scene } from "./ThreeScene"
 import { addFloor } from "../../Components/ThreeModules/floor"
 import floorImage3 from "../../resources/images/floor3.jpg"
+import { addFrame } from "../../Components/ThreeModules/Frame"
+import chatImg from "../../resources/images/chat.jpg"
 
 const onObjects = () => {
   // 기술스택 박스 로드
@@ -107,5 +109,11 @@ const onObjects = () => {
   })
 
   addFloor({ width: 3000, height: 2900, x: -3000, y: -490, z: -2500, imageSrc: floorImage3 }) // Our-Now 바닥
+
+  addFrame({
+    position: { x: 1520, y: 400, z: -1800 },
+    imageUrl: chatImg,
+    rotateY: 0,
+  })
 }
 export default onObjects

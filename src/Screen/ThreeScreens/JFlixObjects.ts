@@ -16,7 +16,7 @@ import { addRoofWindowHole } from "../../Components/ThreeModules/RoofWIndowHole"
 import { addWindow } from "../../Components/ThreeModules/Window"
 import { addSelectBtn } from "../../Components/ThreeModules/SelectBtn"
 import { addFloor } from "../../Components/ThreeModules/floor"
-
+import nomadLogo from "../../resources/images/nomadLogo.png"
 import floorImage3 from "../../resources/images/floor3.jpg"
 export const JFlixObjects = () => {
   // J-Flix 지붕
@@ -176,7 +176,11 @@ export const JFlixObjects = () => {
   })
 
   // 액자 모델 추가, 노마드 로고 그림 배치
-  addFrame()
+  addFrame({
+    imageUrl: nomadLogo,
+    position: { x: 1480, y: 0, z: 0 },
+    rotateY: -Math.PI,
+  })
 
   // 천장과 벽지 이음새 생성
   addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: 1480, y: 490, z: -1000 }, "black", {

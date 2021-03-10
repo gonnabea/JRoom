@@ -224,10 +224,6 @@ const ThreeScene = () => {
     roofMesh.position.set(0, 0, -4000)
     scene.add(roofMesh)
 
-    ////
-
-    // GLTF 로더 //
-
     // 프로젝트별로 구분
     JFlixObjects()
     MainHallObjects()
@@ -260,9 +256,9 @@ const ThreeScene = () => {
       preserveDrawingBuffer: true,
     })
 
-    renderer.shadowMap.enabled = true
+    // renderer.shadowMap.enabled = true
 
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap
+    // renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)

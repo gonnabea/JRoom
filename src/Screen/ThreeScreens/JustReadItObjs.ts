@@ -12,6 +12,8 @@ import jsLogo from "../../resources/images/vanillajs.png"
 import herokuLogo from "../../resources/images/herokuLogo.png"
 import { addFloor } from "../../Components/ThreeModules/floor"
 import floorImage3 from "../../resources/images/floor3.jpg"
+import { addFrame } from "../../Components/ThreeModules/Frame"
+import hackathonLogo from "../../resources/images/nomad_hackathon.png"
 
 export const JustReadItObjs = () => {
   const IntroVideo = document.createElement("video")
@@ -110,9 +112,15 @@ export const JustReadItObjs = () => {
   GLTFModelLoader({
     modelUrl: "/models/door/scene.gltf",
     scale: { x: 600, y: 300, z: 300 },
-    position: { x: -1490, y: -500, z: -2700 },
+    position: { x: -1490, y: -500, z: -2500 },
     rotation: { x: 0, y: 0, z: 0 },
   })
 
   addFloor({ width: 3000, height: 2900, x: 3000, y: -490, z: -2500, imageSrc: floorImage3 }) // Just-Read-It 바닥
+
+  addFrame({
+    imageUrl: hackathonLogo,
+    position: { x: -1500, y: 800, z: -2500 },
+    rotateY: -Math.PI,
+  })
 }
