@@ -243,7 +243,7 @@ const ThreeScene = () => {
 
     // 모바일 기기 대비
     if (window.matchMedia("(max-width: 500px)").matches) {
-      renderer.setPixelRatio(window.devicePixelRatio / 2)
+      renderer.setPixelRatio(window.devicePixelRatio / 4)
     } else {
       renderer.setPixelRatio(window.devicePixelRatio)
     }
