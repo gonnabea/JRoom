@@ -241,7 +241,12 @@ const ThreeScene = () => {
 
     // renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
-    renderer.setPixelRatio(window.devicePixelRatio / 1.5)
+    // 모바일 기기 대비
+    if (window.matchMedia("(max-width: 500px)")) {
+      renderer.setPixelRatio(window.devicePixelRatio / 2)
+    }
+    renderer.setPixelRatio(window.devicePixelRatio)
+
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setClearColor(0xffffff, 1)
     renderer.domElement.style.position = "absolute"
