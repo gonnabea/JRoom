@@ -3,6 +3,8 @@ import * as THREE from "three"
 import CSS3D from "three-css3drenderer"
 import { cssScene } from "../../Screen/ThreeScreens/ThreeScene"
 
+export let descriptionBox: HTMLAnchorElement
+
 // 프로젝트 설명 DOM 오브젝트
 const addDescriptionBoard = (props: {
   width: string
@@ -28,7 +30,7 @@ const addDescriptionBoard = (props: {
   scene.add(planeMesh)
 
   // 프로젝트 실제 링크 박스
-  const descriptionBox = document.createElement("a")
+  descriptionBox = document.createElement("a")
   descriptionBox.style.width = props.width
   descriptionBox.style.height = props.height
   descriptionBox.style.opacity = "0.7"

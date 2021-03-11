@@ -21,6 +21,10 @@ const Container = styled.section`
   :active {
     cursor: grabbing;
   }
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-self: center;
 `
 
 export let camera: THREE.PerspectiveCamera
@@ -58,13 +62,17 @@ const ThreeScene = () => {
   useEffect(() => {
     camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 100000)
     camera.position.set(-2773.8192101111504, 490.0248603839669, 9020.7527992239675)
-    camera.zoom = 0.3
+    camera.zoom = 0.5
     camera.updateProjectionMatrix()
     camera.updateMatrix()
     scene = new THREE.Scene()
     cssRenderer = new CSS3D.CSS3DRenderer()
     cssScene = new THREE.Scene()
-    cssRenderer.setSize(window.innerWidth, window.innerHeight)
+    if (window.matchMedia("(max-width:800)").matches) {
+      cssRenderer.setSize(window.innerWidth, window.innerHeight)
+    } else {
+      cssRenderer.setSize(window.innerWidth, window.innerHeight)
+    }
     cssRenderer.domElement.style.top = 0
     cssRenderer.domElement.style.position = "absolute"
     cssRenderer.domElement.style.zIndex = "5"
@@ -241,11 +249,16 @@ const ThreeScene = () => {
 
     // renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
-    // 모바일 기기 대비
+    // 성능 최적화를 위한 화면 크기별 해상도 조정
     if (window.matchMedia("(max-width: 500px)").matches) {
-      renderer.setPixelRatio(window.devicePixelRatio / 4)
-    } else {
+      // 모바일 기기 대비
+      renderer.setPixelRatio(window.devicePixelRatio / 2)
+    } else if (window.matchMedia("(max-width: 800px)").matches) {
       renderer.setPixelRatio(window.devicePixelRatio)
+    } else if (window.matchMedia("(max-width: 1200px)")) {
+      renderer.setPixelRatio(window.devicePixelRatio / 1.5)
+    } else {
+      renderer.setPixelRatio(window.devicePixelRatio / 2)
     }
 
     renderer.setSize(window.innerWidth, window.innerHeight)

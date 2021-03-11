@@ -10,6 +10,7 @@ import {
   websiteObject,
 } from "../../Screen/ThreeScreens/ThreeScene"
 import CSS3D from "three-css3drenderer"
+import addDescriptionBoard, { descriptionBox } from "./DescriptionBoard"
 
 // 선택 버튼 생성
 export const addSelectBtn = (props: {
@@ -71,19 +72,26 @@ export const addSelectBtn = (props: {
   cssScene.add(selectBtnObj)
 
   selectBtn.onclick = () => {
-    // 액자 모델 프레임
-    // const meshsOfFrame =
-    //   frameGroupMesh?.children[0].children[0].children[0].children[0].children[0].children[0]
-    //     .children
-
     if (props.text === "0") {
+      descriptionBox.style.opacity = "0"
       controls.target.set(0, 0, 0)
     }
 
-    // TV 버튼을 클릭했을 경우
     if (props.text === "1") {
+      descriptionBox.style.opacity = "0"
       controls.target.set(websiteObject.position.x, 0, websiteObject.position.z) // 예외적으로 타겟이 정해짐
-
+      // JFlix 프로젝트 설명 DOM 오브젝트
+      addDescriptionBoard({
+        width: "600px",
+        height: "400px",
+        description:
+          "영화 소개 사이트 입니다. 리액트 내에서 ajax를 사용해 만들었으며, json 데이터의 동적 처리, SPA, 컴포넌트 활용 등 순수 JavaScript와 비교해서 어떤 점이 리액트가 우수한 지 알 수 있었던 프로젝트였습니다.",
+        title: "J-Flix",
+        titleColor: "#10EEC6",
+        siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
+        position: { x: -1200, y: 610, z: -400 },
+        rotation: { x: 0, y: Math.PI / 2, z: 0 },
+      })
       camera.updateMatrix()
 
       // meshsOfFrame.map((object: { visible: boolean }) => {
@@ -94,9 +102,47 @@ export const addSelectBtn = (props: {
       chooseProject()
       controls.target.set(websiteObject.position.x, 0, websiteObject.position.z)
       camera.updateMatrix()
-      // meshsOfFrame.map((object: { visible: boolean }) => {
-      //   object.visible = false
-      // })
+      // 프로젝트 설명 DOM 오브젝트
+      addDescriptionBoard({
+        width: "600px",
+        height: "400px",
+        description:
+          "영화 소개 사이트 입니다. 리액트 내에서 ajax를 사용해 만들었으며, json 데이터의 동적 처리, SPA, 컴포넌트 활용 등 순수 JavaScript와 비교해서 어떤 점이 리액트가 우수한 지 알 수 있었던 프로젝트였습니다.",
+        title: "J-Flix",
+        titleColor: "#10EEC6",
+        siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
+        position: { x: -1200, y: 610, z: -400 },
+        rotation: { x: 0, y: Math.PI / 2, z: 0 },
+      })
+    } else if (props.text === "4") {
+      descriptionBox.style.opacity = "0"
+      // Just-Read-It 프로젝트 설명 보드
+      addDescriptionBoard({
+        siteUrl: "https://just-read-it.herokuapp.com/",
+        width: "500px",
+        height: "400px",
+        title: "Just Read It",
+        titleColor: "orange",
+        description:
+          "node.js-express 서버와 자바스크립트 연습용 프로젝트입니다. css 애니메이션과 3D 효과에 가장 공을 들였습니다. \n 1. ",
+        position: { x: -4300, y: -200, z: -3300 },
+        rotation: { x: 0, y: Math.PI / 2, z: 0 },
+      })
+    } else if (props.text === "5") {
+      descriptionBox.style.opacity = "0"
+
+      // 프로젝트 설명 보드 로드
+      addDescriptionBoard({
+        siteUrl: "https://our-now.herokuapp.com/",
+        width: "600px",
+        height: "400px",
+        title: "ON",
+        titleColor: "purple",
+        description:
+          "카카오톡과 같이 실시간 채팅과 1:1, 다대다 채팅이 가능하며, 화상통화 기능과 얼굴인식을 통환 효과 각종 영상처리 넣기를 지원하는 웹입니다.",
+        position: { x: 4000, y: 1000, z: -1950 },
+        rotation: { x: 0, y: -Math.PI / 2, z: 0 },
+      })
     }
 
     if (props.targetPosition) {

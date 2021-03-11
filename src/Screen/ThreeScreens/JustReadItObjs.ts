@@ -36,19 +36,6 @@ export const JustReadItObjs = () => {
   videoMesh.position.set(-4300, 500, -2500)
   scene.add(videoMesh)
 
-  // 프로젝트 설명 보드
-  addDescriptionBoard({
-    siteUrl: "https://just-read-it.herokuapp.com/",
-    width: "500px",
-    height: "400px",
-    title: "Just Read It",
-    titleColor: "orange",
-    description:
-      "node.js-express 서버와 자바스크립트 연습용 프로젝트입니다. css 애니메이션과 3D 효과에 가장 공을 들였습니다. \n 1. ",
-    position: { x: -4300, y: -200, z: -3300 },
-    rotation: { x: 0, y: Math.PI / 2, z: 0 },
-  })
-
   // 스켈레톤 책장 모델
   GLTFModelLoader({
     modelUrl: "/models/bookshelf_household_props_12 (1)/scene.gltf",
@@ -102,7 +89,7 @@ export const JustReadItObjs = () => {
   // 프로젝트 선택 버튼
   addSelectBtn({
     text: "4",
-    btnPosition: { x: -1500, y: 0, z: -2700 },
+    btnPosition: { x: -1500, y: 0, z: -2500 },
     cameraPosition: { x: -2000, y: 500, z: -2500 },
     targetPosition: { x: -3000, y: 500, z: -2500 },
     zoomIndex: 0.2,
@@ -116,11 +103,16 @@ export const JustReadItObjs = () => {
     rotation: { x: 0, y: 0, z: 0 },
   })
 
+  // 방문 조명
+  const doorLight = new THREE.PointLight(0xffffff, 2, 300)
+  doorLight.position.set(-1470, 200, -2500)
+  scene.add(doorLight)
+
   addFloor({ width: 3000, height: 2900, x: 3000, y: -490, z: -2500, imageSrc: floorImage3 }) // Just-Read-It 바닥
 
   addFrame({
     imageUrl: hackathonLogo,
-    position: { x: -1500, y: 800, z: -2500 },
+    position: { x: -1510, y: 800, z: -2500 },
     rotateY: -Math.PI,
   })
 }

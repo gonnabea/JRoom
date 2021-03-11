@@ -242,6 +242,19 @@ export const JFlixObjects = () => {
     zoomIndex: 0.3,
   })
 
+  // JFlix 프로젝트 설명 DOM 오브젝트
+  addDescriptionBoard({
+    width: "600px",
+    height: "400px",
+    description:
+      "영화 소개 사이트 입니다. 리액트 내에서 ajax를 사용해 만들었으며, json 데이터의 동적 처리, SPA, 컴포넌트 활용 등 순수 JavaScript와 비교해서 어떤 점이 리액트가 우수한 지 알 수 있었던 프로젝트였습니다.",
+    title: "J-Flix",
+    titleColor: "#10EEC6",
+    siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
+    position: { x: -1200, y: 610, z: -400 },
+    rotation: { x: 0, y: Math.PI / 2, z: 0 },
+  })
+
   // tv 포커싱
   addSelectBtn({
     text: "1",
@@ -258,19 +271,6 @@ export const JFlixObjects = () => {
     cameraPosition: { x: 1000, y: 300, z: 0 },
     targetPosition: { x: 900, y: 300, z: 0 },
     zoomIndex: 0.2,
-  })
-
-  // 프로젝트 설명 DOM 오브젝트
-  addDescriptionBoard({
-    width: "600px",
-    height: "400px",
-    description:
-      "영화 소개 사이트 입니다. 리액트 내에서 ajax를 사용해 만들었으며, json 데이터의 동적 처리, SPA, 컴포넌트 활용 등 순수 JavaScript와 비교해서 어떤 점이 리액트가 우수한 지 알 수 있었던 프로젝트였습니다.",
-    title: "J-Flix",
-    titleColor: "#10EEC6",
-    siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
-    position: { x: -1200, y: 610, z: -400 },
-    rotation: { x: 0, y: Math.PI / 2, z: 0 },
   })
 
   addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0, imageSrc: floorImage3 }) // J-Flix 바닥

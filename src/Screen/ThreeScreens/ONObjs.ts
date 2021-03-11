@@ -15,6 +15,7 @@ import { addFloor } from "../../Components/ThreeModules/floor"
 import floorImage3 from "../../resources/images/floor3.jpg"
 import { addFrame } from "../../Components/ThreeModules/Frame"
 import chatImg from "../../resources/images/chat.jpg"
+import * as THREE from "three"
 
 const onObjects = () => {
   // 기술스택 박스 로드
@@ -42,18 +43,6 @@ const onObjects = () => {
     rotation: { x: 0, y: -Math.PI / 2, z: 0 },
   })
 
-  // 프로젝트 설명 보드 로드
-  addDescriptionBoard({
-    siteUrl: "https://our-now.herokuapp.com/",
-    width: "600px",
-    height: "400px",
-    title: "ON",
-    titleColor: "purple",
-    description:
-      "카카오톡과 같이 실시간 채팅과 1:1, 다대다 채팅이 가능하며, 화상통화 기능과 얼굴인식을 통환 효과 각종 영상처리 넣기를 지원하는 웹입니다.",
-    position: { x: 4000, y: 1000, z: -1950 },
-    rotation: { x: 0, y: -Math.PI / 2, z: 0 },
-  })
   // 메세지 아이콘 모델 로드
   GLTFModelLoader({
     modelUrl: "/models/digital_message_icon/scene.gltf",
