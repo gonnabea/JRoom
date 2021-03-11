@@ -1,15 +1,22 @@
 import React from "react"
 import styled from "styled-components"
 import Header from "../Components/Header"
+import SkeletonScrollMenu from "../Components/SkewScrollMenu"
 
 const Container = styled.section`
   overflow: auto;
+`
+
+const Sidebar = styled.div`
+  width: 30%;
+  height: 100%;
 `
 
 const Interested = () => {
   return (
     <Container>
       <Header title="사용 기술" />
+      <Sidebar></Sidebar>
       <h1>My Stack</h1>
       <h2>언어</h2>
       <ul>

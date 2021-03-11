@@ -4,7 +4,6 @@ import { GodRaysEffect, RenderPass, EffectPass, EffectComposer } from "postproce
 
 export const addSunLight = (position: { x: number; y: number; z: number }) => {
   const CylinderGeometry = new THREE.CylinderGeometry(3, 4, 20, 32)
-  console.log(CylinderGeometry)
 
   // netlify에서 geometry.faces 프로퍼티를 인식하지 못하여 조치
   ;(CylinderGeometry as any).faces.splice(0, 1)

@@ -113,9 +113,6 @@ const inclinetexts = () => {
       setTimeout(() => {
         currentPosition = textContainer.scrollTop + textContainer.scrollHeight
 
-        console.log(originPosition)
-        console.log(currentPosition)
-        console.dir(textContainer)
         // 스크롤을 내릴 때
         if (originPosition <= currentPosition) {
           textContainer.style.animation = `inclineTexts 1s forwards`
@@ -145,8 +142,7 @@ const SkeletonScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links 
     links: Array<string>
   ) => {
     // props 전달 안되는 문제 고쳐야함
-    console.log(texts)
-    console.log(colors)
+
     return texts.map((text, index) => (
       <TextArea
         to={links[index]}
@@ -159,9 +155,8 @@ const SkeletonScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links 
   }
 
   const selectVideo = (index: number, colors: string[]) => {
-    console.log(index)
     setvideoIndex(index)
-    console.log(video)
+
     if (video.current !== null) {
       video.current.style.boxShadow = `0px 0px 200px ${colors[index]}`
     }

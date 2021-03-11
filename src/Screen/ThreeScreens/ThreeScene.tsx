@@ -6,11 +6,11 @@ import CSS3D from "three-css3drenderer"
 import { addDirLight } from "../../Components/ThreeModules/DirectionalLight"
 import { addSpotLight } from "../../Components/ThreeModules/SpotLight"
 import { addSunLight } from "../../Components/ThreeModules/SunLight"
-import { JFlixObjects } from "./JFlixObjects"
+import { JFlixObjects } from "./JFlixObjs"
 import { CSG } from "three-csg-ts"
-import MainHallObjects from "./MainHallObjects"
+import MainHallObjects from "./MainHallObjs"
 import { JustReadItObjs } from "./JustReadItObjs"
-import onObjects from "./ONObjects"
+import onObjects from "./ONObjs"
 
 const Container = styled.section`
   width: 100%;
@@ -185,7 +185,7 @@ const ThreeScene = () => {
 
     project3Mesh.position.set(-2960, 500, -2490)
     project3Mesh.material.side = THREE.DoubleSide
-    console.log(project3Mesh)
+
     scene.add(project3Mesh)
 
     // 디렉셔널 라이트 (햇빛)
@@ -230,25 +230,6 @@ const ThreeScene = () => {
     JustReadItObjs()
     onObjects()
 
-    // 마우스 움직일 때마다 오브젝트 감지
-
-    const onMouseMove = (event: { clientX: number; clientY: number }) => {
-      // calculate mouse position in normalized device coordinates
-      // (-1 to +1) for both components
-
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
-
-      // update the picking ray with the camera and mouse position
-      raycaster.setFromCamera(mouse, camera)
-      // calculate objects intersecting the picking ray
-      const intersects = raycaster.intersectObjects(scene.children)
-
-      for (let i = 0; i < intersects.length; i++) {
-        // 임의로 지정해 줬던 object name으로 구별
-      }
-    }
-
     // 렌더러
     renderer = new THREE.WebGLRenderer({
       antialias: false,
@@ -260,7 +241,7 @@ const ThreeScene = () => {
 
     // renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
-    renderer.setPixelRatio(window.devicePixelRatio)
+    renderer.setPixelRatio(window.devicePixelRatio / 1.5)
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setClearColor(0xffffff, 1)
     renderer.domElement.style.position = "absolute"
@@ -357,7 +338,7 @@ const ThreeScene = () => {
         // 카메라 줌에 따른 버튼 크기 조정
         if (selectBtnObjs) {
           selectBtnObjs.map((selectBtnObj) => {
-            if (camera.zoom < 0.5) {
+            if (camera.zoom < 0.5 && selectBtnObj.scale.x < 1.5) {
               selectBtnObj.scale.set(
                 selectBtnObj.scale.x + 0.3,
                 selectBtnObj.scale.y + 0.3,
@@ -371,24 +352,26 @@ const ThreeScene = () => {
       }
     }
 
-    // 카메라 회전시 버튼이 정면에서 보이도록.
-    window.addEventListener("mousedown", () => {
+    // 카메라 회전시 버튼이 정면에서 보이도록 회전
+    window.addEventListener("mousedown", function () {
       if (selectBtnObjs) {
         selectBtnObjs.map((selectBtnObj) => {
           selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
         })
       }
-    })
 
-    window.addEventListener("mouseup", () => {
-      if (selectBtnObjs) {
-        selectBtnObjs.map((selectBtnObj) => {
-          selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
-        })
+      window.onmousemove = function () {
+        if (selectBtnObjs) {
+          selectBtnObjs.map((selectBtnObj) => {
+            selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
+          })
+        }
       }
     })
 
-    window.addEventListener("mousemove", onMouseMove)
+    window.addEventListener("mouseup", function () {
+      window.onmousemove = null
+    })
 
     if (ThreeContainer.current !== null) {
       ThreeContainer.current?.appendChild(renderer.domElement)

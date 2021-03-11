@@ -40,7 +40,7 @@ export const addFrame = (props: {
     // 액자에 들어갈 그림
 
     const sizeCheckBox = new THREE.Box3().setFromObject(gltf.scene) // 액자 크기 측정을 위한 가상 박스
-    console.log(sizeCheckBox)
+
     const frameWidth = sizeCheckBox.max.z - sizeCheckBox.min.z - 100
     const frameHeight = sizeCheckBox.max.y - sizeCheckBox.min.y - 100
     const frameDepth = sizeCheckBox.max.x - sizeCheckBox.min.x

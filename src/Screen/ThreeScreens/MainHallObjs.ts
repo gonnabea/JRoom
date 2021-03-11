@@ -72,7 +72,6 @@ const MainHallObjects = () => {
   loader.load("/models/window1/scene.gltf", (gltf) => {
     gltf.scene.scale.set(320, 370, 100)
     gltf.scene.position.set(0, 70, -4050)
-    console.log(gltf.scene)
 
     scene.add(gltf.scene)
   })
