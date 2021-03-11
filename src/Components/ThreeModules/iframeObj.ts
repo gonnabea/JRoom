@@ -6,6 +6,7 @@ import { cssScene, scene } from "../../Screen/ThreeScreens/ThreeScene"
 // TV 모델에 올려진 plane mesh
 
 export let embedWebsite = document.createElement("iframe")
+export let websiteObject: THREE.Object3D
 const addIframeObj = (props: {
   width: number
   height: number
@@ -28,17 +29,8 @@ const addIframeObj = (props: {
   embedWebsite.src = props.siteUrl
   embedWebsite.width = `${props.width}px`
   embedWebsite.height = `${props.height}px`
-  embedWebsite.style.opacity = "0"
-  embedWebsite.onmouseover = () => {
-    embedWebsite.style.opacity = "1"
-    tvBackCover.style.opacity = "1"
-  }
-  embedWebsite.onmouseleave = () => {
-    embedWebsite.style.opacity = "0"
-    tvBackCover.style.opacity = "0"
-  }
 
-  const websiteObject = new CSS3D.CSS3DObject(embedWebsite)
+  websiteObject = new CSS3D.CSS3DObject(embedWebsite)
   websiteObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
   websiteObject.rotation.set(props.rotation.x, props.rotation.y, props.rotation.z)
   cssScene.add(websiteObject)

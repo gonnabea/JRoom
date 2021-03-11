@@ -11,6 +11,7 @@ import { CSG } from "three-csg-ts"
 import MainHallObjects from "./MainHallObjs"
 import { JustReadItObjs } from "./JustReadItObjs"
 import onObjects from "./ONObjs"
+import addIframeObj from "../../Components/ThreeModules/iframeObj"
 
 const Container = styled.section`
   width: 100%;
@@ -44,7 +45,7 @@ export let selectBtnObjs: any[] = []
 let raycaster = new THREE.Raycaster()
 let mouse = new THREE.Vector2()
 export let embedWebsite: HTMLIFrameElement
-export let websiteObject: THREE.Object3D
+
 let frameCount = 0
 const ThreeScene = () => {
   const ThreeContainer = useRef<HTMLDivElement>(null)
@@ -266,59 +267,6 @@ const ThreeScene = () => {
     renderer.domElement.style.position = "absolute"
     renderer.domElement.style.top = "0"
     renderer.domElement.style.zIndex = "1"
-
-    // Three.js에 html embed 시키기
-    // TV 모델에 올려진 plane mesh
-
-    const geometry = new THREE.PlaneBufferGeometry(1400, 800)
-
-    const material = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      opacity: 0.0,
-      side: THREE.DoubleSide,
-    })
-    const planeMesh = new THREE.Mesh(geometry, material)
-    planeMesh.position.set(-1200, 10, 0)
-    planeMesh.rotation.set(0, Math.PI / 2, 0)
-    scene.add(planeMesh)
-
-    embedWebsite = document.createElement("iframe")
-    embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
-    embedWebsite.width = "1400px"
-    embedWebsite.height = "800px"
-    embedWebsite.style.opacity = "0"
-    embedWebsite.onmouseover = () => {
-      embedWebsite.style.opacity = "1"
-      tvBackCover.style.opacity = "1"
-    }
-    embedWebsite.onmouseleave = () => {
-      embedWebsite.style.opacity = "0"
-      tvBackCover.style.opacity = "0"
-    }
-
-    websiteObject = new CSS3D.CSS3DObject(embedWebsite)
-    websiteObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
-    websiteObject.rotation.set(0, Math.PI / 2, 0)
-    cssScene.add(websiteObject)
-
-    // TV 뒷면 가리기 위한 Div Box
-
-    const tvBackCover = document.createElement("div")
-
-    tvBackCover.style.width = "1400px"
-    tvBackCover.style.height = "800px"
-    tvBackCover.style.backgroundColor = "black"
-    tvBackCover.style.color = "white"
-    tvBackCover.style.fontSize = "80px"
-    tvBackCover.style.opacity = "0"
-    const tvBackCoverObject = new CSS3D.CSS3DObject(tvBackCover)
-    tvBackCoverObject.position.set(
-      planeMesh.position.x - 3,
-      planeMesh.position.y,
-      planeMesh.position.z
-    )
-    tvBackCoverObject.rotation.set(0, Math.PI / 2, 0)
-    cssScene.add(tvBackCoverObject)
 
     // 갓레이이펙트
 

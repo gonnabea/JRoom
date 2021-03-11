@@ -34,15 +34,6 @@ const onObjects = () => {
     rotation: { x: Math.PI / 2, y: -Math.PI / 2.5, z: 0 },
   })
 
-  // iframe 웹사이트 로드
-  addIframeObj({
-    siteUrl: "https://our-now.herokuapp.com/#/",
-    position: { x: 4000, y: 400, z: -2380 },
-    width: 1200,
-    height: 800,
-    rotation: { x: 0, y: -Math.PI / 2, z: 0 },
-  })
-
   // 메세지 아이콘 모델 로드
   GLTFModelLoader({
     modelUrl: "/models/digital_message_icon/scene.gltf",

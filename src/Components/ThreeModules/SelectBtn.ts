@@ -5,12 +5,11 @@ import {
   scene,
   selectBtnObjs,
   cssScene,
-  embedWebsite,
   controls,
-  websiteObject,
 } from "../../Screen/ThreeScreens/ThreeScene"
 import CSS3D from "three-css3drenderer"
 import addDescriptionBoard, { descriptionBox } from "./DescriptionBoard"
+import addIframeObj, { embedWebsite, websiteObject } from "./iframeObj"
 
 // 선택 버튼 생성
 export const addSelectBtn = (props: {
@@ -73,14 +72,27 @@ export const addSelectBtn = (props: {
 
   selectBtn.onclick = () => {
     if (props.text === "0") {
-      descriptionBox.style.opacity = "0"
+      descriptionBox.style.display = "none"
+
       controls.target.set(0, 0, 0)
     }
 
     if (props.text === "1") {
-      descriptionBox.style.opacity = "0"
+      descriptionBox.style.display = "none"
+
+      embedWebsite.style.display = "block"
       controls.target.set(websiteObject.position.x, 0, websiteObject.position.z) // 예외적으로 타겟이 정해짐
-      // JFlix 프로젝트 설명 DOM 오브젝트
+
+      // JFlix 웹사이트 로드
+      addIframeObj({
+        width: 1400,
+        height: 800,
+        siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
+        position: { x: -1200, y: 10, z: 0 },
+        rotation: { x: 0, y: Math.PI / 2, z: 0 },
+      })
+
+      // JFlix 프로젝트 설명 보드
       addDescriptionBoard({
         width: "600px",
         height: "400px",
@@ -93,16 +105,14 @@ export const addSelectBtn = (props: {
         rotation: { x: 0, y: Math.PI / 2, z: 0 },
       })
       camera.updateMatrix()
-
-      // meshsOfFrame.map((object: { visible: boolean }) => {
-      //   object.visible = false
-      // })
-    } // 프로젝트 변경 버튼을 클릭했을 경우
+    } // 프로젝트 변경 버튼
     else if (props.text === "✨") {
+      descriptionBox.style.display = "none"
+      embedWebsite.style.display = "block"
       chooseProject()
       controls.target.set(websiteObject.position.x, 0, websiteObject.position.z)
       camera.updateMatrix()
-      // 프로젝트 설명 DOM 오브젝트
+      // JFLIX 프로젝트 설명 보드
       addDescriptionBoard({
         width: "600px",
         height: "400px",
@@ -115,7 +125,8 @@ export const addSelectBtn = (props: {
         rotation: { x: 0, y: Math.PI / 2, z: 0 },
       })
     } else if (props.text === "4") {
-      descriptionBox.style.opacity = "0"
+      descriptionBox.style.display = "none"
+      embedWebsite.style.display = "none"
       // Just-Read-It 프로젝트 설명 보드
       addDescriptionBoard({
         siteUrl: "https://just-read-it.herokuapp.com/",
@@ -129,9 +140,9 @@ export const addSelectBtn = (props: {
         rotation: { x: 0, y: Math.PI / 2, z: 0 },
       })
     } else if (props.text === "5") {
-      descriptionBox.style.opacity = "0"
-
-      // 프로젝트 설명 보드 로드
+      descriptionBox.style.display = "none"
+      embedWebsite.style.display = "block"
+      // ON 프로젝트 설명 보드
       addDescriptionBoard({
         siteUrl: "https://our-now.herokuapp.com/",
         width: "600px",
@@ -143,6 +154,18 @@ export const addSelectBtn = (props: {
         position: { x: 4000, y: 1000, z: -1950 },
         rotation: { x: 0, y: -Math.PI / 2, z: 0 },
       })
+
+      // ON 프로젝트 웹사이트 로드
+      addIframeObj({
+        siteUrl: "https://our-now.herokuapp.com/#/",
+        position: { x: 4000, y: 400, z: -2380 },
+        width: 1200,
+        height: 800,
+        rotation: { x: 0, y: -Math.PI / 2, z: 0 },
+      })
+    } else {
+      embedWebsite.style.display = "none"
+      descriptionBox.style.display = "none"
     }
 
     if (props.targetPosition) {

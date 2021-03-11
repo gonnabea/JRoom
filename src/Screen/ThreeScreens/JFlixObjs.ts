@@ -18,6 +18,7 @@ import { addSelectBtn } from "../../Components/ThreeModules/SelectBtn"
 import { addFloor } from "../../Components/ThreeModules/floor"
 import nomadLogo from "../../resources/images/nomadLogo.png"
 import floorImage3 from "../../resources/images/floor3.jpg"
+import addIframeObj from "../../Components/ThreeModules/iframeObj"
 export const JFlixObjects = () => {
   // J-Flix 지붕
   const roofShape = new THREE.Shape()
@@ -240,6 +241,14 @@ export const JFlixObjects = () => {
     cameraPosition: { x: -2773.8192101111504, y: 490.0248603839669, z: 4120.7527992239675 },
     targetPosition: { x: 0, y: 0, z: 0 },
     zoomIndex: 0.3,
+  })
+
+  addIframeObj({
+    width: 1400,
+    height: 800,
+    siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
+    position: { x: -1200, y: 10, z: 0 },
+    rotation: { x: 0, y: Math.PI / 2, z: 0 },
   })
 
   // JFlix 프로젝트 설명 DOM 오브젝트
