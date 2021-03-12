@@ -11,6 +11,29 @@ import CSS3D from "three-css3drenderer"
 import addDescriptionBoard, { descriptionBox } from "./DescriptionBoard"
 import addIframeObj, { embedWebsite, websiteObject } from "./iframeObj"
 
+function chooseProject() {
+  // 순차적으로 프로젝트 변경
+  // 나중에 버튼을 여러개 만들어 각각 선택할 수 있게 할까 고민중.
+  // switch - case로 변경 예정
+  if (embedWebsite.src === "https://nomfilx-jiwon.netlify.app/#/") {
+    embedWebsite.src = "https://gonnabea.github.io/Music-Player/"
+  } else if (embedWebsite.src === "https://gonnabea.github.io/Music-Player/") {
+    embedWebsite.src = "https://gonnabea.github.io/Typing-Game/"
+  } else if (embedWebsite.src === "https://gonnabea.github.io/Typing-Game/") {
+    embedWebsite.src = "https://gonnabea.github.io/Hangman-Game/"
+  } else if (embedWebsite.src === "https://gonnabea.github.io/Hangman-Game/") {
+    embedWebsite.src = "https://gonnabea.github.io/Expense-Tracker/"
+  } else if (embedWebsite.src === "https://gonnabea.github.io/Expense-Tracker/") {
+    embedWebsite.src = "https://gonnabea.github.io/Speech-Text-Reader/"
+  } else if (embedWebsite.src === "https://gonnabea.github.io/Speech-Text-Reader/") {
+    embedWebsite.src = "https://gonnabea.github.io/Sortable-List/"
+  } else if (embedWebsite.src === "https://gonnabea.github.io/Sortable-List/") {
+    embedWebsite.src = "https://gonnabea.github.io/Breakout-Game/"
+  } else {
+    embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
+  }
+}
+
 // 선택 버튼 생성
 export const addSelectBtn = (props: {
   text: string
@@ -19,29 +42,6 @@ export const addSelectBtn = (props: {
   targetPosition?: { x: number; y: number; z: number }
   zoomIndex: number
 }) => {
-  function chooseProject() {
-    // 순차적으로 프로젝트 변경
-    // 나중에 버튼을 여러개 만들어 각각 선택할 수 있게 할까 고민중.
-    // switch - case로 변경 예정
-    if (embedWebsite.src === "https://nomfilx-jiwon.netlify.app/#/") {
-      embedWebsite.src = "https://gonnabea.github.io/Music-Player/"
-    } else if (embedWebsite.src === "https://gonnabea.github.io/Music-Player/") {
-      embedWebsite.src = "https://gonnabea.github.io/Typing-Game/"
-    } else if (embedWebsite.src === "https://gonnabea.github.io/Typing-Game/") {
-      embedWebsite.src = "https://gonnabea.github.io/Hangman-Game/"
-    } else if (embedWebsite.src === "https://gonnabea.github.io/Hangman-Game/") {
-      embedWebsite.src = "https://gonnabea.github.io/Expense-Tracker/"
-    } else if (embedWebsite.src === "https://gonnabea.github.io/Expense-Tracker/") {
-      embedWebsite.src = "https://gonnabea.github.io/Speech-Text-Reader/"
-    } else if (embedWebsite.src === "https://gonnabea.github.io/Speech-Text-Reader/") {
-      embedWebsite.src = "https://gonnabea.github.io/Sortable-List/"
-    } else if (embedWebsite.src === "https://gonnabea.github.io/Sortable-List/") {
-      embedWebsite.src = "https://gonnabea.github.io/Breakout-Game/"
-    } else {
-      embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
-    }
-  }
-
   const selectBtn = document.createElement("button")
   selectBtn.innerHTML = props.text
   selectBtn.style.width = "100px"

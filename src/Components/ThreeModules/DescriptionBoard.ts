@@ -42,6 +42,7 @@ const addDescriptionBoard = (props: {
   descriptionBox.style.overflow = "auto"
   descriptionBox.href = props.siteUrl ? props.siteUrl : ""
   descriptionBox.target = "_blank"
+
   descriptionBox.onmouseover = () => (descriptionBox.style.opacity = "1")
   descriptionBox.onmouseout = () => (descriptionBox.style.opacity = "0.7")
 

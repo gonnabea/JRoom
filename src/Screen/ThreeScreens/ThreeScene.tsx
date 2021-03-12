@@ -12,6 +12,7 @@ import MainHallObjects from "./MainHallObjs"
 import { JustReadItObjs } from "./JustReadItObjs"
 import onObjects from "./ONObjs"
 import addIframeObj from "../../Components/ThreeModules/iframeObj"
+import outsideObjs from "./OutsideObjs"
 
 const Container = styled.section`
   width: 100%;
@@ -238,12 +239,15 @@ const ThreeScene = () => {
     MainHallObjects()
     JustReadItObjs()
     onObjects()
+    outsideObjs()
 
     // 렌더러
     renderer = new THREE.WebGLRenderer({
+      powerPreference: "high-performance",
       antialias: false,
+      stencil: false,
+      depth: false,
       alpha: true,
-      preserveDrawingBuffer: true,
     })
 
     // renderer.shadowMap.enabled = true
