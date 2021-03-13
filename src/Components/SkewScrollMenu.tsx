@@ -88,8 +88,8 @@ const TextArea = styled(Link)`
 `
 
 const Video = styled.video`
-  width: 50%;
-  height: 50%;
+  width: 70%;
+  height: 70%;
   object-fit: fill;
 
   box-shadow: 0px 0px 200px #68b793;
