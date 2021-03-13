@@ -42,7 +42,64 @@ const TextArea = styled(Link)`
   /* Prefix required. Even Firefox only supports the -webkit- prefix */
   font-family: fantasy;
   margin-bottom: 80px;
-  -webkit-text-stroke: 4px white;
+  -webkit-text-stroke: 4px black;
+  -webkit-text-fill-color: transparent;
+  transition: -webkit-text-fill-color 0.5s;
+
+  :hover {
+    -webkit-text-fill-color: ${(props) => props.color};
+    cursor: pointer;
+  }
+  @keyframes inclineTexts {
+    0% {
+      transform: skew(0deg);
+    }
+    100% {
+      transform: skew(-10deg);
+    }
+  }
+
+  @keyframes revertIncline {
+    0% {
+      transform: skew(-10deg);
+    }
+    100% {
+      transform: skew(0deg);
+    }
+  }
+
+  @keyframes InclineTextsLeft {
+    0% {
+      transform: skew(0deg);
+    }
+    100% {
+      transform: skew(10deg);
+    }
+  }
+
+  @keyframes revertInclineLeft {
+    0% {
+      transform: skew(10deg);
+    }
+    100% {
+      transform: skew(0deg);
+    }
+  }
+`
+
+// anchor 링크가 필요한 경우
+const TextAreaAnchor = styled.a`
+  color: black;
+  width: 100%;
+  font-size: 10.5vw;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  /* Prefix required. Even Firefox only supports the -webkit- prefix */
+  font-family: fantasy;
+  margin-bottom: 80px;
+  -webkit-text-stroke: 4px black;
   -webkit-text-fill-color: transparent;
   transition: -webkit-text-fill-color 0.5s;
 
@@ -133,7 +190,7 @@ const inclinetexts = () => {
   })
 }
 
-const SkeletonScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) => {
+const SkewScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) => {
   const [videoIndex, setvideoIndex] = useState(0) // 화면에 나오는 비디오를 선택하기 위한 index 값
   const background = useRef(null)
   const video = useRef<HTMLVideoElement>(null)
@@ -145,16 +202,32 @@ const SkeletonScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links 
   ) => {
     // props 전달 안되는 문제 고쳐야함
 
-    return texts.map((text, index) => (
-      <TextArea
-        to={links[index]}
-        onMouseOver={(e) => selectVideo(e, index, colors)}
-        className="textAreas"
-        color={colors[index]}
-      >
-        {text}
-      </TextArea>
-    ))
+    return texts.map((text, index) => {
+      if (index != 1 && index != 6) {
+        return (
+          <TextArea
+            to={links[index]}
+            onMouseOver={(e) => selectVideo(e, index, colors)}
+            className="textAreas"
+            color={colors[index]}
+          >
+            {text}
+          </TextArea>
+        )
+      } else {
+        return (
+          <TextAreaAnchor
+            href={links[index]}
+            onMouseOver={(e) => selectVideo(e, index, colors)}
+            className="textAreas"
+            color={colors[index]}
+            target="_blank"
+          >
+            {text}
+          </TextAreaAnchor>
+        )
+      }
+    })
   }
 
   const selectVideo = (e: any, index: number, colors: string[]) => {
@@ -189,4 +262,4 @@ const SkeletonScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links 
   )
 }
 
-export default SkeletonScrollMenu
+export default SkewScrollMenu

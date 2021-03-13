@@ -12,7 +12,7 @@ const Sidebar = styled.div`
   height: 100%;
 `
 
-const Interested = () => {
+const TechStack = () => {
   return (
     <Container>
       <Header title="사용 기술" />
@@ -80,4 +80,4 @@ const Interested = () => {
   )
 }
 
-export default Interested
+export default TechStack

@@ -75,22 +75,21 @@ const Home: React.FC = () => {
           "Contact Me...",
           "Github",
         ]}
-        colors={[
-          "rgba(255, 99, 71, 0.2)",
-          "green",
-          "white",
-          "#C56AC8",
-          "#FBD591",
-          "skyblue",
-          "purple",
-          "gray",
-        ]}
+        colors={["#0080C6", "orange", "white", "yellowgreen", "#FBD591", "skyblue", "gray", "gray"]}
         videoList={[
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
         ]}
-        links={["/about-me", "/exhibition", "", "", "/interested"]}
+        links={[
+          "/about-me",
+          "/exhibition",
+          "/documents",
+          "/books",
+          "/tech-stack",
+          "/contact",
+          "https://github.com/gonnabea",
+        ]}
       ></SkewScrollMenu>
     </Container>
   )
