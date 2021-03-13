@@ -2,6 +2,6 @@
     "compilerOptions": {
         "jsx": "react"
     },
-
+    "moduleResolution": "node",
     "allowJs": true
 }
