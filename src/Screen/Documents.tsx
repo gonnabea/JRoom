@@ -1,5 +1,5 @@
 const Documents: React.FC = () => {
-  return <div className="text-lg font-semibold">"Documents"</div>
+  return <div>"Documents"</div>
 }
 
 export default Documents

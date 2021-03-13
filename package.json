@@ -28,9 +28,8 @@
     "react-scripts": "4.0.1",
     "styled-components": "^5.2.1",
     "styled-normalize": "^8.0.7",
-    "tailwindcss": "^2.0.3",
-    "three": "^0.126.1",
-    "three-csg-ts": "^2.2.2",
+    "three": "^0.123.0",
+    "three-csg-ts": "^2.0.0",
     "three-css3drenderer": "^1.0.1",
     "three-js-csg-es6": "^73.0.0",
     "three-orbitcontrols-ts": "^0.1.2",
@@ -60,8 +59,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/three": "^0.126.0"
   }
 }
