@@ -15,11 +15,14 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.5",
+    "@types/tailwindcss": "^2.0.0",
     "@types/threex.domevents": "git+https://github.com/ahilbig/types-threex.domevents.git",
     "aframe-area-light-component": "^1.0.1",
     "babylonjs-godrays": "^1.0.13",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-prettier": "^3.3.1",
+    "i": "^0.3.6",
+    "npm": "^7.6.3",
     "postprocessing": "^6.18.0",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
@@ -29,7 +32,7 @@
     "styled-components": "^5.2.1",
     "styled-normalize": "^8.0.7",
     "three": "^0.123.0",
-    "three-csg-ts": "^2.0.0",
+    "three-csg-ts": "^2.2.2",
     "three-css3drenderer": "^1.0.1",
     "three-js-csg-es6": "^73.0.0",
     "three-orbitcontrols-ts": "^0.1.2",
@@ -59,5 +62,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }
