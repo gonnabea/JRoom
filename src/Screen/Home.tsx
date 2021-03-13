@@ -9,7 +9,6 @@ const Container = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
   opacity: 1;
 `
 const MouseEffectBox = styled.div`
@@ -39,7 +38,7 @@ const Home: React.FC = () => {
         if (containerBox.current && previousImage) {
           containerBox.current.removeChild(previousImage)
         }
-      }, 100)
+      }, 50)
 
       const afterImage = document.createElement("div")
       afterImage.id = "afterImage"
@@ -76,7 +75,16 @@ const Home: React.FC = () => {
           "Contact Me...",
           "Github",
         ]}
-        colors={["#79D0FF", "green", "white", "#C56AC8", "#FBD591", "skyblue", "purple", "gray"]}
+        colors={[
+          "rgba(255, 99, 71, 0.2)",
+          "green",
+          "white",
+          "#C56AC8",
+          "#FBD591",
+          "skyblue",
+          "purple",
+          "gray",
+        ]}
         videoList={[
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 const Container = styled.div`
+  background-color: ${(props) => props.color};
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -46,7 +47,7 @@ const TextArea = styled(Link)`
   transition: -webkit-text-fill-color 0.5s;
 
   :hover {
-    -webkit-text-fill-color: white;
+    -webkit-text-fill-color: ${(props) => props.color};
     cursor: pointer;
   }
   @keyframes inclineTexts {
@@ -134,6 +135,7 @@ const inclinetexts = () => {
 
 const SkeletonScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) => {
   const [videoIndex, setvideoIndex] = useState(0) // 화면에 나오는 비디오를 선택하기 위한 index 값
+  const background = useRef(null)
   const video = useRef<HTMLVideoElement>(null)
 
   const handleTexts: Function = (
@@ -146,19 +148,25 @@ const SkeletonScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links 
     return texts.map((text, index) => (
       <TextArea
         to={links[index]}
-        onMouseOver={() => selectVideo(index, colors)}
+        onMouseOver={(e) => selectVideo(e, index, colors)}
         className="textAreas"
+        color={colors[index]}
       >
         {text}
       </TextArea>
     ))
   }
 
-  const selectVideo = (index: number, colors: string[]) => {
+  const selectVideo = (e: any, index: number, colors: string[]) => {
     setvideoIndex(index)
 
     if (video.current !== null) {
       video.current.style.boxShadow = `0px 0px 200px ${colors[index]}`
+    }
+    console.log(e.target)
+
+    if (background.current) {
+      ;(background.current as any).style.backgroundColor = colors[index]
     }
   }
 
@@ -167,7 +175,7 @@ const SkeletonScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links 
   }, [])
 
   return (
-    <Container>
+    <Container ref={background}>
       <TextContainer id="textContainer">{handleTexts(texts, colors, links)}</TextContainer>
       <Video
         src={videoList[videoIndex]}

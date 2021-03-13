@@ -5,7 +5,8 @@ const GlobalStyles = createGlobalStyle`
 ${normalize}
 html,
   body {
-    
+    overflow:hidden;
+    background-color: white;
   }
 
   * {
