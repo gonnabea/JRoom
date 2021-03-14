@@ -46,7 +46,7 @@ interface props {
 const WikiSidebar: React.FC<props> = ({ menus }) => {
   return (
     <SideBar>
-      <WikiLogo src="images/wiki_logo.png"></WikiLogo>
+      <WikiLogo src="/images/wiki_logo.png"></WikiLogo>
       <PageTitle>위키백과</PageTitle>
       <TitleTail>Jiwon의 CS 백과</TitleTail>
 

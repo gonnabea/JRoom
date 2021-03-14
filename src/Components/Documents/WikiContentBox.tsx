@@ -36,6 +36,7 @@ interface props {
   title: string
   imageSrc: string
   text: string
+  sort: string // 분류별로 나누기 위한 property
 }
 
 const WikiContentBox: React.FC<props> = () => {
