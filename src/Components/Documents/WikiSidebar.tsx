@@ -54,7 +54,7 @@ const WikiSidebar: React.FC<props> = ({ menus }) => {
         <SideBarMenu to={menu}>{menu}</SideBarMenu>
       ))}
       <Footer>
-        위키백과의 디자인을 클론하여 만든 페이지임을 밝힙니다.
+        위키백과의 디자인을 클론하여 만든 페이지임을 밝힙니다. -Jiwon-
         <br />
         <a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank">
           컨셉 페이지

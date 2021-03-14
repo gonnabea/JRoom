@@ -63,7 +63,7 @@ const Frontend: React.FC = () => {
         <WikiHeader />
         <ContentArea>
           <WikiGreeting
-            title="Jiwon의 프론트엔드 CS 지식입니다."
+            title="Jiwon의 프론트엔드 관련 CS 지식입니다."
             msg={`제가 만든 프로젝트들을 기점으로 얻을 수 있는 Computer Science 지식들을 정리해 놓은
               페이지입니다.
             내용은 지속적으로 추가될 것입니다.`}
