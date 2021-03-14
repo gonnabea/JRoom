@@ -4,6 +4,14 @@ import styled from "styled-components"
 const Header = styled.header`
   display: flex;
   height: 80px;
+  @media (max-width: 620px) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 340px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
 `
 const HeaderTab = styled(Link)`
   cursor: pointer;
@@ -21,6 +29,9 @@ const HeaderTab = styled(Link)`
   text-decoration: none;
   :hover {
     text-decoration: underline;
+  }
+  @media (max-width: 340px) {
+    height: 30px;
   }
 `
 

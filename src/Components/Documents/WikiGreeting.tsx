@@ -4,7 +4,7 @@ const GreetingBox = styled.div`
   background-color: #f1e8e8;
   border: solid 1px gray;
   width: 100%;
-  height: 15%;
+
   padding: 10px;
   display: flex;
   flex-direction: column;

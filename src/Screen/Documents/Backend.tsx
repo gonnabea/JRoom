@@ -7,7 +7,7 @@ import WikiSidebar from "../../Components/Documents/WikiSidebar"
 
 const Container = styled.main`
   display: flex;
-  width: calc(100vw - 40px);
+
   height: 100vh;
 `
 
@@ -25,7 +25,6 @@ const MainArea = styled.section``
 
 const ContentArea = styled.section`
   height: calc(100vh - 80px);
-  width: calc(100vw - 10em - 40px);
 
   padding: 20px 24px;
 `
@@ -40,6 +39,9 @@ const ContentMainArea = styled.section`
   justify-items: center;
   border: solid 1px skyblue;
   padding: 10px;
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 const Backend: React.FC = () => {

@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 const ContentBox = styled.div`
   border: solid 1px green;
-  min-width: 100%;
+  width: 100%;
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -20,8 +20,9 @@ const ContentTitle = styled.h2`
   font-size: 18px;
 `
 const ContentImg = styled.img`
-  min-width: 140px;
-  max-height: 140px;
+  width: 200px;
+  align-self: center;
+  height: 200px;
   margin: 10px 10px 10px 0;
 `
 const Content = styled.div`
@@ -30,6 +31,7 @@ const Content = styled.div`
 const Text = styled.p`
   margin: 0;
   max-width: 100%;
+  line-height: 30px;
 `
 
 interface props {
@@ -43,8 +45,8 @@ const WikiContentBox: React.FC<props> = ({ title, imageSrc, text }) => {
   return (
     <ContentBox>
       <ContentTitle>{title}</ContentTitle>
+      <ContentImg src={imageSrc}></ContentImg>
       <Content>
-        <ContentImg src={imageSrc}></ContentImg>
         <Text>{text}</Text>
       </Content>
     </ContentBox>

@@ -9,11 +9,14 @@ const SideBar = styled.aside`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 550px) {
+    display: none;
+  }
 `
 
 const WikiLogo = styled.img`
-  width: 120px;
-  height: 120px;
+  max-width: 120px;
+  max-height: 120px;
 `
 const PageTitle = styled.h1`
   font-size: 18px;
@@ -51,7 +54,7 @@ const WikiSidebar: React.FC<props> = ({ menus }) => {
       <TitleTail>Jiwon의 CS 백과</TitleTail>
 
       {menus.map((menu) => (
-        <SideBarMenu to={menu}>{menu}</SideBarMenu>
+        <SideBarMenu to={`/${menu}`}>{menu}</SideBarMenu>
       ))}
       <Footer>
         위키백과의 디자인을 클론하여 만든 페이지임을 밝힙니다. -Jiwon-
