@@ -60,6 +60,9 @@ const ExplorerModal = styled.div`
   background-color: white;
   right: 0;
   opacity: 0.9;
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `
 
 const Backend: React.FC = () => {

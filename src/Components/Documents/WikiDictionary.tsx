@@ -40,7 +40,7 @@ const WikiDictionary: Function = (keyword: string) => {
   if (keyword === "세션") {
     return (
       <Container id="modal">
-        <Title>keyword</Title>
+        <Title>{keyword}</Title>
         <ExitBtn onClick={handleExit}>X</ExitBtn>
         <Description>
           세션(session)은 컴퓨터 과학에서, 특히 네트워크 분야에서 반영구적이고 상호작용적인 정보
