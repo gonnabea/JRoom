@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 const Header = styled.header`
   display: flex;
   height: 80px;
 `
-const HeaderTab = styled.nav`
+const HeaderTab = styled(Link)`
   cursor: pointer;
   background-image: linear-gradient(to bottom, rgba(167, 215, 249, 0) 0, #a7d7f9 100%);
   background-repeat: no-repeat;
@@ -17,6 +18,7 @@ const HeaderTab = styled.nav`
   color: #0645ad;
   border: solid 1px skyblue;
   border-top: 0px;
+  text-decoration: none;
   :hover {
     text-decoration: underline;
   }
@@ -25,14 +27,14 @@ const HeaderTab = styled.nav`
 const WikiHeader: React.FC = () => {
   return (
     <Header>
-      <HeaderTab>News</HeaderTab>
-      <HeaderTab>프론트엔드</HeaderTab>
-      <HeaderTab>백엔드</HeaderTab>
-      <HeaderTab>네트워크 통신</HeaderTab>
-      <HeaderTab>영상처리</HeaderTab>
-      <HeaderTab>3D 게임</HeaderTab>
-      <HeaderTab>안드로이드</HeaderTab>
-      <HeaderTab>공통</HeaderTab>
+      <HeaderTab to="/documents">News</HeaderTab>
+      <HeaderTab to="/documents/front-end">프론트엔드</HeaderTab>
+      <HeaderTab to="/documents/back-end">백엔드</HeaderTab>
+      <HeaderTab to="/documents/network">네트워크 통신</HeaderTab>
+      <HeaderTab to="/documents/computer-vision">영상처리</HeaderTab>
+      <HeaderTab to="/documents/3d-game">3D 게임</HeaderTab>
+      <HeaderTab to="/documents/android">안드로이드</HeaderTab>
+      <HeaderTab to="/documents/common">공통</HeaderTab>
     </Header>
   )
 }

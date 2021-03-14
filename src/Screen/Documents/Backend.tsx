@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import WikiContentBox from "../Components/Documents/WikiContentBox"
-import WikiGreeting from "../Components/Documents/WikiGreeting"
-import WikiHeader from "../Components/Documents/WikiHeader"
-import WikiSidebar from "../Components/Documents/WikiSidebar"
+import WikiContentBox from "../../Components/Documents/WikiContentBox"
+import WikiGreeting from "../../Components/Documents/WikiGreeting"
+import WikiHeader from "../../Components/Documents/WikiHeader"
+import WikiSidebar from "../../Components/Documents/WikiSidebar"
 
 const Container = styled.main`
   display: flex;
@@ -42,7 +42,7 @@ const ContentMainArea = styled.section`
   padding: 10px;
 `
 
-const Documents: React.FC = () => {
+const Backend: React.FC = () => {
   return (
     <Container>
       <WikiSidebar menus={["HTML", "CSS", "JavaScript", "React"]} />
@@ -50,7 +50,7 @@ const Documents: React.FC = () => {
         <WikiHeader />
         <ContentArea>
           <WikiGreeting
-            title="Jiwon의 CS 백과에 오신 것을 환영합니다,"
+            title="Jiwon의 백엔드 관련 CS 지식입니다."
             msg={`제가 만든 프로젝트들을 기점으로 얻을 수 있는 Computer Science 지식들을 정리해 놓은
               페이지입니다.
             내용은 지속적으로 추가될 것입니다.`}
@@ -117,4 +117,4 @@ const Documents: React.FC = () => {
   )
 }
 
-export default Documents
+export default Backend
