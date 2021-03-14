@@ -37,7 +37,7 @@ const Text = styled.p`
 interface props {
   title: string
   imageSrc: string
-  text: string
+  text: JSX.Element
   sort: string // 분류별로 나누기 위한 property
 }
 

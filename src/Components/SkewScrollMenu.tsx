@@ -15,7 +15,7 @@ const Container = styled.div`
 const TextContainer = styled.div`
   width: 80vw;
   height: 90vh;
-  position: absolute;
+  position: fixed;
   opacity: 0.7;
   z-index: 1;
   top: 10%;
