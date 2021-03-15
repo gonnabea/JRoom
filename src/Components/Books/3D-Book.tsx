@@ -4,10 +4,11 @@ interface props {
   width?: string
   height?: string
   spineWidth?: string
-  front?: HTMLDivElement
-  inside?: HTMLDivElement
-  back?: HTMLDivElement
-  inside1?: HTMLDivElement
+  front?: JSX.Element
+  inside?: JSX.Element
+  back?: JSX.Element
+  spine?: JSX.Element
+  inside1?: JSX.Element
 }
 // So there's currently no way in TypeScript to pass a generic type to a tagged template literal
 // https://stackoverflow.com/questions/63169809/property-name-does-not-exist-on-type-themedstyledprops
@@ -16,12 +17,15 @@ const Container = styled.section`
   transform-style: preserve-3d;
   position: relative;
   color: white;
-  animation: rotate 3s forwards;
-  width: ${(props: props) => (props.width ? props.width : "!00px")};
+  animation: rotate 1s forwards;
+  /* width: ${(props: props) => (props.width ? props.width : "!00px")}; <- 원본 코드 */
+  width: ${(props: props) =>
+    props.spineWidth ? props.spineWidth : "40px"}; // rotateY 90도 일 시 정렬을 위함
+
   height: ${(props) => (props.height ? props.height : "150px")};
   @keyframes rotate {
     to {
-      transform: rotateY(180deg);
+      transform: rotateY(90deg);
     }
   }
 `
@@ -51,19 +55,18 @@ const Back = styled.div`
   width: ${(props: props) => (props.width ? props.width : "100px")};
   height: ${(props) => (props.height ? props.height : "150px")};
   background-color: black;
-  transform: translateZ(
-    ${(props) => (props.spineWidth ? `calc(${props.spineWidth}*-1)` : "-30px")}
-  );
+  transform: translateZ(${(props) => (props.spineWidth ? `calc(${props.spineWidth}*-1)` : "-30px")})
+    rotateY(180deg);
 `
 
-const Left = styled.div`
+const Spine = styled.div`
   position: absolute;
   width: calc(${(props: props) => (props.spineWidth ? props.spineWidth : "30px")});
   height: ${(props) => (props.height ? props.height : "150px")};
   background-color: grey;
-  transform: rotateY(90deg)
-    translateX(${(props) => (props.spineWidth ? `calc(${props.spineWidth} /2)` : "15px")})
-    translateZ(${(props) => (props.spineWidth ? `calc(${props.spineWidth} /-2)` : "15px")});
+  transform: rotateY(-90deg)
+    translateX(${(props) => (props.spineWidth ? `calc(${props.spineWidth} /-2)` : "15px")})
+    translateZ(${(props) => (props.spineWidth ? `calc(${props.spineWidth} /2)` : "15px")});
 `
 
 const Inside1 = styled.div`
@@ -140,6 +143,7 @@ const Book3D: React.FC<props> = ({
   front,
   inside1,
   back,
+  spine,
 }) => {
   return (
     <Container width={width} height={height}>
@@ -155,11 +159,11 @@ const Book3D: React.FC<props> = ({
       <Inside5 width={width} height={height} spineWidth={spineWidth}></Inside5>
 
       <Back width={width} height={height} spineWidth={spineWidth}>
-        back
+        {back}
       </Back>
-      <Left width={width} height={height} spineWidth={spineWidth}>
-        spine
-      </Left>
+      <Spine width={width} height={height} spineWidth={spineWidth}>
+        {spine}
+      </Spine>
     </Container>
   )
 }

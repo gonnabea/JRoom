@@ -25,7 +25,10 @@ const WikiMain: React.FC = () => {
             title="Jiwon의 CS 백과에 오신 것을 환영합니다,"
             msg={`제가 만든 프로젝트들을 기점으로 얻을 수 있는 Computer Science 지식들을 정리해 놓은
               페이지입니다.
-            내용은 지속적으로 추가될 것입니다.`}
+            페이지의 목적은 저 자신이 공부하기 위한 것에 초점이 있습니다 (:
+              내용은 지속적으로 추가될 것입니다.
+            
+            `}
           />
           <ContentMainArea>
             <WikiContentBox
