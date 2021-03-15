@@ -1,53 +1,33 @@
+import { useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import WikiContentBox from "../../Components/Documents/WikiContentBox"
+import WikiDictionary from "../../Components/Documents/WikiDictionary"
 import WikiGreeting from "../../Components/Documents/WikiGreeting"
 import WikiHeader from "../../Components/Documents/WikiHeader"
 import WikiSidebar from "../../Components/Documents/WikiSidebar"
 
-const Container = styled.main`
-  display: flex;
-
-  height: 100vh;
-`
-
-const SideBar = styled.aside`
-  padding: 20px;
-  background-color: #f6f6f6;
-  height: 100vh;
-  width: 10em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const MainArea = styled.section``
-
-const ContentArea = styled.section`
-  height: calc(100vh - 80px);
-
-  padding: 20px 24px;
-`
-
-const ContentMainArea = styled.section`
-  width: 100%;
-
-  background-color: white;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: center;
-  justify-items: center;
-  border: solid 1px skyblue;
-  padding: 10px;
-
-  @media (max-width: 1100px) {
-    grid-template-columns: 1fr;
-  }
-`
+import {
+  Container,
+  ContentArea,
+  ContentMainArea,
+  ExplorerLink,
+  ExplorerModal,
+  MainArea,
+} from "./styles/common-styles"
 
 const Network: React.FC = () => {
+  const [content, setContent] = useState<JSX.Element | null>(null) // 모달에 들어갈 내용 설정
+  const explorerModal = useRef<HTMLDivElement | null>(null)
+
+  // 키워드 탐색기 실행
+  const handleExplorer = (keyword: string) => {
+    setContent(WikiDictionary(keyword))
+  }
+
   return (
     <Container>
+      <ExplorerModal ref={explorerModal}>{content}</ExplorerModal>
       <WikiSidebar menus={["Socket.io", "WebRTC"]} />
       <MainArea>
         <WikiHeader />
@@ -79,13 +59,15 @@ const Network: React.FC = () => {
                   과정을 거칩니다 중계과정 Indentify (클라이언트 인식, 검증) Type of Data (전송받은
                   데이터의 타입을 체크: 비디오인지 오디오인지 등등) NAT traversal (Peer to Peer
                   컨넥션: 클라이언트간 연결해주는 기술이라고 하는데 자세히는 모름) Security (데이터
-                  Encrypt 과정) Codec (데이터 압축) 특징 주로 UDP를 사용: TCP와 UDP의 차이는 속도와
-                  데이터 전송의 안정성에 주로 있는데, UDP는 안정성보다는 속도에 특화된 프로토콜이다
-                  따라서 스트리밍 서비스나 액션 게임등에 적합합니다 (webSocket은 TCP를 사용) 표준
-                  프로토콜이 없습니다 일부 브라우저에서 지원이 되지 않습니다 (ex) Firefox : 그러나
-                  adapter.js 라는 것을 이용하면 호환성을 개선할 수 있는 것으로 보입니다. 결론
-                  webSocket과 WebRTC의 특성을 비교하여 용도에 맞게 사용해주면 됩니다. webSocket은
-                  안정성 WebRTC는 속도 에 각각 무게가 실려있다는 것을 알 수 있습니다.
+                  Encrypt 과정) Codec (데이터 압축) 특징 주로 UDP를 사용:{" "}
+                  <ExplorerLink onClick={() => handleExplorer("TCP")}>TCP</ExplorerLink>와{" "}
+                  <ExplorerLink onClick={() => handleExplorer("UDP")}>UDP</ExplorerLink>의 차이는
+                  속도와 데이터 전송의 안정성에 주로 있는데, UDP는 안정성보다는 속도에 특화된
+                  프로토콜이다 따라서 스트리밍 서비스나 액션 게임등에 적합합니다 (webSocket은 TCP를
+                  사용) 표준 프로토콜이 없습니다 일부 브라우저에서 지원이 되지 않습니다 (ex) Firefox
+                  : 그러나 adapter.js 라는 것을 이용하면 호환성을 개선할 수 있는 것으로 보입니다.
+                  결론 webSocket과 WebRTC의 특성을 비교하여 용도에 맞게 사용해주면 됩니다.
+                  webSocket은 안정성 WebRTC는 속도 에 각각 무게가 실려있다는 것을 알 수 있습니다.
                   WebSocket으로도 영상 스트리밍을 구현할 수 있으나 WebRTC를 선호하는 것은 이
                   때문입니다.
                 </div>

@@ -4,49 +4,28 @@ import WikiContentBox from "../../Components/Documents/WikiContentBox"
 import WikiGreeting from "../../Components/Documents/WikiGreeting"
 import WikiHeader from "../../Components/Documents/WikiHeader"
 import WikiSidebar from "../../Components/Documents/WikiSidebar"
-
-const Container = styled.main`
-  display: flex;
-
-  height: 100vh;
-`
-
-const SideBar = styled.aside`
-  padding: 20px;
-  background-color: #f6f6f6;
-  height: 100vh;
-  width: 10em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const MainArea = styled.section``
-
-const ContentArea = styled.section`
-  height: calc(100vh - 80px);
-
-  padding: 20px 24px;
-`
-
-const ContentMainArea = styled.section`
-  width: 100%;
-
-  background-color: white;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: center;
-  justify-items: center;
-  border: solid 1px skyblue;
-  padding: 10px;
-  @media (max-width: 1100px) {
-    grid-template-columns: 1fr;
-  }
-`
+import {
+  Container,
+  ContentArea,
+  ContentMainArea,
+  ExplorerLink,
+  ExplorerModal,
+  MainArea,
+} from "./styles/common-styles"
+import WikiDictionary from "../../Components/Documents/WikiDictionary"
+import { useRef, useState } from "react"
 
 const CommonWiki: React.FC = () => {
+  const [content, setContent] = useState<JSX.Element | null>(null) // 모달에 들어갈 내용 설정
+  const explorerModal = useRef<HTMLDivElement | null>(null)
+
+  // 키워드 탐색기 실행
+  const handleExplorer = (keyword: string) => {
+    setContent(WikiDictionary(keyword))
+  }
   return (
     <Container>
+      <ExplorerModal ref={explorerModal}>{content}</ExplorerModal>
       <WikiSidebar
         menus={["컴퓨터 구조", "네트워크", "데이터베이스", "운영체제", "하드웨어", "디자인 패턴"]}
       />
