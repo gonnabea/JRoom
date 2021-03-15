@@ -67,6 +67,7 @@ const Spine = styled.div`
   transform: rotateY(-90deg)
     translateX(${(props) => (props.spineWidth ? `calc(${props.spineWidth} /-2)` : "15px")})
     translateZ(${(props) => (props.spineWidth ? `calc(${props.spineWidth} /2)` : "15px")});
+  border: solid 1px black;
 `
 
 const Inside1 = styled.div`
