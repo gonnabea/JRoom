@@ -4,6 +4,7 @@ interface props {
   width?: string
   height?: string
   spineWidth?: string
+  topWidth?: string
   front?: JSX.Element
   inside?: JSX.Element
   back?: JSX.Element
@@ -14,26 +15,52 @@ interface props {
 // https://stackoverflow.com/questions/63169809/property-name-does-not-exist-on-type-themedstyledprops
 
 const Container = styled.section`
+  cursor: pointer;
   transform-style: preserve-3d;
   position: relative;
   color: white;
-  animation: rotate 1s forwards;
+  /* animation: rotate 1s forwards; */
   /* width: ${(props: props) => (props.width ? props.width : "!00px")}; <- 원본 코드 */
   width: ${(props: props) =>
     props.spineWidth ? props.spineWidth : "40px"}; // rotateY 90도 일 시 정렬을 위함
 
   height: ${(props) => (props.height ? props.height : "150px")};
+  /* backface-visibility: visible; */
+  transform: rotateY(90deg);
+
+  :hover {
+    z-index: 1;
+    animation: incline 0.5s forwards;
+  }
   @keyframes rotate {
     to {
       transform: rotateY(90deg);
     }
   }
+  @keyframes revert {
+    from {
+      transform: rotateZ(-90deg);
+    }
+    to {
+      transform: rotateZ(0deg);
+    }
+  }
+  @keyframes incline {
+    from {
+      transform: rotateY(90deg);
+    }
+    to {
+      transform: rotateY(0deg) translateY(20%);
+    }
+  }
 `
 
 const Front = styled.div`
+  transform-style: preserve-3d;
   position: absolute;
   width: ${(props: props) => (props.width ? props.width : "100px")};
-  height: ${(props) => (props.height ? props.height : "150px")};
+  height: ${(props) => (props.height ? `calc(${props.height} + 0px)` : "150px")};
+
   background-color: black;
   color: white;
   :hover {
@@ -51,6 +78,8 @@ const Front = styled.div`
 `
 
 const Back = styled.div`
+  transform-style: preserve-3d;
+
   position: absolute;
   width: ${(props: props) => (props.width ? props.width : "100px")};
   height: ${(props) => (props.height ? props.height : "150px")};
@@ -60,6 +89,7 @@ const Back = styled.div`
 `
 
 const Spine = styled.div`
+  transform-style: preserve-3d;
   position: absolute;
   width: calc(${(props: props) => (props.spineWidth ? props.spineWidth : "30px")});
   height: ${(props) => (props.height ? props.height : "150px")};
@@ -70,7 +100,20 @@ const Spine = styled.div`
   border: solid 1px black;
 `
 
+const Top = styled.div`
+  transform-style: preserve-3d;
+  position: absolute;
+  width: calc(${(props: props) => (props.width ? props.width : "150px")});
+  height: ${(props) => (props.spineWidth ? props.spineWidth : "40px")};
+  background-color: white;
+  transform: rotateX(90deg)
+    translateY(${(props) => (props.spineWidth ? `calc(${props.spineWidth} /-2)` : "-20px")});
+  /* background-image: url("images/book_paper_top.png"); */
+  border: solid 2px black;
+`
+
 const Inside1 = styled.div`
+  transform-style: preserve-3d;
   position: absolute;
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
@@ -83,6 +126,7 @@ const Inside1 = styled.div`
 `
 
 const Inside2 = styled.div`
+  transform-style: preserve-3d;
   position: absolute;
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
@@ -94,6 +138,7 @@ const Inside2 = styled.div`
 `
 
 const Inside3 = styled.div`
+  transform-style: preserve-3d;
   position: absolute;
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
@@ -105,6 +150,7 @@ const Inside3 = styled.div`
 `
 
 const Inside4 = styled.div`
+  transform-style: preserve-3d;
   position: absolute;
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
@@ -116,6 +162,7 @@ const Inside4 = styled.div`
 `
 
 const Inside5 = styled.div`
+  transform-style: preserve-3d;
   position: absolute;
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
@@ -127,6 +174,7 @@ const Inside5 = styled.div`
 `
 
 const Inside6 = styled.div`
+  transform-style: preserve-3d;
   position: absolute;
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
@@ -141,16 +189,40 @@ const Book3D: React.FC<props> = ({
   width = "300px",
   height = "500px",
   spineWidth = "40px",
+  topWidth = "30px",
   front,
   inside1,
   back,
   spine,
 }) => {
+  const inclineBook = (e: any) => {
+    // 더 좋은 알고리즘 필요.
+    if (e.target.parentNode.id === "container") {
+      e.target.parentNode.style.animation = "incline 0.5s forwards"
+    }
+  }
+
+  const revertBook = (e: any) => {
+    if (e.target.parentNode.id === "container") {
+      console.log(e.target.parentNode)
+
+      e.target.parentNode.style.animation = "revert 0.5s forwards"
+    }
+  }
+
   return (
-    <Container width={width} height={height}>
+    <Container
+      id="container"
+      // onMouseOver={(e: any) => inclineBook(e)}
+      onMouseOut={(e: any) => revertBook(e)}
+      width={width}
+      height={height}
+      spineWidth={spineWidth}
+    >
       <Front width={width} height={height} spineWidth={spineWidth}>
         {front}
       </Front>
+      <Top width={width} height={height} spineWidth={spineWidth}></Top>
       <Inside1 width={width} height={height} spineWidth={spineWidth}>
         {inside1}
       </Inside1>

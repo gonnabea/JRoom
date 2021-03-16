@@ -35,6 +35,9 @@ const BookShelf = styled.img`
 
 const SpineTitle = styled.h2`
   font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
+  width: 50%;
 `
 
 const PageTitle = styled.h1`
@@ -121,6 +124,7 @@ const Books: React.FC = () => {
       <Book3D
         width="300px"
         height="450px"
+        spineWidth="45px"
         front={<FrontCover src="/book_covers/core_js_front.jpg"></FrontCover>}
         back={<BackCover src="/book_covers/core_js_back.jpg"></BackCover>}
         spine={
@@ -132,8 +136,9 @@ const Books: React.FC = () => {
       <Book3D
         width="300px"
         height="450px"
-        front={<FrontCover src="/book_covers/core_js_front.jpg"></FrontCover>}
-        back={<BackCover src="/book_covers/core_js_back.jpg"></BackCover>}
+        spineWidth="45px"
+        front={<FrontCover src="/book_covers/seven_db_front.jpg"></FrontCover>}
+        back={<BackCover src="/book_covers/seven_db_back.jpg"></BackCover>}
         spine={
           <SevenDBCover>
             <SpineTitle>세븐 데이터베이스</SpineTitle>
@@ -143,8 +148,9 @@ const Books: React.FC = () => {
       <Book3D
         width="300px"
         height="450px"
-        front={<FrontCover src="/book_covers/core_js_front.jpg"></FrontCover>}
-        back={<BackCover src="/book_covers/core_js_back.jpg"></BackCover>}
+        spineWidth="45px"
+        front={<FrontCover src="/book_covers/deepwork_front.jpg"></FrontCover>}
+        back={<BackCover src="/book_covers/deepwork_back.jpg"></BackCover>}
         spine={
           <DeepWorkCover>
             <SpineTitle>Deep Work</SpineTitle>
@@ -154,8 +160,9 @@ const Books: React.FC = () => {
       <Book3D
         width="300px"
         height="450px"
-        front={<FrontCover src="/book_covers/core_js_front.jpg"></FrontCover>}
-        back={<BackCover src="/book_covers/core_js_back.jpg"></BackCover>}
+        spineWidth="45px"
+        front={<FrontCover src="/book_covers/money_history_front.jpg"></FrontCover>}
+        back={<BackCover src="/book_covers/money_history_back.jpg"></BackCover>}
         spine={
           <MoneyCover>
             <SpineTitle>돈의 역사</SpineTitle>
@@ -165,8 +172,9 @@ const Books: React.FC = () => {
       <Book3D
         width="300px"
         height="450px"
-        front={<FrontCover src="/book_covers/core_js_front.jpg"></FrontCover>}
-        back={<BackCover src="/book_covers/core_js_back.jpg"></BackCover>}
+        spineWidth="45px"
+        front={<FrontCover src="/book_covers/readable_code_front.jpg"></FrontCover>}
+        back={<BackCover src="/book_covers/readable_code_back.jpg"></BackCover>}
         spine={
           <RedableCover>
             <SpineTitle>읽기 좋은 코드가 좋은 코드다</SpineTitle>
@@ -176,8 +184,9 @@ const Books: React.FC = () => {
       <Book3D
         width="300px"
         height="450px"
-        front={<FrontCover src="/book_covers/core_js_front.jpg"></FrontCover>}
-        back={<BackCover src="/book_covers/core_js_back.jpg"></BackCover>}
+        spineWidth="45px"
+        front={<FrontCover src="/book_covers/code_front.jpg"></FrontCover>}
+        back={<BackCover src="/book_covers/code_back.jpg"></BackCover>}
         spine={
           <CODECover>
             <SpineTitle>CODE</SpineTitle>
