@@ -19,6 +19,7 @@ import { addFloor } from "../../Components/ThreeModules/floor"
 import nomadLogo from "../../resources/images/nomadLogo.png"
 import floorImage3 from "../../resources/images/floor3.jpg"
 import addIframeObj from "../../Components/ThreeModules/iframeObj"
+import { Geometry } from "three"
 export const JFlixObjects = () => {
   // J-Flix 지붕
   const roofShape = new THREE.Shape()
@@ -184,53 +185,130 @@ export const JFlixObjects = () => {
   })
 
   // 천장과 벽지 이음새 생성
-  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: 1480, y: 490, z: -1000 }, "black", {
-    x: 0,
-    y: 0,
-    z: Math.PI / 2,
+  const ceilConnectors = new THREE.Geometry()
+  const connector1: THREE.Mesh = addCeilConnector({
+    scale: { x: 2, y: 3, z: 9.9 },
+    depth: 200,
+    position: { x: 1480, y: 490, z: -1000 },
+    color: "black",
+    rotation: {
+      x: 0,
+      y: 0,
+      z: Math.PI / 2,
+    },
+  })
+  console.log(connector1.geometry)
+  connector1.updateMatrix()
+  ceilConnectors.merge(connector1.geometry as Geometry, connector1.matrix)
+
+  const connector2: THREE.Mesh = addCeilConnector({
+    scale: { x: 2, y: 3, z: 9.9 },
+    depth: 200,
+    position: { x: -1460, y: 490, z: -1000 },
+    color: "black",
+    rotation: {
+      x: 0,
+      y: 0,
+      z: Math.PI,
+    },
+  })
+  connector2.updateMatrix()
+  ceilConnectors.merge(connector2.geometry as Geometry, connector2.matrix)
+
+  const connector3 = addCeilConnector({
+    scale: { x: 2, y: 3, z: 9.9 },
+    depth: 300,
+    position: { x: -1460, y: 480, z: -970 },
+    color: "black",
+    rotation: {
+      x: 0,
+      y: Math.PI / 2,
+      z: Math.PI / 2,
+    },
   })
 
-  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: -1460, y: 490, z: -1000 }, "black", {
-    x: 0,
-    y: 0,
-    z: Math.PI,
+  connector3.updateMatrix()
+  ceilConnectors.merge(connector3.geometry as Geometry, connector3.matrix)
+
+  const connector4 = addCeilConnector({
+    scale: { x: 2, y: 3, z: 9.9 },
+    depth: 300,
+    position: { x: -1460, y: 485, z: 970 },
+    color: "black",
+    rotation: {
+      x: 0,
+      y: Math.PI / 2,
+      z: -Math.PI / 2,
+    },
   })
 
-  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: 480, z: -970 }, "black", {
-    x: 0,
-    y: Math.PI / 2,
-    z: Math.PI / 2,
-  })
-  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: 485, z: 970 }, "black", {
-    x: 0,
-    y: Math.PI / 2,
-    z: -Math.PI / 2,
-  })
+  connector4.updateMatrix()
+  ceilConnectors.merge(connector4.geometry as Geometry, connector4.matrix)
 
   // 바닥 이음새
-  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: 1480, y: -490, z: -1000 }, "grey", {
-    x: 0,
-    y: 0,
-    z: Math.PI / 2,
+  const connector5 = addCeilConnector({
+    scale: { x: 2, y: 3, z: 9.9 },
+    depth: 200,
+    position: { x: 1480, y: -490, z: -1000 },
+    color: "grey",
+    rotation: {
+      x: 0,
+      y: 0,
+      z: Math.PI / 2,
+    },
   })
 
-  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 200, { x: -1460, y: -490, z: -1000 }, "grey", {
-    x: 0,
-    y: 0,
-    z: Math.PI,
+  connector5.updateMatrix()
+  ceilConnectors.merge(connector5.geometry as Geometry, connector5.matrix)
+
+  const connector6 = addCeilConnector({
+    scale: { x: 2, y: 3, z: 9.9 },
+    depth: 200,
+    position: { x: -1460, y: -490, z: -1000 },
+    color: "grey",
+    rotation: {
+      x: 0,
+      y: 0,
+      z: Math.PI,
+    },
   })
 
-  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: -480, z: -970 }, "grey", {
-    x: 0,
-    y: Math.PI / 2,
-    z: Math.PI / 2,
+  connector6.updateMatrix()
+  ceilConnectors.merge(connector6.geometry as Geometry, connector6.matrix)
+
+  const connector7 = addCeilConnector({
+    scale: { x: 2, y: 3, z: 9.9 },
+    depth: 300,
+    position: { x: -1460, y: -480, z: -970 },
+    color: "grey",
+    rotation: {
+      x: 0,
+      y: Math.PI / 2,
+      z: Math.PI / 2,
+    },
   })
 
-  addCeilConnector({ x: 2, y: 3, z: 9.9 }, 300, { x: -1460, y: -485, z: 970 }, "grey", {
-    x: 0,
-    y: Math.PI / 2,
-    z: -Math.PI / 2,
+  connector7.updateMatrix()
+  ceilConnectors.merge(connector7.geometry as Geometry, connector7.matrix)
+
+  const connector8 = addCeilConnector({
+    scale: { x: 2, y: 3, z: 9.9 },
+    depth: 300,
+    position: { x: -1460, y: -485, z: 970 },
+    color: "grey",
+    rotation: {
+      x: 0,
+      y: Math.PI / 2,
+      z: -Math.PI / 2,
+    },
   })
+
+  connector8.updateMatrix()
+  ceilConnectors.merge(connector8.geometry as Geometry, connector8.matrix)
+
+  const connectorsMaterial = new THREE.MeshPhongMaterial({ color: "black" })
+  const connectorsMesh = new THREE.Mesh(ceilConnectors, connectorsMaterial)
+  scene.add(connectorsMesh)
 
   // 선택 버튼 생성
 

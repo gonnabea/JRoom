@@ -6,7 +6,7 @@
 - [x] TypeScript
 - [x] React
 - [x] Three.js 💎
-- [ ] Ammo.js
+- [ ] Babylon.js
 
 ## TodoList
 
