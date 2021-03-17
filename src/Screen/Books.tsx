@@ -15,6 +15,7 @@ const FrontCover = styled.img`
   background-color: white;
   width: 100%;
   height: 100%;
+  backface-visibility: hidden;
 `
 
 const BackCover = styled.img`
@@ -113,6 +114,12 @@ const RedableCover = styled.div`
   align-items: center;
 `
 
+const BookContent = styled.div`
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+`
+
 const Books: React.FC = () => {
   return (
     <Container>
@@ -127,11 +134,13 @@ const Books: React.FC = () => {
         spineWidth="45px"
         front={<FrontCover src="/book_covers/core_js_front.jpg"></FrontCover>}
         back={<BackCover src="/book_covers/core_js_back.jpg"></BackCover>}
+        bookTitle="coreJS"
         spine={
           <CoreJSCover>
             <SpineTitle>코어 자바스크립트</SpineTitle>
           </CoreJSCover>
         }
+        inside1={<BookContent>테스트입니다</BookContent>}
       />
       <Book3D
         width="300px"
@@ -139,6 +148,7 @@ const Books: React.FC = () => {
         spineWidth="45px"
         front={<FrontCover src="/book_covers/seven_db_front.jpg"></FrontCover>}
         back={<BackCover src="/book_covers/seven_db_back.jpg"></BackCover>}
+        bookTitle="sevenDB"
         spine={
           <SevenDBCover>
             <SpineTitle>세븐 데이터베이스</SpineTitle>
@@ -151,6 +161,7 @@ const Books: React.FC = () => {
         spineWidth="45px"
         front={<FrontCover src="/book_covers/deepwork_front.jpg"></FrontCover>}
         back={<BackCover src="/book_covers/deepwork_back.jpg"></BackCover>}
+        bookTitle="deepWork"
         spine={
           <DeepWorkCover>
             <SpineTitle>Deep Work</SpineTitle>
@@ -163,6 +174,7 @@ const Books: React.FC = () => {
         spineWidth="45px"
         front={<FrontCover src="/book_covers/money_history_front.jpg"></FrontCover>}
         back={<BackCover src="/book_covers/money_history_back.jpg"></BackCover>}
+        bookTitle="moneyHistory"
         spine={
           <MoneyCover>
             <SpineTitle>돈의 역사</SpineTitle>
@@ -175,6 +187,7 @@ const Books: React.FC = () => {
         spineWidth="45px"
         front={<FrontCover src="/book_covers/readable_code_front.jpg"></FrontCover>}
         back={<BackCover src="/book_covers/readable_code_back.jpg"></BackCover>}
+        bookTitle="readableCode"
         spine={
           <RedableCover>
             <SpineTitle>읽기 좋은 코드가 좋은 코드다</SpineTitle>
@@ -187,6 +200,7 @@ const Books: React.FC = () => {
         spineWidth="45px"
         front={<FrontCover src="/book_covers/code_front.jpg"></FrontCover>}
         back={<BackCover src="/book_covers/code_back.jpg"></BackCover>}
+        bookTitle="CODE"
         spine={
           <CODECover>
             <SpineTitle>CODE</SpineTitle>
