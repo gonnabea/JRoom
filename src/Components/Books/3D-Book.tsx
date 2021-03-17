@@ -10,6 +10,10 @@ interface props {
   back?: JSX.Element
   spine?: JSX.Element
   inside1?: JSX.Element
+  inside2?: JSX.Element
+  inside3?: JSX.Element
+  inside4?: JSX.Element
+
   bookTitle?: string
 }
 // So there's currently no way in TypeScript to pass a generic type to a tagged template literal
@@ -128,12 +132,12 @@ const Inside1 = styled.div`
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
   height: calc(${(props) => (props.height ? props.height : "150px")} + (-10px));
-  transform: translateX(4px)
+  transform: translateX(5px)
     translateZ(${(props) => (props.width ? `calc(${props.width} / -20)` : "-5px")});
   background-color: white;
   border-radius: 0 3px 3px 0;
   color: black;
-  padding: 20px;
+
   /* animation: flipPage 0.5s forwards; */
   @keyframes flipPage {
     to {
@@ -149,7 +153,7 @@ const Inside2 = styled.div`
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
   height: calc(${(props) => (props.height ? props.height : "150px")} + (-10px));
-  transform: translateX(4px)
+  transform: translateX(5px)
     translateZ(${(props) => (props.width ? `calc(${props.width} / -18)` : "-5px")});
   background-color: white;
   border-radius: 0 3px 3px 0;
@@ -157,11 +161,12 @@ const Inside2 = styled.div`
 
 const Inside3 = styled.div`
   transform-style: preserve-3d;
+  transform-origin: top left;
   position: absolute;
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
   height: calc(${(props) => (props.height ? props.height : "150px")} + (-10px));
-  transform: translateX(4px)
+  transform: translateX(5px)
     translateZ(${(props) => (props.width ? `calc(${props.width} / -16)` : "-5px")});
   background-color: white;
   border-radius: 0 3px 3px 0;
@@ -169,11 +174,12 @@ const Inside3 = styled.div`
 
 const Inside4 = styled.div`
   transform-style: preserve-3d;
+  transform-origin: top left;
   position: absolute;
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
   height: calc(${(props) => (props.height ? props.height : "150px")} + (-10px));
-  transform: translateX(4px)
+  transform: translateX(5px)
     translateZ(${(props) => (props.width ? `calc(${props.width} / -14)` : "-5px")});
   background-color: white;
   border-radius: 0 3px 3px 0;
@@ -185,7 +191,7 @@ const Inside5 = styled.div`
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
   height: calc(${(props) => (props.height ? props.height : "150px")} + (-10px));
-  transform: translateX(4px)
+  transform: translateX(5px)
     translateZ(${(props) => (props.width ? `calc(${props.width} / -12)` : "-5px")});
   background-color: white;
   border-radius: 0 3px 3px 0;
@@ -197,7 +203,7 @@ const Inside6 = styled.div`
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
   height: calc(${(props) => (props.height ? props.height : "150px")} + (-10px));
-  transform: translateX(4px)
+  transform: translateX(5px)
     translateZ(${(props) => (props.width ? `calc(${props.width} / -10)` : "-5px")});
   background-color: white;
   border-radius: 0 3px 3px 0;
@@ -207,9 +213,12 @@ const Book3D: React.FC<props> = ({
   width = "300px",
   height = "500px",
   spineWidth = "40px",
-  topWidth = "30px",
   front,
   inside1,
+  inside2,
+  inside3,
+  inside4,
+
   back,
   spine,
   bookTitle,
@@ -235,7 +244,7 @@ const Book3D: React.FC<props> = ({
           e.style.zIndex = 0
         }
       },
-      500,
+      300,
       e.currentTarget
     )
   }
@@ -283,7 +292,28 @@ const Book3D: React.FC<props> = ({
         width={width}
         height={height}
         spineWidth={spineWidth}
-      ></Inside2>
+      >
+        {inside2}
+      </Inside2>
+      <Inside3
+        onClick={(e: any) => flipPage(e)}
+        width={width}
+        height={height}
+        spineWidth={spineWidth}
+      >
+        {inside3}
+      </Inside3>
+      {/* 책 페이지 필요 없을 경우 처리 */}
+      {inside4 ? (
+        <Inside4
+          onClick={(e: any) => flipPage(e)}
+          width={width}
+          height={height}
+          spineWidth={spineWidth}
+        >
+          {inside4}
+        </Inside4>
+      ) : null}
 
       <Back
         onClick={(e: any) => closeBook(e)}
