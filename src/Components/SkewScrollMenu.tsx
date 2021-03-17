@@ -32,7 +32,7 @@ const TextContainer = styled.div`
 `
 
 const TextArea = styled(Link)`
-  color: black;
+  color: white;
   width: 100%;
   font-size: 10.5vw;
   height: 20%;
@@ -42,12 +42,14 @@ const TextArea = styled(Link)`
   /* Prefix required. Even Firefox only supports the -webkit- prefix */
   font-family: fantasy;
   margin-bottom: 80px;
-  -webkit-text-stroke: 4px black;
+  -webkit-text-stroke: 4px white;
   -webkit-text-fill-color: transparent;
   transition: -webkit-text-fill-color 0.5s;
 
   :hover {
-    -webkit-text-fill-color: ${(props) => props.color};
+    /* -webkit-text-fill-color: ${(props) => props.color}; */
+    -webkit-text-fill-color: white;
+    background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
     cursor: pointer;
   }
   @keyframes inclineTexts {
@@ -89,7 +91,7 @@ const TextArea = styled(Link)`
 
 // anchor 링크가 필요한 경우
 const TextAreaAnchor = styled.a`
-  color: black;
+  color: white;
   width: 100%;
   font-size: 10.5vw;
   height: 20%;
@@ -99,12 +101,16 @@ const TextAreaAnchor = styled.a`
   /* Prefix required. Even Firefox only supports the -webkit- prefix */
   font-family: fantasy;
   margin-bottom: 80px;
-  -webkit-text-stroke: 4px black;
+  -webkit-text-stroke: 4px white;
   -webkit-text-fill-color: transparent;
   transition: -webkit-text-fill-color 0.5s;
 
   :hover {
-    -webkit-text-fill-color: ${(props) => props.color};
+    /* -webkit-text-fill-color: ${(props) => props.color}; */
+    -webkit-text-fill-color: white;
+    /* background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); */
+    background-color: red;
+
     cursor: pointer;
   }
   @keyframes inclineTexts {
@@ -145,10 +151,12 @@ const TextAreaAnchor = styled.a`
 `
 
 const Video = styled.video`
-  width: 70%;
-  height: 70%;
-  object-fit: fill;
+  transform-style: preserve-3d;
 
+  width: 95%;
+  height: 95%;
+  object-fit: fill;
+  transform: rotateZ(-5deg);
   box-shadow: 0px 0px 200px #68b793;
 `
 

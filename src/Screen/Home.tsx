@@ -46,8 +46,8 @@ const Home: React.FC = () => {
       afterImage.style.height = "100px"
       afterImage.style.background = "none"
       afterImage.style.position = "absolute"
-      afterImage.style.color = "orange"
-      afterImage.style.border = "4px solid orange"
+      afterImage.style.color = "white"
+      afterImage.style.border = "4px solid white"
       afterImage.style.borderRadius = "10px"
       afterImage.style.display = "flex"
       afterImage.style.justifyContent = "center"
@@ -75,7 +75,16 @@ const Home: React.FC = () => {
           "Contact Me...",
           "Github",
         ]}
-        colors={["#0080C6", "orange", "white", "yellowgreen", "#FBD591", "skyblue", "gray", "gray"]}
+        colors={[
+          "#88DEB1",
+          "#69C7AF",
+          "#4EADAF",
+          "#377A97",
+          "#254A7F",
+          "#162068",
+          "#140850",
+          "gray",
+        ]}
         videoList={[
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
