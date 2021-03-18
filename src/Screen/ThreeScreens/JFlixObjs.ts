@@ -80,7 +80,6 @@ export const JFlixObjects = () => {
   // )
 
   // 책 모형에 붙일 텍스트 geometry
-  const textGroup = new THREE.Geometry()
   FontLoder(
     {
       fontModelUrl: "/fonts/helvetiker_regular.typeface.json",
@@ -194,8 +193,7 @@ export const JFlixObjects = () => {
   })
 
   // 천장과 벽지 이음새 생성
-  const ceilConnectors = new THREE.Geometry()
-  const connector1: THREE.Mesh = addCeilConnector({
+  addCeilConnector({
     scale: { x: 2, y: 3, z: 9.9 },
     depth: 200,
     position: { x: 1480, y: 490, z: -1000 },
@@ -206,11 +204,8 @@ export const JFlixObjects = () => {
       z: Math.PI / 2,
     },
   })
-  console.log(connector1.geometry)
-  connector1.updateMatrix()
-  ceilConnectors.merge(connector1.geometry as Geometry, connector1.matrix)
 
-  const connector2: THREE.Mesh = addCeilConnector({
+  addCeilConnector({
     scale: { x: 2, y: 3, z: 9.9 },
     depth: 200,
     position: { x: -1460, y: 490, z: -1000 },
@@ -221,10 +216,8 @@ export const JFlixObjects = () => {
       z: Math.PI,
     },
   })
-  connector2.updateMatrix()
-  ceilConnectors.merge(connector2.geometry as Geometry, connector2.matrix)
 
-  const connector3 = addCeilConnector({
+  addCeilConnector({
     scale: { x: 2, y: 3, z: 9.9 },
     depth: 300,
     position: { x: -1460, y: 480, z: -970 },
@@ -236,10 +229,7 @@ export const JFlixObjects = () => {
     },
   })
 
-  connector3.updateMatrix()
-  ceilConnectors.merge(connector3.geometry as Geometry, connector3.matrix)
-
-  const connector4 = addCeilConnector({
+  addCeilConnector({
     scale: { x: 2, y: 3, z: 9.9 },
     depth: 300,
     position: { x: -1460, y: 485, z: 970 },
@@ -251,11 +241,8 @@ export const JFlixObjects = () => {
     },
   })
 
-  connector4.updateMatrix()
-  ceilConnectors.merge(connector4.geometry as Geometry, connector4.matrix)
-
   // 바닥 이음새
-  const connector5 = addCeilConnector({
+  addCeilConnector({
     scale: { x: 2, y: 3, z: 9.9 },
     depth: 200,
     position: { x: 1480, y: -490, z: -1000 },
@@ -267,10 +254,7 @@ export const JFlixObjects = () => {
     },
   })
 
-  connector5.updateMatrix()
-  ceilConnectors.merge(connector5.geometry as Geometry, connector5.matrix)
-
-  const connector6 = addCeilConnector({
+  addCeilConnector({
     scale: { x: 2, y: 3, z: 9.9 },
     depth: 200,
     position: { x: -1460, y: -490, z: -1000 },
@@ -282,10 +266,7 @@ export const JFlixObjects = () => {
     },
   })
 
-  connector6.updateMatrix()
-  ceilConnectors.merge(connector6.geometry as Geometry, connector6.matrix)
-
-  const connector7 = addCeilConnector({
+  addCeilConnector({
     scale: { x: 2, y: 3, z: 9.9 },
     depth: 300,
     position: { x: -1460, y: -480, z: -970 },
@@ -297,10 +278,7 @@ export const JFlixObjects = () => {
     },
   })
 
-  connector7.updateMatrix()
-  ceilConnectors.merge(connector7.geometry as Geometry, connector7.matrix)
-
-  const connector8 = addCeilConnector({
+  addCeilConnector({
     scale: { x: 2, y: 3, z: 9.9 },
     depth: 300,
     position: { x: -1460, y: -485, z: 970 },
@@ -311,13 +289,6 @@ export const JFlixObjects = () => {
       z: -Math.PI / 2,
     },
   })
-
-  connector8.updateMatrix()
-  ceilConnectors.merge(connector8.geometry as Geometry, connector8.matrix)
-
-  const connectorsMaterial = new THREE.MeshPhongMaterial({ color: "black" })
-  const connectorsMesh = new THREE.Mesh(ceilConnectors, connectorsMaterial)
-  scene.add(connectorsMesh)
 
   // 선택 버튼 생성
 

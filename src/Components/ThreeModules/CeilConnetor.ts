@@ -1,7 +1,9 @@
 import { scene } from "../../Screen/ThreeScreens/ThreeScene"
 import * as THREE from "three"
-import { BackSide, FrontSide } from "three"
+import { BackSide, FrontSide, Geometry } from "three"
 
+export let connectorsMesh: THREE.Mesh
+const ceilConnectorGroup = new THREE.Geometry()
 // 천장과 벽지 이음새
 export const addCeilConnector = (props: {
   scale: { x: number; y: number; z: number }
@@ -34,5 +36,9 @@ export const addCeilConnector = (props: {
   mesh.position.set(props.position.x, props.position.y, props.position.z)
   material.side = FrontSide
 
-  return mesh
+  mesh.updateMatrix()
+  ceilConnectorGroup.merge(mesh.geometry as Geometry, mesh.matrix)
+
+  const connectorsMaterial = new THREE.MeshPhongMaterial({ color: "black" })
+  connectorsMesh = new THREE.Mesh(ceilConnectorGroup, connectorsMaterial)
 }

@@ -272,9 +272,10 @@ const Book3D: React.FC<props> = ({
   }
 
   const closeBook = (e: React.MouseEvent) => {
-    console.dir(e.currentTarget.parentNode)
-    ;(e.currentTarget as HTMLElement).style.transformOrigin = "top left"
-    ;(e.currentTarget as HTMLElement).style.transform = "rotateY(-157deg)"
+    if (bookState === "open") {
+      ;(e.currentTarget as HTMLElement).style.transformOrigin = "top left"
+      ;(e.currentTarget as HTMLElement).style.transform = "rotateY(-157deg)"
+    }
   }
 
   return (

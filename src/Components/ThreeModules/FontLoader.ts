@@ -1,4 +1,5 @@
 import * as THREE from "three"
+import { Geometry, TextBufferGeometry, TextGeometry } from "three"
 import { scene } from "../../Screen/ThreeScreens/ThreeScene"
 
 export const FontLoder = (
@@ -15,7 +16,7 @@ export const FontLoder = (
 ) => {
   const fontLoader = new THREE.FontLoader()
   fontLoader.load(params.fontModelUrl, (font) => {
-    const geometry = new THREE.TextBufferGeometry(params.text, {
+    const geometry = new THREE.TextGeometry(params.text, {
       font,
       size: params.size,
       height: params.height,
@@ -31,8 +32,11 @@ export const FontLoder = (
       specular: "orange",
       flatShading: true,
     })
+
     const mesh = new THREE.Mesh(geometry, material)
     mesh.position.set(position.x, position.y, position.z)
+
+    // textGroup.merge(mesh.geometry as TextGeometry, mesh.matrix)
     if (rotation) {
       mesh.rotation.set(rotation.x, rotation.y, rotation.z)
     }

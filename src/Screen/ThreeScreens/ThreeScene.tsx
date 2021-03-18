@@ -13,6 +13,7 @@ import { JustReadItObjs } from "./JustReadItObjs"
 import onObjects from "./ONObjs"
 import addIframeObj from "../../Components/ThreeModules/iframeObj"
 import outsideObjs from "./OutsideObjs"
+import { connectorsMesh } from "../../Components/ThreeModules/CeilConnetor"
 
 const Container = styled.section`
   width: 100%;
@@ -36,16 +37,17 @@ export let controls: OrbitControls
 export let composer: { addPass: (arg0: any) => void; render: (arg0: number) => void }
 export let floorCamera: THREE.CubeCamera
 export let floorMesh: THREE.Mesh
+export let cssScene: THREE.Scene
+export let selectBtnObjs: any[] = []
+export let embedWebsite: HTMLIFrameElement
+
 let cssRenderer: {
   setSize: (arg0: number, arg1: number) => void
   domElement: any
   render: (arg0: THREE.Scene, arg1: THREE.PerspectiveCamera) => void
 }
-export let cssScene: THREE.Scene
-export let selectBtnObjs: any[] = []
 let raycaster = new THREE.Raycaster()
 let mouse = new THREE.Vector2()
-export let embedWebsite: HTMLIFrameElement
 
 let frameCount = 0
 const ThreeScene = () => {
@@ -240,6 +242,9 @@ const ThreeScene = () => {
     JustReadItObjs()
     onObjects()
     outsideObjs()
+
+    // 이음새 mesh 모두 화면에 적용
+    scene.add(connectorsMesh)
 
     // 렌더러
     renderer = new THREE.WebGLRenderer({
