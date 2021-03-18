@@ -69,7 +69,7 @@ const Home: React.FC = () => {
         texts={[
           "About Me",
           "3D Exhibition ✨",
-          "Documents",
+          "CS Wiki",
           "Books",
           "Tech Stack",
           "Contact Me...",

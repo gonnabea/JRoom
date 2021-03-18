@@ -227,22 +227,21 @@ const Book3D: React.FC<props> = ({
   let bookState: string
 
   // 책 꺼내기
-  const takeOutBook = (e: any) => {
+  const takeOutBook = (e: React.MouseEvent) => {
     e.stopPropagation()
-
-    e.currentTarget.style.animation = "takeOut 0.5s forwards"
-    e.currentTarget.style.zIndex = 1
+    ;(e.currentTarget as HTMLElement).style.animation = "takeOut 0.5s forwards"
+    ;(e.currentTarget as HTMLElement).style.zIndex = "1"
   }
 
   // 책 돌려놓기
-  const revertBook = (e: any) => {
+  const revertBook = (e: React.MouseEvent) => {
     bookState = "close"
-    e.currentTarget.style.animation = null // js로 트리거되는 애니메이션을 없애서 css 애니메이션을 발동시킴
-    e.currentTarget.childNodes[0].style.animation = "" // 모든 element를 원래대로
+    ;(e.currentTarget as HTMLElement).style.animation = "" // js로 트리거되는 애니메이션을 없애서 css 애니메이션을 발동시킴
+    ;(e.currentTarget.childNodes[0] as HTMLElement).style.animation = "" // 모든 element를 원래대로
 
     for (let i = 0; i < e.currentTarget.childNodes.length; i++) {
-      e.currentTarget.childNodes[i].style.animation = ""
-      e.currentTarget.childNodes[i].style.transform = ""
+      ;(e.currentTarget.childNodes[i] as HTMLElement).style.animation = ""
+      ;(e.currentTarget.childNodes[i] as HTMLElement).style.transform = ""
     }
 
     // zIndex를 변경하여 자연스런 효과 유도
@@ -257,23 +256,25 @@ const Book3D: React.FC<props> = ({
     )
   }
 
-  const openBook = (e: any) => {
-    console.dir(e.currentTarget)
-    bookState = "open"
-    e.currentTarget.style.animation = "openBook 0.5s forwards"
-    e.currentTarget.style.background = null
-  }
-
-  const flipPage = (e: any) => {
-    if (bookState === "open") {
-      e.currentTarget.style.animation = "flipPage 0.5s forwards"
+  const openBook = (e: React.MouseEvent) => {
+    if (e) {
+      console.dir(e.currentTarget)
+      bookState = "open"
+      ;(e.currentTarget as HTMLElement).style.animation = "openBook 0.5s forwards"
+      ;(e.currentTarget as HTMLElement).style.background = ""
     }
   }
 
-  const closeBook = (e: any) => {
+  const flipPage = (e: React.MouseEvent) => {
+    if (bookState === "open") {
+      ;(e.currentTarget as HTMLElement).style.animation = "flipPage 0.5s forwards"
+    }
+  }
+
+  const closeBook = (e: React.MouseEvent) => {
     console.dir(e.currentTarget.parentNode)
-    e.currentTarget.style.transformOrigin = "top left"
-    e.currentTarget.style.transform = "rotateY(-157deg)"
+    ;(e.currentTarget as HTMLElement).style.transformOrigin = "top left"
+    ;(e.currentTarget as HTMLElement).style.transform = "rotateY(-157deg)"
   }
 
   return (
@@ -286,12 +287,17 @@ const Book3D: React.FC<props> = ({
       spineWidth={spineWidth}
       bookTitle={bookTitle}
     >
-      <Front onClick={openBook} width={width} height={height} spineWidth={spineWidth}>
+      <Front
+        onClick={(e: React.MouseEvent) => openBook(e)}
+        width={width}
+        height={height}
+        spineWidth={spineWidth}
+      >
         {front}
       </Front>
       {/* <Top width={width} height={height} spineWidth={spineWidth}></Top> */}
       <Inside1
-        onClick={(e: any) => flipPage(e)}
+        onClick={(e: React.MouseEvent) => flipPage(e)}
         width={width}
         height={height}
         spineWidth={spineWidth}
@@ -299,7 +305,7 @@ const Book3D: React.FC<props> = ({
         {inside1}
       </Inside1>
       <Inside2
-        onClick={(e: any) => flipPage(e)}
+        onClick={(e: React.MouseEvent) => flipPage(e)}
         width={width}
         height={height}
         spineWidth={spineWidth}
@@ -307,7 +313,7 @@ const Book3D: React.FC<props> = ({
         {inside2}
       </Inside2>
       <Inside3
-        onClick={(e: any) => flipPage(e)}
+        onClick={(e: React.MouseEvent) => flipPage(e)}
         width={width}
         height={height}
         spineWidth={spineWidth}
@@ -317,7 +323,7 @@ const Book3D: React.FC<props> = ({
       {/* 책 페이지 필요 없을 경우 처리 */}
       {inside4 ? (
         <Inside4
-          onClick={(e: any) => flipPage(e)}
+          onClick={(e: React.MouseEvent) => flipPage(e)}
           width={width}
           height={height}
           spineWidth={spineWidth}
@@ -327,7 +333,7 @@ const Book3D: React.FC<props> = ({
       ) : null}
 
       <Back
-        onClick={(e: any) => closeBook(e)}
+        onClick={(e: React.MouseEvent) => closeBook(e)}
         width={width}
         height={height}
         spineWidth={spineWidth}

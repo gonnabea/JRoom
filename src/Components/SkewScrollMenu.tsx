@@ -240,7 +240,8 @@ const SkewScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) =
 
   const selectVideo = (e: any, index: number, colors: string[]) => {
     setvideoIndex(index)
-
+    const soundEffect = new Audio("/sounds/bicycle.mp3")
+    soundEffect.play()
     if (video.current !== null) {
       video.current.style.boxShadow = `0px 0px 200px ${colors[index]}`
     }

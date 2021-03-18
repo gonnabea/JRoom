@@ -33,6 +33,6 @@ export const addCeilConnector = (props: {
   mesh.rotation.set(props.rotation.x, props.rotation.y, props.rotation.z)
   mesh.position.set(props.position.x, props.position.y, props.position.z)
   material.side = FrontSide
-  // scene.add(mesh)
+
   return mesh
 }

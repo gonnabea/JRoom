@@ -15,5 +15,6 @@ export const addLogoBox = (position: { x: number; y: number; z: number }, image:
   logoBox.castShadow = true
 
   logoBox.position.set(position.x, position.y, position.z)
+
   scene.add(logoBox)
 }

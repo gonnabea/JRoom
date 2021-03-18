@@ -80,6 +80,7 @@ export const JFlixObjects = () => {
   // )
 
   // 책 모형에 붙일 텍스트 geometry
+  const textGroup = new THREE.Geometry()
   FontLoder(
     {
       fontModelUrl: "/fonts/helvetiker_regular.typeface.json",
@@ -91,6 +92,14 @@ export const JFlixObjects = () => {
     },
     { x: 100, y: 200, z: -900 }
   )
+
+  // text1.updateMatrix()
+  // textGroup.merge(text1.geometry as Geometry, text1.matrix)
+
+  // const textGroupMaterial = new THREE.MeshPhongMaterial({ color: "black" })
+  // const textGroupMesh = new THREE.Mesh(textGroup, textGroupMaterial)
+  // scene.add(textGroupMesh)
+
   // 프로젝트 제목
 
   // 제작자 이름
