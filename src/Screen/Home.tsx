@@ -87,12 +87,12 @@ const Home: React.FC = () => {
         ]}
         videoList={[
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-          "videos/exhibition.mp4",
-          "videos/wiki.mp4",
-          "videos/books.mp4",
+          "backgroundVideos/exhibition.mp4",
+          "backgroundVideos/wiki.mp4",
+          "backgroundVideos/books.mp4",
           "",
           "",
-          "videos/github.mp4",
+          "backgroundVideos/github.mp4",
         ]}
         links={[
           "/about-me",
