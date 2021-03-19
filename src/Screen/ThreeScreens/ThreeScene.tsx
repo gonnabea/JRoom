@@ -14,6 +14,7 @@ import onObjects from "./ONObjs"
 import addIframeObj from "../../Components/ThreeModules/iframeObj"
 import outsideObjs from "./OutsideObjs"
 import { connectorsMesh } from "../../Components/ThreeModules/CeilConnetor"
+import { logoBoxesMesh } from "../../Components/ThreeModules/LogoBox"
 
 const Container = styled.section`
   width: 100%;
@@ -237,14 +238,20 @@ const ThreeScene = () => {
     scene.add(roofMesh)
 
     // 프로젝트별로 구분
-    JFlixObjects()
-    MainHallObjects()
-    JustReadItObjs()
-    onObjects()
-    outsideObjs()
 
+    const projectsLoad = async () => {
+      JFlixObjects()
+      MainHallObjects()
+      JustReadItObjs()
+      onObjects()
+      outsideObjs()
+    }
+    projectsLoad()
     // 이음새 mesh 모두 화면에 적용
     scene.add(connectorsMesh)
+
+    // 로고박스 mesh 모두 화면에 적용
+    scene.add(logoBoxesMesh)
 
     // 렌더러
     renderer = new THREE.WebGLRenderer({

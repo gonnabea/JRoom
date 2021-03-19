@@ -60,7 +60,7 @@ const onObjects = () => {
   GLTFModelLoader({
     modelUrl: "/models/foyer_table/scene.gltf",
     scale: { x: 5, y: 5, z: 5 },
-    position: { x: 3000, y: -500, z: -1100 },
+    position: { x: 3000, y: -500, z: -1150 },
     rotation: { x: 0, y: Math.PI, z: 0 },
   })
 

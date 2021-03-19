@@ -1,20 +1,28 @@
 import * as THREE from "three"
-import { FlatShading } from "three"
+import { FlatShading, Geometry } from "three"
 import { scene } from "../../Screen/ThreeScreens/ThreeScene"
 
+export let logoBoxesMesh: THREE.Mesh
+const logoBoxGroup = new THREE.Geometry()
+let boxIndex = 0
+const logoBoxMaterials: Array<THREE.Material> = []
 export const addLogoBox = (position: { x: number; y: number; z: number }, image: string) => {
-  const logoBoxGeo = new THREE.BoxBufferGeometry(300, 300, 100, 1, 1, 1)
+  const logoBoxGeo = new THREE.BoxGeometry(300, 300, 100, 1, 1, 1)
   const logoBoxTexture = new THREE.TextureLoader().load(image)
   const logoBoxMat = new THREE.MeshPhongMaterial({
     map: logoBoxTexture,
     specular: "orange",
     flatShading: true,
   })
+
   const logoBox = new THREE.Mesh(logoBoxGeo, logoBoxMat)
-  logoBox.receiveShadow = true
-  logoBox.castShadow = true
 
+  // logoBoxMaterials.push(logoBoxMat)
   logoBox.position.set(position.x, position.y, position.z)
-
+  // logoBox.updateMatrix()
+  // logoBoxGroup.merge(logoBox.geometry as Geometry, logoBox.matrix, boxIndex)
+  // console.log(logoBoxMaterials[boxIndex])
+  // boxIndex += 1
+  // logoBoxesMesh = new THREE.Mesh(logoBoxGroup, logoBoxMaterials)
   scene.add(logoBox)
 }

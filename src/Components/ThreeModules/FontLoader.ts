@@ -20,12 +20,12 @@ export const FontLoder = (
       font,
       size: params.size,
       height: params.height,
-      curveSegments: 12,
+      curveSegments: 3,
       bevelEnabled: true,
-      bevelThickness: 10,
+      bevelThickness: 3,
       bevelSize: params.bevelSize,
       bevelOffset: 0,
-      bevelSegments: 5,
+      bevelSegments: 3,
     })
     const material = new THREE.MeshPhongMaterial({
       color: params.color,
