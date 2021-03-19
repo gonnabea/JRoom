@@ -33,6 +33,7 @@ const addIframeObj = (props: {
   websiteObject = new CSS3D.CSS3DObject(embedWebsite)
   websiteObject.position.set(planeMesh.position.x, planeMesh.position.y, planeMesh.position.z)
   websiteObject.rotation.set(props.rotation.x, props.rotation.y, props.rotation.z)
+
   cssScene.add(websiteObject)
 
   // TV 뒷면 가리기 위한 Div Box

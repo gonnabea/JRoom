@@ -20,23 +20,6 @@ export const addFrame = (props: {
 
     scene.add(frameGroupMesh)
 
-    // 카메라 시점이 액자 뒤로 갔을 때 사라지게 하는 알고리즘
-    // window.addEventListener("mouseup", () => {
-    //   console.log(camera.position)
-    //   console.log(camera.rotation)
-    //   const meshsOfFrame =
-    //     frameGroupMesh.children[0].children[0].children[0].children[0].children[0].children[0]
-    //       .children
-
-    //   meshsOfFrame.map((object) => {
-    //     if (camera.rotation.z > 0.2) {
-    //       object.visible = false
-    //     } else {
-    //       object.visible = true
-    //     }
-    //   })
-    // })
-
     // 액자에 들어갈 그림
 
     const sizeCheckBox = new THREE.Box3().setFromObject(gltf.scene) // 액자 크기 측정을 위한 가상 박스

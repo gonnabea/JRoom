@@ -35,6 +35,7 @@ const addDescriptionBoard = (props: {
   descriptionBox.style.height = props.height
   descriptionBox.style.opacity = "0.7"
   descriptionBox.style.cursor = "pointer"
+
   // descriptionBox.style.borderRadius = "100%" // border-radius가 안먹힘
   descriptionBox.style.paddingLeft = "20px"
   descriptionBox.style.paddingRight = "20px"

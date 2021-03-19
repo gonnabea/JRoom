@@ -78,10 +78,10 @@ export const addSelectBtn = (props: {
     }
 
     if (props.text === "1") {
-      descriptionBox.style.display = "none"
-
-      embedWebsite.style.display = "block"
-      controls.target.set(websiteObject.position.x, 0, websiteObject.position.z) // 예외적으로 타겟이 정해짐
+      controls.target.set(-500, 0, 0) // 예외적으로 타겟이 정해짐
+      if (descriptionBox) {
+        descriptionBox.style.display = "none"
+      }
 
       // JFlix 웹사이트 로드
       addIframeObj({
@@ -92,7 +92,7 @@ export const addSelectBtn = (props: {
         rotation: { x: 0, y: Math.PI / 2, z: 0 },
       })
 
-      // JFlix 프로젝트 설명 보드
+      // JFlix 프로젝트 설명 보드 로드
       addDescriptionBoard({
         width: "600px",
         height: "400px",
@@ -104,10 +104,12 @@ export const addSelectBtn = (props: {
         position: { x: -1200, y: 610, z: -400 },
         rotation: { x: 0, y: Math.PI / 2, z: 0 },
       })
+      embedWebsite.style.display = "block"
       camera.updateMatrix()
     } // 프로젝트 변경 버튼
     else if (props.text === "✨") {
       descriptionBox.style.display = "none"
+
       embedWebsite.style.display = "block"
       chooseProject()
       controls.target.set(websiteObject.position.x, 0, websiteObject.position.z)
