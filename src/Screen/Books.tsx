@@ -39,6 +39,7 @@ const SpineTitle = styled.h2`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
     "Open Sans", "Helvetica Neue", sans-serif;
   width: 50%;
+  text-align: center;
 `
 
 const PageTitle = styled.h1`
@@ -114,6 +115,16 @@ const RedableCover = styled.div`
   align-items: center;
 `
 
+const NodeJSCover = styled.div`
+  background-color: #fd6e8a;
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 const BookContentBox = styled.div`
   width: 100%;
   height: 100%;
@@ -135,6 +146,19 @@ const BookContent = styled.p`
   font-size: 12px;
   line-height: 30px;
   font-weight: 300;
+  height: 100%;
+`
+
+const OJTubeLink = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 20%;
+`
+
+const OJTubeLogo = styled.img`
+  width: 100%;
 `
 
 const Books: React.FC = () => {
@@ -260,6 +284,73 @@ const Books: React.FC = () => {
           </BookContentBox>
         }
       />{" "}
+      <Book3D
+        width="300px"
+        height="450px"
+        spineWidth="45px"
+        front={<FrontCover src="/book_covers/node_js_front.jpg"></FrontCover>}
+        back={<BackCover src="/book_covers/node_js_back.jpg"></BackCover>}
+        bookTitle="CODE"
+        spine={
+          <NodeJSCover>
+            <SpineTitle>
+              N<br />o<br />d<br />e<br />
+              j<br />s<br /> 프로그래밍
+            </SpineTitle>
+          </NodeJSCover>
+        }
+        inside1={
+          <BookContentBox>
+            <BookTitle>세븐 데이터베이스</BookTitle>
+            <BookAuthor>김다니엘 저</BookAuthor>
+            <BookContent>
+              Node.js로 프로그래밍 하는 방법을 다양한 예제를 통해 설명한다. 내용은 크게 3장으로
+              나뉘어 있으며, 각 장에서는 대표적인 주제에 따른 프로젝트 예제를 제공한다. 또한 주제는
+              웹 애플리케이션, 소셜 웹 애플리케이션, 매시업 웹 애플리케이션, 그리고 사물인터넷
+              애플리케이션으로 나뉘며 각 프로젝트의 설계 및 구현 과정에서 반드시 필요한 내용을
+              설명한다.
+            </BookContent>
+          </BookContentBox>
+        }
+        inside2={
+          <BookContentBox>
+            <BookTitle>책소개</BookTitle>
+            <BookContent>
+              사물인터넷이 급속도로 발달하면서 이를 활용하기 위한 다양한 아이디어들이 쏟아져 나오고
+              있다. 이러한 변화 속에서 가장 주목할 만한 점은 이와 관련된 사물인터넷 관련 웹
+              애플리케이션, 매시업 애플리케이션 등이 다양한 가능성을 열어준다는 점이다. 이러한
+              환경의 변화 속에 실제 관련 애플리케이션을 제작하는 데에 필수적인 Node.js를 실제 사례를
+              통해 쉽게 배울 수 있는 책이 출간된 것을 누구보다 기쁘게 생각한다. 저자는 학부 전공이
+              소프트웨어가 아니었기 때문에, 본인이 실무를 경험하면서 쌓아 올린
+            </BookContent>
+          </BookContentBox>
+        }
+        inside3={
+          <BookContentBox>
+            <BookContent>
+              산 경험을 이 책에 고스란히 담았다. 이 책에는 프로그래밍 기법뿐만 아니라 Node.js가
+              지니고 있는 프로젝트 관리 측면에서의 장점들이 곳곳에 드러나 있다. 각 단계마다 수록된
+              실습 가능한 예제와 온라인 예제 등을 통해 학습 효과를 극대화시킬 수 있으리라 확신한다.
+            </BookContent>
+          </BookContentBox>
+        }
+        inside4={
+          <BookContentBox>
+            <BookContent>
+              <h2>✨</h2>이 책은 오제이튜브 유튜브 채널에서 우연히 이벤트에 당첨되어 채널 주인장님의
+              친필 사인이 담긴 책을 받아 알게 된 책입니다. 본인이 백엔드로는 주로 Node.js를 사용하기
+              때문에 이론을 공부할 때 도움이 많이 될 것 같습니다.
+              <OJTubeLink
+                href="https://www.youtube.com/channel/UCIRh1Bvv_CigcP80H0ZCBUA"
+                target="_blank"
+              >
+                {" "}
+                <OJTubeLogo src="images/ojtube.png" />
+              </OJTubeLink>
+            </BookContent>
+          </BookContentBox>
+        }
+      />
       <Book3D
         width="300px"
         height="450px"
