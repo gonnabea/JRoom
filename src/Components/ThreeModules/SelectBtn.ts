@@ -70,15 +70,30 @@ export const addSelectBtn = (props: {
   selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
   cssScene.add(selectBtnObj)
 
+  const addJFlixBoard = () => {
+    addDescriptionBoard({
+      width: "600px",
+      height: "400px",
+      description:
+        "영화 소개 사이트 입니다. 리액트 내에서 ajax를 사용해 만들었으며, json 데이터의 동적 처리, SPA, 컴포넌트 활용 등 순수 JavaScript와 비교해서 어떤 점이 리액트가 우수한 지 알 수 있었던 프로젝트였습니다.",
+      title: "J-Flix",
+      titleColor: "#10EEC6",
+      siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
+      position: { x: 100, y: 800, z: -900 },
+      rotation: { x: 0, y: 0, z: 0 },
+    })
+  }
+
   selectBtn.onclick = () => {
     if (props.text === "0") {
-      descriptionBox.style.display = "none"
+      if (descriptionBox) {
+        descriptionBox.style.display = "none"
+      }
 
       controls.target.set(0, 0, 0)
-    }
-
-    if (props.text === "1") {
+    } else if (props.text === "1") {
       controls.target.set(-500, 0, 0) // 예외적으로 타겟이 정해짐
+
       if (descriptionBox) {
         descriptionBox.style.display = "none"
       }
@@ -93,19 +108,15 @@ export const addSelectBtn = (props: {
       })
 
       // JFlix 프로젝트 설명 보드 로드
-      addDescriptionBoard({
-        width: "600px",
-        height: "400px",
-        description:
-          "영화 소개 사이트 입니다. 리액트 내에서 ajax를 사용해 만들었으며, json 데이터의 동적 처리, SPA, 컴포넌트 활용 등 순수 JavaScript와 비교해서 어떤 점이 리액트가 우수한 지 알 수 있었던 프로젝트였습니다.",
-        title: "J-Flix",
-        titleColor: "#10EEC6",
-        siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
-        position: { x: -1200, y: 610, z: -400 },
-        rotation: { x: 0, y: Math.PI / 2, z: 0 },
-      })
+      addJFlixBoard()
       embedWebsite.style.display = "block"
       camera.updateMatrix()
+    } else if (props.text === "📄") {
+      // JFlix 프로젝트 설명 보드 로드
+      if (descriptionBox) {
+        descriptionBox.style.display = "none"
+      }
+      addJFlixBoard()
     } // 프로젝트 변경 버튼
     else if (props.text === "✨") {
       descriptionBox.style.display = "none"
@@ -115,20 +126,13 @@ export const addSelectBtn = (props: {
       controls.target.set(websiteObject.position.x, 0, websiteObject.position.z)
       camera.updateMatrix()
       // JFLIX 프로젝트 설명 보드
-      addDescriptionBoard({
-        width: "600px",
-        height: "400px",
-        description:
-          "영화 소개 사이트 입니다. 리액트 내에서 ajax를 사용해 만들었으며, json 데이터의 동적 처리, SPA, 컴포넌트 활용 등 순수 JavaScript와 비교해서 어떤 점이 리액트가 우수한 지 알 수 있었던 프로젝트였습니다.",
-        title: "J-Flix",
-        titleColor: "#10EEC6",
-        siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
-        position: { x: -1200, y: 610, z: -400 },
-        rotation: { x: 0, y: Math.PI / 2, z: 0 },
-      })
+      addJFlixBoard()
     } else if (props.text === "4") {
-      descriptionBox.style.display = "none"
+      if (descriptionBox) {
+        descriptionBox.style.display = "none"
+      }
       embedWebsite.style.display = "none"
+
       // Just-Read-It 프로젝트 설명 보드
       addDescriptionBoard({
         siteUrl: "https://just-read-it.herokuapp.com/",
@@ -142,8 +146,11 @@ export const addSelectBtn = (props: {
         rotation: { x: 0, y: Math.PI / 2, z: 0 },
       })
     } else if (props.text === "5") {
-      descriptionBox.style.display = "none"
-      embedWebsite.style.display = "block"
+      if (descriptionBox) {
+        descriptionBox.style.display = "none"
+      }
+      embedWebsite.style.display = "none"
+
       // ON 프로젝트 설명 보드
       addDescriptionBoard({
         siteUrl: "https://our-now.herokuapp.com/",
@@ -165,9 +172,12 @@ export const addSelectBtn = (props: {
         height: 800,
         rotation: { x: 0, y: -Math.PI / 2, z: 0 },
       })
+      embedWebsite.style.display = "block"
     } else {
       embedWebsite.style.display = "none"
-      descriptionBox.style.display = "none"
+      if (descriptionBox) {
+        descriptionBox.style.display = "none"
+      }
     }
 
     if (props.targetPosition) {

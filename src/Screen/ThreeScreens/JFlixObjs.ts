@@ -295,7 +295,7 @@ export const JFlixObjects = () => {
   // J-Flix 방 포커싱
   addSelectBtn({
     text: "0",
-    btnPosition: { x: 0, y: 300, z: -800 },
+    btnPosition: { x: 0, y: 300, z: 1000 },
     cameraPosition: { x: -2773.8192101111504, y: 490.0248603839669, z: 4120.7527992239675 },
     targetPosition: { x: 0, y: 0, z: 0 },
     zoomIndex: 0.3,
@@ -304,19 +304,28 @@ export const JFlixObjects = () => {
   // tv 포커싱
   addSelectBtn({
     text: "1",
-    btnPosition: { x: -1300, y: 600, z: 500 },
+    btnPosition: { x: -1300, y: 500, z: 500 },
     cameraPosition: { x: 1000, y: 300, z: 0 },
     targetPosition: { x: 600, y: 250, z: 0 },
-    zoomIndex: 0.2,
+    zoomIndex: 0.3,
+  })
+
+  // 프로젝트 설명 포커싱
+  addSelectBtn({
+    text: "📄",
+    btnPosition: { x: 0, y: 300, z: -800 },
+    cameraPosition: { x: 0, y: 900, z: 300 },
+    targetPosition: { x: 0, y: 900, z: -100 },
+    zoomIndex: 0.1,
   })
 
   // 채널 변경 버튼 & tv 포커싱
   addSelectBtn({
     text: "✨",
-    btnPosition: { x: -1300, y: 600, z: 300 },
+    btnPosition: { x: -1300, y: 500, z: 300 },
     cameraPosition: { x: 1000, y: 300, z: 0 },
-    targetPosition: { x: 900, y: 300, z: 0 },
-    zoomIndex: 0.2,
+    targetPosition: { x: 600, y: 250, z: 0 },
+    zoomIndex: 0.3,
   })
 
   addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0, imageSrc: floorImage3 }) // J-Flix 바닥
