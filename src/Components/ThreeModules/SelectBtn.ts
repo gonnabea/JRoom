@@ -93,6 +93,7 @@ export const addSelectBtn = (props: {
       controls.target.set(0, 0, 0)
     } else if (props.text === "1") {
       controls.target.set(-500, 0, 0) // 예외적으로 타겟이 정해짐
+      embedWebsite.style.display = "none"
 
       if (descriptionBox) {
         descriptionBox.style.display = "none"
@@ -120,6 +121,7 @@ export const addSelectBtn = (props: {
     } // 프로젝트 변경 버튼
     else if (props.text === "✨") {
       descriptionBox.style.display = "none"
+      embedWebsite.style.display = "none"
 
       embedWebsite.style.display = "block"
       chooseProject()
