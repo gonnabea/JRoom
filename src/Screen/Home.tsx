@@ -87,12 +87,12 @@ const Home: React.FC = () => {
         ]}
         videoList={[
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-          "backgroundVideos/exhibition.webm",
-          "backgroundVideos/wiki.webm",
-          "backgroundVideos/books.webm",
+          "https://wetube-jiwon.s3.ap-northeast-2.amazonaws.com/video/e2d6f6c0bd56cacfc54210465f0ba104",
+          "https://wetube-jiwon.s3.ap-northeast-2.amazonaws.com/video/bf4ab8c595738ab1be66b1feca3256f0",
+          "https://wetube-jiwon.s3.ap-northeast-2.amazonaws.com/video/a05e5a7bfc031b730309de52e4b0b487",
           "",
           "",
-          "backgroundVideos/github.webm",
+          "https://wetube-jiwon.s3.ap-northeast-2.amazonaws.com/video/452f790ffe87e1ff44cea0687605c596",
         ]}
         links={[
           "/about-me",
