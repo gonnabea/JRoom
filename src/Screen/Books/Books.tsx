@@ -198,6 +198,13 @@ const Books: React.FC = () => {
         inside4={
           <BookContentBox>
             <BookContent>
+              <img src="images/oj_sign.png" alt="" width="100%" height="100%" />
+            </BookContent>
+          </BookContentBox>
+        }
+        inside5={
+          <BookContentBox>
+            <BookContent>
               <h2>✨</h2>이 책은 오제이튜브 유튜브 채널에서 우연히 이벤트에 당첨되어 채널 주인장님의
               친필 사인이 담긴 책을 받아 알게 된 책입니다. 본인이 백엔드로는 주로 Node.js를 사용하기
               때문에 이론을 공부할 때 도움이 많이 될 것 같습니다.

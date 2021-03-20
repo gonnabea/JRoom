@@ -13,6 +13,7 @@ interface props {
   inside2?: JSX.Element
   inside3?: JSX.Element
   inside4?: JSX.Element
+  inside5?: JSX.Element
 
   bookTitle?: string
 }
@@ -187,6 +188,8 @@ const Inside4 = styled.div`
 
 const Inside5 = styled.div`
   transform-style: preserve-3d;
+  transform-origin: top left;
+
   position: absolute;
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
@@ -199,6 +202,8 @@ const Inside5 = styled.div`
 
 const Inside6 = styled.div`
   transform-style: preserve-3d;
+  transform-origin: top left;
+
   position: absolute;
   top: 7px;
   width: calc(${(props: props) => (props.width ? props.width : "100px")} + (-10px));
@@ -218,7 +223,7 @@ const Book3D: React.FC<props> = ({
   inside2,
   inside3,
   inside4,
-
+  inside5,
   back,
   spine,
   bookTitle,
@@ -331,6 +336,16 @@ const Book3D: React.FC<props> = ({
         >
           {inside4}
         </Inside4>
+      ) : null}
+      {inside4 ? (
+        <Inside5
+          onClick={(e: React.MouseEvent) => flipPage(e)}
+          width={width}
+          height={height}
+          spineWidth={spineWidth}
+        >
+          {inside5}
+        </Inside5>
       ) : null}
 
       <Back
