@@ -21,10 +21,6 @@ export const addRoofWindowHole = (
     new THREE.BoxBufferGeometry(600, 500, 700, 1, 1, 1),
     new THREE.MeshPhongMaterial()
   )
-  const JFlixDoorHole = new THREE.Mesh(
-    new THREE.BoxBufferGeometry(600, 500, 700, 1, 1, 1),
-    new THREE.MeshPhongMaterial()
-  )
 
   roofWindowHole.rotateZ(-Math.PI / 4)
   roofWindowHole2.rotateZ(-Math.PI / 4)

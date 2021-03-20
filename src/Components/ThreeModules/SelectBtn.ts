@@ -1,12 +1,4 @@
-import * as THREE from "three"
-import { FlatShading } from "three"
-import {
-  camera,
-  scene,
-  selectBtnObjs,
-  cssScene,
-  controls,
-} from "../../Screen/ThreeScreens/ThreeScene"
+import { camera, selectBtnObjs, cssScene, controls } from "../../Screen/ThreeScreens/ThreeScene"
 import CSS3D from "three-css3drenderer"
 import addDescriptionBoard, { descriptionBox } from "./DescriptionBoard"
 import addIframeObj, { embedWebsite, websiteObject } from "./iframeObj"
@@ -89,6 +81,7 @@ export const addSelectBtn = (props: {
       if (descriptionBox) {
         descriptionBox.style.display = "none"
       }
+      embedWebsite.style.display = "none"
 
       controls.target.set(0, 0, 0)
     } else if (props.text === "1") {

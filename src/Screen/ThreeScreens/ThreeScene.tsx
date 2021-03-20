@@ -11,7 +11,6 @@ import { CSG } from "three-csg-ts"
 import MainHallObjects from "./MainHallObjs"
 import { JustReadItObjs } from "./JustReadItObjs"
 import onObjects from "./ONObjs"
-import addIframeObj from "../../Components/ThreeModules/iframeObj"
 import outsideObjs from "./OutsideObjs"
 import { connectorsMesh } from "../../Components/ThreeModules/CeilConnetor"
 import { logoBoxesMesh } from "../../Components/ThreeModules/LogoBox"
@@ -47,8 +46,6 @@ let cssRenderer: {
   domElement: any
   render: (arg0: THREE.Scene, arg1: THREE.PerspectiveCamera) => void
 }
-let raycaster = new THREE.Raycaster()
-let mouse = new THREE.Vector2()
 
 let frameCount = 0
 const ThreeScene = () => {
@@ -86,7 +83,6 @@ const ThreeScene = () => {
     // 메인 홀
     const buildingGeometry = new THREE.BoxGeometry(3000, 1000, 3000, 1, 1, 1)
     const buildingBuffGeometry = new THREE.BufferGeometry().fromGeometry(buildingGeometry)
-    const buildingTexture = new THREE.TextureLoader()
     const buildingMaterial = new THREE.MeshPhongMaterial({
       color: 0x4e61ff,
       specular: "blue",

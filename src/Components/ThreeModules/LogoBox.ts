@@ -1,11 +1,8 @@
 import * as THREE from "three"
-import { FlatShading, Geometry } from "three"
 import { scene } from "../../Screen/ThreeScreens/ThreeScene"
 
 export let logoBoxesMesh: THREE.Mesh
-const logoBoxGroup = new THREE.Geometry()
-let boxIndex = 0
-const logoBoxMaterials: Array<THREE.Material> = []
+
 export const addLogoBox = (position: { x: number; y: number; z: number }, image: string) => {
   const logoBoxGeo = new THREE.BoxGeometry(300, 300, 100, 1, 1, 1)
   const logoBoxTexture = new THREE.TextureLoader().load(image)

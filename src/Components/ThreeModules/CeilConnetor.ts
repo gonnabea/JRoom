@@ -1,6 +1,5 @@
-import { scene } from "../../Screen/ThreeScreens/ThreeScene"
 import * as THREE from "three"
-import { BackSide, FrontSide, Geometry } from "three"
+import { FrontSide, Geometry } from "three"
 
 export let connectorsMesh: THREE.Mesh
 const ceilConnectorGroup = new THREE.Geometry()

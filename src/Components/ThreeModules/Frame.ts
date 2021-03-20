@@ -1,8 +1,6 @@
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { camera, scene } from "../../Screen/ThreeScreens/ThreeScene"
-import nomadLogo from "../../resources/images/nomadLogo.png"
-import { PointLightHelper } from "three"
+import { scene } from "../../Screen/ThreeScreens/ThreeScene"
 
 // 액자 모델
 const loader = new GLTFLoader()

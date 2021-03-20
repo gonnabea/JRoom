@@ -6,16 +6,12 @@ import webrtcLogo from "../../resources/images/webrtcLogo.png"
 import pythonLogo from "../../resources/images/pythonLogo.jpg"
 import flaskLogo from "../../resources/images/flaskLogo.png"
 import mysqlLogo from "../../resources/images/mysqlLogo.png"
-import addDescriptionBoard from "../../Components/ThreeModules/DescriptionBoard"
 import { GLTFModelLoader } from "../../Components/ThreeModules/GLTFModelLoader"
-import addIframeObj from "../../Components/ThreeModules/iframeObj"
-import { FontLoder } from "../../Components/ThreeModules/FontLoader"
-import { scene } from "./ThreeScene"
 import { addFloor } from "../../Components/ThreeModules/floor"
 import floorImage3 from "../../resources/images/floor3.jpg"
 import { addFrame } from "../../Components/ThreeModules/Frame"
 import chatImg from "../../resources/images/chat.jpg"
-import * as THREE from "three"
+import { FontLoder } from "../../Components/ThreeModules/FontLoader"
 
 const onObjects = () => {
   // 기술스택 박스 로드

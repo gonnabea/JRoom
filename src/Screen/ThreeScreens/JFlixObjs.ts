@@ -11,15 +11,13 @@ import { addCeilConnector } from "../../Components/ThreeModules/CeilConnetor"
 import { addFrame } from "../../Components/ThreeModules/Frame"
 import * as THREE from "three"
 
-import addDescriptionBoard from "../../Components/ThreeModules/DescriptionBoard"
 import { addRoofWindowHole } from "../../Components/ThreeModules/RoofWIndowHole"
 import { addWindow } from "../../Components/ThreeModules/Window"
 import { addSelectBtn } from "../../Components/ThreeModules/SelectBtn"
 import { addFloor } from "../../Components/ThreeModules/floor"
 import nomadLogo from "../../resources/images/nomadLogo.png"
 import floorImage3 from "../../resources/images/floor3.jpg"
-import addIframeObj from "../../Components/ThreeModules/iframeObj"
-import { Geometry } from "three"
+
 export const JFlixObjects = () => {
   // J-Flix 지붕
   const roofShape = new THREE.Shape()

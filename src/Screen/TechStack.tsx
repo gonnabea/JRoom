@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 import Header from "../Components/Header"
-import SkeletonScrollMenu from "../Components/SkewScrollMenu"
 
 const Container = styled.section`
   overflow: auto;

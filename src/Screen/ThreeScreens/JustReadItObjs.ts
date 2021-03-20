@@ -3,7 +3,6 @@ import * as THREE from "three"
 import { DoubleSide } from "three"
 import { GLTFModelLoader } from "../../Components/ThreeModules/GLTFModelLoader"
 import { FontLoder } from "../../Components/ThreeModules/FontLoader"
-import addDescriptionBoard from "../../Components/ThreeModules/DescriptionBoard"
 import { addSelectBtn } from "../../Components/ThreeModules/SelectBtn"
 import { addLogoBox } from "../../Components/ThreeModules/LogoBox"
 import nodeLogo from "../../resources/images/nodeLogo.jpg"
@@ -17,7 +16,7 @@ import hackathonLogo from "../../resources/images/nomad_hackathon.png"
 
 export const JustReadItObjs = () => {
   const IntroVideo = document.createElement("video")
-  IntroVideo.src = "/videos/just-read-it.mp4"
+  IntroVideo.src = "/backgroundVidoes/just-read-it.mp4"
   IntroVideo.autoplay = true
   IntroVideo.loop = true
 
