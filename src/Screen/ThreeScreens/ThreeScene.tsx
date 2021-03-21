@@ -83,12 +83,17 @@ const ThreeScene = () => {
 
     const manager = new THREE.LoadingManager()
     manager.onProgress = function (item, loaded, total) {
+      setTimeout(() => {
+        if (item) {
+          progress.style.display = "none"
+        }
+      }, 1000)
+      console.log(item)
       progressBar.style.width = (loaded / total) * 100 + "%"
     }
 
     manager.onLoad = function () {
       console.log("Loading complete!")
-      setTimeout(() => (progress.style.display = "none"), 1000)
     }
 
     function addRandomPlaceHoldItImage() {
