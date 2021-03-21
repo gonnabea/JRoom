@@ -20,6 +20,7 @@ import {
   MoneyCover,
   RedableCover,
   CODECover,
+  NicoCover,
 } from "./styles"
 
 const Books: React.FC = () => {
@@ -206,8 +207,8 @@ const Books: React.FC = () => {
           <BookContentBox>
             <BookContent>
               <h2>✨</h2>이 책은 오제이튜브 유튜브 채널에서 우연히 이벤트에 당첨되어 채널 주인장님의
-              친필 사인이 담긴 책을 받아 알게 된 책입니다. 본인이 백엔드로는 주로 Node.js를 사용하기
-              때문에 이론을 공부할 때 도움이 많이 될 것 같습니다.
+              친필 사인이 담긴 책을 받아 알게 된 책입니다. 본인이 백엔드로는 현재까지 주로 Node.js를
+              많이 사용했기 때문에 이론을 공부할 때 도움이 많이 될 것 같습니다.
               <OJTubeLink
                 href="https://www.youtube.com/channel/UCIRh1Bvv_CigcP80H0ZCBUA"
                 target="_blank"
@@ -215,6 +216,55 @@ const Books: React.FC = () => {
                 {" "}
                 <OJTubeLogo src="images/ojtube.png" />
               </OJTubeLink>
+            </BookContent>
+          </BookContentBox>
+        }
+      />
+      <Book3D
+        width="300px"
+        height="450px"
+        spineWidth="45px"
+        front={<FrontCover src="/book_covers/nico_front.jpg"></FrontCover>}
+        back={<BackCover src="/book_covers/nico_back.jpg"></BackCover>}
+        bookTitle="클론 코딩 영화 평점 웹서비스"
+        spine={
+          <NicoCover>
+            <SpineTitle>클론 코딩 영화 평점 웹서비스</SpineTitle>
+          </NicoCover>
+        }
+        inside1={
+          <BookContentBox>
+            <BookTitle>클론 코딩 영화 평점 웹서비스</BookTitle>
+            <BookAuthor>니콜라스 저</BookAuthor>
+            <BookTitle>책소개</BookTitle>
+            <BookContent>
+              처음부터 끝까지 액션을 따라 하면서 영화 평점 웹서비스를 클론 코딩할 수 있도록
+              설계되었다. 액션은 어떤 명령어를 입력해야 하는지, 어디에 파일을 만들어야 하는지,
+              어디를 수정해야 하는지 정확하게 지시하는 문장을 말한다. 액션만 따라 하면 내비게이션,
+              영화 상세 정보, 리다이렉션 기능을 포함한 영화 평점 웹서비스가 만들어진다.
+            </BookContent>
+          </BookContentBox>
+        }
+        inside2={
+          <BookContentBox>
+            <BookContent>
+              바로 어제 리액트를 시작한 사람도 편안하게 따라 할 수 있도록 실습 요소를 배치했다.
+              코드를 작성하고 결과를 확인하는 일련의 과정을 스티커와 별색, 삭제선 등으로 구분해서
+              표시했다. 여기에 주요한 개념은 킴조교의 보충 설명을 더했고, 혹시라도 놓칠 수 있는
+              부분은 말풍선 등으로 한 번 더 강조해서 학습을 도왔다.
+            </BookContent>
+          </BookContentBox>
+        }
+        inside3={
+          <BookContentBox>
+            <BookContent>
+              이 책을 구입했던 시점에는 이미 니꼬의 React 강의를 수강하고 프로젝트를 다 만들어본
+              상태였지만 팬심 + 엄청난 이벤트 때문에 거부할 수 없었던 기억이 있다. 물론 책의 내용은
+              정말 아무 것도 모르는 분이 봐도 잘 따라올 수 있게 구성되어 있고 직접 따라 만드는 걸
+              유도하는 점이 매우 맘에들었다.
+              <br />
+              <em>ps. 니꼬 린 노마드코더 사랑해요 ㅋㅋㅋㅋㅋㅋ</em> 🧡💛💚💙💜💗
+              <img width="100px" height="100px" src="/images/nomad_logo.jpg" />
             </BookContent>
           </BookContentBox>
         }

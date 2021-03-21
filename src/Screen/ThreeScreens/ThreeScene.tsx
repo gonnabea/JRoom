@@ -40,6 +40,7 @@ export let floorMesh: THREE.Mesh
 export let cssScene: THREE.Scene
 export let selectBtnObjs: any[] = []
 export let embedWebsite: HTMLIFrameElement
+export let loadingManager: THREE.LoadingManager = new THREE.LoadingManager()
 
 let cssRenderer: {
   setSize: (arg0: number, arg1: number) => void
@@ -62,6 +63,41 @@ const ThreeScene = () => {
   }
 
   useEffect(() => {
+    const progress = document.createElement("div")
+    const progressBar = document.createElement("div")
+    progress.style.width = "60%"
+    progress.style.height = "20px"
+    progress.style.background = "#000"
+    progress.style.border = "2px solid #000"
+    progress.style.position = "absolute"
+    progress.style.top = "20%"
+    progress.style.zIndex = "2"
+
+    progressBar.style.width = "60%"
+    progressBar.style.height = "20px"
+    progressBar.style.background = "red"
+    progressBar.style.border = "none"
+
+    progress.appendChild(progressBar)
+    ;(ThreeContainer.current as any).appendChild(progress)
+
+    const manager = new THREE.LoadingManager()
+    manager.onProgress = function (item, loaded, total) {
+      progressBar.style.width = (loaded / total) * 100 + "%"
+    }
+
+    manager.onLoad = function () {
+      console.log("Loading complete!")
+      setTimeout(() => (progress.style.display = "none"), 1000)
+    }
+
+    function addRandomPlaceHoldItImage() {
+      const r = Math.round(Math.random() * 4000)
+      new THREE.ImageLoader(manager).load("http://placehold.it/" + r + "x" + r)
+    }
+
+    for (let i = 0; i < 10; i++) addRandomPlaceHoldItImage()
+
     camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 100000)
     camera.position.set(-2773.8192101111504, 490.0248603839669, 9020.7527992239675)
     camera.zoom = 0.5

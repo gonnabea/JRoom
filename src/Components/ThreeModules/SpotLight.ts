@@ -15,8 +15,9 @@ export const addSpotLight = (
   spotLight.target.position.set(targetPosition.x, targetPosition.y, targetPosition.z)
   spotLight.target.updateMatrixWorld()
 
-  const spotLightHelper = new THREE.SpotLightHelper(spotLight)
-  scene.add(spotLightHelper)
+  // 라이트 헬퍼
+  // const spotLightHelper = new THREE.SpotLightHelper(spotLight)
+  // scene.add(spotLightHelper)
 
   scene.add(spotLight)
 }

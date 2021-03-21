@@ -211,6 +211,7 @@ const SkewScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) =
     // props 전달 안되는 문제 고쳐야함
 
     return texts.map((text, index) => {
+      // 2번째 메뉴와 6번째 메뉴만 anchor, 나머지는 React
       if (index != 1 && index != 6) {
         return (
           <TextArea
@@ -238,14 +239,13 @@ const SkewScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) =
     })
   }
 
+  const soundEffect = new Audio("/sounds/bicycle.mp3")
   const selectVideo = (e: any, index: number, colors: string[]) => {
     setvideoIndex(index)
-    const soundEffect = new Audio("/sounds/bicycle.mp3")
     soundEffect.play()
     if (video.current !== null) {
       video.current.style.boxShadow = `0px 0px 200px ${colors[index]}`
     }
-    console.log(e.target)
 
     if (background.current) {
       ;(background.current as any).style.backgroundColor = colors[index]

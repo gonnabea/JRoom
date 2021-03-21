@@ -1,4 +1,5 @@
 import styled from "styled-components"
+
 export const Container = styled.main`
   width: 100vw;
   height: 100vh;
@@ -123,6 +124,16 @@ export const NodeJSCover = styled.div`
   align-items: center;
 `
 
+export const NicoCover = styled.div`
+  background-color: #80b3ff;
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 export const BookContentBox = styled.div`
   width: 100%;
   height: 100%;
@@ -145,6 +156,9 @@ export const BookContent = styled.p`
   line-height: 30px;
   font-weight: 300;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 export const OJTubeLink = styled.a`

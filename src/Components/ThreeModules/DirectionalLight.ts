@@ -25,9 +25,9 @@ export const addDirLight = (
   dirLight.target.position.set(targetPosition.x, targetPosition.y, targetPosition.z)
   dirLight.target.updateMatrixWorld()
 
-  const dirLightHelper = new THREE.DirectionalLightHelper(dirLight, 300, 0xa0c2f9)
-  dirLightHelper.update()
+  // const dirLightHelper = new THREE.DirectionalLightHelper(dirLight, 300, 0xa0c2f9)
+  // dirLightHelper.update()
 
   scene.add(dirLight, dirLight.target)
-  scene.add(dirLightHelper)
+  // scene.add(dirLightHelper)
 }
