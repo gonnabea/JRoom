@@ -1,5 +1,5 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { scene } from "./ThreeScene"
+import { loadingManager, scene } from "./ThreeScene"
 import { FontLoder } from "../../Components/ThreeModules/FontLoader"
 import { addLogoBox } from "../../Components/ThreeModules/LogoBox"
 
@@ -17,6 +17,7 @@ import { addSelectBtn } from "../../Components/ThreeModules/SelectBtn"
 import { addFloor } from "../../Components/ThreeModules/floor"
 import nomadLogo from "../../resources/images/nomadLogo.png"
 import floorImage3 from "../../resources/images/floor3.jpg"
+import { GLTFModelLoader } from "../../Components/ThreeModules/GLTFModelLoader"
 
 export const JFlixObjects = () => {
   // J-Flix 지붕
@@ -132,7 +133,7 @@ export const JFlixObjects = () => {
   addLogoBox({ x: 700, y: 100, z: -940 }, netlifyLogo)
   addLogoBox({ x: 700, y: -300, z: -940 }, jsLogo)
 
-  const loader = new GLTFLoader()
+  const loader = new GLTFLoader(loadingManager)
 
   // TV GLTF 모델 로드
   loader.load("/models/2018_flat_screen_tv/scene.gltf", (gltf) => {

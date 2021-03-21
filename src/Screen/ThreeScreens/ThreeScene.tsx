@@ -63,43 +63,62 @@ const ThreeScene = () => {
   }
 
   useEffect(() => {
-    const progress = document.createElement("div")
-    const progressBar = document.createElement("div")
-    progress.style.width = "60%"
-    progress.style.height = "20px"
-    progress.style.background = "#000"
-    progress.style.border = "2px solid #000"
-    progress.style.position = "absolute"
-    progress.style.top = "20%"
-    progress.style.zIndex = "2"
+    // Three.js 로딩 진행 화면
 
-    progressBar.style.width = "60%"
-    progressBar.style.height = "20px"
-    progressBar.style.background = "red"
-    progressBar.style.border = "none"
+    const addLoadingScreen = () => {
+      const loadingScreen = document.createElement("section")
+      const progress = document.createElement("div")
+      const progressBar = document.createElement("div")
+      const loadingMsg = document.createElement("span")
 
-    progress.appendChild(progressBar)
-    ;(ThreeContainer.current as any).appendChild(progress)
+      loadingScreen.style.width = "100vw"
+      loadingScreen.style.height = "100vh"
+      loadingScreen.style.zIndex = "2"
+      loadingScreen.style.opacity = "0.9"
+      loadingScreen.style.backgroundColor = "black"
+      loadingScreen.style.display = "flex"
+      loadingScreen.style.justifyContent = "center"
+      loadingScreen.style.alignItems = "center"
 
-    loadingManager.onProgress = function (item, loaded, total) {
-      console.log(item)
-      progressBar.style.width = (loaded / total) * 100 + "%"
+      progress.style.width = "60%"
+      progress.style.height = "22px"
+      progress.style.background = "#000"
+      progress.style.border = "solid 2px white"
+      progress.style.position = "absolute"
+
+      progress.style.top = "20%"
+
+      progressBar.style.width = "0%"
+      progressBar.style.height = "20px"
+      progressBar.style.background = "linear-gradient(to left, #00c3ff, #ffff1c)"
+      progressBar.style.border = "none"
+
+      loadingMsg.innerHTML = "불러오는 중..."
+      loadingMsg.style.color = "white"
+      loadingMsg.style.fontWeight = "700"
+      loadingMsg.style.fontSize = "20px"
+
+      progress.appendChild(progressBar)
+      loadingScreen.appendChild(progress)
+      loadingScreen.appendChild(loadingMsg)
+      ;(ThreeContainer.current as any).appendChild(loadingScreen)
+
+      // 진행 중
+      loadingManager.onProgress = function (item, loaded, total) {
+        console.log(item)
+        progressBar.style.width = (loaded / total) * 100 + "%"
+      }
+
+      // 로딩 완료 시
+      loadingManager.onLoad = function () {
+        setTimeout(() => {
+          loadingScreen.style.display = "none"
+        }, 1000)
+        console.log("Loading complete!")
+      }
     }
 
-    loadingManager.onLoad = function () {
-      setTimeout(() => {
-        progress.style.display = "none"
-      }, 1000)
-      console.log("Loading complete!")
-    }
-
-    function addRandomPlaceHoldItImage() {
-      const r = Math.round(Math.random() * 4000)
-      new THREE.ImageLoader(loadingManager).load("http://placehold.it/" + r + "x" + r)
-    }
-
-    for (let i = 0; i < 10; i++) addRandomPlaceHoldItImage()
-
+    addLoadingScreen()
     camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 100000)
     camera.position.set(-2773.8192101111504, 490.0248603839669, 9020.7527992239675)
     camera.zoom = 0.5
@@ -115,14 +134,14 @@ const ThreeScene = () => {
     }
     cssRenderer.domElement.style.top = 0
     cssRenderer.domElement.style.position = "absolute"
-    cssRenderer.domElement.style.zIndex = "5"
+    cssRenderer.domElement.style.zIndex = "1"
     ThreeContainer?.current?.appendChild(cssRenderer.domElement)
 
     // 메인 홀
     const buildingGeometry = new THREE.BoxGeometry(3000, 1000, 3000, 1, 1, 1)
     const buildingBuffGeometry = new THREE.BufferGeometry().fromGeometry(buildingGeometry)
     const buildingMaterial = new THREE.MeshPhongMaterial({
-      color: 0x4e61ff,
+      color: 0xffffff,
       specular: "blue",
       flatShading: true,
     })
@@ -140,7 +159,7 @@ const ThreeScene = () => {
 
     const project1Geo = new THREE.BoxGeometry(3000, 1000, 2000, 1, 1, 1)
     const project1Mat = new THREE.MeshPhongMaterial({
-      color: 0x8af4eb,
+      color: 0xffffff,
       specular: "orange",
       flatShading: true,
     })
@@ -316,7 +335,7 @@ const ThreeScene = () => {
     renderer.setClearColor(0xffffff, 1)
     renderer.domElement.style.position = "absolute"
     renderer.domElement.style.top = "0"
-    renderer.domElement.style.zIndex = "1"
+    renderer.domElement.style.zIndex = "0"
 
     // 갓레이이펙트
 

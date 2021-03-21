@@ -113,15 +113,18 @@ export const addSelectBtn = (props: {
       addJFlixBoard()
     } // 프로젝트 변경 버튼
     else if (props.text === "✨") {
-      descriptionBox.style.display = "none"
+      controls.target.set(-500, 0, 0) // 예외적으로 타겟이 정해짐
       embedWebsite.style.display = "none"
 
-      embedWebsite.style.display = "block"
-      chooseProject()
-      controls.target.set(websiteObject.position.x, 0, websiteObject.position.z)
-      camera.updateMatrix()
-      // JFLIX 프로젝트 설명 보드
+      if (descriptionBox) {
+        descriptionBox.style.display = "none"
+      }
+
+      // JFlix 프로젝트 설명 보드 로드
       addJFlixBoard()
+      embedWebsite.style.display = "block"
+      camera.updateMatrix()
+      chooseProject()
     } else if (props.text === "4") {
       if (descriptionBox) {
         descriptionBox.style.display = "none"

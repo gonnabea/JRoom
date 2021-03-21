@@ -12,6 +12,7 @@ import { addLogoBox } from "../../Components/ThreeModules/LogoBox"
 import { addFloor } from "../../Components/ThreeModules/floor"
 import floorImage2 from "../../resources/images/floor2.jpg"
 import { addSelectBtn } from "../../Components/ThreeModules/SelectBtn"
+import { GLTFModelLoader } from "../../Components/ThreeModules/GLTFModelLoader"
 
 const loader = new GLTFLoader()
 
@@ -55,18 +56,25 @@ const MainHallObjects = () => {
     scene.add(JFlixRoomBoardMesh)
   })
 
-  // 미니 자동차 트랙
-  // loader.load("/models/drawer_of_blacksmith_table_-_a (1)/scene.gltf", (gltf) => {
-  //   gltf.scene.scale.set(390, 500, 1100)
-  //   gltf.scene.position.set(100, 0, -3000)
-  //   scene.add(gltf.scene)
-  // })
-
-  // loader.load("/models/motocross_track/scene.gltf", (gltf) => {
-  //   gltf.scene.scale.set(30, 30, 30)
-  //   gltf.scene.position.set(200, -210, -3000)
-  //   scene.add(gltf.scene)
-  // })
+  // 화분 모델 로드
+  GLTFModelLoader({
+    modelUrl: "models/flowervase/scene.gltf",
+    scale: {
+      x: 20,
+      y: 20,
+      z: 20,
+    },
+    position: {
+      x: 800,
+      y: -300,
+      z: -1500,
+    },
+    rotation: {
+      x: 0,
+      y: 0,
+      z: 0,
+    },
+  })
 
   // 창문 모델 로드
   loader.load("/models/window1/scene.gltf", (gltf) => {

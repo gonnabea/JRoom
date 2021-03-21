@@ -1,0 +1,11 @@
+Model Information:
+* title:	Llama-pot
+* source:	https://sketchfab.com/3d-models/llama-pot-0f7299c87f6944a79523a263e0a2fff1
+* author:	katrin.701 (https://sketchfab.com/katrin.701)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Llama-pot" (https://sketchfab.com/3d-models/llama-pot-0f7299c87f6944a79523a263e0a2fff1) by katrin.701 (https://sketchfab.com/katrin.701) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
