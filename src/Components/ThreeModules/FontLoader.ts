@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { Geometry, TextBufferGeometry, TextGeometry } from "three"
-import { scene } from "../../Screen/ThreeScreens/ThreeScene"
+import { loadingManager, scene } from "../../Screen/ThreeScreens/ThreeScene"
 
 export const FontLoder = (
   params: {
@@ -14,7 +14,7 @@ export const FontLoder = (
   position: { x: number; y: number; z: number },
   rotation?: { x: number; y: number; z: number }
 ) => {
-  const fontLoader = new THREE.FontLoader()
+  const fontLoader = new THREE.FontLoader(loadingManager)
   fontLoader.load(params.fontModelUrl, (font) => {
     const geometry = new THREE.TextGeometry(params.text, {
       font,

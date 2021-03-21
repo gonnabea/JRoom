@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { scene } from "../../Screen/ThreeScreens/ThreeScene"
+import { loadingManager, scene } from "../../Screen/ThreeScreens/ThreeScene"
 
 // 액자 모델
 const loader = new GLTFLoader()
@@ -27,7 +27,7 @@ export const addFrame = (props: {
     const frameDepth = sizeCheckBox.max.x - sizeCheckBox.min.x
 
     const imageInFrameGeo = new THREE.PlaneBufferGeometry(frameWidth, frameHeight, frameDepth)
-    const imageInFrameTexture = new THREE.TextureLoader().load(props.imageUrl)
+    const imageInFrameTexture = new THREE.TextureLoader(loadingManager).load(props.imageUrl)
     const imageInFrameMat = new THREE.MeshPhongMaterial({ map: imageInFrameTexture })
     const imageInFrame = new THREE.Mesh(imageInFrameGeo, imageInFrameMat)
 

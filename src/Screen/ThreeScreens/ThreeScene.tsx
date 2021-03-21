@@ -30,6 +30,7 @@ const Container = styled.section`
   align-self: center;
 `
 
+export let loadingManager: THREE.LoadingManager = new THREE.LoadingManager()
 export let camera: THREE.PerspectiveCamera
 export let scene: THREE.Scene
 export let renderer: THREE.WebGLRenderer
@@ -40,7 +41,6 @@ export let floorMesh: THREE.Mesh
 export let cssScene: THREE.Scene
 export let selectBtnObjs: any[] = []
 export let embedWebsite: HTMLIFrameElement
-export let loadingManager: THREE.LoadingManager = new THREE.LoadingManager()
 
 let cssRenderer: {
   setSize: (arg0: number, arg1: number) => void
@@ -81,24 +81,21 @@ const ThreeScene = () => {
     progress.appendChild(progressBar)
     ;(ThreeContainer.current as any).appendChild(progress)
 
-    const manager = new THREE.LoadingManager()
-    manager.onProgress = function (item, loaded, total) {
-      setTimeout(() => {
-        if (item) {
-          progress.style.display = "none"
-        }
-      }, 1000)
+    loadingManager.onProgress = function (item, loaded, total) {
       console.log(item)
       progressBar.style.width = (loaded / total) * 100 + "%"
     }
 
-    manager.onLoad = function () {
+    loadingManager.onLoad = function () {
+      setTimeout(() => {
+        progress.style.display = "none"
+      }, 1000)
       console.log("Loading complete!")
     }
 
     function addRandomPlaceHoldItImage() {
       const r = Math.round(Math.random() * 4000)
-      new THREE.ImageLoader(manager).load("http://placehold.it/" + r + "x" + r)
+      new THREE.ImageLoader(loadingManager).load("http://placehold.it/" + r + "x" + r)
     }
 
     for (let i = 0; i < 10; i++) addRandomPlaceHoldItImage()
