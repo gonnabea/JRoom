@@ -176,11 +176,11 @@ export const JFlixObjects = () => {
 
   // 방문 모델 로드
 
-  loader.load("/models/door/scene.gltf", (gltf) => {
+  loader.load("/models/animated_room/animated_room.glb", (gltf) => {
     gltf.scene.scale.set(600, 300, 300)
     gltf.scene.position.set(1200, -500, -1030)
     gltf.scene.rotateY(Math.PI / 2)
-
+    console.log(gltf)
     scene.add(gltf.scene)
   })
 
