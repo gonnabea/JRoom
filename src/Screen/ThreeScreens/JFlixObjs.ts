@@ -190,6 +190,7 @@ export const JFlixObjects = () => {
 
     const clips = gltf.animations
     function update() {
+      console.log(mixer)
       mixer.update(0.02)
     }
     console.log(clips)
@@ -199,27 +200,32 @@ export const JFlixObjects = () => {
     action.play()
     console.log(clip)
 
-    let doorAni: any
-
     // 문 열때 애니메이션
     addOpenDoorAni = () => {
+      // 애니메이션 클립 초기화
+      mixer.time = 0
+      action.time = 0
+      // 정순 애니메이션
       mixer.timeScale = 1
-      doorAni = setInterval(update, 1000 / 60)
+      const openDoorAni = setInterval(update, 1000 / 60)
       setTimeout(() => {
-        clearInterval(doorAni)
+        clearInterval(openDoorAni)
       }, 1000)
     }
 
     // 문 닫을 때 애니메이션
     addCloseDoorAni = () => {
+      // 역순 애니메이션
       mixer.timeScale = -1
-      doorAni = setInterval(update, 1000 / 60)
-      setTimeout(() => {
-        clearInterval(doorAni)
+      const closeDoorAni = setInterval(update, 1000 / 60)
 
+      setTimeout(() => {
         // 애니메이션 클립 초기화
         mixer.time = 0
         action.time = 0
+
+        clearInterval(closeDoorAni)
+        mixer.setTime(0)
       }, 900)
     }
 
