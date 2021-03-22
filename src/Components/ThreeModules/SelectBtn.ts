@@ -2,6 +2,7 @@ import { camera, selectBtnObjs, cssScene, controls } from "../../Screen/ThreeScr
 import CSS3D from "three-css3drenderer"
 import addDescriptionBoard, { descriptionBox } from "./DescriptionBoard"
 import addIframeObj, { embedWebsite, websiteObject } from "./iframeObj"
+import { addOpenDoorAni, addCloseDoorAni } from "../../Screen/ThreeScreens/JFlixObjs"
 
 function chooseProject() {
   // 순차적으로 프로젝트 변경
@@ -84,6 +85,7 @@ export const addSelectBtn = (props: {
       embedWebsite.style.display = "none"
 
       controls.target.set(0, 0, 0)
+      addCloseDoorAni()
     } else if (props.text === "1") {
       controls.target.set(-500, 0, 0) // 예외적으로 타겟이 정해짐
       embedWebsite.style.display = "none"
@@ -105,6 +107,7 @@ export const addSelectBtn = (props: {
       addJFlixBoard()
       embedWebsite.style.display = "block"
       camera.updateMatrix()
+      addCloseDoorAni()
     } else if (props.text === "📄") {
       // JFlix 프로젝트 설명 보드 로드
       if (descriptionBox) {
@@ -125,6 +128,7 @@ export const addSelectBtn = (props: {
       embedWebsite.style.display = "block"
       camera.updateMatrix()
       chooseProject()
+      addCloseDoorAni()
     } else if (props.text === "4") {
       if (descriptionBox) {
         descriptionBox.style.display = "none"
@@ -176,6 +180,7 @@ export const addSelectBtn = (props: {
       if (descriptionBox) {
         descriptionBox.style.display = "none"
       }
+      addOpenDoorAni()
     }
 
     if (props.targetPosition) {

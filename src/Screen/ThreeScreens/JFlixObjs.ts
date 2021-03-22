@@ -19,6 +19,9 @@ import nomadLogo from "../../resources/images/nomadLogo.png"
 import floorImage3 from "../../resources/images/floor3.jpg"
 import { GLTFModelLoader } from "../../Components/ThreeModules/GLTFModelLoader"
 
+export let addOpenDoorAni: Function
+export let addCloseDoorAni: Function
+
 export const JFlixObjects = () => {
   // J-Flix 지붕
   const roofShape = new THREE.Shape()
@@ -177,12 +180,14 @@ export const JFlixObjects = () => {
   // 방문 모델 로드
 
   loader.load("/models/animated_room/animated_room.glb", (gltf) => {
-    gltf.scene.scale.set(600, 300, 300)
-    gltf.scene.position.set(1200, -500, -1030)
-    gltf.scene.rotateY(Math.PI / 2)
+    gltf.scene.scale.set(300, 300, 300)
+    gltf.scene.position.set(1200, -500, -1000)
+    gltf.scene.rotateY(-Math.PI / 2)
+
     console.log(gltf)
 
     const mixer = new THREE.AnimationMixer(gltf.scene)
+
     const clips = gltf.animations
     function update() {
       mixer.update(0.02)
@@ -193,7 +198,30 @@ export const JFlixObjects = () => {
     const action = mixer.clipAction(clip)
     action.play()
     console.log(clip)
-    setInterval(() => update(), 1000 / 30)
+
+    let doorAni: any
+
+    // 문 열때 애니메이션
+    addOpenDoorAni = () => {
+      mixer.timeScale = 1
+      doorAni = setInterval(update, 1000 / 60)
+      setTimeout(() => {
+        clearInterval(doorAni)
+      }, 1000)
+    }
+
+    // 문 닫을 때 애니메이션
+    addCloseDoorAni = () => {
+      mixer.timeScale = -1
+      doorAni = setInterval(update, 1000 / 60)
+      setTimeout(() => {
+        clearInterval(doorAni)
+
+        // 애니메이션 클립 초기화
+        mixer.time = 0
+        action.time = 0
+      }, 900)
+    }
 
     scene.add(gltf.scene)
   })
