@@ -181,6 +181,20 @@ export const JFlixObjects = () => {
     gltf.scene.position.set(1200, -500, -1030)
     gltf.scene.rotateY(Math.PI / 2)
     console.log(gltf)
+
+    const mixer = new THREE.AnimationMixer(gltf.scene)
+    const clips = gltf.animations
+    function update() {
+      mixer.update(0.02)
+    }
+    console.log(clips)
+    const clip = THREE.AnimationClip.findByName(clips, "Door_0Action")
+
+    const action = mixer.clipAction(clip)
+    action.play()
+    console.log(clip)
+    setInterval(() => update(), 1000 / 30)
+
     scene.add(gltf.scene)
   })
 
