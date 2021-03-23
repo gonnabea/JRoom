@@ -131,12 +131,44 @@ export const JFlixObjects = () => {
 
   // 기술스택 박스 만들기
 
-  addLogoBox({ x: -500, y: 200, z: -940 }, reactLogo)
-  addLogoBox({ x: -500, y: -200, z: -940 }, styledComponentsLogo)
-  addLogoBox({ x: 700, y: 100, z: -940 }, netlifyLogo)
-  addLogoBox({ x: 700, y: -300, z: -940 }, jsLogo)
+  // addLogoBox({ x: -500, y: 200, z: -940 }, reactLogo)
+  // addLogoBox({ x: -500, y: -200, z: -940 }, styledComponentsLogo)
+  // addLogoBox({ x: 700, y: 100, z: -940 }, netlifyLogo)
+  // addLogoBox({ x: 700, y: -300, z: -940 }, jsLogo)
 
   const loader = new GLTFLoader(loadingManager)
+
+  loader.load("/models/customs/js_frame.glb", (gltf) => {
+    gltf.scene.scale.set(100, 100, 100)
+    gltf.scene.position.set(700, -300, -940)
+    gltf.scene.rotation.set(0, -Math.PI / 2, 0)
+
+    scene.add(gltf.scene)
+  })
+
+  loader.load("/models/customs/styled_components_frame.glb", (gltf) => {
+    gltf.scene.scale.set(100, 100, 100)
+    gltf.scene.position.set(-500, -200, -940)
+    gltf.scene.rotation.set(0, -Math.PI / 2, 0)
+
+    scene.add(gltf.scene)
+  })
+
+  loader.load("/models/customs/netlify_frame.glb", (gltf) => {
+    gltf.scene.scale.set(100, 100, 100)
+    gltf.scene.position.set(700, 100, -940)
+    gltf.scene.rotation.set(0, -Math.PI / 2, 0)
+
+    scene.add(gltf.scene)
+  })
+
+  loader.load("/models/customs/react_frame.glb", (gltf) => {
+    gltf.scene.scale.set(100, 100, 100)
+    gltf.scene.position.set(-500, 200, -740)
+    gltf.scene.rotation.set(0, -Math.PI / 2, 0)
+
+    scene.add(gltf.scene)
+  })
 
   // TV GLTF 모델 로드
   loader.load("/models/2018_flat_screen_tv/scene.gltf", (gltf) => {

@@ -161,7 +161,7 @@ const ThreeScene = () => {
     const project1Geo = new THREE.BoxGeometry(3000, 1000, 2000, 1, 1, 1)
     const project1Mat = new THREE.MeshPhongMaterial({
       color: 0x787677,
-      specular: "orange",
+      specular: "white",
       flatShading: true,
     })
 
