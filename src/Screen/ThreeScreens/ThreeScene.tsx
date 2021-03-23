@@ -129,7 +129,7 @@ const ThreeScene = () => {
     if (window.matchMedia("(max-width:1280px)").matches) {
       camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 100000)
     } else {
-      camera = new THREE.PerspectiveCamera(10, 1280 / window.innerHeight, 1, 100000)
+      camera = new THREE.PerspectiveCamera(10, 1280 / 720, 1, 100000)
     }
     camera.position.set(-2773.8192101111504, 490.0248603839669, 9020.7527992239675)
     camera.zoom = 0.5
@@ -141,7 +141,7 @@ const ThreeScene = () => {
     if (window.matchMedia("(max-width:1280px)").matches) {
       cssRenderer.setSize(window.innerWidth, window.innerHeight)
     } else {
-      cssRenderer.setSize(1280, window.innerHeight)
+      cssRenderer.setSize(1280, 720)
     }
     cssRenderer.domElement.style.top = 0
     cssRenderer.domElement.style.position = "absolute"
@@ -346,7 +346,7 @@ const ThreeScene = () => {
     if (window.matchMedia("(max-width:1280px)").matches) {
       renderer.setSize(window.innerWidth, window.innerHeight)
     } else {
-      renderer.setSize(1280, window.innerHeight)
+      renderer.setSize(1280, 720)
     }
 
     renderer.setClearColor(0xffffff, 1)

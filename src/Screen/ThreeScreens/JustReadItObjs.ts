@@ -16,7 +16,7 @@ import hackathonLogo from "../../resources/images/nomad_hackathon.png"
 
 export const JustReadItObjs = () => {
   const IntroVideo = document.createElement("video")
-  IntroVideo.src = "/backgroundVidoes/just-read-it.mp4"
+  IntroVideo.src = "/backgroundVideos/just-read-it.mp4"
   IntroVideo.autoplay = true
   IntroVideo.loop = true
 
