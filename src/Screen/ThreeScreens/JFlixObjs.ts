@@ -378,12 +378,15 @@ export const JFlixObjects = () => {
   })
 
   // tv 포커싱
+
   addSelectBtn({
     text: "1",
     btnPosition: { x: -1300, y: 500, z: 500 },
-    cameraPosition: { x: 1000, y: 300, z: 0 },
+    cameraPosition: window.matchMedia("(max-width: 500px)").matches
+      ? { x: 1400, y: 300, z: 0 }
+      : { x: 1000, y: 300, z: 0 },
     targetPosition: { x: 600, y: 250, z: 0 },
-    zoomIndex: 0.3,
+    zoomIndex: window.matchMedia("(max-width: 850px)").matches ? 0.15 : 0.3, // 850px 보다 width가 작을 때 축소
   })
 
   // 프로젝트 설명 포커싱
@@ -399,9 +402,11 @@ export const JFlixObjects = () => {
   addSelectBtn({
     text: "✨",
     btnPosition: { x: -1300, y: 500, z: 300 },
-    cameraPosition: { x: 1000, y: 300, z: 0 },
+    cameraPosition: window.matchMedia("(max-width: 500px)").matches
+      ? { x: 1400, y: 300, z: 0 }
+      : { x: 1000, y: 300, z: 0 },
     targetPosition: { x: 600, y: 250, z: 0 },
-    zoomIndex: 0.3,
+    zoomIndex: window.matchMedia("(max-width: 850px)").matches ? 0.15 : 0.3, // 850px 보다 width가 작을 때 축소
   })
 
   addFloor({ width: 3000, height: 2000, x: 0, y: -490, z: 0, imageSrc: floorImage3 }) // J-Flix 바닥

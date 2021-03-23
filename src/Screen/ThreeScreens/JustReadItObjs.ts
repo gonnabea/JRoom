@@ -61,10 +61,10 @@ export const JustReadItObjs = () => {
 
   // 의자 모델
   GLTFModelLoader({
-    modelUrl: "/models/office_chair/scene.gltf",
+    modelUrl: "/models/armchair/scene.gltf",
     scale: { x: 6, y: 6, z: 6 },
-    position: { x: -2300, y: -400, z: -2000 },
-    rotation: { x: 0, y: Math.PI / 2, z: 0 },
+    position: { x: -3000, y: -400, z: -2000 },
+    rotation: { x: 0, y: Math.PI, z: 0 },
   })
 
   // 프로젝트 제목 폰트모델
@@ -89,7 +89,9 @@ export const JustReadItObjs = () => {
   addSelectBtn({
     text: "4",
     btnPosition: { x: -1500, y: 0, z: -2500 },
-    cameraPosition: { x: -2000, y: 500, z: -2500 },
+    cameraPosition: window.matchMedia("(max-width: 700px)").matches
+      ? { x: -1600, y: 500, z: -2500 }
+      : { x: -2000, y: 500, z: -2500 },
     targetPosition: { x: -3000, y: 500, z: -2500 },
     zoomIndex: 0.2,
   })

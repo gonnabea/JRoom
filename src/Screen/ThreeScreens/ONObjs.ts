@@ -87,9 +87,11 @@ const onObjects = () => {
   addSelectBtn({
     text: "5",
     btnPosition: { x: 1520, y: 0, z: -3000 },
-    targetPosition: { x: 3000, y: 500, z: -2500 },
+    targetPosition: { x: 2500, y: 500, z: -2500 },
     zoomIndex: 0.2,
-    cameraPosition: { x: 2000, y: 500, z: -2500 },
+    cameraPosition: window.matchMedia("(max-width: 700px)").matches // 적응형 구현 위함
+      ? { x: 1550, y: 500, z: -2500 }
+      : { x: 2000, y: 500, z: -2500 },
   })
 
   addFloor({ width: 3000, height: 2900, x: -3000, y: -490, z: -2500, imageSrc: floorImage3 }) // Our-Now 바닥

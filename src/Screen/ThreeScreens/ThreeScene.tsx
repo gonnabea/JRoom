@@ -14,7 +14,6 @@ import onObjects from "./ONObjs"
 import outsideObjs from "./OutsideObjs"
 import { connectorsMesh } from "../../Components/ThreeModules/CeilConnetor"
 import { logoBoxesMesh } from "../../Components/ThreeModules/LogoBox"
-import { BackSide, DoubleSide, FrontSide } from "three"
 
 const Container = styled.section`
   width: 100%;
@@ -65,7 +64,6 @@ const ThreeScene = () => {
 
   useEffect(() => {
     // Three.js 로딩 진행 화면
-
     const addLoadingScreen = () => {
       const loadingScreen = document.createElement("section")
       const progress = document.createElement("div")
@@ -118,6 +116,8 @@ const ThreeScene = () => {
 
       // 로딩 완료 시
       loadingManager.onLoad = function () {
+        loadingMsg.innerHTML = "로딩 완료!"
+        loadingItem.innerHTML = ""
         setTimeout(() => {
           loadingScreen.style.display = "none"
         }, 1000)
@@ -126,7 +126,11 @@ const ThreeScene = () => {
     }
 
     addLoadingScreen()
-    camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 100000)
+    if (window.matchMedia("(max-width:1280px)").matches) {
+      camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 100000)
+    } else {
+      camera = new THREE.PerspectiveCamera(10, 1280 / window.innerHeight, 1, 100000)
+    }
     camera.position.set(-2773.8192101111504, 490.0248603839669, 9020.7527992239675)
     camera.zoom = 0.5
     camera.updateProjectionMatrix()
@@ -134,10 +138,10 @@ const ThreeScene = () => {
     scene = new THREE.Scene()
     cssRenderer = new CSS3D.CSS3DRenderer()
     cssScene = new THREE.Scene()
-    if (window.matchMedia("(max-width:800)").matches) {
+    if (window.matchMedia("(max-width:1280px)").matches) {
       cssRenderer.setSize(window.innerWidth, window.innerHeight)
     } else {
-      cssRenderer.setSize(window.innerWidth, window.innerHeight)
+      cssRenderer.setSize(1280, window.innerHeight)
     }
     cssRenderer.domElement.style.top = 0
     cssRenderer.domElement.style.position = "absolute"
@@ -339,7 +343,12 @@ const ThreeScene = () => {
       renderer.setPixelRatio(window.devicePixelRatio / 2)
     }
 
-    renderer.setSize(window.innerWidth, window.innerHeight)
+    if (window.matchMedia("(max-width:1280px)").matches) {
+      renderer.setSize(window.innerWidth, window.innerHeight)
+    } else {
+      renderer.setSize(1280, window.innerHeight)
+    }
+
     renderer.setClearColor(0xffffff, 1)
     renderer.domElement.style.position = "absolute"
     renderer.domElement.style.top = "0"
