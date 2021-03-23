@@ -1,7 +1,7 @@
 import * as THREE from "three"
 import { DoubleSide } from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { scene } from "./ThreeScene"
+import { loadingManager, scene } from "./ThreeScene"
 import { FontLoder } from "../../Components/ThreeModules/FontLoader"
 import JsLogo from "../../resources/images/vanillajs.png"
 import tsLogo from "../../resources/images/tsLogo.png"
@@ -15,9 +15,8 @@ import { addSelectBtn } from "../../Components/ThreeModules/SelectBtn"
 import { GLTFModelLoader } from "../../Components/ThreeModules/GLTFModelLoader"
 import { FBXLoader } from "fbxloader.ts"
 
-const loader = new GLTFLoader()
-
 const MainHallObjects = () => {
+  const loader = new GLTFLoader(loadingManager)
   // 알림판 모델 로드
   loader.load("/models/futuristic_sandwich_board/scene.gltf", (gltf) => {
     gltf.scene.scale.set(400, 400, 400)
@@ -58,24 +57,51 @@ const MainHallObjects = () => {
   })
 
   // 화분 모델 로드
-  // GLTFModelLoader({
-  //   modelUrl: "models/flowervase/scene.gltf",
-  //   scale: {
-  //     x: 20,
-  //     y: 20,
-  //     z: 20,
-  //   },
-  //   position: {
-  //     x: 800,
-  //     y: -300,
-  //     z: -1500,
-  //   },
-  //   rotation: {
-  //     x: 0,
-  //     y: 0,
-  //     z: 0,
-  //   },
-  // })
+  GLTFModelLoader({
+    modelUrl: "models/flowervase/scene.gltf",
+    scale: {
+      x: 20,
+      y: 20,
+      z: 20,
+    },
+    position: {
+      x: 800,
+      y: -300,
+      z: -1500,
+    },
+    rotation: {
+      x: 0,
+      y: 0,
+      z: 0,
+    },
+  })
+
+  // 식탁 모델 로드
+
+  loader.load("/models/simple_dining_table/animated.glb", (gltf) => {
+    gltf.scene.scale.set(4, 4, 4)
+    gltf.scene.position.set(0, -500, -2500)
+
+    console.log(gltf)
+
+    const mixer = new THREE.AnimationMixer(gltf.scene)
+
+    const clips = gltf.animations
+    function update() {
+      console.log(mixer)
+      mixer.update(0.02)
+    }
+    console.log(clips)
+    const clip = THREE.AnimationClip.findByName(clips, "Mesh_1Action")
+
+    const action = mixer.clipAction(clip)
+    action.play()
+    console.log(clip)
+
+    setInterval(update, 1000 / 60)
+
+    scene.add(gltf.scene)
+  })
 
   // 창문 모델 로드
   loader.load("/models/window1/scene.gltf", (gltf) => {
@@ -90,7 +116,7 @@ const MainHallObjects = () => {
   addLogoBox({ x: -600, y: -100, z: -4000 }, reactLogo)
   addLogoBox({ x: 600, y: 200, z: -4000 }, tsLogo)
 
-  addFloor({ width: 3000, height: 2900, x: 0, y: -490, z: -2500, imageSrc: floorImage2 }) // 메인 홀 바닥
+  // addFloor({ width: 3000, height: 2900, x: 0, y: -490, z: -2500, imageSrc: floorImage2 }) // 메인 홀 바닥
 
   // 거실 (로비) 포커싱
   addSelectBtn({

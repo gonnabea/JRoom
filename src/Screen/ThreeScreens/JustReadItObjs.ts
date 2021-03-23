@@ -39,7 +39,7 @@ export const JustReadItObjs = () => {
   GLTFModelLoader({
     modelUrl: "/models/bookshelf_household_props_12 (1)/scene.gltf",
     scale: { x: 1, y: 1, z: 1 },
-    position: { x: -2000, y: -500, z: -4005 },
+    position: { x: -2000, y: -510, z: -4005 },
     rotation: { x: 0, y: 0, z: 0 },
   })
 
