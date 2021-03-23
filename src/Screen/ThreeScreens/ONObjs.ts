@@ -6,18 +6,26 @@ import webrtcLogo from "../../resources/images/webrtcLogo.png"
 import pythonLogo from "../../resources/images/pythonLogo.jpg"
 import flaskLogo from "../../resources/images/flaskLogo.png"
 import mysqlLogo from "../../resources/images/mysqlLogo.png"
+import reactLogo from "../../resources/images/reactLogo.jpg"
+import nodejsLogo from "../../resources/images/nodeLogo.jpg"
+
 import { GLTFModelLoader } from "../../Components/ThreeModules/GLTFModelLoader"
 import { addFloor } from "../../Components/ThreeModules/floor"
 import floorImage3 from "../../resources/images/floor3.jpg"
 import { addFrame } from "../../Components/ThreeModules/Frame"
 import chatImg from "../../resources/images/chat.jpg"
 import { FontLoder } from "../../Components/ThreeModules/FontLoader"
+import { loadingManager, scene } from "./ThreeScene"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 
 const onObjects = () => {
+  const loader = new GLTFLoader(loadingManager)
   // 기술스택 박스 로드
+  addLogoBox({ x: 2400, y: 500, z: -3900 }, reactLogo)
   addLogoBox({ x: 2700, y: 500, z: -3900 }, opencvLogo)
   addLogoBox({ x: 3000, y: 500, z: -3900 }, socketioLogo)
   addLogoBox({ x: 3300, y: 500, z: -3900 }, webrtcLogo)
+  addLogoBox({ x: 2400, y: 200, z: -3900 }, nodejsLogo)
   addLogoBox({ x: 2700, y: 200, z: -3900 }, pythonLogo)
   addLogoBox({ x: 3000, y: 200, z: -3900 }, flaskLogo)
   addLogoBox({ x: 3300, y: 200, z: -3900 }, mysqlLogo)

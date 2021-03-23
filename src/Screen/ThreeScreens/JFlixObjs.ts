@@ -138,16 +138,17 @@ export const JFlixObjects = () => {
 
   const loader = new GLTFLoader(loadingManager)
 
+  // 액자 모델 로드
   loader.load("/models/customs/js_frame.glb", (gltf) => {
-    gltf.scene.scale.set(100, 100, 100)
-    gltf.scene.position.set(700, -300, -940)
+    gltf.scene.scale.set(120, 120, 120)
+    gltf.scene.position.set(700, -200, -940)
     gltf.scene.rotation.set(0, -Math.PI / 2, 0)
 
     scene.add(gltf.scene)
   })
 
   loader.load("/models/customs/styled_components_frame.glb", (gltf) => {
-    gltf.scene.scale.set(100, 100, 100)
+    gltf.scene.scale.set(120, 120, 120)
     gltf.scene.position.set(-500, -200, -940)
     gltf.scene.rotation.set(0, -Math.PI / 2, 0)
 
@@ -155,16 +156,16 @@ export const JFlixObjects = () => {
   })
 
   loader.load("/models/customs/netlify_frame.glb", (gltf) => {
-    gltf.scene.scale.set(100, 100, 100)
-    gltf.scene.position.set(700, 100, -940)
+    gltf.scene.scale.set(120, 120, 120)
+    gltf.scene.position.set(675, 200, -940)
     gltf.scene.rotation.set(0, -Math.PI / 2, 0)
 
     scene.add(gltf.scene)
   })
 
   loader.load("/models/customs/react_frame.glb", (gltf) => {
-    gltf.scene.scale.set(100, 100, 100)
-    gltf.scene.position.set(-500, 200, -740)
+    gltf.scene.scale.set(120, 120, 120)
+    gltf.scene.position.set(-600, 200, -720)
     gltf.scene.rotation.set(0, -Math.PI / 2, 0)
 
     scene.add(gltf.scene)
@@ -202,7 +203,7 @@ export const JFlixObjects = () => {
   // 팝콘 모델 로드
 
   loader.load("/models/popcorn_bucket/scene.gltf", (gltf) => {
-    gltf.scene.scale.set(100, 100, 100)
+    gltf.scene.scale.set(120, 120, 120)
     gltf.scene.position.set(-1000, -500, 850)
 
     gltf.scene.rotateY(Math.PI)
