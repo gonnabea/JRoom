@@ -214,12 +214,13 @@ const ThreeScene = () => {
 
     bspMainRoomMesh.material = bspJFlixMeshResult.material
     bspMainRoomMesh.updateMatrix()
-
+    console.log((bspMainRoomMesh as any).geometry.faces)
     // netlify에서 geometry.faces 프로퍼티를 인식하지 못하여 조치
     // face 목록 중 가장 끝의 것들만 제거하면 패인 부분을 제거할 수 있음
     ;(bspMainRoomMesh as any).geometry.faces.splice(180, 20)
     bspMainRoomMesh.castShadow = true
     bspMainRoomMesh.receiveShadow = true
+
     scene.add(bspMainRoomMesh)
 
     //// 프로젝트 방 (Our-Now) ////

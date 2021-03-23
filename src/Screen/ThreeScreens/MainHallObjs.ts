@@ -104,10 +104,10 @@ const MainHallObjects = () => {
   })
 
   // 부억 세트 모델 로드
-  loader.load("/models/kitchen/kitchen.glb", (gltf) => {
-    gltf.scene.scale.set(350, 350, 400)
-    gltf.scene.position.set(-300, -490, -3500)
-    gltf.scene.rotation.set(0, -Math.PI / 2, 0)
+  loader.load("/models/sims_kitchen/scene.gltf", (gltf) => {
+    gltf.scene.scale.set(300, 300, 250)
+    gltf.scene.position.set(-300, -490, -3900)
+    gltf.scene.rotation.set(0, 0, 0)
     console.log(gltf.scene)
     scene.add(gltf.scene)
   })
