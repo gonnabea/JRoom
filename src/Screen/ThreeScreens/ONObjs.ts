@@ -64,7 +64,7 @@ const onObjects = () => {
   GLTFModelLoader({
     modelUrl: "/models/square_dining_table/scene.gltf",
     scale: { x: 8, y: 8, z: 8 },
-    position: { x: 3000, y: -400, z: -2500 },
+    position: { x: 3000, y: -450, z: -2500 },
     rotation: { x: 0, y: -Math.PI / 2, z: 0 },
   })
 

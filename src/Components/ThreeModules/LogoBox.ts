@@ -8,7 +8,7 @@ export const addLogoBox = (position: { x: number; y: number; z: number }, image:
   const logoBoxTexture = new THREE.TextureLoader().load(image)
   const logoBoxMat = new THREE.MeshPhongMaterial({
     map: logoBoxTexture,
-    specular: "orange",
+    specular: "black",
     flatShading: true,
   })
 

@@ -42,7 +42,7 @@ export const JFlixObjects = () => {
 
   const roofGeometry = new THREE.ExtrudeGeometry(roofShape, extrudeSettings)
   const roofMaterial = new THREE.MeshPhongMaterial({
-    color: 0x24292e,
+    color: 0x272524,
     specular: "orange",
     flatShading: true,
   })
@@ -220,10 +220,6 @@ export const JFlixObjects = () => {
       const closeDoorAni = setInterval(update, 1000 / 60)
 
       setTimeout(() => {
-        // 애니메이션 클립 초기화
-        mixer.time = 0
-        action.time = 0
-
         clearInterval(closeDoorAni)
         mixer.setTime(0)
       }, 900)

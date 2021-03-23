@@ -14,6 +14,7 @@ import onObjects from "./ONObjs"
 import outsideObjs from "./OutsideObjs"
 import { connectorsMesh } from "../../Components/ThreeModules/CeilConnetor"
 import { logoBoxesMesh } from "../../Components/ThreeModules/LogoBox"
+import { BackSide, DoubleSide, FrontSide } from "three"
 
 const Container = styled.section`
   width: 100%;
@@ -159,7 +160,7 @@ const ThreeScene = () => {
 
     const project1Geo = new THREE.BoxGeometry(3000, 1000, 2000, 1, 1, 1)
     const project1Mat = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
+      color: 0x787677,
       specular: "orange",
       flatShading: true,
     })

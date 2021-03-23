@@ -13,6 +13,7 @@ import { addFloor } from "../../Components/ThreeModules/floor"
 import floorImage2 from "../../resources/images/floor2.jpg"
 import { addSelectBtn } from "../../Components/ThreeModules/SelectBtn"
 import { GLTFModelLoader } from "../../Components/ThreeModules/GLTFModelLoader"
+import { FBXLoader } from "fbxloader.ts"
 
 const loader = new GLTFLoader()
 
@@ -20,7 +21,7 @@ const MainHallObjects = () => {
   // 알림판 모델 로드
   loader.load("/models/futuristic_sandwich_board/scene.gltf", (gltf) => {
     gltf.scene.scale.set(400, 400, 400)
-    gltf.scene.position.set(800, -500, -1300)
+    gltf.scene.position.set(500, -500, -1300)
 
     gltf.scene.rotateY(Math.PI)
     scene.add(gltf.scene)
@@ -29,13 +30,13 @@ const MainHallObjects = () => {
     const JFlixRoomBoardGeo = new THREE.PlaneGeometry(350, 400)
     const JFlixRoomBoardTexture = new THREE.TextureLoader().load(JsLogo)
     const JFlixRoomBoardMat = new THREE.MeshPhongMaterial({
-      specular: "orange",
+      specular: "white",
       flatShading: true,
       color: "gray",
       map: JFlixRoomBoardTexture,
     })
     const JFlixRoomBoardMesh = new THREE.Mesh(JFlixRoomBoardGeo, JFlixRoomBoardMat)
-    JFlixRoomBoardMesh.position.set(800, -230, -1290)
+    JFlixRoomBoardMesh.position.set(500, -230, -1290)
     JFlixRoomBoardMesh.rotation.set(Math.PI / 12, Math.PI, 0)
     JFlixRoomBoardMesh.material.side = DoubleSide
 
@@ -46,10 +47,10 @@ const MainHallObjects = () => {
         text: "Vanilla-JS\n\nReact.js",
         size: 40,
         height: 1,
-        color: 0xffffff,
+        color: 0xff9500,
         bevelSize: 1,
       },
-      { x: 900, y: -200, z: -1280 },
+      { x: 600, y: -200, z: -1280 },
       { x: Math.PI / 12, y: Math.PI, z: 0 }
     )
 
@@ -57,24 +58,24 @@ const MainHallObjects = () => {
   })
 
   // 화분 모델 로드
-  GLTFModelLoader({
-    modelUrl: "models/flowervase/scene.gltf",
-    scale: {
-      x: 20,
-      y: 20,
-      z: 20,
-    },
-    position: {
-      x: 800,
-      y: -300,
-      z: -1500,
-    },
-    rotation: {
-      x: 0,
-      y: 0,
-      z: 0,
-    },
-  })
+  // GLTFModelLoader({
+  //   modelUrl: "models/flowervase/scene.gltf",
+  //   scale: {
+  //     x: 20,
+  //     y: 20,
+  //     z: 20,
+  //   },
+  //   position: {
+  //     x: 800,
+  //     y: -300,
+  //     z: -1500,
+  //   },
+  //   rotation: {
+  //     x: 0,
+  //     y: 0,
+  //     z: 0,
+  //   },
+  // })
 
   // 창문 모델 로드
   loader.load("/models/window1/scene.gltf", (gltf) => {

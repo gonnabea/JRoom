@@ -29,7 +29,7 @@ export const FontLoder = (
     })
     const material = new THREE.MeshPhongMaterial({
       color: params.color,
-      specular: "orange",
+      specular: "black",
       flatShading: true,
     })
 

@@ -21,6 +21,7 @@
     "babylonjs-godrays": "^1.0.13",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-prettier": "^3.3.1",
+    "fbxloader.ts": "^1.0.5",
     "i": "^0.3.6",
     "npm": "^7.6.3",
     "postprocessing": "^6.18.0",
