@@ -71,6 +71,7 @@ const ThreeScene = () => {
       const progress = document.createElement("div")
       const progressBar = document.createElement("div")
       const loadingMsg = document.createElement("span")
+      const loadingItem = document.createElement("em")
 
       loadingScreen.style.width = "100vw"
       loadingScreen.style.height = "100vh"
@@ -78,6 +79,8 @@ const ThreeScene = () => {
       loadingScreen.style.opacity = "0.9"
       loadingScreen.style.backgroundColor = "black"
       loadingScreen.style.display = "flex"
+      loadingScreen.style.flexDirection = "column"
+
       loadingScreen.style.justifyContent = "center"
       loadingScreen.style.alignItems = "center"
 
@@ -99,14 +102,17 @@ const ThreeScene = () => {
       loadingMsg.style.fontWeight = "700"
       loadingMsg.style.fontSize = "20px"
 
+      loadingItem.style.color = "white"
+
       progress.appendChild(progressBar)
       loadingScreen.appendChild(progress)
       loadingScreen.appendChild(loadingMsg)
+      loadingScreen.appendChild(loadingItem)
       ;(ThreeContainer.current as any).appendChild(loadingScreen)
 
       // 진행 중
       loadingManager.onProgress = function (item, loaded, total) {
-        console.log(item)
+        loadingItem.innerHTML = item
         progressBar.style.width = (loaded / total) * 100 + "%"
       }
 
