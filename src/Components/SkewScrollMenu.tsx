@@ -150,7 +150,7 @@ const TextAreaAnchor = styled.a`
   }
 `
 
-const Video = styled.img`
+const Video = styled.video`
   transform-style: preserve-3d;
 
   width: 95%;
@@ -201,7 +201,7 @@ const inclinetexts = () => {
 const SkewScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) => {
   const [videoIndex, setvideoIndex] = useState(1) // 화면에 나오는 비디오를 선택하기 위한 index 값
   const background = useRef(null)
-  const video = useRef<HTMLImageElement>(null)
+  const video = useRef<HTMLVideoElement>(null)
 
   const handleTexts: Function = (
     texts: Array<string>,
@@ -241,7 +241,8 @@ const SkewScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) =
 
   const soundEffect = new Audio("/sounds/bicycle.mp3")
   const selectVideo = (e: any, index: number, colors: string[]) => {
-    setvideoIndex(index)
+    // 크롬 브라우저 버그로 인해 딜레이가 생겨 임시로 비활성화 처리
+    // setvideoIndex(index)
     soundEffect.play()
     if (video.current !== null) {
       video.current.style.boxShadow = `0px 0px 200px ${colors[index]}`
@@ -263,6 +264,9 @@ const SkewScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) =
         src={videoList[videoIndex]}
         ref={video}
         onContextMenu={(e) => e.preventDefault()}
+        autoPlay
+        loop
+        muted
       ></Video>
     </Container>
   )
