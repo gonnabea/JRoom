@@ -6,10 +6,12 @@ const Header = styled.header`
   height: 80px;
   position: relative;
   @media (max-width: 620px) {
+    top: 5vh;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
   }
   @media (max-width: 340px) {
+    top: 5vh;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }

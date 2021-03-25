@@ -11,6 +11,8 @@ export const MainArea = styled.section``
 export const ContentArea = styled.section`
   height: calc(100vh - 80px);
 
+  position: relative;
+  top: 5vh;
   padding: 20px 24px;
 `
 
@@ -37,11 +39,13 @@ export const ExplorerLink = styled.span`
 `
 
 export const ExplorerModal = styled.div`
-  position: absolute;
+  position: fixed;
   width: 50%;
   background-color: white;
   right: 0;
   opacity: 0.9;
+  top: 5vh;
+  z-index: 2;
   @media (max-width: 700px) {
     width: 100%;
   }

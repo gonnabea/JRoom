@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react"
 import styled from "styled-components"
 import Header from "../Components/Header"
+import Loader from "../Components/Loader"
 
 const Container = styled.section`
   overflow: auto;
@@ -81,6 +83,8 @@ const TechBox = styled.div<techBoxTypes>`
 `
 
 const TechStack = () => {
+  const [isLoading, setLoading] = useState(true)
+  console.log(isLoading)
   const nameBox = document.createElement("div")
   const showTechName = (e: React.MouseEvent, techName: string) => {
     nameBox.style.color = "white"
@@ -95,7 +99,7 @@ const TechStack = () => {
     nameBox.style.alignItems = "center"
     nameBox.style.textAlign = "center"
     nameBox.style.borderRadius = "10px"
-
+    nameBox.id = "namebox"
     nameBox.innerHTML = techName
 
     console.dir(e.target)
@@ -103,12 +107,21 @@ const TechStack = () => {
   }
 
   const hideTechName = (e: React.MouseEvent) => {
-    if (nameBox) {
+    // 초기 로딩 시 namebox가 없을 경우 버그 방지
+    const childElement = document.getElementById("namebox")
+    if (childElement) {
       ;(e.target as HTMLImageElement).removeChild(nameBox)
     }
   }
 
-  return (
+  useEffect(() => {
+    setLoading(false)
+    console.log(isLoading)
+  }, [])
+
+  return isLoading ? (
+    <Loader />
+  ) : (
     <Container>
       <Header title="Tech-Stack" />
       <Sidebar></Sidebar>
@@ -300,7 +313,7 @@ const TechStack = () => {
             />
             <TechBox
               onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "AWS")}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "AWS \n (Beginner)")}
               imageSrc="/tech_logos/aws.jpg"
             />
           </TechBoxArea>
@@ -313,7 +326,7 @@ const TechStack = () => {
           <TechBoxArea>
             <TechBox
               onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "Kotlin")}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "Kotlin \n (Beginner)")}
               imageSrc="/tech_logos/kotlin.jpeg"
             />
           </TechBoxArea>

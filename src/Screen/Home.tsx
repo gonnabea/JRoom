@@ -1,5 +1,6 @@
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
+import Loader from "../Components/Loader"
 import SkewScrollMenu from "../Components/SkewScrollMenu"
 
 const Container = styled.section`
@@ -25,6 +26,7 @@ const MouseEffectBox = styled.div`
 `
 
 const Home: React.FC = () => {
+  const [isLoading, setLoading] = useState(true)
   // 마우스 따라오는 box 이벤트 핸들링
   const containerBox = useRef<HTMLElement>(null)
   const mouseEffectBox = useRef<HTMLDivElement>(null)
@@ -62,7 +64,14 @@ const Home: React.FC = () => {
     }
   }
   window.addEventListener("mousemove", (e) => mouseEffect(e))
-  return (
+
+  useEffect(() => {
+    setLoading(false)
+  }, [])
+
+  return isLoading ? (
+    <Loader />
+  ) : (
     <Container ref={containerBox}>
       <MouseEffectBox ref={mouseEffectBox}>Jiwon</MouseEffectBox>
       <SkewScrollMenu
