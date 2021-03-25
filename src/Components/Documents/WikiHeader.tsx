@@ -4,6 +4,7 @@ import styled from "styled-components"
 const Header = styled.header`
   display: flex;
   height: 80px;
+  position: relative;
   @media (max-width: 620px) {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

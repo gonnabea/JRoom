@@ -1,4 +1,5 @@
 import Book3D from "../../Components/Books/3D-Book"
+import Header from "../../Components/Header"
 import {
   BackCover,
   BookAuthor,
@@ -26,6 +27,7 @@ import {
 const Books: React.FC = () => {
   return (
     <Container>
+      <Header title="Books" />
       <PageTitle>3D Book Showcase</PageTitle>
       <PageDescription>
         제가 현재 관심있는 책, 읽고있는 책, 이미 읽은 책 등을 소개하는 페이지입니다.

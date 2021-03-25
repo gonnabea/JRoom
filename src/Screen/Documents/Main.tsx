@@ -4,6 +4,7 @@ import WikiContentBox from "../../Components/Documents/WikiContentBox"
 import WikiGreeting from "../../Components/Documents/WikiGreeting"
 import WikiHeader from "../../Components/Documents/WikiHeader"
 import WikiSidebar from "../../Components/Documents/WikiSidebar"
+import Header from "../../Components/Header"
 
 import {
   Container,
@@ -17,6 +18,7 @@ import {
 const WikiMain: React.FC = () => {
   return (
     <Container>
+      <Header title="Wiki" />
       <WikiSidebar menus={[]} />
       <MainArea>
         <WikiHeader />

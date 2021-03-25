@@ -2,7 +2,8 @@ import styled from "styled-components"
 
 export const Container = styled.main`
   display: flex;
-
+  position: relative;
+  top: 5vh;
   height: 100vh;
 `
 
