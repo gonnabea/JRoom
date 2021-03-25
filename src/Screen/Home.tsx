@@ -87,12 +87,12 @@ const Home: React.FC = () => {
         ]}
         videoList={[
           "",
-          "backgroundVideos/exhibition.gif",
-          "backgroundVideos/wiki.gif",
-          "backgroundVideos/books.gif",
+          "backgroundVideos/exhibition.png",
+          "backgroundVideos/wiki.png",
+          "backgroundVideos/books.png",
           "",
           "",
-          "backgroundVideos/github.gif",
+          "backgroundVideos/github.png",
         ]}
         links={[
           "/about-me",
