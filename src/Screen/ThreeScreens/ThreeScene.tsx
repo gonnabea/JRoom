@@ -246,7 +246,7 @@ const ThreeScene = () => {
     const project2Mesh = new THREE.Mesh(project2buffGeo, project2Mat)
 
     project2Mesh.position.set(3010, 500, -2490)
-    project2Mesh.material.side = THREE.DoubleSide
+    project2Mesh.material.side = THREE.BackSide
 
     scene.add(project2Mesh)
 
@@ -262,7 +262,7 @@ const ThreeScene = () => {
     const project3Mesh = new THREE.Mesh(project3Geo, project3Mat)
 
     project3Mesh.position.set(-2960, 500, -2490)
-    project3Mesh.material.side = THREE.DoubleSide
+    project3Mesh.material.side = THREE.BackSide
 
     scene.add(project3Mesh)
 

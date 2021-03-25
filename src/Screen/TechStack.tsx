@@ -3,7 +3,7 @@ import Header from "../Components/Header"
 
 const Container = styled.section`
   overflow: auto;
-  background-color: #eaccb0;
+  background-color: rgba(0, 0, 0, 0.9);
 `
 
 const Sidebar = styled.div`
@@ -33,11 +33,13 @@ const Title = styled.h1`
   text-align: center;
   margin-top: 10vh;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: white;
 `
 
 const CategoryTitle = styled.h2`
   font-size: 20px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: white;
 `
 
 const CategoryLine = styled.div`
@@ -92,6 +94,7 @@ const TechStack = () => {
     nameBox.style.justifyContent = "center"
     nameBox.style.alignItems = "center"
     nameBox.style.textAlign = "center"
+    nameBox.style.borderRadius = "10px"
 
     nameBox.innerHTML = techName
 
