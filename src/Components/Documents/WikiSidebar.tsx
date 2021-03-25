@@ -4,7 +4,8 @@ import styled from "styled-components"
 const SideBar = styled.aside`
   padding: 20px;
   background-color: #f6f6f6;
-  top: 10vh;
+  position: relative;
+  top: 5vh;
   height: 90vh;
   width: 10em;
   display: flex;

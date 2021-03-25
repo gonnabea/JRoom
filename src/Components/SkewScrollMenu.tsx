@@ -150,7 +150,7 @@ const TextAreaAnchor = styled.a`
   }
 `
 
-const Video = styled.video`
+const Video = styled.img`
   transform-style: preserve-3d;
 
   width: 95%;
@@ -199,9 +199,9 @@ const inclinetexts = () => {
 }
 
 const SkewScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) => {
-  const [videoIndex, setvideoIndex] = useState(0) // 화면에 나오는 비디오를 선택하기 위한 index 값
+  const [videoIndex, setvideoIndex] = useState(1) // 화면에 나오는 비디오를 선택하기 위한 index 값
   const background = useRef(null)
-  const video = useRef<HTMLVideoElement>(null)
+  const video = useRef<HTMLImageElement>(null)
 
   const handleTexts: Function = (
     texts: Array<string>,
@@ -211,7 +211,7 @@ const SkewScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) =
     // props 전달 안되는 문제 고쳐야함
 
     return texts.map((text, index) => {
-      // 2번째 메뉴와 6번째 메뉴만 anchor, 나머지는 React
+      // 2번째 메뉴와 6번째 메뉴만 anchor, 나머지는 React Link
       if (index != 1 && index != 6) {
         return (
           <TextArea
@@ -263,9 +263,6 @@ const SkewScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) =
         src={videoList[videoIndex]}
         ref={video}
         onContextMenu={(e) => e.preventDefault()}
-        autoPlay
-        muted
-        loop
       ></Video>
     </Container>
   )

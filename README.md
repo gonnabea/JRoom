@@ -67,8 +67,6 @@ CS이론을 공부하기 위한 효과적인 방법 중 하나는
 
 - https://sketchfab.com/3d-models/richards-art-gallery-audio-tour-0e3e19faa6474fd5974e6a7ed1b221d8
 
-- https://www.google.com/search?q=%EC%A7%80%EB%B6%95+%EB%94%94%EC%9E%90%EC%9D%B8&sa=X&hl=en&sxsrf=ALeKk00DoPjr-NCuCQ0AgREFN0mxDCUPew:1609667503591&tbm=isch&source=iu&ictx=1&fir=F8IlHogFCaOyeM%252Cs7mWa-rAoMJu0M%252C_&vet=1&usg=AI4_-kQdx9g5wyzsvK1d0DF9FLORBYcvjw&ved=2ahUKEwic54fevv_tAhWjUN4KHTzSCKMQ9QF6BAgNEAE&cshid=1609667640685442&biw=1536&bih=754#imgrc=F8IlHogFCaOyeM
-
 - https://www.youtube.com/watch?v=D1lGGvO0eEs <- OpenCV로 자동차 핸들 구현
 
 #### Concepts

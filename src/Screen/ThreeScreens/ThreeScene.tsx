@@ -131,8 +131,8 @@ const ThreeScene = () => {
     } else {
       camera = new THREE.PerspectiveCamera(10, 1280 / 720, 1, 100000)
     }
-    camera.position.set(-2773.8192101111504, 490.0248603839669, 9020.7527992239675)
-    camera.zoom = 0.5
+    camera.position.set(-2773.8192101111504, 490.0248603839669, 4120.7527992239675)
+    camera.zoom = 0.2
     camera.updateProjectionMatrix()
     camera.updateMatrix()
     scene = new THREE.Scene()

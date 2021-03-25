@@ -15,10 +15,13 @@ const Container = styled.header`
 
 const ToHomeLink = styled.a`
   position: relative;
-
+  color: black;
   font-size: 20px;
   text-decoration: none;
-  width: 10vw;
+  top: 2px;
+  left: 5px;
+  width: 100px;
+  height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,7 +40,7 @@ const HeaderTitle = styled.span`
 const Header = ({ title }: { title: string }) => {
   return (
     <Container>
-      <ToHomeLink href="/">홈으로</ToHomeLink>
+      <ToHomeLink href="/">Home</ToHomeLink>
       <HeaderTitle>{title}</HeaderTitle>
     </Container>
   )
