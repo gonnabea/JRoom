@@ -239,11 +239,12 @@ const SkewScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) =
     })
   }
 
-  const soundEffect = new Audio("/sounds/bicycle.mp3")
   const selectVideo = (e: any, index: number, colors: string[]) => {
+    const soundEffect = new Audio("/sounds/bicycle.mp3")
     // 크롬 브라우저 버그로 인해 딜레이가 생겨 임시로 비활성화 처리
     // setvideoIndex(index)
     soundEffect.play()
+
     if (video.current !== null) {
       video.current.style.boxShadow = `0px 0px 200px ${colors[index]}`
     }
