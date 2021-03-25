@@ -10,7 +10,7 @@ const Container = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: black;
   opacity: 1;
   cursor: grab;
   cursor: -moz-grab;

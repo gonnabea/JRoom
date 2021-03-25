@@ -1,3 +1,5 @@
+// 프론트만으로 데이터를 관리하기 위한 임시방법
+
 import styled from "styled-components"
 
 const Container = styled.main`
