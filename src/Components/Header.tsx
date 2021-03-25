@@ -21,7 +21,7 @@ const ToHomeLink = styled.a`
   top: 2px;
   left: 5px;
   width: 100px;
-  height: 35px;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
