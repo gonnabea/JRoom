@@ -28,7 +28,7 @@ const TitleTail = styled.span`
   font-weight: 600;
   margin-bottom: 20px;
 `
-const SideBarMenu = styled(Link)`
+const SideBarMenu = styled.span`
   font-size: 12px;
   padding: 3px;
 `
@@ -55,7 +55,8 @@ const WikiSidebar: React.FC<props> = ({ menus }) => {
       <TitleTail>Jiwon의 CS 백과</TitleTail>
 
       {menus.map((menu) => (
-        <SideBarMenu to={`/${menu}`}>{menu}</SideBarMenu>
+        // <SideBarMenu to={`/${menu}`}>{menu}</SideBarMenu>
+        <SideBarMenu>{menu}</SideBarMenu>
       ))}
       <Footer>
         위키백과의 디자인을 클론하여 만든 페이지임을 밝힙니다. -Jiwon-
