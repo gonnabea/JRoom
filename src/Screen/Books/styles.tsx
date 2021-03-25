@@ -43,13 +43,13 @@ export const SpineTitle = styled.h2`
 
 export const PageTitle = styled.h1`
   position: absolute;
-  top: 2%;
+  top: 5%;
   left: 20%;
 `
 
 export const PageDescription = styled.p`
   position: absolute;
-  top: 10%;
+  top: 12%;
   left: 20%;
   font-size: 15px;
 `

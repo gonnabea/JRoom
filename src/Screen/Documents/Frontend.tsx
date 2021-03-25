@@ -15,6 +15,7 @@ import {
   ExplorerModal,
   MainArea,
 } from "./styles/common-styles"
+import Header from "../../Components/Header"
 
 const Frontend: React.FC = () => {
   const [content, setContent] = useState<JSX.Element | null>(null) // 모달에 들어갈 내용 설정
@@ -27,6 +28,7 @@ const Frontend: React.FC = () => {
 
   return (
     <Container>
+      <Header title="Wiki" />
       <ExplorerModal ref={explorerModal}>{content}</ExplorerModal>
       <WikiSidebar
         menus={[

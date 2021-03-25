@@ -103,7 +103,9 @@ const TechStack = () => {
   }
 
   const hideTechName = (e: React.MouseEvent) => {
-    ;(e.target as HTMLImageElement).removeChild(nameBox)
+    if (nameBox) {
+      ;(e.target as HTMLImageElement).removeChild(nameBox)
+    }
   }
 
   return (

@@ -14,6 +14,7 @@ import {
 } from "./styles/common-styles"
 import WikiDictionary from "../../Components/Documents/WikiDictionary"
 import { useRef, useState } from "react"
+import Header from "../../Components/Header"
 
 const Android: React.FC = () => {
   const [content, setContent] = useState<JSX.Element | null>(null) // 모달에 들어갈 내용 설정
@@ -25,6 +26,7 @@ const Android: React.FC = () => {
   }
   return (
     <Container>
+      <Header title="Wiki" />
       <ExplorerModal ref={explorerModal}>{content}</ExplorerModal>
       <WikiSidebar menus={["Kotlin"]} />
       <MainArea>

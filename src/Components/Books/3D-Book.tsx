@@ -36,7 +36,7 @@ const Container = styled.section`
 
   @keyframes rotate {
     from {
-      transform: rotateX(10deg) rotateY(0deg) translateX(-100px) translateY(-20%) scale(1.2);
+      transform: rotateX(10deg) rotateY(0deg) translateX(-100px) translateY(-15%) scale(1.2);
     }
     to {
       transform: rotateY(90deg);
@@ -44,7 +44,7 @@ const Container = styled.section`
   }
   @keyframes revert {
     from {
-      transform: rotateX(10deg) rotateY(0deg) translateX(-100px) translateY(-20%);
+      transform: rotateX(10deg) rotateY(0deg) translateX(-100px) translateY(-15%);
     }
     to {
       transform: rotateY(0deg);
@@ -55,7 +55,7 @@ const Container = styled.section`
       transform: rotateY(90deg);
     }
     to {
-      transform: rotateX(10deg) rotateY(0deg) translateX(-100px) translateY(-20%) scale(1.2);
+      transform: rotateX(10deg) rotateY(0deg) translateX(-100px) translateY(-15%) scale(1.2);
     }
   }
 
