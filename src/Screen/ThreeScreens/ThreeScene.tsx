@@ -28,6 +28,7 @@ const Container = styled.section`
   display: flex;
   justify-content: center;
   align-self: center;
+  top: 5vh;
 `
 
 export let loadingManager: THREE.LoadingManager = new THREE.LoadingManager()

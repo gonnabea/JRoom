@@ -111,7 +111,7 @@ const Home: React.FC = () => {
           "/documents",
           "/books",
           "/tech-stack",
-          "/contact",
+          "",
           "https://github.com/gonnabea",
         ]}
       ></SkewScrollMenu>

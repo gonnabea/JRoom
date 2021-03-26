@@ -5,6 +5,7 @@ const Header = styled.header`
   display: flex;
   height: 80px;
   position: relative;
+  top: 3vh;
   @media (max-width: 620px) {
     top: 5vh;
     display: grid;

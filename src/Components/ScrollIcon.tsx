@@ -17,6 +17,9 @@ const Container = styled.span`
       bottom: 9vh;
     }
   }
+  @media screen and (max-width: 650px) {
+    font-size: 20px;
+  }
 `
 
 const ScrollIcon = () => {

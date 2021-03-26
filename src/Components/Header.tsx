@@ -11,6 +11,7 @@ const Container = styled.header`
   top: 0;
   left: 0;
   z-index: 999;
+  box-shadow: 0 0 10px black;
 `
 
 const ToHomeLink = styled.a`

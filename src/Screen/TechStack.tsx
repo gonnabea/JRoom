@@ -189,7 +189,7 @@ const TechStack = () => {
             />
             <TechBox
               onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "PostgresQL")}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "PostgreSQL")}
               imageSrc="/tech_logos/postgresql.png"
             />
             <TechBox
