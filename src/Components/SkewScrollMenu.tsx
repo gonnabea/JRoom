@@ -159,6 +159,11 @@ const Video = styled.video`
   object-fit: fill;
   transform: rotateZ(-5deg);
   box-shadow: 0px 0px 200px #68b793;
+  @media screen and (max-width: 600px) {
+    transform: rotateZ(0deg);
+    width: 100vh;
+    height: 100vh;
+  }
 `
 
 interface IProps {
