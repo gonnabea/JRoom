@@ -142,13 +142,18 @@ const TechStack = () => {
             />
             <TechBox
               onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "JavsScript")}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "JavaScript")}
               imageSrc="/tech_logos/js.png"
             />
             <TechBox
               onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
               onMouseEnter={(e: React.MouseEvent) => showTechName(e, "Python")}
               imageSrc="/tech_logos/python.png"
+            />
+            <TechBox
+              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "TypeScript")}
+              imageSrc="/tech_logos/ts.png"
             />
           </TechBoxArea>
         </Category>
@@ -173,37 +178,7 @@ const TechStack = () => {
             />
           </TechBoxArea>
         </Category>
-        <Category>
-          <CategoryTitle>데이터베이스 / ORM</CategoryTitle>
-          <CategoryLine></CategoryLine>
-          <TechBoxArea>
-            <TechBox
-              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "MongoDB")}
-              imageSrc="/tech_logos/mongodb.png"
-            />
-            <TechBox
-              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "MySQL")}
-              imageSrc="/tech_logos/mysql.png"
-            />
-            <TechBox
-              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "PostgreSQL")}
-              imageSrc="/tech_logos/postgresql.png"
-            />
-            <TechBox
-              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "TypeORM")}
-              imageSrc="/tech_logos/typeorm.png"
-            />
-            <TechBox
-              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "Sequelize")}
-              imageSrc="/tech_logos/sequelize.png"
-            />
-          </TechBoxArea>
-        </Category>
+
         <Category>
           <CategoryTitle>서버 / 프레임워크</CategoryTitle>
           <CategoryLine></CategoryLine>
@@ -264,11 +239,6 @@ const TechStack = () => {
               onMouseEnter={(e: React.MouseEvent) => showTechName(e, "GraphQL")}
               imageSrc="/tech_logos/graphql.png"
             />
-            <TechBox
-              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "THREE.js")}
-              imageSrc="/tech_logos/threejs.png"
-            />
           </TechBoxArea>
         </Category>
         <Category>
@@ -279,6 +249,23 @@ const TechStack = () => {
               onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
               onMouseEnter={(e: React.MouseEvent) => showTechName(e, "OpenCV")}
               imageSrc="/tech_logos/opencv.png"
+            />
+          </TechBoxArea>
+        </Category>
+        <Category>
+          <CategoryTitle>WebGL 관련</CategoryTitle>
+          <CategoryLine></CategoryLine>
+
+          <TechBoxArea>
+            <TechBox
+              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "Three.js")}
+              imageSrc="/tech_logos/threejs.png"
+            />
+            <TechBox
+              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "Babylon.js \n (Beginner)")}
+              imageSrc="/tech_logos/Babylonjs.png"
             />
           </TechBoxArea>
         </Category>
@@ -297,6 +284,38 @@ const TechStack = () => {
               onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
               onMouseEnter={(e: React.MouseEvent) => showTechName(e, "React-Testing-Library")}
               imageSrc="/tech_logos/react-testing-library.png"
+            />
+          </TechBoxArea>
+        </Category>
+
+        <Category>
+          <CategoryTitle>데이터베이스 / ORM</CategoryTitle>
+          <CategoryLine></CategoryLine>
+          <TechBoxArea>
+            <TechBox
+              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "MongoDB")}
+              imageSrc="/tech_logos/mongodb.png"
+            />
+            <TechBox
+              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "MySQL")}
+              imageSrc="/tech_logos/mysql.png"
+            />
+            <TechBox
+              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "PostgreSQL")}
+              imageSrc="/tech_logos/postgresql.png"
+            />
+            <TechBox
+              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "TypeORM")}
+              imageSrc="/tech_logos/typeorm.png"
+            />
+            <TechBox
+              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "Sequelize")}
+              imageSrc="/tech_logos/sequelize.png"
             />
           </TechBoxArea>
         </Category>
