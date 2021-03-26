@@ -14,6 +14,8 @@ const addIframeObj = (props: {
   position: { x: number; y: number; z: number }
   rotation: { x: number; y: number; z: number }
 }) => {
+  // 제거하기 전 음소거
+  ;(embedWebsite as HTMLIFrameElement).remove()
   // 이동 시 iframe 화면 전환 위함
   embedWebsite = null
   embedWebsite = document.createElement("iframe")
@@ -21,7 +23,7 @@ const addIframeObj = (props: {
   const geometry = new THREE.PlaneBufferGeometry(props.width, props.height)
 
   const material = new THREE.MeshBasicMaterial({
-    color: 0xffffff,
+    color: 0x212121,
     opacity: 0.0,
     side: THREE.DoubleSide,
   })

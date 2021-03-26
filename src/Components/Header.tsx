@@ -19,8 +19,6 @@ const ToHomeLink = styled.a`
   color: black;
   font-size: 20px;
   text-decoration: none;
-  top: 2px;
-  left: 5px;
   width: 100px;
   height: 100%;
   display: flex;

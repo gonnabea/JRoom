@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react"
 import Book3D from "../../Components/Books/3D-Book"
 import Header from "../../Components/Header"
+import Loader from "../../Components/Loader"
 import {
   BackCover,
   BookAuthor,
@@ -26,7 +28,14 @@ import {
 } from "./styles"
 
 const Books: React.FC = () => {
-  return (
+  const [isLoading, setLoading] = useState(true)
+  useEffect(() => {
+    setLoading(false)
+  }, [])
+
+  return isLoading ? (
+    <Loader />
+  ) : (
     <Container>
       <Header title="Books" />
       <Preparering>모바일 화면 준비중입니다.</Preparering>

@@ -109,7 +109,7 @@ const ThreeScene = () => {
       loadingScreen.appendChild(loadingItem)
       ;(ThreeContainer.current as any).appendChild(loadingScreen)
 
-      // 진행 중
+      // 로딩 진행 중
       loadingManager.onProgress = function (item, loaded, total) {
         loadingItem.innerHTML = item
         progressBar.style.width = (loaded / total) * 100 + "%"
@@ -118,10 +118,10 @@ const ThreeScene = () => {
       // 로딩 완료 시
       loadingManager.onLoad = function () {
         loadingMsg.innerHTML = "로딩 완료!"
-        loadingItem.innerHTML = ""
+        loadingItem.innerHTML = "마우스 휠, 드래그로 조작하세요."
         setTimeout(() => {
           loadingScreen.style.display = "none"
-        }, 1000)
+        }, 3000)
         console.log("Loading complete!")
       }
     }
@@ -133,7 +133,7 @@ const ThreeScene = () => {
       camera = new THREE.PerspectiveCamera(10, 1280 / 720, 1, 100000)
     }
     camera.position.set(-2773.8192101111504, 490.0248603839669, 4120.7527992239675)
-    camera.zoom = 0.2
+    camera.zoom = 0.4
     camera.updateProjectionMatrix()
     camera.updateMatrix()
     scene = new THREE.Scene()

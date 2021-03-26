@@ -7,12 +7,12 @@ const Header = styled.header`
   position: relative;
   top: 3vh;
   @media (max-width: 620px) {
-    top: 5vh;
+    top: 6vh;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
   }
   @media (max-width: 340px) {
-    top: 5vh;
+    top: 6vh;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
