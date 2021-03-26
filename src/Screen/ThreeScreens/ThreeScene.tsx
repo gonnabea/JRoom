@@ -421,6 +421,13 @@ const ThreeScene = () => {
           })
         }
       }
+      window.ontouchmove = function () {
+        if (selectBtnObjs) {
+          selectBtnObjs.map((selectBtnObj) => {
+            selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
+          })
+        }
+      }
     })
 
     window.addEventListener("mouseup", function () {
