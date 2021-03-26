@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const Container = styled.main`
   width: 100vw;
   height: 100vh;
-  background-color: skyblue;
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -169,4 +169,20 @@ export const OJTubeLink = styled.a`
 
 export const OJTubeLogo = styled.img`
   width: 80%;
+`
+
+export const Preparering = styled.div`
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: black;
+  color: white;
+  z-index: 1;
+  left: 0;
+  @media screen and (max-width: 600px) {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+  }
 `

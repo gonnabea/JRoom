@@ -5,7 +5,7 @@ import { cssScene, scene } from "../../Screen/ThreeScreens/ThreeScene"
 // Three.js에 html embed 시키기
 // TV 모델에 올려진 plane mesh
 
-export let embedWebsite = document.createElement("iframe")
+export let embedWebsite: HTMLIFrameElement | null = document.createElement("iframe")
 export let websiteObject: THREE.Object3D
 const addIframeObj = (props: {
   width: number
@@ -14,6 +14,10 @@ const addIframeObj = (props: {
   position: { x: number; y: number; z: number }
   rotation: { x: number; y: number; z: number }
 }) => {
+  // 이동 시 iframe 화면 전환 위함
+  embedWebsite = null
+  embedWebsite = document.createElement("iframe")
+
   const geometry = new THREE.PlaneBufferGeometry(props.width, props.height)
 
   const material = new THREE.MeshBasicMaterial({
@@ -35,25 +39,6 @@ const addIframeObj = (props: {
   websiteObject.rotation.set(props.rotation.x, props.rotation.y, props.rotation.z)
 
   cssScene.add(websiteObject)
-
-  // TV 뒷면 가리기 위한 Div Box
-
-  const tvBackCover = document.createElement("div")
-
-  tvBackCover.style.width = `${props.width}px`
-  tvBackCover.style.height = `${props.height}px`
-  tvBackCover.style.backgroundColor = "black"
-  tvBackCover.style.color = "white"
-  tvBackCover.style.fontSize = "80px"
-  tvBackCover.style.opacity = "0"
-  const tvBackCoverObject = new CSS3D.CSS3DObject(tvBackCover)
-  tvBackCoverObject.position.set(
-    planeMesh.position.x - 3,
-    planeMesh.position.y,
-    planeMesh.position.z
-  )
-  tvBackCoverObject.rotation.set(props.rotation.x, props.rotation.y, props.rotation.z)
-  //   cssScene.add(tvBackCoverObject)
 }
 
 export default addIframeObj

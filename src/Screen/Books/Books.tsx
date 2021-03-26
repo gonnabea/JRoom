@@ -22,12 +22,14 @@ import {
   RedableCover,
   CODECover,
   NicoCover,
+  Preparering,
 } from "./styles"
 
 const Books: React.FC = () => {
   return (
     <Container>
       <Header title="Books" />
+      <Preparering>모바일 화면 준비중입니다.</Preparering>
       <PageTitle>3D Book Showcase</PageTitle>
       <PageDescription>
         제가 현재 관심있는 책, 읽고있는 책, 이미 읽은 책 등을 소개하는 페이지입니다.

@@ -8,22 +8,24 @@ function chooseProject() {
   // 순차적으로 프로젝트 변경
   // 나중에 버튼을 여러개 만들어 각각 선택할 수 있게 할까 고민중.
   // switch - case로 변경 예정
-  if (embedWebsite.src === "https://nomfilx-jiwon.netlify.app/#/") {
-    embedWebsite.src = "https://gonnabea.github.io/Music-Player/"
-  } else if (embedWebsite.src === "https://gonnabea.github.io/Music-Player/") {
-    embedWebsite.src = "https://gonnabea.github.io/Typing-Game/"
-  } else if (embedWebsite.src === "https://gonnabea.github.io/Typing-Game/") {
-    embedWebsite.src = "https://gonnabea.github.io/Hangman-Game/"
-  } else if (embedWebsite.src === "https://gonnabea.github.io/Hangman-Game/") {
-    embedWebsite.src = "https://gonnabea.github.io/Expense-Tracker/"
-  } else if (embedWebsite.src === "https://gonnabea.github.io/Expense-Tracker/") {
-    embedWebsite.src = "https://gonnabea.github.io/Speech-Text-Reader/"
-  } else if (embedWebsite.src === "https://gonnabea.github.io/Speech-Text-Reader/") {
-    embedWebsite.src = "https://gonnabea.github.io/Sortable-List/"
-  } else if (embedWebsite.src === "https://gonnabea.github.io/Sortable-List/") {
-    embedWebsite.src = "https://gonnabea.github.io/Breakout-Game/"
-  } else {
-    embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
+  if (embedWebsite) {
+    if (embedWebsite.src === "https://nomfilx-jiwon.netlify.app/#/") {
+      embedWebsite.src = "https://gonnabea.github.io/Music-Player/"
+    } else if (embedWebsite.src === "https://gonnabea.github.io/Music-Player/") {
+      embedWebsite.src = "https://gonnabea.github.io/Typing-Game/"
+    } else if (embedWebsite.src === "https://gonnabea.github.io/Typing-Game/") {
+      embedWebsite.src = "https://gonnabea.github.io/Hangman-Game/"
+    } else if (embedWebsite.src === "https://gonnabea.github.io/Hangman-Game/") {
+      embedWebsite.src = "https://gonnabea.github.io/Expense-Tracker/"
+    } else if (embedWebsite.src === "https://gonnabea.github.io/Expense-Tracker/") {
+      embedWebsite.src = "https://gonnabea.github.io/Speech-Text-Reader/"
+    } else if (embedWebsite.src === "https://gonnabea.github.io/Speech-Text-Reader/") {
+      embedWebsite.src = "https://gonnabea.github.io/Sortable-List/"
+    } else if (embedWebsite.src === "https://gonnabea.github.io/Sortable-List/") {
+      embedWebsite.src = "https://gonnabea.github.io/Breakout-Game/"
+    } else {
+      embedWebsite.src = "https://nomfilx-jiwon.netlify.app/#/"
+    }
   }
 }
 
@@ -82,13 +84,17 @@ export const addSelectBtn = (props: {
       if (descriptionBox) {
         descriptionBox.style.display = "none"
       }
-      embedWebsite.style.display = "none"
+      if (embedWebsite) {
+        embedWebsite.style.display = "none"
+      }
 
       controls.target.set(0, 0, 0)
       addCloseDoorAni()
     } else if (props.text === "1") {
       controls.target.set(-500, 0, 0) // 예외적으로 타겟이 정해짐
-      embedWebsite.style.display = "none"
+      if (embedWebsite) {
+        embedWebsite.style.display = "none"
+      }
 
       if (descriptionBox) {
         descriptionBox.style.display = "none"
@@ -105,7 +111,9 @@ export const addSelectBtn = (props: {
 
       // JFlix 프로젝트 설명 보드 로드
       addJFlixBoard()
-      embedWebsite.style.display = "block"
+      if (embedWebsite) {
+        embedWebsite.style.display = "block"
+      }
       camera.updateMatrix()
       addCloseDoorAni()
     } else if (props.text === "📄") {
@@ -117,7 +125,9 @@ export const addSelectBtn = (props: {
     } // 프로젝트 변경 버튼
     else if (props.text === "✨") {
       controls.target.set(-500, 0, 0) // 예외적으로 타겟이 정해짐
-      embedWebsite.style.display = "none"
+      if (embedWebsite) {
+        embedWebsite.style.display = "none"
+      }
 
       if (descriptionBox) {
         descriptionBox.style.display = "none"
@@ -125,7 +135,9 @@ export const addSelectBtn = (props: {
 
       // JFlix 프로젝트 설명 보드 로드
       addJFlixBoard()
-      embedWebsite.style.display = "block"
+      if (embedWebsite) {
+        embedWebsite.style.display = "block"
+      }
       camera.updateMatrix()
       chooseProject()
       addCloseDoorAni()
@@ -133,7 +145,9 @@ export const addSelectBtn = (props: {
       if (descriptionBox) {
         descriptionBox.style.display = "none"
       }
-      embedWebsite.style.display = "none"
+      if (embedWebsite) {
+        embedWebsite.style.display = "none"
+      }
 
       // Just-Read-It 프로젝트 설명 보드
       addDescriptionBoard({
@@ -151,7 +165,9 @@ export const addSelectBtn = (props: {
       if (descriptionBox) {
         descriptionBox.style.display = "none"
       }
-      embedWebsite.style.display = "none"
+      if (embedWebsite) {
+        embedWebsite.style.display = "none"
+      }
 
       // ON 프로젝트 설명 보드
       addDescriptionBoard({
@@ -174,9 +190,13 @@ export const addSelectBtn = (props: {
         height: 800,
         rotation: { x: 0, y: -Math.PI / 2, z: 0 },
       })
-      embedWebsite.style.display = "block"
+      if (embedWebsite) {
+        embedWebsite.style.display = "block"
+      }
     } else {
-      embedWebsite.style.display = "none"
+      if (embedWebsite) {
+        embedWebsite.style.display = "none"
+      }
       if (descriptionBox) {
         descriptionBox.style.display = "none"
       }
