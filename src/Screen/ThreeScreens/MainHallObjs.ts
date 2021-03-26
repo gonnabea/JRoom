@@ -112,13 +112,6 @@ const MainHallObjects = () => {
     scene.add(gltf.scene)
   })
 
-  // 기술 스택 로고 박스
-  // addLogoBox({ x: -600, y: 200, z: -4000 }, threejsLogo)
-  // addLogoBox({ x: -600, y: -100, z: -4000 }, reactLogo)
-  // addLogoBox({ x: 600, y: 200, z: -4000 }, tsLogo)
-
-  // addFloor({ width: 3000, height: 2900, x: 0, y: -490, z: -2500, imageSrc: floorImage2 }) // 메인 홀 바닥
-
   // 거실 (로비) 포커싱
   addSelectBtn({
     text: "2",

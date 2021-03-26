@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import ScrollIcon from "./ScrollIcon"
 
 const Container = styled.div`
   background-color: ${(props) => props.color};
@@ -261,6 +262,7 @@ const SkewScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) =
   return (
     <Container ref={background}>
       <TextContainer id="textContainer">{handleTexts(texts, colors, links)}</TextContainer>
+      <ScrollIcon />
       <Video
         src={videoList[videoIndex]}
         ref={video}

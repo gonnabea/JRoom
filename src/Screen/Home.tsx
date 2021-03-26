@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import Loader from "../Components/Loader"
+import ScrollIcon from "../Components/ScrollIcon"
 import SkewScrollMenu from "../Components/SkewScrollMenu"
 
 const Container = styled.section`
@@ -15,13 +16,13 @@ const Container = styled.section`
 const MouseEffectBox = styled.div`
   width: 100px;
   height: 100px;
-  border: 4px solid orange;
+  border: 4px solid white;
   background-color: none;
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: orange;
+  color: white;
   font-weight: 700;
 `
 
@@ -55,6 +56,7 @@ const Home: React.FC = () => {
       afterImage.style.justifyContent = "center"
       afterImage.style.alignItems = "center"
       afterImage.style.fontWeight = "700"
+      afterImage.style.zIndex = "2"
 
       afterImage.style.left = `${event.pageX}px`
       afterImage.style.top = `${event.pageY}px`
