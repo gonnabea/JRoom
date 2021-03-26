@@ -421,6 +421,16 @@ const ThreeScene = () => {
           })
         }
       }
+    })
+
+    // 모바일에서 버튼 회전
+    window.addEventListener("ontouchstart", function () {
+      if (selectBtnObjs) {
+        selectBtnObjs.map((selectBtnObj) => {
+          selectBtnObj.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z)
+        })
+      }
+
       window.ontouchmove = function () {
         if (selectBtnObjs) {
           selectBtnObjs.map((selectBtnObj) => {
