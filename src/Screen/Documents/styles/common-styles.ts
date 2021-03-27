@@ -12,7 +12,7 @@ export const ContentArea = styled.section`
   height: calc(100vh - 80px);
 
   position: relative;
-  top: 6vh;
+  top: 5vh;
   padding: 20px 24px;
 `
 

@@ -61,7 +61,7 @@ const AboutMe: React.FC = () => {
         <Sentence>억대 연봉 급의 실력있는 개발자 분들의 조언을 듣는 것을 좋아합니다</Sentence>
         <Sentence>프로그래밍은 논리적, 예술적, 인문학적인 것이라 생각합니다 </Sentence>
         <Sentence>본인의 실력이 한참, 한참 부족하다는 것을 체감적으로 압니다 </Sentence>
-        <Sentence>자기소개 페이지가 중요하다고 생각하지 않습니다 </Sentence>
+        <Sentence>자기소개 페이지가 중요하다고 생각하진 않습니다 </Sentence>
         <Sentence>반갑습니다 😄</Sentence>
       </Body>
     </Container>

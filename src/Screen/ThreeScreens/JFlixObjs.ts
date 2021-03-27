@@ -395,7 +395,7 @@ export const JFlixObjects = () => {
     btnPosition: { x: 0, y: 300, z: -800 },
     cameraPosition: { x: 0, y: 900, z: 300 },
     targetPosition: { x: 0, y: 900, z: -100 },
-    zoomIndex: 0.1,
+    zoomIndex: 0.2,
   })
 
   // 채널 변경 버튼 & tv 포커싱

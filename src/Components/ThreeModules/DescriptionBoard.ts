@@ -3,7 +3,7 @@ import * as THREE from "three"
 import CSS3D from "three-css3drenderer"
 import { cssScene } from "../../Screen/ThreeScreens/ThreeScene"
 
-export let descriptionBox: HTMLAnchorElement
+export let descriptionBox: HTMLDivElement
 
 // 프로젝트 설명 DOM 오브젝트
 const addDescriptionBoard = (props: {
@@ -29,34 +29,59 @@ const addDescriptionBoard = (props: {
 
   scene.add(planeMesh)
 
-  // 프로젝트 실제 링크 박스
-  descriptionBox = document.createElement("a")
+  descriptionBox = document.createElement("div")
   descriptionBox.style.width = props.width
   descriptionBox.style.height = props.height
+  descriptionBox.style.position = "absolute"
   descriptionBox.style.opacity = "0.7"
-  descriptionBox.style.cursor = "pointer"
-  // descriptionBox.style.borderRadius = "100%" // border-radius가 안먹힘
+  descriptionBox.style.cursor = "default"
   descriptionBox.style.paddingLeft = "20px"
   descriptionBox.style.paddingRight = "20px"
   descriptionBox.style.textDecoration = "none"
   descriptionBox.style.overflow = "auto"
-  descriptionBox.href = props.siteUrl ? props.siteUrl : ""
-  descriptionBox.target = "_blank"
+  descriptionBox.style.display = "flex"
+  descriptionBox.style.flexDirection = "column"
 
-  descriptionBox.onmouseover = () => (descriptionBox.style.opacity = "1")
-  descriptionBox.onmouseout = () => (descriptionBox.style.opacity = "0.7")
+  descriptionBox.style.justifyContent = "center"
+  descriptionBox.style.alignItems = "center"
+
+  descriptionBox.onmouseover = () => {
+    descriptionBox.style.opacity = "1"
+  }
+  descriptionBox.onmouseout = () => {
+    descriptionBox.style.opacity = "0.7"
+  }
 
   const title = document.createElement("h2")
   title.style.fontSize = "50px"
   title.innerHTML = props.title
   title.style.color = props.titleColor
+  title.style.margin = "10px"
   descriptionBox.appendChild(title)
 
   const description = document.createElement("p")
-  description.style.fontSize = "30px"
+  description.style.fontSize = "35px"
   description.style.color = "white"
+  description.style.textAlign = "center"
+  description.style.fontWeight = "700"
+  description.style.display = "flex"
+  description.style.justifyContent = "center"
+  description.style.alignItems = "center"
+
   description.innerHTML = props.description
   descriptionBox.appendChild(description)
+
+  // 프로젝트 실제 링크
+  const siteLink = document.createElement("a")
+  siteLink.href = props.siteUrl ? props.siteUrl : ""
+  siteLink.style.textAlign = "center"
+  siteLink.style.fontWeight = "700"
+  siteLink.target = "_blank"
+  siteLink.style.fontSize = "40px"
+  siteLink.style.color = props.titleColor
+
+  siteLink.innerHTML = props.siteUrl ? "프로젝트 링크" : ""
+  descriptionBox.appendChild(siteLink)
 
   const descriptionObject = new CSS3D.CSS3DObject(descriptionBox)
   descriptionObject.position.set(props.position.x, props.position.y, props.position.z)
