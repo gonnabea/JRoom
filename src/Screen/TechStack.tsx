@@ -82,6 +82,12 @@ const TechBox = styled.div<techBoxTypes>`
   font-weight: 700;
 `
 
+const Intro = styled.p`
+  width: 100vw;
+  text-align: center;
+  color: white;
+`
+
 const TechStack = () => {
   const [isLoading, setLoading] = useState(true)
   console.log(isLoading)
@@ -126,6 +132,7 @@ const TechStack = () => {
       <Header title="Tech-Stack" />
       <Sidebar></Sidebar>
       <Title>사용 기술</Title>
+      <Intro>최소 한 번은 프로젝트에 사용해 본 기술들의 목록입니다.</Intro>
       <MainArea>
         <Category>
           <CategoryTitle>언어</CategoryTitle>
