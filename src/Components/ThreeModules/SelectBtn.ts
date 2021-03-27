@@ -81,13 +81,13 @@ export const addSelectBtn = (props: {
 
   const addONBoard = () => {
     addDescriptionBoard({
-      siteUrl: "https://our-now.herokuapp.com/",
+      siteUrl: "",
       width: "1000px",
       height: "550px",
       title: "ON",
       titleColor: "#09FFFF",
       description:
-        "카카오톡과 같이 실시간 채팅과 1:1, 다대다 채팅이 가능하며, p2p 화상통화 기능과 얼굴인식을 통환 효과 넣기 등을 지원하는 웹입니다. (미완성) <br/><br/>1. 로그인 / 로그아웃 <br/> 2. P2P, N:N 채팅방 만들기 <br/> 3. 실시간 채팅 <br/> 4. P2P 화상채팅 <br/> 5. 얼굴인식을 이용한 그래픽 효과 주기",
+        "카카오톡과 같이 실시간 채팅과 1:1, 다대다 채팅이 가능하며, p2p 화상통화 기능과 얼굴인식을 통환 효과 넣기 등을 지원하는 웹입니다. (3일 내 완성) <br/><br/>1. 로그인 / 로그아웃 <br/> 2. P2P, N:N 채팅방 만들기 <br/> 3. 실시간 채팅 <br/> 4. P2P 화상채팅 <br/> 5. 얼굴인식을 이용한 그래픽 효과 주기",
       position: { x: 4000, y: 1090, z: -2400 },
       rotation: { x: 0, y: -Math.PI / 2, z: 0 },
     })
