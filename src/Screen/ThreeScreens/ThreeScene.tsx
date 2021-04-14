@@ -358,8 +358,8 @@ const ThreeScene = () => {
 
     // 갓레이이펙트
 
-    composer = addSunLight({ x: -600, y: 200, z: 100 })
-    composer = addSunLight({ x: 200, y: 200, z: 100 })
+    // composer = addSunLight({ x: -600, y: 200, z: 100 })
+    // composer = addSunLight({ x: 200, y: 200, z: 100 })
     composer = addSunLight({ x: 1000, y: 200, z: 100 })
 
     controls = new OrbitControls(camera, cssRenderer.domElement)

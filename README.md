@@ -26,6 +26,7 @@
 - [x] 산들바람 효과 (애니메이션)
 - [x] 마당에 자동차 컨트롤
 - [x] 모델 애니메이션
+- [ ] 모바일 성능 개선
 
 ### Documents
 
@@ -46,6 +47,7 @@ CS이론을 공부하기 위한 효과적인 방법 중 하나는
 
 - [x] 3D Book
 - [x] 책 페이지 넘기기
+- [ ] 모바일 화면
 
 #### Bonus
 
@@ -55,19 +57,13 @@ CS이론을 공부하기 위한 효과적인 방법 중 하나는
 - [ ] 그림자 효과
 - [ ] 기상 효과 (눈 or 비)
 - [ ] 창문 모양으로 빛 반사시키기
-- [ ] OpenCV를 이용한 자동차 핸들링
-- [ ] 물리엔진 적용
-- [ ] 마우스에 따라 스크린 무빙
 - [ ] 메뉴에 따른 html canvas background
-- [ ] Babylon.js
 
 #### References
 
 - https://activetheory.net/work
 
 - https://sketchfab.com/3d-models/richards-art-gallery-audio-tour-0e3e19faa6474fd5974e6a7ed1b221d8
-
-- https://www.youtube.com/watch?v=D1lGGvO0eEs <- OpenCV로 자동차 핸들 구현
 
 #### Concepts
 
