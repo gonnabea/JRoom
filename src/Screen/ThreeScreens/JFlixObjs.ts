@@ -116,19 +116,21 @@ export const JFlixObjects = () => {
     { x: 100, y: 100, z: -900 }
   )
 
-  FontLoder(
-    {
-      fontModelUrl: "/fonts/D2D.json",
-      text:
-        "HTML,CSS,순수_JavaScript로_만든\n\n미니_프로젝트들과_\n\n_리액트를_사용하여_만든_\n\nnomflix_클론입니다",
-      size: 20,
-      height: 10,
-      color: 0xffffff,
-      bevelSize: 1,
-    },
-    { x: -200, y: 0, z: -900 }
-  )
-
+  // 모바일 최적화 위함
+  if (window.matchMedia("(min-width:500px)").matches) {
+    FontLoder(
+      {
+        fontModelUrl: "/fonts/D2D.json",
+        text:
+          "HTML,CSS,순수_JavaScript로_만든\n\n미니_프로젝트들과_\n\n_리액트를_사용하여_만든_\n\nnomflix_클론입니다",
+        size: 20,
+        height: 10,
+        color: 0xffffff,
+        bevelSize: 1,
+      },
+      { x: -200, y: 0, z: -900 }
+    )
+  }
   // 기술스택 박스 만들기
 
   // addLogoBox({ x: -500, y: 200, z: -940 }, reactLogo)

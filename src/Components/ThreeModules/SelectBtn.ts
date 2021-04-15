@@ -131,13 +131,24 @@ export const addSelectBtn = (props: {
       }
 
       // JFlix 웹사이트 로드
-      addIframeObj({
-        width: 1400,
-        height: 800,
-        siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
-        position: { x: -1200, y: 10, z: 0 },
-        rotation: { x: 0, y: Math.PI / 2, z: 0 },
-      })
+      // 모바일에서 크기 변경
+      if (window.matchMedia("(min-width:500px)").matches) {
+        addIframeObj({
+          width: 1400,
+          height: 800,
+          siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
+          position: { x: -1200, y: 10, z: 0 },
+          rotation: { x: 0, y: Math.PI / 2, z: 0 },
+        })
+      } else {
+        addIframeObj({
+          width: 1000,
+          height: 800,
+          siteUrl: "https://nomfilx-jiwon.netlify.app/#/",
+          position: { x: -1200, y: 10, z: 0 },
+          rotation: { x: 0, y: Math.PI / 2, z: 0 },
+        })
+      }
 
       // JFlix 프로젝트 설명 보드 로드
       addJFlixBoard()
