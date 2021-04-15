@@ -218,7 +218,7 @@ const SkewScrollMenu: React.FC<IProps> = ({ texts, colors, videoList, links }) =
 
     return texts.map((text, index) => {
       // 2번째 메뉴와 6번째 메뉴만 anchor, 나머지는 React Link
-      if (index != 1 && index != 6) {
+      if (index != 1 && index != 6 && index != 5) {
         return (
           <TextArea
             to={links[index]}

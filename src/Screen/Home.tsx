@@ -83,7 +83,7 @@ const Home: React.FC = () => {
           "CS Wiki",
           "Books",
           "Tech Stack",
-          "Contact Me...",
+          "Trello",
           "Github",
         ]}
         colors={[
@@ -111,7 +111,7 @@ const Home: React.FC = () => {
           "/documents",
           "/books",
           "/tech-stack",
-          "",
+          "https://trello.com/b/N5vJ0zw3/cs-%EC%A7%88%EB%AC%B8%EA%B1%B0%EB%A6%AC",
           "https://github.com/gonnabea",
         ]}
       ></SkewScrollMenu>
