@@ -163,8 +163,14 @@ const ThreeScene = () => {
 
     ExhibitionRoom.material.side = THREE.BackSide // mesh 내부에서만 면이 보이게 만들어 줌.
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.2) // soft white light
-
+    // 모바일에서 디렉셔널 라이트 off 위함
+    let ambientLightBright
+    if (window.matchMedia("(max-width: 500px)").matches) {
+      ambientLightBright = 0.8
+    } else {
+      ambientLightBright = 0.2
+    }
+    const ambientLight = new THREE.AmbientLight(0xffffff, ambientLightBright) // soft white light
     ambientLight.position.set(0, 0, 0)
     scene.add(ambientLight)
 
@@ -269,9 +275,11 @@ const ThreeScene = () => {
     scene.add(project3Mesh)
 
     // 디렉셔널 라이트 (햇빛)
-    addDirLight({ x: -1000, y: 2000, z: 2000 }, { x: -500, y: 1000, z: 800 })
-
-    addDirLight({ x: 0, y: 2000, z: -2000 }, { x: 0, y: 1000, z: 0 })
+    // 핸드폰에선 off
+    if (window.matchMedia("(min-width: 499px)").matches) {
+      addDirLight({ x: -1000, y: 2000, z: 2000 }, { x: -500, y: 1000, z: 800 })
+      addDirLight({ x: 0, y: 2000, z: -2000 }, { x: 0, y: 1000, z: 0 })
+    }
 
     // 스포트라이트 (창문 통과하는 햇빛)
     addSpotLight({ x: -900, y: 750, z: 800 }, { x: -400, y: -500, z: -100 }, Math.PI / 18)
