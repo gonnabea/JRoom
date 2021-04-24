@@ -326,7 +326,7 @@ const ThreeScene = () => {
       antialias: false,
       stencil: false,
       depth: false,
-      alpha: true,
+      alpha: false,
     })
 
     // renderer.shadowMap.enabled = true
@@ -336,7 +336,7 @@ const ThreeScene = () => {
     // 성능 최적화를 위한 화면 크기별 해상도 조정
     if (window.matchMedia("(max-width: 500px)").matches) {
       // 모바일 기기 대비
-      renderer.setPixelRatio(window.devicePixelRatio / 5)
+      renderer.setPixelRatio(window.devicePixelRatio / 3.5)
     } else if (window.matchMedia("(max-width: 800px)").matches) {
       renderer.setPixelRatio(window.devicePixelRatio)
     } else if (window.matchMedia("(max-width: 1200px)")) {
