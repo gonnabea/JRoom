@@ -462,7 +462,7 @@ const ThreeScene = () => {
       frameCount += 1
 
       cssRenderer.render(cssScene, camera)
-      composer.render(1)
+      composer.render(0)
       // floorCamera.update(renderer, scene) <- GPU 점유율 대폭 상승 유발
 
       requestAnimationFrame(animate)

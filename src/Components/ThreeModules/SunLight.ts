@@ -32,7 +32,10 @@ export const addSunLight = (position: { x: number; y: number; z: number }) => {
   CylinderGeometry.rotateX(Math.PI / 6)
   CylinderGeometry.rotateY(-Math.PI / 4)
 
-  scene.add(CylinderMesh)
+  // 모바일 환경에선 햇빛 제거
+  if (window.matchMedia("(min-width:500px)").matches) {
+    scene.add(CylinderMesh)
+  }
   const godraysEffect = new GodRaysEffect(camera, CylinderMesh, {
     resolutionScale: 1,
     density: 0.9,
@@ -45,6 +48,7 @@ export const addSunLight = (position: { x: number; y: number; z: number }) => {
 
   const renderPass = new RenderPass(scene, camera)
   const effectPass = new EffectPass(camera, godraysEffect)
+
   effectPass.renderToScreen = true
 
   // 어떻게 글로벌 변수인 composer를 모듈로 불어올 것인가?
