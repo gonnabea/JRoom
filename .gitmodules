@@ -1,3 +1,3 @@
-[submodule "JRoom"] 
-  path = JRoom/
+[submodule "./JRoom"] 
+  path = ./JRoom
   url = https://github.com/gonnabea/JRoom.git
