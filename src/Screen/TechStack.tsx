@@ -352,16 +352,11 @@ const TechStack = () => {
               onMouseEnter={(e: React.MouseEvent) => showTechName(e, "Heroku")}
               imageSrc="/tech_logos/heroku.jpg"
             />
-            <TechBox
-              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "AWS")}
-              imageSrc="/tech_logos/aws.jpg"
-            />
           </TechBoxArea>
         </Category>
 
         <Category>
-          <CategoryTitle>안드로이드</CategoryTitle>
+          <CategoryTitle>현재 배우고 있는 기술 목록입니다.</CategoryTitle>
           <CategoryLine></CategoryLine>
 
           <TechBoxArea>
@@ -370,26 +365,17 @@ const TechStack = () => {
               onMouseEnter={(e: React.MouseEvent) => showTechName(e, "Kotlin")}
               imageSrc="/tech_logos/kotlin.jpeg"
             />
-          </TechBoxArea>
-        </Category>
-        <Category>
-          <CategoryTitle>게임 엔진</CategoryTitle>
-          <CategoryLine></CategoryLine>
-
-          <TechBoxArea>
-            <TechBox
+              <TechBox
+              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "AWS")}
+              imageSrc="/tech_logos/aws.jpg"
+            />
+              <TechBox
               onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
               onMouseEnter={(e: React.MouseEvent) => showTechName(e, "Unity")}
               imageSrc="/tech_logos/unity.jpg"
             />
-          </TechBoxArea>
-        </Category>
-        <Category>
-          <CategoryTitle>AI / 머신러닝</CategoryTitle>
-          <CategoryLine></CategoryLine>
-
-          <TechBoxArea>
-            <TechBox
+              <TechBox
               onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
               onMouseEnter={(e: React.MouseEvent) => showTechName(e, "TensorFlow")}
               imageSrc="/tech_logos/tensorflow.jpg"
