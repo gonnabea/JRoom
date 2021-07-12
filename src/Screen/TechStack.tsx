@@ -162,21 +162,7 @@ const TechStack = () => {
               onMouseEnter={(e: React.MouseEvent) => showTechName(e, "TypeScript")}
               imageSrc="/tech_logos/ts.png"
             />
-            <TechBox
-              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "C")}
-              imageSrc="/tech_logos/c.png"
-            />
-            <TechBox
-              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "C#")}
-              imageSrc="/tech_logos/c_sharp.jpg"
-            />
-            <TechBox
-              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
-              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "Go")}
-              imageSrc="/tech_logos/go.png"
-            />
+
           </TechBoxArea>
         </Category>
         <Category>
@@ -379,6 +365,21 @@ const TechStack = () => {
               onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
               onMouseEnter={(e: React.MouseEvent) => showTechName(e, "TensorFlow")}
               imageSrc="/tech_logos/tensorflow.jpg"
+            />
+              <TechBox
+              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "C")}
+              imageSrc="/tech_logos/c.png"
+            />
+            <TechBox
+              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "C#")}
+              imageSrc="/tech_logos/c_sharp.jpg"
+            />
+            <TechBox
+              onMouseLeave={(e: React.MouseEvent) => hideTechName(e)}
+              onMouseEnter={(e: React.MouseEvent) => showTechName(e, "Go")}
+              imageSrc="/tech_logos/go.png"
             />
           </TechBoxArea>
         </Category>
