@@ -1,0 +1,436 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 8,
+      "max": [
+        22.972682952880859,
+        0.31772440671920776,
+        22.884075164794922
+      ],
+      "min": [
+        -22.972660064697266,
+        0.1916574239730835,
+        -22.842794418334961
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 96,
+      "componentType": 5126,
+      "count": 8,
+      "max": [
+        8.8540396347980277e-08,
+        1,
+        4.8880814951246521e-09
+      ],
+      "min": [
+        -8.5945785599506053e-08,
+        -1,
+        -7.4950730066802862e-09
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 8,
+      "max": [
+        1,
+        -7.4950738948587059e-09,
+        5.1550080115703167e-07,
+        1
+      ],
+      "min": [
+        2.0197214753659093e-16,
+        -8.5945778494078695e-08,
+        -1,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 8,
+      "max": [
+        0.81103754043579102,
+        0.99350804090499878
+      ],
+      "min": [
+        0.0018872146029025316,
+        0.0015289329458028078
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 12,
+      "max": [
+        7
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 192,
+      "componentType": 5126,
+      "count": 408,
+      "max": [
+        25.000030517578125,
+        0.47675222158432007,
+        25.000003814697266
+      ],
+      "min": [
+        -25.000001907348633,
+        -0.52324789762496948,
+        -24.999992370605469
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 5088,
+      "componentType": 5126,
+      "count": 408,
+      "max": [
+        0.99744260311126709,
+        0.9991118311882019,
+        0.99742376804351807
+      ],
+      "min": [
+        -0.99744182825088501,
+        -0.99911129474639893,
+        -0.99741047620773315
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 128,
+      "componentType": 5126,
+      "count": 408,
+      "max": [
+        0.99955511093139648,
+        0.99950551986694336,
+        0.99942529201507568,
+        1
+      ],
+      "min": [
+        -0.99955540895462036,
+        -0.99955242872238159,
+        -0.99941033124923706,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 64,
+      "componentType": 5126,
+      "count": 408,
+      "max": [
+        0.98699885606765747,
+        0.99613994359970093
+      ],
+      "min": [
+        0.82032638788223267,
+        0.00072489160811528563
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 48,
+      "componentType": 5125,
+      "count": 1824,
+      "max": [
+        407
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "MADE.COM (https://sketchfab.com/made-it)",
+      "license": "CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)",
+      "source": "https://sketchfab.com/3d-models/city-map-framed-wall-art-print-amsterdam-0605a5f3e2784a5aad2127170d63e237",
+      "title": "City Map Framed Wall Art Print, Amsterdam"
+    },
+    "generator": "Sketchfab-5.11.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 7344,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 3328,
+      "byteOffset": 7344,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 9984,
+      "byteOffset": 10672,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 6656,
+      "byteOffset": 20656,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 27312,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/PRINT_baseColor.jpeg"
+    },
+    {
+      "uri": "textures/FRAME_baseColor.jpeg"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "PRINT",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseColorTexture": {
+          "index": 0,
+          "texCoord": 0
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.050000000000000044
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "FRAME",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseColorTexture": {
+          "index": 1,
+          "texCoord": 0
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.40000000000000002
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "City_Map_Amsterdam_50x50_PRINT_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "City_Map_Amsterdam_50x50_FRAME_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 6,
+            "POSITION": 5,
+            "TANGENT": 7,
+            "TEXCOORD_0": 8
+          },
+          "indices": 9,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "2080163c33c94f73bb5b4da8da6366f6.fbx"
+    },
+    {
+      "children": [
+        4
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        5
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        2.2204460492503131e-16,
+        -1,
+        0,
+        0,
+        1,
+        2.2204460492503131e-16,
+        0,
+        0,
+        100.00000762939453,
+        -3.6954879760742188e-06,
+        1
+      ],
+      "name": "City_Map_Amsterdam_50x50"
+    },
+    {
+      "children": [
+        6,
+        7
+      ],
+      "matrix": [
+        1,
+        0,
+        -0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -0.47675198316574097,
+        0,
+        1
+      ],
+      "name": ""
+    },
+    {
+      "mesh": 0,
+      "name": "City_Map_Amsterdam_50x50_PRINT_0"
+    },
+    {
+      "mesh": 1,
+      "name": "City_Map_Amsterdam_50x50_FRAME_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    }
+  ]
+}
+

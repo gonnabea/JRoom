@@ -1,0 +1,722 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.14669999480247498,
+        0.24666999280452728,
+        0.12253999710083008
+      ],
+      "min": [
+        -0.1523900032043457,
+        -0.43661999702453613,
+        -0.43661999702453613
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 786384,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -1,
+        -1,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 369546,
+      "max": [
+        65531
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1572768,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.14669999480247498,
+        0.4366300106048584,
+        0.36577999591827393
+      ],
+      "min": [
+        -0.1523900032043457,
+        0.052209999412298203,
+        -0.42930999398231506
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 2359152,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -1,
+        -0.99717724323272705,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1478184,
+      "componentType": 5125,
+      "count": 369069,
+      "max": [
+        65531
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 3145536,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.14669999480247498,
+        0.33902999758720398,
+        0.4366300106048584
+      ],
+      "min": [
+        -0.1523900032043457,
+        -0.4263400137424469,
+        0.089069999754428864
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 3931920,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -1,
+        -1,
+        -0.98205304145812988
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 2954460,
+      "componentType": 5125,
+      "count": 369222,
+      "max": [
+        65531
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 4718304,
+      "componentType": 5126,
+      "count": 20178,
+      "max": [
+        0.14669999480247498,
+        0.43555998802185059,
+        0.43555998802185059
+      ],
+      "min": [
+        -0.1523900032043457,
+        -0.43555000424385071,
+        -0.43555000424385071
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 4960440,
+      "componentType": 5126,
+      "count": 20178,
+      "max": [
+        1,
+        1,
+        0.99999624490737915
+      ],
+      "min": [
+        -1,
+        -1,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 4431348,
+      "componentType": 5125,
+      "count": 93315,
+      "max": [
+        20177
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 5202576,
+      "componentType": 5126,
+      "count": 800,
+      "max": [
+        0.15072999894618988,
+        0.43004000186920166,
+        0.43004000186920166
+      ],
+      "min": [
+        -0.15072999894618988,
+        -0.43004000186920166,
+        -0.43004000186920166
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 5212176,
+      "componentType": 5126,
+      "count": 800,
+      "max": [
+        0.99968409538269043,
+        1,
+        1
+      ],
+      "min": [
+        -0.99968409538269043,
+        -1,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 4804608,
+      "componentType": 5125,
+      "count": 4608,
+      "max": [
+        799
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 5221776,
+      "componentType": 5126,
+      "count": 20115,
+      "max": [
+        -1.9999999494757503e-05,
+        0.33166998624801636,
+        0.33375000953674316
+      ],
+      "min": [
+        -0.25508001446723938,
+        -0.33166000247001648,
+        -0.33166998624801636
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 5463156,
+      "componentType": 5126,
+      "count": 20115,
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -0.99966847896575928,
+        -1,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 20115,
+      "max": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "min": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 4823040,
+      "componentType": 5125,
+      "count": 117360,
+      "max": [
+        20114
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 5704536,
+      "componentType": 5126,
+      "count": 701,
+      "max": [
+        -0.036789998412132263,
+        0.029389999806880951,
+        0.029400000348687172
+      ],
+      "min": [
+        -0.047869998961687088,
+        -0.029389999806880951,
+        -0.029400000348687172
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 5712948,
+      "componentType": 5126,
+      "count": 701,
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "min": [
+        0,
+        -1,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 321840,
+      "componentType": 5126,
+      "count": 701,
+      "max": [
+        0.58394902944564819,
+        1,
+        0.9974932074546814,
+        1
+      ],
+      "min": [
+        -0.58394902944564819,
+        -1,
+        -0.99749326705932617,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 5292480,
+      "componentType": 5125,
+      "count": 3600,
+      "max": [
+        700
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "CG Cookie (https://sketchfab.com/cgcookie)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/models/6bcf949023d54cb49901e7acb3dfbdfc",
+      "title": "Sports Car Wheel"
+    },
+    "generator": "Sketchfab-3.18.2",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 5306880,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5721360,
+      "byteOffset": 5306880,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 333056,
+      "byteOffset": 11028240,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 11361296,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "wheel_rims",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.75,
+          0.75,
+          0.75,
+          1
+        ],
+        "metallicFactor": 1,
+        "roughnessFactor": 0.20999999999999999
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "wheel_cap",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.80000001190000003,
+          0.80000001190000003,
+          0.80000001190000003,
+          1
+        ],
+        "metallicFactor": 1,
+        "roughnessFactor": 0
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "rubber",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.029554022499999999,
+          0.029554022499999999,
+          0.029554022499999999,
+          1
+        ],
+        "metallicFactor": 0.31,
+        "roughnessFactor": 0.42999999999999999
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "wheel_tire_tread",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0
+          },
+          "indices": 2,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "wheel_tire_tread",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 4,
+            "POSITION": 3
+          },
+          "indices": 5,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "wheel_tire_tread",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 7,
+            "POSITION": 6
+          },
+          "indices": 8,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "wheel_tire_tread",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 10,
+            "POSITION": 9
+          },
+          "indices": 11,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "wheel_tire",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 13,
+            "POSITION": 12
+          },
+          "indices": 14,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "wheel_rim",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 16,
+            "POSITION": 15,
+            "TANGENT": 17
+          },
+          "indices": 18,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "wheel_rim",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 20,
+            "POSITION": 19,
+            "TANGENT": 21
+          },
+          "indices": 22,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3,
+        8,
+        10,
+        13
+      ],
+      "name": "Root"
+    },
+    {
+      "children": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "name": "wheel_tire_tread"
+    },
+    {
+      "mesh": 0,
+      "name": "wheel_tire_tread"
+    },
+    {
+      "mesh": 1,
+      "name": "wheel_tire_tread"
+    },
+    {
+      "mesh": 2,
+      "name": "wheel_tire_tread"
+    },
+    {
+      "mesh": 3,
+      "name": "wheel_tire_tread"
+    },
+    {
+      "children": [
+        9
+      ],
+      "matrix": [
+        1,
+        -0,
+        -0,
+        0,
+        0,
+        0.98079000000000005,
+        0.19509000000000004,
+        0,
+        -0,
+        -0.19509000000000004,
+        0.98079000000000005,
+        0,
+        0,
+        -0,
+        -0,
+        1
+      ],
+      "name": "wheel_tire"
+    },
+    {
+      "mesh": 4,
+      "name": "wheel_tire"
+    },
+    {
+      "children": [
+        11,
+        12
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0.17009000000000002,
+        -0,
+        0,
+        1
+      ],
+      "name": "wheel_rim"
+    },
+    {
+      "mesh": 5,
+      "name": "wheel_rim"
+    },
+    {
+      "mesh": 6,
+      "name": "wheel_rim"
+    },
+    {
+      "children": [
+        14
+      ],
+      "matrix": [
+        -0.29086000000000006,
+        0.95517000000000007,
+        -0.05519000000000001,
+        0,
+        -0.77110000000000001,
+        -0.19988000000000003,
+        0.60452000000000006,
+        0,
+        0.56639000000000006,
+        0.21839000000000003,
+        0.7946700000000001,
+        0,
+        4.0762500000000008,
+        1.00545,
+        5.9038600000000008,
+        1
+      ],
+      "name": "Lamp"
+    },
+    {
+      "name": "Lamp"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
+
